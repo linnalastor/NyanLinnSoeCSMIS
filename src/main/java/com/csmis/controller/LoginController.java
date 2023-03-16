@@ -20,8 +20,8 @@ public class LoginController {
 	
 	@GetMapping("/dashboard")
 	public String dashboard(Authentication auth) {
-		System.out.println(auth.getAuthorities());
-		return "operator/User_Dashboard";
+		if(auth==null) return "fancy-login";
+		else return "operator/User_Dashboard";
 
 	}
 
