@@ -1,10 +1,9 @@
 package com.csmis.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.csmis.service.PassBCryptor;
 
@@ -20,8 +19,9 @@ public class LoginController {
 	}
 	
 	@GetMapping("/dashboard")
-	public String dashboard() {
-		return "admin/admin_dashboard";
+	public String dashboard(Authentication auth) {
+		System.out.println(auth.getAuthorities());
+		return "operator/User_Dashboard";
 
 	}
 

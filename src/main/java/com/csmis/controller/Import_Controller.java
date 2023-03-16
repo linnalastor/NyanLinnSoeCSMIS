@@ -39,14 +39,14 @@ public class Import_Controller {
 	public String import_menu(@RequestParam("pdfFile") MultipartFile pdfFile,Model model) throws IOException,DocumentException {
 		//save pdf file to resources/pdf
 		pdfService.storePdf(pdfFile);
-		//get the name of the imported file
-		String pdfFileName="NextWeek.pdf";
 
-		System.out.println(pdfFileName);
 		//convert pdf from resource/pdfs to byte string
-		String encodedPdf =pdfService.getPdfAsByteString(pdfFileName);
+		String encodedPdf =pdfService.getPdfAsByteString("ThisWeek.pdf");
+
+		String nextweek_encodedPdf =pdfService.getPdfAsByteString("NextWeek.pdf");
 
         model.addAttribute("pdf", encodedPdf);
+        model.addAttribute("npdf", nextweek_encodedPdf);
         return "admin/admin_menu";
 	}
 
