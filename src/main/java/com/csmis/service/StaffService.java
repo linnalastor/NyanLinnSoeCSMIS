@@ -17,9 +17,13 @@ public class StaffService implements StaffServiceInterface{
 
 	@Override
 	public void saveStaffs(List<Staff> staffs) {
-		// TODO Auto-generated method stub
 		staffRepository.saveAll(staffs);
 
+	}
+
+	@Override
+	public List<Staff> findAll() {
+		return staffRepository.findAll();
 	}
 
 }

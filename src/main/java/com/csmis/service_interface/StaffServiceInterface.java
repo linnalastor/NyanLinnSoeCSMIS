@@ -7,4 +7,5 @@ import com.csmis.entity.Staff;
 public interface StaffServiceInterface {
 
 	public void saveStaffs(List<Staff> staffs);
+	public List<Staff> findAll();
 }

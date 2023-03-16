@@ -1,13 +1,17 @@
 package com.csmis.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.csmis.entity.Staff;
 import com.csmis.service.PdfService;
+import com.csmis.service_interface.StaffServiceInterface;
 
 @Controller
 @RequestMapping("/admin")
@@ -15,6 +19,15 @@ public class AdminController {
 	
 	@Autowired
 	PdfService pdfService;
+	
+	
+	StaffServiceInterface staffService;
+	
+	@Autowired
+	public AdminController(StaffServiceInterface staffService) {
+		this.staffService=staffService;
+	}
+	
 	
 	//Mapping for importing master data setup files page
 	@GetMapping("/master_data_setup")
@@ -137,7 +150,12 @@ public class AdminController {
 
 	/* EmployeeList */
 	@GetMapping("/staff_list")
-	public String staffList() {
+	public String staffList(Model model) {
+		List<Staff> staff =staffService.findAll();
+
+        // save users list on model
+        model.addAttribute("staff", staff);
+        model.addAttribute("status", true); 
 		return "admin/employee-list/stafflist";
 	}
 

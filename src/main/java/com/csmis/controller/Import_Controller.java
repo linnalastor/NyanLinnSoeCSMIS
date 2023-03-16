@@ -27,11 +27,11 @@ public class Import_Controller {
 
 	@Autowired
 	PdfService pdfService;
-	
-	StaffServiceInterface staffService;
-	
-	public Import_Controller(StaffServiceInterface theStaffService) {
-		staffService=theStaffService;
+
+	StaffServiceInterface thestaffService;
+	@Autowired
+	public Import_Controller(StaffServiceInterface staffService) {
+		thestaffService=staffService;
 	}
 
 	//Mapping For Import Menu Pdf
@@ -52,45 +52,45 @@ public class Import_Controller {
 
 	//Mapping for Import Staff.csv
 	@PostMapping("/import_staff")
-    public String import_staff(@RequestParam("staff_file") MultipartFile file, Model model) {
-        // validate file
-        if (file.isEmpty()) {
-            model.addAttribute("message", "Please select the Staff CSV file to import.");
-            model.addAttribute("status", false);
-        } else {
+	public String StaffList(@RequestParam("staff_file") MultipartFile file, Model model) {
+		 // validate file
+       if (file.isEmpty()) {
+           model.addAttribute("message", "Please select the Staff CSV file to import.");
+           model.addAttribute("status", false);
+       } else {
 
-            // parse CSV file to create a list of `User` objects
-            try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
+           // parse CSV file to create a list of `User` objects
+           try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
 
-                // create csv bean reader
-            	CsvToBean<Staff> csvToBean = new CsvToBeanBuilder<Staff>(reader)
-            			.withType(Staff.class)
-            			.withIgnoreLeadingWhiteSpace(true)
-                        .build();
+               // create csv bean reader
+           	CsvToBean<Staff> csvToBean = new CsvToBeanBuilder<Staff>(reader)
+           			.withType(Staff.class)
+           			.withIgnoreLeadingWhiteSpace(true)
+                       .build();
 
-                // convert `CsvToBean` object to list of users
-                List<Staff> staff = csvToBean.parse();
+               // convert `CsvToBean` object to list of users
+               List<Staff> staff = csvToBean.parse();
+              
 
+               // save users in DB?
+               thestaffService.saveStaffs(staff);
+               staff=thestaffService.findAll();
 
-                // save users in DB
-                staffService.saveStaffs(staff);
+               // save users list on model
+               model.addAttribute("staff", staff);
+               model.addAttribute("status", true); 
 
-                // save users list on model
-                model.addAttribute("staff", staff);
-                model.addAttribute("status", true);
+               try {
+               }catch(Exception ex) {
+               	 model.addAttribute("message", "An error occurred while saving the CSV file.");
+                    model.addAttribute("status", false); 
+               }
 
-                try {
-                }catch(Exception ex) {
-                	 model.addAttribute("message", "An error occurred while saving the CSV file.");
-                     model.addAttribute("status", false);
-                }
-
-            } catch (Exception ex) {
-                model.addAttribute("message", "An error occurred while processing the CSV file.");
-                model.addAttribute("status", false);
-            }
-        }
-
-        return "staff_imported_file";
+           } catch (Exception ex) {
+               model.addAttribute("message", "An error occurred while processing the CSV file.");
+               model.addAttribute("status", false);
+           }
+       }
+		return "admin/employee-list/stafflist";
     }
 }
