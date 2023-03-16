@@ -22,16 +22,20 @@ public class PdfService {
 
 	public void storePdf(MultipartFile pdfFile) throws IOException {
         // Get the filename of the PDF file
-        String fileName = StringUtils.cleanPath(pdfFile.getOriginalFilename());
 
         // Create a Path object for the resource directory
         Path resourceDirectory = Paths.get("src", "main", "resources","pdfs");
 
         // Create a Path object for the PDF file
-        Path pdfPath = resourceDirectory.resolve(fileName);
-
+        Path thisweek_pdfPath = resourceDirectory.resolve("ThisWeek.pdf");
+        Path nextweek_pdfPath = resourceDirectory.resolve("NextWeek.pdf");
+        
+        // Read the contents of the PDF file into a byte array
+        byte[] fileData = Files.readAllBytes(nextweek_pdfPath);
+        
         // Write the PDF file to the resource directory
-        Files.write(pdfPath, pdfFile.getBytes());
+        Files.write(thisweek_pdfPath, fileData);
+        Files.write(nextweek_pdfPath, pdfFile.getBytes());
     }
 
 	public String getPdfAsByteString(String fileName) throws IOException {
@@ -40,11 +44,9 @@ public class PdfService {
 
         // Create a Path object for the PDF file
         Path pdfPath = resourceDirectory.resolve(fileName);
-        System.out.println(pdfPath);
 
         // Read the contents of the PDF file into a byte array
         byte[] fileData = Files.readAllBytes(pdfPath);
-        System.out.println(fileData);
 
         // Encode the byte array using Base64 encoding
         String byteString = Base64.getEncoder().encodeToString(fileData);

@@ -18,10 +18,20 @@ public class LoginController {
 
 	}
 	
-	@GetMapping("/dashboard")
+	@GetMapping("/welcome")
 	public String dashboard(Authentication auth) {
-		if(auth==null) return "fancy-login";
-		else return "operator/User_Dashboard";
+		String role=null;
+		if(auth!=null) role=auth.getAuthorities().toArray()[0].toString();
+		
+		if(role==null) return "fancy-login";
+		else if(role.equals("ROLE_ADMIN")) {
+			return "admin/admin_dashboard";
+		}
+		else {
+			return "operator/User_Dashboard";
+		}
+		
+
 
 	}
 

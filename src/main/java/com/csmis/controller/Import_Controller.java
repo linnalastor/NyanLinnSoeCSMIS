@@ -35,20 +35,25 @@ public class Import_Controller {
 	}
 
 	//Mapping For Import Menu Pdf
-	@PostMapping("/import_menu")
-	public String import_menu(@RequestParam("pdfFile") MultipartFile pdfFile,Model model) throws IOException,DocumentException {
-		//save pdf file to resources/pdf
-		pdfService.storePdf(pdfFile);
+		@PostMapping("/import_menu")
+		public String import_menu(@RequestParam("pdfFile") MultipartFile pdfFile,Model model) throws IOException,DocumentException {
+			
+			//get the name of the imported file
+			String thisweek_pdfFileName="ThisWeek.pdf";
+			String nextweek_pdfFileName="NextWeek.pdf";
+			
+			//save pdf file to resources/pdf
+			pdfService.storePdf(pdfFile);
+			
+			//convert pdf from resource/pdfs to byte string
+			String thisweek_encodedPdf =pdfService.getPdfAsByteString(thisweek_pdfFileName);
+			String nextweek_encodedPdf =pdfService.getPdfAsByteString(nextweek_pdfFileName);
+			
 
-		//convert pdf from resource/pdfs to byte string
-		String encodedPdf =pdfService.getPdfAsByteString("ThisWeek.pdf");
-
-		String nextweek_encodedPdf =pdfService.getPdfAsByteString("NextWeek.pdf");
-
-        model.addAttribute("pdf", encodedPdf);
-        model.addAttribute("npdf", nextweek_encodedPdf);
-        return "admin/admin_menu";
-	}
+	        model.addAttribute("pdf", thisweek_encodedPdf);
+	        model.addAttribute("npdf", nextweek_encodedPdf);
+	        return "admin/admin_menu";
+		}
 
 	//Mapping for Import Staff.csv
 	@PostMapping("/import_staff")
@@ -71,7 +76,7 @@ public class Import_Controller {
                // convert `CsvToBean` object to list of users
                List<Staff> staff = csvToBean.parse();
               
-
+               System.out.println(staff);
                // save users in DB?
                thestaffService.saveStaffs(staff);
                staff=thestaffService.findAll();
