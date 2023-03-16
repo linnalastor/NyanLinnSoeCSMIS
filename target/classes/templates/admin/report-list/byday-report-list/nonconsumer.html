@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Non Consumer</title>
+    <!-- fav icon -->
+    <link th:href="@{/images/datlogo.png}" rel="icon" type="image/png" sizes="18*18" />
+
+    <!-- bootstrap css1 js1 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+
+    <!-- internal css -->
+    <link rel="stylesheet" th:href="@{css/dashboard.css}" />
+    <link rel="stylesheet" th:href="@{css/faq.css}" />
+    <link rel="stylesheet" th:href="@{css/register.css}" />
+    <link rel="stylesheet" th:href="@{css/report.css}" />
+ 
+
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://kit.fontawesome.com/e0faeaf50f.css" crossorigin="anonymous">
+
+</head>
+<body>
+
+    <header class="w-100 mt-0">
+        <!-- START BAVBAR -->
+        <nav class="navbar navbar-light">
+
+            <div id="mynavbar">
+                <div class="container-fluid m-0">
+                    <div class="row">
+                        
+                        <!-- Start Left Sidebar -->
+                        <div id="nav" class="col-xl-2 col-lg-3 col-md-4 fixed-top collapse sidebars">
+
+                            <div class="pb-3 pt-2 mt-4 text-center borderbottoms">
+                                <a href="" class="btn btn-outline-light rounded-circle mb-1"><i class="fa-solid fa-user fs-3"></i></a>
+                                <a href="#" class="text-white nav-link">DAT Admin</a>
+                            </div>
+                             <ul class="navbar-nav flex-column mt-4">
+                                <li class="navbar-item"><a th:href="@{/admin/admindashboard}" class="nav-link text-white px-2 py-2 mb-2 currents"><i class="fas fa-home fa-lg me-3"></i>Dashboard</a></li>
+                                <li class="navbar-item"><a th:href="@{/admin/adminmenu}" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-utensils fa-lg ps-1 me-3"></i>Menu</a></li>
+                                <li class="navbar-item"><a th:href="@{/admin/adminconsumertoday}" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Consumer List</a></li>
+                                <li class="navbar-item"><a th:href="@{/admin/reportListToday}" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-money-check fa-lg me-3"></i>Report List</a></li>
+                                <li class="navbar-item"><a th:href="@{/admin/employeelist}" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-users-line fa-lg me-3"></i>Employee List</a></li>
+                                <li class="navbar-item"><a th:href="@{/admin/invoice}" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-sack-dollar fa-lg me-3"></i></i>Invoice</a></li>
+                                <li class="navbar-item"><a href="#" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-id-card-clip fa-lg me-3"></i>Door Access File</a></li>
+                                <li class="navbar-item"><a href="#" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-brands fa-mdb fa-lg me-3"></i>Master Data Setup</a></li>
+                                <li class="navbar-item"><a href="#" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-envelope fa-lg me-3"></i>Email</a></li>
+                                <li class="navbar-item"><a href="#" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fas fa-wrench fa-lg me-3"></i>About As</a></li>
+                                <li class="navbar-item"><a href="#" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fas fa-sign-out-alt fa-lg me-3"></i>Logout</a></li>
+                            </ul>
+                        </div>
+            
+                        <!-- End Left Sidebar --> 
+
+                        <!-- Start Top Sidebar -->
+                        <div class="col-xl-12 col-lg-9 col-md-8 py-2 mb-4 ms-auto fixed-top topnavbars">
+                            <div class="row d-flex align-items-center justify-content-between ">
+                                <div class="d-flex justify-content-between">
+                                    
+                                    
+                                    <nav class="navbar navbar-dark ">
+                                        <div class="container-fluid">
+                                        <button class="navbar-toggler buttons" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+                                            <span class="navbar-toggler-icon"></span>
+                                        </button>
+                                        </div>
+                                    </nav>
+                                
+                                    <div class="navbar-brand text-light mx-3 ">
+                                        <img th:src="@{/images/datlogo.png}" width="60px" alt="favicon" />
+                                        <span class="text-uppercase pe-none mx-2 ">Catering Service</span>
+                                    </div>
+                                    
+                                    <div class=" d-flex align-items-center">
+                                        <a href="" class="nav-link fs-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-circle-question fa-lg me-1 qicons"></i>
+                                            <span class="me-2">Help</span>
+                                            </a>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <!-- End Top Sidebar -->
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">How can I help you?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                <div class="modal-body">
+                                    <div></div>
+                                      <section class="container my-5" id="maincontent">
+                                        <section id="accordion">
+                                          <a class="py-3 d-block h-100 w-100 position-relative z-index-1 pr-1 text-secondary border-top text-decoration-none" aria-controls="faq-17" aria-expanded="false" data-toggle="collapse" href="#faq-17" role="button">
+                                            <div class="position-relative">
+                                              <h2 class="h4 m-0 pr-3">
+                                                What if I want custom gear?
+                                              </h2>
+                                              <div class="position-absolute top-0 right-0 h-100 d-flex align-items-center">
+                                                <i class="fa fa-plus"></i>
+                                              </div>
+                                            </div>
+                                          </a>
+                                          <div class="collapse" id="faq-17">
+                                            <div class="card card-body border-0 p-0">
+                                              <p>Custom gear can be ordered through our contact form. Additional fees may apply.</p>
+                                    
+                                            </div>
+                                          </div>
+                                    
+                                          <a class="py-3 d-block h-100 w-100 position-relative z-index-1 pr-1 text-secondary border-top" aria-controls="faq-18" aria-expanded="false" data-toggle="collapse" href="#faq-18" role="button">
+                                            <div class="position-relative">
+                                              <h2 class="h4 m-0 pr-3">
+                                                What is the official mission statement?
+                                              </h2>
+                                              <div class="position-absolute top-0 right-0 h-100 d-flex align-items-center">
+                                                <i class="fa fa-plus"></i>
+                                              </div>
+                                            </div>
+                                          </a>
+                                          <div class="collapse" id="faq-18">
+                                            <div class="card card-body border-0 p-0">
+                                              <p>Our official mission statement is lorem ipsum dolor sit.</p>
+                                              <p>
+                                              </p>
+                                            </div>
+                                          </div>
+                                    
+                                          <a class="py-3 d-block h-100 w-100 position-relative z-index-1 pr-1 text-secondary border-top" aria-controls="faq-19" aria-expanded="false" data-toggle="collapse" href="#faq-19" role="button">
+                                            <div class="position-relative">
+                                              <h2 class="h4 m-0 pr-3">
+                                                What is the purpose of LunarXP?
+                                              </h2>
+                                              <div class="position-absolute top-0 right-0 h-100 d-flex align-items-center">
+                                                <i class="fa fa-plus"></i>
+                                              </div>
+                                            </div>
+                                          </a>
+                                          <div class="collapse" id="faq-19">
+                                            <div class="card card-body border-0 p-0">
+                                              <p>The purpose of LunarXP is to give you the best Mars experience!</p>
+                                              <p>
+                                              </p>
+                                            </div>
+                                          </div>
+                                    
+                                          <a class="py-3 d-block h-100 w-100 position-relative z-index-1 pr-1 text-secondary  border-top" aria-controls="faq-20" aria-expanded="false" data-toggle="collapse" href="#faq-20" role="button">
+                                            <div class="position-relative">
+                                              <h2 class="h4 m-0 pr-3">
+                                                What is the best email to reach you at?
+                                              </h2>
+                                              <div class="position-absolute top-0 right-0 h-100 d-flex align-items-center">
+                                                <i class="fa fa-plus"></i>
+                                              </div>
+                                            </div>
+                                          </a>
+                                          <div class="collapse" id="faq-20">
+                                            <div class="card card-body border-0 p-0">
+                                              <p>The best email for any inquiries is email@email.com!</p>
+                                              <p>
+                                              </p>
+                                            </div>
+                                          </div>
+                                    
+                                          <a class="py-3 d-block h-100 w-100 position-relative z-index-1 pr-1 text-secondary  border-top" aria-controls="faq-21" aria-expanded="false" data-toggle="collapse" href="#faq-21" role="button">
+                                            <div class="position-relative">
+                                              <h2 class="h4 m-0 pr-3">
+                                                Where can I read more about this company?
+                                              </h2>
+                                              <div class="position-absolute top-0 right-0 h-100 d-flex align-items-center">
+                                                <i class="fa fa-plus"></i>
+                                              </div>
+                                            </div>
+                                          </a>
+                                          <div class="collapse" id="faq-21">
+                                            <div class="card card-body border-0 p-0">
+                                              <p>Lorem ipsum dolor sit!</p>
+                                              <p>
+                                              </p>
+                                            </div>
+                                          </div>
+                                    
+                                          <a class="py-3 d-block h-100 w-100 position-relative z-index-1 pr-1 text-secondary  border-top" aria-controls="faq-22" aria-expanded="false" data-toggle="collapse" href="#faq-22" role="button">
+                                            <div class="position-relative">
+                                              <h2 class="h4 m-0 pr-3">
+                                                What is the best time to call?
+                                              </h2>
+                                              <div class="position-absolute top-0 right-0 h-100 d-flex align-items-center">
+                                                <i class="fa fa-plus"></i>
+                                              </div>
+                                            </div>
+                                          </a>
+                                          <div class="collapse" id="faq-22">
+                                            <div class="card card-body border-0 p-0">
+                                              <p>The best time to call is 24/7! We are always available to answer any questions.</p>
+                                              <p>
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </section>
+                                      </section>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <!-- End Modal -->
+
+
+                    </div>
+                </div>
+            </div>
+            
+        </nav>
+        <!-- END NAVBAR -->
+
+    </header>
+
+    <!-- start byday report section -->
+    <section class="pt-4 pb-2 reports">
+        <div class="container mt-3 pt-5">
+            <!-- start title -->
+            <div class="row text-center mt-2 mb-3">
+                <div class="col">
+                    <h3 class="titles text-dark">Report List</h3>
+                </div>
+            </div>
+            <!-- end title -->
+
+            <!-- Start report lists -->
+            <ul class="list-inline text-center fw-bold mb-4">
+                    <li class="list-inline-item btn reportlists activeitems"  th:onclick="window.location.href='/admin/reportListToday'">Today </li>
+                    <li class="list-inline-item btn reportlists "  th:onclick="window.location.href='/admin/reportweek'">Weekly</li>
+                    <li class="list-inline-item btn reportlists"  th:onclick="window.location.href='/admin/reportmonth'">Monthly</li>
+                    <li class="list-inline-item btn reportlists"  th:onclick="window.location.href='/admin/reportbyday'">By Day</li>
+                </ul>
+
+            <!-- End Report Lists -->
+
+            <div class="text-center">
+                <h3>Total Consumer Count : <span>3</span></h3>
+            </div>
+                
+            <!-- Start Search BOx and Calendar -->
+            <div class="my-2  searchboxs">
+                <form class="row  d-flex justify-content-between">
+                    
+                    <div class="row col-8 d-flex justify-content-left">
+                        <div class="col-5 d-flex mb-2">
+                            <label for="startdate" class="col-form-label text-dark pe-2">Start Date</label>
+                            <div class="inputdates">
+                              <input type="date" class="form-control" id="startdate" />
+                            </div>
+                        </div>
+    
+                        <div class="col-7 d-flex mb-2 ">
+                            <label for="enddate" class="col-form-label text-dark pe-2">End Date</label>
+                            <div class="d-flex inputdates">
+                              <input type="date" class="form-control me-2" id="enddate" />
+                              <a href="" class="btn clickbtns">Search</a>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-12 d-flex">
+                                <input type="text" class="form-control text-muted me-2" id="search" placeholder="Search someone by name..."  />
+                                <a href="" class="btn searchbtns">Search</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+
+                </form>
+            </div>
+            <!-- End Search BOx and Calendar -->
+
+            <!-- Start List box -->
+            <div class="d-flex justify-content-center my-2">
+                
+                <div class="btn-group col-10 d-flex justify-content-center">
+                    <a th:href="@{/admin/reportbyday}" class="btn text-light btn-secondary disabled">Register : 125</a>
+                    <a th:href="@{/admin/reportbyday}" class="btn text-light btn-secondary disabled">Consumer : 120</a>
+                    <a th:href="@{/admin/reportbydaynonconsumer}" class="btn text-light btn-secondary">Non Consumer : 3</a>
+                    <a th:href="@{/admin/reportbydaynonregister}" class="btn text-light btn-secondary">Non Register : 2</a>
+                    
+                </div>
+            </div>
+            <!-- End List Box -->
+
+            <!-- Start staff report -->
+            <div class="my-4 lists">
+                
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-grid">
+                                    
+                                    <button class="btn btn-primary text-light text-start dropbuttons" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                                        <div class="d-flex justify-content-between col-10 mx-auto">
+                                            <div class="col-1">1</div>
+                                            <div class="col-1">Div002</div>
+                                            <div class="col-3">Amy Htun</div>
+                                            <div class="col-3">Offshore Development Dept-1</div>
+                                            <div class="col-2">DOT</div>
+                                        </div>
+                                        <i class="fa-solid fa-bars menubars"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="collapse1" class="collapse">
+                                <div class="card-body">
+                                    <small class="text-dark d-flex justify-content-end">1-3-2023 to 31-3-2023</small> 
+                                    <div class="row col-12">
+                                            <div class="col-12 d-flex justify-content-center">
+                                                <span class="bg-success p-2 m-2">01</span>
+                                                <span class="bg-danger p-2 m-2">02</span>
+                                                <span class="bg-success p-2 m-2">03</span>
+                                                <span class="bg-secondary p-2 m-2">04</span>
+                                                <span class="bg-secondary p-2 m-2">05</span>
+
+                                                <span class="bg-success p-2 m-2">06</span>
+                                                <span class="bg-danger p-2 m-2">07</span>
+                                                <span class="bg-success p-2 m-2">08</span>
+                                                <span class="bg-danger p-2 m-2">09</span>
+                                                <span class="bg-success p-2 m-2">10</span>
+
+                                                <span class="bg-secondary p-2 m-2">11</span>
+                                                <span class="bg-secondary p-2 m-2">12</span>
+                                                <span class="bg-success p-2 m-2">13</span>
+                                                <span class="bg-danger p-2 m-2">14</span>
+                                                <span class="bg-success p-2 m-2">15</span>
+                                                <span class="bg-danger p-2 m-2">16</span>
+                                            </div>
+                                            
+                                            <div class="col-12 d-flex justify-content-center">
+                                                
+                                                <span class="bg-success p-2 m-2">17</span>
+
+                                                <span class="bg-secondary p-2 m-2">18</span>
+                                                <span class="bg-secondary p-2 m-2">19</span>
+                                            
+                                                <span class="bg-success p-2 m-2">20</span>
+                                                <span class="bg-danger p-2 m-2">21</span>
+                                                <span class="bg-success p-2 m-2">22</span>
+                                                <span class="bg-danger p-2 m-2">23</span>
+                                                <span class="bg-success p-2 m-2">24</span>
+
+                                                <span class="bg-secondary p-2 m-2">25</span>
+                                                <span class="bg-secondary p-2 m-2">26</span>
+                                                <span class="bg-success p-2 m-2">27</span>
+                                                <span class="bg-danger p-2 m-2">28</span>
+                                                <span class="bg-success p-2 m-2">29</span>
+
+                                                <span class="bg-success p-2 m-2">30</span>
+                                                <span class="bg-danger p-2 m-2">31</span>
+                                                
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-grid">
+                                    
+                                    <button class="btn btn-primary text-light text-start dropbuttons" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                                        <div class="d-flex justify-content-between col-10 mx-auto">
+                                            <div class="col-1">2</div>
+                                    <div class="col-1">Div003</div>
+                                    <div class="col-3">Arjun</div>
+                                    <div class="col-3">Local Business Dept</div>
+                                    <div class="col-2">GGI RPA Development</div>
+                                        </div>
+                                        <i class="fa-solid fa-bars menubars"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="collapse2" class="collapse">
+                                <div class="card-body">
+                                    <small class="text-dark d-flex justify-content-end">1-3-2023 to 31-3-2023</small> 
+                                    <div class="row col-12">
+                                            <div class="col-12 d-flex justify-content-center">
+                                                <span class="bg-success p-2 m-2">01</span>
+                                                <span class="bg-danger p-2 m-2">02</span>
+                                                <span class="bg-success p-2 m-2">03</span>
+                                                <span class="bg-secondary p-2 m-2">04</span>
+                                                <span class="bg-secondary p-2 m-2">05</span>
+
+                                                <span class="bg-success p-2 m-2">06</span>
+                                                <span class="bg-danger p-2 m-2">07</span>
+                                                <span class="bg-success p-2 m-2">08</span>
+                                                <span class="bg-danger p-2 m-2">09</span>
+                                                <span class="bg-success p-2 m-2">10</span>
+
+                                                <span class="bg-secondary p-2 m-2">11</span>
+                                                <span class="bg-secondary p-2 m-2">12</span>
+                                                <span class="bg-success p-2 m-2">13</span>
+                                                <span class="bg-danger p-2 m-2">14</span>
+                                                <span class="bg-success p-2 m-2">15</span>
+                                                <span class="bg-danger p-2 m-2">16</span>
+                                            </div>
+                                            
+                                            <div class="col-12 d-flex justify-content-center">
+                                                
+                                                <span class="bg-success p-2 m-2">17</span>
+
+                                                <span class="bg-secondary p-2 m-2">18</span>
+                                                <span class="bg-secondary p-2 m-2">19</span>
+                                            
+                                                <span class="bg-success p-2 m-2">20</span>
+                                                <span class="bg-danger p-2 m-2">21</span>
+                                                <span class="bg-success p-2 m-2">22</span>
+                                                <span class="bg-danger p-2 m-2">23</span>
+                                                <span class="bg-success p-2 m-2">24</span>
+
+                                                <span class="bg-secondary p-2 m-2">25</span>
+                                                <span class="bg-secondary p-2 m-2">26</span>
+                                                <span class="bg-success p-2 m-2">27</span>
+                                                <span class="bg-danger p-2 m-2">28</span>
+                                                <span class="bg-success p-2 m-2">29</span>
+
+                                                <span class="bg-success p-2 m-2">30</span>
+                                                <span class="bg-danger p-2 m-2">31</span>
+                                                
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-grid">
+                                    
+                                    <button class="btn btn-primary text-light text-start dropbuttons" data-bs-toggle="collapse" data-bs-target="#collapse3">
+                                        <div class="d-flex justify-content-between col-10 mx-auto">
+                                            <div class="col-1">3</div>
+                                            <div class="col-1">Div003</div>
+                                          <div class="col-3">Aung Chan Myae</div>
+                                          <div class="col-3">Common Infrastructure Dept</div>
+                                          <div class="col-2">First Line</div>
+                                        </div>
+                                        <i class="fa-solid fa-bars menubars"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="collapse3" class="collapse">
+                                <div class="card-body">
+                                    <small class="text-dark d-flex justify-content-end">1-3-2023 to 31-3-2023</small> 
+                                    <div class="row col-12">
+                                            <div class="col-12 d-flex justify-content-center">
+                                                <span class="bg-success p-2 m-2">01</span>
+                                                <span class="bg-danger p-2 m-2">02</span>
+                                                <span class="bg-success p-2 m-2">03</span>
+                                                <span class="bg-secondary p-2 m-2">04</span>
+                                                <span class="bg-secondary p-2 m-2">05</span>
+
+                                                <span class="bg-success p-2 m-2">06</span>
+                                                <span class="bg-danger p-2 m-2">07</span>
+                                                <span class="bg-success p-2 m-2">08</span>
+                                                <span class="bg-danger p-2 m-2">09</span>
+                                                <span class="bg-success p-2 m-2">10</span>
+
+                                                <span class="bg-secondary p-2 m-2">11</span>
+                                                <span class="bg-secondary p-2 m-2">12</span>
+                                                <span class="bg-success p-2 m-2">13</span>
+                                                <span class="bg-danger p-2 m-2">14</span>
+                                                <span class="bg-success p-2 m-2">15</span>
+                                                <span class="bg-danger p-2 m-2">16</span>
+                                            </div>
+                                            
+                                            <div class="col-12 d-flex justify-content-center">
+                                                
+                                                <span class="bg-success p-2 m-2">17</span>
+
+                                                <span class="bg-secondary p-2 m-2">18</span>
+                                                <span class="bg-secondary p-2 m-2">19</span>
+                                            
+                                                <span class="bg-success p-2 m-2">20</span>
+                                                <span class="bg-danger p-2 m-2">21</span>
+                                                <span class="bg-success p-2 m-2">22</span>
+                                                <span class="bg-danger p-2 m-2">23</span>
+                                                <span class="bg-success p-2 m-2">24</span>
+
+                                                <span class="bg-secondary p-2 m-2">25</span>
+                                                <span class="bg-secondary p-2 m-2">26</span>
+                                                <span class="bg-success p-2 m-2">27</span>
+                                                <span class="bg-danger p-2 m-2">28</span>
+                                                <span class="bg-success p-2 m-2">29</span>
+
+                                                <span class="bg-success p-2 m-2">30</span>
+                                                <span class="bg-danger p-2 m-2">31</span>
+                                                
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- End staff report -->
+
+            
+        </div>
+
+        
+
+    </section>
+
+    <!-- end byday report section -->
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script src="https://kit.fontawesome.com/e0faeaf50f.js" crossorigin="anonymous"></script>
+
+    <!-- bootstrap css1 js1 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+
+<head>
+    <title>Paid Voucher list</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- fav icon -->
+    <link th:href="@{/images/datlogo.png}" rel="icon" type="image/png" sizes="18*18" />
+
+
+    <!-- bootstrap css1 js1 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+
+    <!-- internal css -->
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+    <link rel="stylesheet" th:href="@{/css/faq.css}" />
+    <link rel="stylesheet" th:href="@{/css/register.css}" />
+    
+    
+
+    <!-- s awesome -->
+    <link rel="stylesheet" href="https://kit.fontawesome.com/e0faeaf50f.css" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="css.css" /> -->
+    <style>
+        /* Add custom styles here */
+
+        body{
+            font-family: sans-serif;
+        }
+
+        .titles{
+          /* background-color: green; */
+          text-transform: uppercase;
+          color: var(--txtcolor);
+          display: inline-block;
+          padding: 5px 20px;
+
+          position: relative;
+      }
+
+      .titles::before,
+      .titles::after{
+          content: "";
+          width: 20px;
+          height: 20px;
+
+          position: absolute;
+      }
+
+      .titles::before{
+          border-left: 3px solid var(--btncolor);
+          border-bottom: 3px solid var(--btncolor);
+
+          left: 0;
+          bottom: 0;
+      }
+
+      .titles::after{
+          border-right: 3px solid var(--btncolor);
+          border-top: 3px solid var(--btncolor);
+
+          right: 0;
+          top: 0;
+      }
+
+        .invoice-list {
+            margin-top: 50px;
+        }
+
+        .div {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            left: 0px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            background-color: #ebf5fb;
+        }
+
+        .invoice-list table {
+            border-collapse: collapse;
+        }
+
+        .first table {
+            width: 50%;
+            border-collapse: collapse;
+            
+        }
+        .first{
+            position: relative;
+        }
+
+        .prints{
+            position: absolute;
+            top: 0;
+            right: 10px;
+        }
+
+        .invoice-list th,
+        .invoice-list td {
+            border: 1px solid rgb(83, 74, 74);
+            padding: 8px;
+            text-align: center;
+        }
+
+        .invoice-list th {
+            background-color: lightblue;
+        }
+
+        .invoice-list .invoice-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .invoice-list .paid {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .invoice-list .unpaid {
+            background-color: #d31111;
+            color: #fff;
+        }
+
+        .div2 {
+            width: 70%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .div2 div {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 20px;
+        }
+
+        .div3 {
+            background: rgb(1, 80, 120);
+            color: white;
+            padding-right: 20px;
+            padding-left: 20px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+
+        .div4 {
+            background: rgb(255, 255, 255);
+            padding-right: 20px;
+            padding-left: 20px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+
+        .div4:hover {
+            background-color: rgb(1, 80, 120);
+            color: white;
+            cursor: pointer;
+        }
+
+        .div3:hover {
+            background-color: rgb(1, 80, 120);
+            color: white;
+            cursor: pointer;
+
+        }
+
+        .clickbtns,.searchbtns{
+            font-size: 16px;
+            
+            color: #000;
+            background-color: #2874a6;
+        }
+
+        .clickbtns:hover,
+        .searchbtns:hover{
+            
+            color: var(--txtcolor);
+            background: rgb(1, 80, 120);
+            
+        }
+
+        .icons{
+            color: #000;
+        }
+
+        .icons:hover{
+            color: rgb(1, 80, 120);
+        }
+
+
+        /* body {
+            background-color: lightblue;
+        } */
+    </style>
+</head>
+
+<body>
+
+    <header class="w-100 mt-0">
+        <!-- START BAVBAR -->
+        <nav class="navbar navbar-light">
+    
+          <div id="mynavbar">
+              <div class="container-fluid m-0">
+                  <div class="row">
+                      
+                      <!-- Start Left Sidebar -->
+                      <div id="nav" class="col-xl-2 col-lg-3 col-md-4 fixed-top collapse sidebars">
+    
+                          <div class="pb-3 mt-4 text-center borderbottoms">
+                              <a href="" class="btn btn-outline-light rounded-circle mb-1"><i class="fa-solid fa-user fs-3"></i></a>
+                              <a href="#" class="text-white nav-link">DAT Admin</a>
+                          </div>
+                           <ul class="navbar-nav flex-column mt-4">
+                                <li class="navbar-item"><a th:href="@{/admin/dashboard}" class="nav-link text-white px-2 py-2 mb-2 currents"><i class="fas fa-home fa-lg me-3"></i>Dashboard</a></li>
+                                <li class="navbar-item"><a th:href="@{/admin/menu}" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-utensils fa-lg ps-1 me-3"></i>Menu</a></li>
+                                <li class="navbar-item"><a th:href="@{/admin/registered_list/today}" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Registered List</a></li>
+                                <li class="navbar-item"><a th:href="@{/admin/report/today}" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-money-check fa-lg me-3"></i>Report List</a></li>
+                                <li class="navbar-item"><a th:href="@{/admin/staff_list}" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-users-line fa-lg me-3"></i>Staff List</a></li>
+                                <li class="navbar-item"><a th:href="@{/admin/invoice}" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-sack-dollar fa-lg me-3"></i>Invoice</a></li>
+                                <li class="navbar-item"><a href="#" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-id-card-clip fa-lg me-3"></i>Door Access File</a></li>
+                                <li class="navbar-item"><a href="#" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-brands fa-mdb fa-lg me-3"></i>Master Data Setup</a></li>
+                                <li class="navbar-item"><a href="#" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-envelope fa-lg me-3"></i>Email</a></li>
+                                <li class="navbar-item"><a href="#" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fas fa-wrench fa-lg me-3"></i>About As</a></li>
+                                <li class="navbar-item"><a href="#" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fas fa-sign-out-alt fa-lg me-3"></i>Logout</a></li>
+                            </ul>
+                      </div>
+          
+                      <!-- End Left Sidebar --> 
+    
+                        <!-- Start Top Sidebar -->
+                        <div class="col-xl-12 col-lg-9 col-md-8 py-2 mb-4 ms-auto fixed-top topnavbars">
+                        <div class="row d-flex align-items-center justify-content-between ">
+                            <div class="d-flex justify-content-between">
+                                
+                                
+                                <nav class="navbar navbar-dark ">
+                                    <div class="container-fluid">
+                                      <button class="navbar-toggler buttons" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+                                        <span class="navbar-toggler-icon"></span>
+                                      </button>
+                                    </div>
+                                </nav>
+                            
+                                <div class="navbar-brand text-light mx-3 ">
+                                  <img th:src="@{/images/datlogo.png}" width="60px" alt="favicon" />
+                                  <span class="text-uppercase pe-none mx-2 ">Catering Service</span>
+                                </div>
+                                
+                                <div class=" d-flex align-items-center">
+                                    <a href="" class="nav-link fs-4"><i class="fa-solid fa-circle-question fa-lg me-1 qicons"></i>
+                                        <span class="me-2">Help</span>
+                                        </a>
+                                </div>
+                            </div>
+  
+  
+                        </div>
+                        </div>
+                        <!-- End Top Sidebar -->
+  
+    
+    
+                  </div>
+              </div>
+          </div>
+          
+      </nav>
+      <!-- END NAVBAR -->
+    </header>
+
+    <div class="mb-3 div mt-5">
+        <!-- start title -->
+        <div class="row text-center mt-5 mb-2">
+            <div class="col">
+                <h3 class="titles text-dark">Invoice List</h3>
+            </div>
+        </div>
+        <!-- end title -->
+        <div class="div2 mt-1 mb-0">
+            <div class="m-0 p-0">
+                <div class="div3" th:onclick="window.location.href='/invoice'"><span>Unpaid Voucher List</span>
+                    </div>
+                    <div class="div4" th:onclick="window.location.href='/paidinvoice'"><span>Paid Voucher List</span>
+                    </div>
+            </div>
+        </div>
+
+        <div class="container col-12 d-flex justify-content-end align-items-center mb-2">
+            
+            
+            <div class="d-flex col-6 justify-content-end">
+                <span class="col-2 mt-2 text-center">Start Month</span>
+                <input type="month" class="form-control" />
+                <span class="col-2 mt-2 text-end">End Month</span>
+                <input type="month" class="form-control mx-2" />
+                <a href="" class="btn ms-2 col-2 clickbtns">Search</a>
+            </div>
+
+            
+        </div>
+
+        <div style="background-color: lightblue;margin-bottom: 3%;">
+            <div class=" mt-1">
+                <h1 class=" text-center">Paid Voucher List</h1>
+            </div>
+
+            <div class="container first">
+                <table>
+
+                    <tr>
+                        <td>Catering Service Name:</td>
+                        <td>Kaung Myait Hein Restaurant</td>
+                    </tr>
+                    <tr>
+                        <td>Report Date :</td>
+                        <td>26/02/2023</td>
+                        <td class="col-3 d-flex justify-content-end prints">
+                            <a href="" class="btn ms-2 col-4 clickbtns">Print</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        
+                    </tr>
+
+                </table>
+            </div>
+
+            <div class="container invoice-list my-2" >
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sr.no</th>
+                            <th>Description</th>
+                            <th>Cashier</th>
+                            <th>Received by</th>
+                            <th>Approved by</th>
+                            <th>No. of Pax</th>
+                            <th>Price</th>
+                            <th>Amount</th>
+                            <th>Payment Date</th>
+                            <th>Status</th>
+                            <th>Payment Method</th>
+                            <th>Details </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>CS001-20230206 : 30012023 ~03022023</td>
+                            <td>May Thet Naing</td>
+                            <td>Zin Hnin Aung</td>
+                            <td>Kay Thi Khine</td>
+                            <td>933</td>
+                            <td>1300</td>
+                            <td>1212900</td>
+                            <td>6/2/2023</td>
+                            <td><span class="invoice-status paid">Paid</span></td>
+                            <td>Optiion1</td>
+                            <td><a href=""><i class="fa-solid fa-circle-info fa-lg icons"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>CS002-20230213 : 06022023~10022023</td>
+                            <td>May Thet Naing</td>
+                            <td>Zin Hnin Aung</td>
+                            <td>Kay Thi Khine</td>
+                            <td>900</td>
+                            <td>1300</td>
+                            <td>1170000</td>
+                            <td>13/2/2023</td>
+                            <td><span class="invoice-status paid">Paid</span></td>
+                            <td>Optiion1</td>
+                            <td><a href=""><i class="fa-solid fa-circle-info fa-lg icons"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>CS003-20230220 : 13022023~17022023</td>
+                            <td>May Thet Naing</td>
+                            <td>Zin Hnin Aung</td>
+                            <td>Kay Thi Khine</td>
+                            <td>800</td>
+                            <td>1300</td>
+                            <td>1040000</td>
+                            <td>20/2/2023</td>
+                            <td><span class="invoice-status paid">Paid</span></td>
+                            <td>Optiion1</td>
+                            <td><a href=""><i class="fa-solid fa-circle-info fa-lg icons"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>CS004-20230227 : 20022023~24022023</td>
+                            <td>May Thet Naing</td>
+                            <td>Zin Hnin Aung</td>
+                            <td>Kay Thi Khine</td>
+                            <td>950</td>
+                            <td>1300</td>
+                            <td>1235000</td>
+                            <td>27/2/2023</td>
+                            <td><span class="invoice-status paid">Paid</span></td>
+                            <td>Optiion1</td>
+                            <td><a href=""><i class="fa-solid fa-circle-info fa-lg icons"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>CS005-20230306 : 27022023~03032023</td>
+                            <td>May Thet Naing</td>
+                            <td>Zin Hnin Aung</td>
+                            <td>Kay Thi Khine</td>
+                            <td>680</td>
+                            <td>1300</td>
+                            <td>884000</td>
+                            <td>6/3/2023</td>
+                            <td><span class="invoice-status paid">Paid</span></td>
+                            <td>Optiion1</td>
+                            <td><a href=""><i class="fa-solid fa-circle-info fa-lg icons"></i></a></td>
+                        </tr>
+                        <tr style="background-color: lightblue; font-size: large;font-weight: bold;">
+                            <td colspan="7">Total Cost for Lunch Catering Service</td>
+                            <td>5541900</td>
+                            <td>Kyats</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/e0faeaf50f.js" crossorigin="anonymous"></script>
+
+    <!-- bootstrap css1 js1 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,169 @@
+body{
+    background-color: #ebf5fb;
+}
+
+.buttons{
+    background-color: #03045e !important;
+}
+
+.div1{
+    position: absolute;
+    top: 0px;
+    bottom: 50px;
+    right: 0px;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #ebf5fb;
+}
+.div2{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    margin-bottom: 2%;
+}
+.div2 div{
+    display: flex;
+    flex-direction: row;
+}
+.div3{
+    background: rgb(1, 80, 120);
+    color: white;
+    padding-right: 20px;
+    padding-left:20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+.div4{
+    
+    
+    background: #2874a6;
+    padding-right: 20px;
+    padding-left:20px ;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+.div4:hover,.updatebtns:hover{
+    background: rgb(1, 80, 120);
+    color:white;
+    cursor: pointer;
+}
+
+.btns{
+    position: relative;
+}
+
+.updatebtns{
+    width: 100px;
+    text-align: center;
+    background: #2874a6;
+    padding-right: 20px;
+    padding-left:20px ;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+}
+
+.searchdiv{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5%;
+}
+.div5{
+    width: 90%;
+    background: rgb(0, 126, 189);
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom:5px;
+    border-radius: 15px;
+    color:rgb(234, 233, 233);
+}
+.div6{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+.div6 div{
+    font-size: large;
+    margin-right:20px ;
+}
+.div7{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.div8{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+.div9{
+    margin-right: 10px;
+}
+.div7 div div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+.div7 div div div{
+    border: 1px solid black;
+    background: rgb(103, 209, 103);
+    width: 30px;
+    height: 30px;
+    margin: 2px;
+}
+.todayCounsumerListBody{
+    width: 80%;
+    background: lightblue;
+    overflow-y: scroll;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.todayCounsumerListBody div{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    color:black;
+    width: 100%;
+}
+.todayCounsumerListBorder{
+    border-bottom: 1px solid black;
+}
+
+.lists{
+    width: 85%;
+}
+
+.dropbuttons{
+    position: relative;
+    background-color: #2874a6 !important;
+}
+
+.dropbuttons:hover{
+    background-color: rgb(1, 80, 120) !important;
+}

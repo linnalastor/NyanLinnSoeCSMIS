@@ -1,0 +1,175 @@
+:root{
+    --bgcolor: #00b4d8;
+    --btncolor: #03045e;
+    --txtcolor: #fff;
+}
+
+
+*{
+    box-sizing: border-box;
+    list-style-type: none;
+    text-decoration: none;
+    border: none;
+
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    height: 100vh;
+    font-family: sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #ebf5fb;
+
+    overflow-x: hidden;
+}
+
+.sidebars{
+    height: 100vh;
+
+    background-color: var(--btncolor);
+
+    position: absolute;
+    top: 10vh;
+    left: 0;
+}
+
+.reports{
+    width: 100%;
+}
+
+.titles{
+    /* background-color: green; */
+    text-transform: uppercase;
+    color: var(--txtcolor);
+    display: inline-block;
+    padding: 5px 20px;
+
+    position: relative;
+}
+
+.titles::before,
+.titles::after{
+    content: "";
+    width: 20px;
+    height: 20px;
+
+    position: absolute;
+}
+
+.titles::before{
+    border-left: 3px solid var(--btncolor);
+    border-bottom: 3px solid var(--btncolor);
+
+    left: 0;
+    bottom: 0;
+}
+
+.titles::after{
+    border-right: 3px solid var(--btncolor);
+    border-top: 3px solid var(--btncolor);
+
+    right: 0;
+    top: 0;
+}
+
+/* start report lists  */
+
+.reportlists{
+    background: #2874a6;
+    cursor: pointer;
+    
+}
+
+.reportlists:hover{
+    color: #fff;
+    background: rgb(1, 80, 120);
+}
+
+.activeitems{
+    color: #fff;
+    background: rgb(1, 80, 120);
+}
+
+/* end report lists */
+
+.clickbtns,.searchbtns{
+    font-size: 16px;
+    
+    color: #000;
+    background-color: #2874a6;
+}
+
+.clickbtns:hover,
+.searchbtns:hover{
+    
+    color: var(--txtcolor);
+    background: rgb(1, 80, 120);
+    
+}
+
+#search{
+    width: 100%;
+}
+
+.inputdates{
+    width: 50%;
+}
+
+.lists ,.tablebodys{
+    height: 300px;
+    /* background-color: var(--btncolor); */
+    
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.dropbuttons{
+    position: relative;
+    background-color: #2874a6;
+}
+
+.dropbuttons:hover{
+    background-color: rgb(1, 80, 120);
+}
+
+
+.menubars{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+/* start today css */
+
+.showdates,
+.showtotals{
+    color: var(--btncolor);
+}
+
+.showdates{
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border-bottom: 1px solid var(--bgcolor);
+}
+
+.reporttables{
+    text-align: center;
+    background-color: var(--bgcolor);
+}
+
+.reporttables th{
+    top: 0;
+    position: sticky;
+    background-color: #2874a6;
+}
+
+.searchnames{
+    width: 300px;
+}
+/* end today css */

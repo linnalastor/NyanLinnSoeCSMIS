@@ -1,0 +1,136 @@
+*{
+    box-sizing: border-box;
+}
+:root{
+    --bgcolor: #00b4d8;
+    --btncolor: #03045e;
+    --txtcolor: #fff;
+}
+
+body{
+    overflow-x: hidden;
+    background-color: #ebf5fb;
+}
+
+
+
+.titles{
+    /* background-color: green; */
+    text-transform: uppercase;
+    color: var(--txtcolor);
+    display: inline-block;
+    padding: 5px 20px;
+
+    position: relative;
+}
+
+.titles::before,
+.titles::after{
+    content: "";
+    width: 20px;
+    height: 20px;
+
+    position: absolute;
+}
+
+.titles::before{
+    border-left: 3px solid var(--btncolor);
+    border-bottom: 3px solid var(--btncolor);
+
+    left: 0;
+    bottom: 0;
+}
+
+.titles::after{
+    border-right: 3px solid var(--btncolor);
+    border-top: 3px solid var(--btncolor);
+
+    right: 0;
+    top: 0;
+}
+
+
+/* start menu bar */
+.lines1, .lines2, .lines3{
+    width: 25px;
+    height: 3px;
+    margin: 6px;
+}
+
+
+.topnavbars{
+    background-color: #5dade2;
+}
+
+.borderbottoms{
+    
+    border-bottom: 1px groove #eee;
+}
+
+.buttons{
+    background-color: var(--btncolor);
+}
+
+.sidebars{
+    height: 100vh;
+
+    background-color: var(--btncolor);
+    /* border-right: 2px solid black; */
+    box-shadow: 3px 0 5px rgb(16, 176, 230);
+
+    position: absolute;
+    top: 10vh;
+    left: 0;
+}
+
+.currents{
+    background-color: var(--bgcolor);
+    border-radius: 7px;
+
+    transition: all 0.3s;
+}
+
+.currents:hover{
+    background-color: var(--bgcolor);
+    transform: translateY(-1px);
+}
+
+.sidebarlinks{
+    transition: all 0.4s;
+}
+
+.sidebarlinks:hover{
+    background-color: var(--bgcolor);
+    border-radius: 7px;
+}
+
+/* end menu bar */
+
+
+
+.allcards{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.cards{
+    height: 250px;
+    box-shadow: 1px 2px 5px var(--btncolor);
+}
+
+.cardheads{
+    font-size: 18px;
+    background-color:#5dade2;
+}
+
+.cardbodys a{
+    height: 130px;
+    font-size: 4rem;
+    font-weight: bold;
+    text-decoration: none;
+    color:#2874a6;
+
+    line-height: 130px;
+}

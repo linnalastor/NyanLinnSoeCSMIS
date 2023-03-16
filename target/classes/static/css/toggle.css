@@ -1,0 +1,46 @@
+.toggle{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 40px;
+    border-radius: 30px;
+    background: darkslategrey;
+    transition: 0.3s;
+}
+
+.toggle .toggle-button{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 30px;
+    height: 30px;
+    outline-style: none;
+    border: none;
+    border-radius: 30px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.toggle.active{
+    background-color: aquamarine;
+}
+
+.toggle.active .toggle-button{
+    left: 45px;
+}
+
+.text{
+    position: absolute;
+    left: 80px;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+input[type=submit]{
+	position: absolute;
+	top: 60px;
+	left: 10px;
+}
