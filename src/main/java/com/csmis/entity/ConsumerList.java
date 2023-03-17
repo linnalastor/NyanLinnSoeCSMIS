@@ -1,7 +1,5 @@
 package com.csmis.entity;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,16 +12,8 @@ public class ConsumerList {
 	@Column(name="consumer_information_id")
 	private String consumer_information_id;
 
-
-	@Column(name = "staff_id")
-	private String staff_id;
-
 	@Column(name="confirmation")
 	private String confirmation;
-
-
-	@Column(name="date")
-	private Date date;
 
 
 	public ConsumerList() {
@@ -32,12 +22,10 @@ public class ConsumerList {
 	}
 
 
-	public ConsumerList(String consumer_information_id, String staff_id, String confirmation, Date date) {
+	public ConsumerList(String consumer_information_id, String confirmation) {
 		super();
 		this.consumer_information_id = consumer_information_id;
-		this.staff_id = staff_id;
 		this.confirmation = confirmation;
-		this.date = date;
 	}
 
 
@@ -51,16 +39,6 @@ public class ConsumerList {
 	}
 
 
-	public String getStaff_id() {
-		return staff_id;
-	}
-
-
-	public void setStaff_id(String staff_id) {
-		this.staff_id = staff_id;
-	}
-
-
 	public String getConfirmation() {
 		return confirmation;
 	}
@@ -68,16 +46,6 @@ public class ConsumerList {
 
 	public void setConfirmation(String confirmation) {
 		this.confirmation = confirmation;
-	}
-
-
-	public Date getDate() {
-		return date;
-	}
-
-
-	public void setDate(Date date) {
-		this.date = date;
 	}
 	
 	

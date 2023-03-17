@@ -22,6 +22,14 @@ public class DailyVoucher {
 
 	@Column(name="actual_head_count")
 	private String actual_head_count;
+	
+	@Column(name="staff_cost")
+	private int staff_cost;
+	
+	
+	@Column(name="company_cost")
+	private int company_cost;
+
 
 	@Column(name="amount")
 	private int amount;
@@ -32,12 +40,14 @@ public class DailyVoucher {
 	}
 
 	public DailyVoucher(Date date, String catering_service_name, String register_head_count, String actual_head_count,
-			int amount) {
+			int staff_cost, int company_cost, int amount) {
 		super();
 		this.date = date;
 		this.catering_service_name = catering_service_name;
 		this.register_head_count = register_head_count;
 		this.actual_head_count = actual_head_count;
+		this.staff_cost = staff_cost;
+		this.company_cost = company_cost;
 		this.amount = amount;
 	}
 
@@ -71,6 +81,22 @@ public class DailyVoucher {
 
 	public void setActual_head_count(String actual_head_count) {
 		this.actual_head_count = actual_head_count;
+	}
+
+	public int getStaff_cost() {
+		return staff_cost;
+	}
+
+	public void setStaff_cost(int staff_cost) {
+		this.staff_cost = staff_cost;
+	}
+
+	public int getCompany_cost() {
+		return company_cost;
+	}
+
+	public void setCompany_cost(int company_cost) {
+		this.company_cost = company_cost;
 	}
 
 	public int getAmount() {

@@ -6,8 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="resturant")
-public class Resturant {
+@Table(name="restaurant")
+public class Restaurant {
 	@Id
 	@Column(name="name")
 	private String name;
@@ -20,13 +20,13 @@ public class Resturant {
 	private String phone_number;
 
 
-	public Resturant() {
+	public Restaurant() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 
-	public Resturant(String name, String address, String phone_number) {
+	public Restaurant(String name, String address, String phone_number) {
 		super();
 		this.name = name;
 		this.address = address;
