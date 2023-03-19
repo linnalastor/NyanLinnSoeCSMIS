@@ -26,4 +26,9 @@ public class StaffService implements StaffServiceInterface{
 		return staffRepository.findAll();
 	}
 
+	@Override
+	public Staff findByID(String id) {
+		return staffRepository.getById(id);
+	}
+
 }

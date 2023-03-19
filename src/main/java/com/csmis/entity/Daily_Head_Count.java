@@ -25,7 +25,7 @@ public class Daily_Head_Count {
 	@Column(name="non_register_head_count")
 	private int non_register_head_count;
 	
-	@Column(name="non_register_head_count")
+	@Column(name="not_picked_head_count")
 	private int not_picked_head_count;
 
 	public Daily_Head_Count() {

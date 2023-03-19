@@ -64,7 +64,7 @@ public class AdminController {
 	}
 
 	/* ConsumerList */
-	@GetMapping("/consumer_list/by_days")
+	@GetMapping("/registered_list/today")
 	public String consumerByDays() {
 		return "admin/consumer-list/consumer_bydays";
 	}
