@@ -35,12 +35,7 @@ public class AdminController {
         return "admin/admin_datasetup";
     }
 
-	/* Login */
-	@GetMapping("/login")
-	public String login(Model model) {
-
-		return "admin/admin_login";
-	}
+	
 
 	/* Dashboard */
 	@GetMapping("/dashboard")
