@@ -5,12 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.opencsv.bean.CsvBindByName;
+
 @Entity
 @Table(name="invoice_approved_by")
 public class InvoiceApprovedBy {
 
 	@Id
 	@Column(name="name")
+	@CsvBindByName(column="Name")
 	public String name;
 
 	public InvoiceApprovedBy() {

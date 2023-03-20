@@ -5,11 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.opencsv.bean.CsvBindByName;
+
 @Entity
 @Table(name="invoice_received_by")
 public class InvoiceReceiveBy {
 	@Id
 	@Column(name="name")
+	@CsvBindByName(column="Name")
 	public String name;
 
 	public InvoiceReceiveBy() {
@@ -29,5 +32,13 @@ public class InvoiceReceiveBy {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "InvoiceReceiveBy [name=" + name + "]";
+	}
+
+
+
+
 }

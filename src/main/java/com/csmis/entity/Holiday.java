@@ -1,29 +1,52 @@
 package com.csmis.entity;
 
+
+
+
+
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
-import com.opencsv.bean.CsvBindByName;
 
 @Entity
 @Table(name="holiday")
 public class Holiday {
 	@Id
 	@Column(name="date")
-	@CsvBindByName(column="Date")
 	private Date date;
 
 	@Column(name="description")
-	@CsvBindByName(column="Holiday")
 	private String description;
 
 	public Holiday() {
-		super();
-		// TODO Auto-generated constructor stub
+
+	}
+
+	public void HolidayDTO(String sdate, String description)throws ParseException {
+		
+		String[] formats = {"d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy", "dd/MM/yyyy"};
+		Date date = null;
+		for (String format : formats) {
+            SimpleDateFormat sdf = new SimpleDateFormat(format);
+            try {
+                date = sdf.parse(sdate);
+        	    System.out.println("here");
+                break;
+            } catch (ParseException e) {
+            }if (date != null) {
+                System.out.println(date);
+            } else {
+                System.err.println("Error parsing date string: " + sdate);
+            }
+        }
+		this.date = date;
+		this.description = description;
 	}
 
 	public Holiday(Date date, String description) {
@@ -47,5 +70,12 @@ public class Holiday {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "holiday [date=" + date + ", description=" + description + "]";
+	}
+
+
+
 }
