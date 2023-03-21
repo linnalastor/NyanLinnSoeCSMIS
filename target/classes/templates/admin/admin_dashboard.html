@@ -37,7 +37,7 @@
                             <ul class="navbar-nav flex-column mt-4">
                                 <li class="navbar-item"><a th:href="@{/admin/dashboard}" class="nav-link text-white px-2 py-2 mb-2 currents"><i class="fas fa-home fa-lg me-3"></i>Dashboard</a></li>
                                 <li class="navbar-item"><a th:href="@{/admin/menu}" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-utensils fa-lg ps-1 me-3"></i>Menu</a></li>
-                                <li class="navbar-item"><a th:href="@{/admin/registered_list/today}" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Registered List</a></li>
+                                <li class="navbar-item"><a th:href="@{/admin/consumer_list/today}" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Registered List</a></li>
                                 <li class="navbar-item"><a th:href="@{/admin/report/today}" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-money-check fa-lg me-3"></i>Report List</a></li>
                                 <li class="navbar-item"><a th:href="@{/admin/staff_list}" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-users-line fa-lg me-3"></i>Staff List</a></li>
                                 <li class="navbar-item"><a th:href="@{/admin/invoice}" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-sack-dollar fa-lg me-3"></i>Invoice</a></li>
@@ -117,7 +117,7 @@
             </div>
 
             <div class="card text-center col-3 me-5 my-3 cards"
-            th:onclick="window.location.href='/admin/registered_list/today'">
+            th:onclick="window.location.href='/admin/consumer_list/today'">
                 <div class="card-header text-uppercase cardheads">
                     Registered List
                 </div>

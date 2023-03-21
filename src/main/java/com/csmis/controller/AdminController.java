@@ -64,25 +64,25 @@ public class AdminController {
 	}
 
 	/* ConsumerList */
-	@GetMapping("/registered_list/today")
-	public String consumerByDays() {
-		return "admin/consumer-list/consumer_bydays";
-	}
-
-	@GetMapping("/consumer_list/by_month")
-	public String consumerMonthly() {
-		return "admin/consumer-list/consumer_monthly";
-	}
-
-	@GetMapping("/consumer_list/by_week")
-	public String consumerWeekly() {
-		return "admin/consumer-list/consumer_weekly";
-	}
-
-	@GetMapping("/consumer_list/today")
-	public String consumerToday() {
-		return "admin/consumer-list/consumer_today";
-	}
+//	@GetMapping("/registered_list/today")
+//	public String consumerByDays() {
+//		return "admin/consumer-list/consumer_bydays";
+//	}
+//
+//	@GetMapping("/consumer_list/by_month")
+//	public String consumerMonthly() {
+//		return "admin/consumer-list/consumer_monthly";
+//	}
+//
+//	@GetMapping("/consumer_list/by_week")
+//	public String consumerWeekly() {
+//		return "admin/consumer-list/consumer_weekly";
+//	}
+//
+//	@GetMapping("/consumer_list/today")
+//	public String consumerToday() {
+//		return "admin/consumer-list/consumer_today";
+//	}
 
 	/* Report List by day */
 	@GetMapping("/report/by_days")

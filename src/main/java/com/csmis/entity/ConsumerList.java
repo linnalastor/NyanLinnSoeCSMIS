@@ -47,6 +47,8 @@ public class ConsumerList {
 	public void setConfirmation(String confirmation) {
 		this.confirmation = confirmation;
 	}
+
+
 	
 	
 }
