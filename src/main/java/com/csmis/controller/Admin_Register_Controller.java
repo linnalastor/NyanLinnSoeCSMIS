@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.csmis.entity.ConsumerList;
 import com.csmis.entity.Staff;
-import com.csmis.service.OperatorService;
+
+import com.csmis.service.Operator_Register_Service;
 import com.csmis.service.StaffService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +24,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Admin_Register_Controller {
 
 	@Autowired
-	OperatorService op;
+	Operator_Register_Service op;
+	
 
 	@Autowired
 	StaffService staffService;

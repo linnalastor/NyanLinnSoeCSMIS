@@ -1,5 +1,7 @@
 package com.csmis.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,14 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.csmis.service.Operator_Register_Service;
 import com.csmis.service.StaffService;
-
+import com.csmis.service.PdfService;
 @Controller
 @RequestMapping("/operator")
 public class UserController {
 
 	@Autowired
+
 	Operator_Register_Service op;
 	
+
+
+	@Autowired
+	PdfService pdfService;
+
 	@Autowired
 	StaffService staffService;
 
@@ -37,9 +45,18 @@ public class UserController {
 		return "operator/User_Dashboard";
 	}
 
-	@GetMapping("/menu")
-	public String UserMenu(Model theModel) {
 
+	@GetMapping("/menu")
+	public String UserMenu(Model theModel) throws IOException {
+		String pdf="ThisWeek.pdf";
+		String encodedPdf =pdfService.getPdfAsByteString(pdf);
+		theModel.addAttribute("pdf", encodedPdf);
+        
+        String next_pdf="NextWeek.pdf";
+		String next_encodedPdf =pdfService.getPdfAsByteString(next_pdf);
+		theModel.addAttribute("npdf", next_encodedPdf);
+
+		theModel.addAttribute(theModel);	
 		return "operator/User_Menu";
 	}
 

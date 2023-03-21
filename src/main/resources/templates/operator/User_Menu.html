@@ -24,6 +24,36 @@
       body{
         background-color: #ebf5fb;
       }
+      
+.titles {
+	/* background-color: green; */
+	text-transform: uppercase;
+	color: var(- -txtcolor);
+	display: inline-block;
+	padding: 5px 20px;
+	position: relative;
+}
+
+.titles::before, .titles::after {
+	content: "";
+	width: 20px;
+	height: 20px;
+	position: absolute;
+}
+
+.titles::before {
+	border-left: 3px solid var(- -btncolor);
+	border-bottom: 3px solid var(- -btncolor);
+	left: 0;
+	bottom: 0;
+}
+
+.titles::after {
+	border-right: 3px solid var(- -btncolor);
+	border-top: 3px solid var(- -btncolor);
+	right: 0;
+	top: 0;
+}
     </style>
   </head>
 
@@ -96,29 +126,40 @@
       <!-- END NAVBAR -->
   </header>
 
-<div class="container-fluid mt-5 pt-4">
-  <!-- start title -->
-  <div class="row text-center mt-2 mb-3">
-    <div class="col">
-        <h3 class="titles text-dark">Menu</h3>
-    </div>
-  </div>
-  <!-- end title -->
+	<div class="container mt-5 pt-5">
+		<!-- start title -->
+		<div class="row text-center mb-1">
+			<div class="col">
+				<h3 class="titles text-dark">Menu List</h3>
+			</div>
+		</div>
+	</div>
+	<!-- end title -->
+	
+	
+	<div class="text-center p-5">
+		<div class="d-flex justify-content-around mt-3">
+        <form>
+           
+         <label class="fs-3 text-success">Current week</label>
+        </form>
 
-  
-  <div class="container">
-    <div class="row">
-    	<div class="col-md-4">
-    		<label for="formGroupExampleInput" class="form-label ml-5 text-success fw-bold fs-5">Current  Week</label>
-   			<embed th:attr="src='data:application/pdf;base64,' + ${pdf}" type="application/pdf" width="800px" height="600px" />
-    	</div>
-    	<div class="col-md-4">
-    		<label for="formGroupExampleInput" class="form-label ml-5 text-success fw-bold fs-5">Next  Week</label>
-   			<embed th:attr="src='data:application/pdf;base64,' + ${pdf}" type="application/pdf" width="800px" height="600px" />
-    	</div>
+         <form th:action="@{/admin/import_menu}" method="POST"
+            enctype="multipart/form-data">
+          
+         <label class="fs-3">Next week</label>
+        </form>
+        
     </div>
-     </div>
-  </div>
+
+    <div class="d-flex mt-2">
+   
+        <embed th:attr="src='data:application/pdf;base64,' + ${pdf}" type="application/pdf" width="50%" height="600" class="p-5" />
+         
+         <embed th:attr="src='data:application/pdf;base64,' + ${npdf}" type="application/pdf" width="50%" height="600" class="p-5"/> 
+    </div>
+	</div>
+
     
 <script src="https://kit.fontawesome.com/e0faeaf50f.js" crossorigin="anonymous"></script>
 
