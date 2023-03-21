@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.csmis.entity.ConsumerList;
-import com.csmis.service.OperatorService;
+import com.csmis.service.Operator_Register_Service;
 import com.csmis.service.StaffService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Lunch_Plan_Register_Controller {
 
 	@Autowired
-	OperatorService op;
+	Operator_Register_Service op;
 
 	@Autowired
 	StaffService staffService;
@@ -180,6 +180,7 @@ public class Lunch_Plan_Register_Controller {
 		// set and save staff info according to checker condition
 		if (checker) {
 			while (i < check_list.size()) {
+				
 				if (Integer.parseInt(check_list.get(i)) < 5)
 					next_month.add(check_list.get(i));
 				else

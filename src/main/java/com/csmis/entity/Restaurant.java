@@ -5,18 +5,23 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.opencsv.bean.CsvBindByName;
+
 @Entity
 @Table(name="restaurant")
 public class Restaurant {
 	@Id
 	@Column(name="name")
+	@CsvBindByName(column="Name")
 	private String name;
 
 	@Column(name="address")
+	@CsvBindByName(column="Address")
 	private String address;
 
 
 	@Column(name="phone_number")
+	@CsvBindByName(column="Phone Number")
 	private String phone_number;
 
 

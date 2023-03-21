@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.csmis.service.OperatorService;
+import com.csmis.service.Operator_Register_Service;
 import com.csmis.service.StaffService;
 
 @Controller
@@ -15,7 +15,7 @@ import com.csmis.service.StaffService;
 public class UserController {
 
 	@Autowired
-	OperatorService op;
+	Operator_Register_Service op;
 	
 	@Autowired
 	StaffService staffService;
@@ -50,24 +50,6 @@ public class UserController {
 	public String ConsumerListToday(Model theModel) {
 
 		return "operator/register/ConsumerListToday";
-	}
-
-	@GetMapping("/ConsumerReportMonthly")
-	public String ConsumerReportMonthly(Model theModel) {
-
-		return "operator/register-detail/ConsumerReportMonthly";
-	}
-
-	@GetMapping("/ConsumerReportToday")
-	public String ConsumerReportToday(Model theModel) {
-
-		return "operator/register-detail/ConsumerReportToday";
-	}
-
-	@GetMapping("/ConsumerReportWeekly")
-	public String ConsumerReportWeekly(Model theModel) {
-
-		return "operator/register-detail/ConsumerReportWeekly";
 	}
 
 	@GetMapping("/account")

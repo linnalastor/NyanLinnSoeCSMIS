@@ -32,15 +32,10 @@ public class AdminController {
 	//Mapping for importing master data setup files page
 	@GetMapping("/master_data_setup")
     public String index() {
-        return "master_data_setup";
+        return "admin/admin_datasetup";
     }
 
-	/* Login */
-	@GetMapping("/login")
-	public String login(Model model) {
-
-		return "admin/admin_login";
-	}
+	
 
 	/* Dashboard */
 	@GetMapping("/dashboard")
