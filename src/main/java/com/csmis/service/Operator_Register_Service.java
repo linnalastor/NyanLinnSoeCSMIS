@@ -11,17 +11,17 @@ import org.springframework.stereotype.Service;
 
 import com.csmis.dao.ConsumerListRepository;
 import com.csmis.entity.ConsumerList;
-import com.csmis.service_interface.OperatorServiceInterface;
+import com.csmis.service_interface.OperatorRegisterServiceInterface;
 
 @Service
-public class OperatorService implements OperatorServiceInterface {
+public class Operator_Register_Service implements OperatorRegisterServiceInterface {
 
 	boolean isweekend;
 
 	ConsumerListRepository consumerListRepository;
 
 	@Autowired
-	public OperatorService(ConsumerListRepository consumerListRepository) {
+	public Operator_Register_Service(ConsumerListRepository consumerListRepository) {
 		this.consumerListRepository = consumerListRepository;
 	}
 
@@ -153,9 +153,11 @@ public class OperatorService implements OperatorServiceInterface {
 		ZoneId zone = ZoneId.systemDefault();
 		LocalDate today = LocalDate.now(zone);
 
+//		LocalDate day = today.withDayOfMonth(1).plusMonths(3);
 		LocalDate day = today.withDayOfMonth(1).plusMonths(1);
 
 		// get confirmation string for a month
+//		while (day.getMonthValue() == today.getMonthValue() + 3) {
 		while (day.getMonthValue() == today.getMonthValue() + 1) {
 			isweekend = false;
 			if (day.getDayOfWeek() == DayOfWeek.SATURDAY || day.getDayOfWeek() == DayOfWeek.SUNDAY)
@@ -203,10 +205,11 @@ public class OperatorService implements OperatorServiceInterface {
 	// Weekly Date Real Page
 	public List<String> getWeeklyDate() {
 		ZoneId zone = ZoneId.systemDefault();
+//		LocalDate day = LocalDate.now(zone);
 		LocalDate today = LocalDate.now(zone);
 
-		//LocalDate today = day.withDayOfMonth(1).plusMonths(2);
-		//today=today.plusDays(25);
+//		LocalDate today = day.withDayOfMonth(1).plusMonths(2);
+//		today=today.plusDays(25);
 
 		List<String> days = new ArrayList<>();
 		Integer temp;
@@ -239,9 +242,12 @@ public class OperatorService implements OperatorServiceInterface {
 		ZoneId zone = ZoneId.systemDefault();
 		LocalDate today = LocalDate.now(zone);
 
+//		LocalDate day = today.withDayOfMonth(1).plusMonths(2);
 		LocalDate day = today.withDayOfMonth(1);
 
+//		while (day.getMonthValue() == today.getMonthValue()+2) {
 		while (day.getMonthValue() == today.getMonthValue()) {
+		
 			isweekend = false;
 			if (day.getDayOfWeek() == DayOfWeek.SATURDAY || day.getDayOfWeek() == DayOfWeek.SUNDAY)
 				isweekend = true;
@@ -324,6 +330,7 @@ public class OperatorService implements OperatorServiceInterface {
 	public String get_Month_Year_Weekly() {
 		ZoneId zone = ZoneId.systemDefault();
 		LocalDate today = LocalDate.now(zone);
+//		Integer month_value = today.getMonthValue()+2;
 		Integer month_value = today.getMonthValue();
 		String month = month_value.toString();
 		if (month.length() < 2)
@@ -335,6 +342,7 @@ public class OperatorService implements OperatorServiceInterface {
 	public String get_Month_Year_Monthly() {
 		ZoneId zone = ZoneId.systemDefault();
 		LocalDate today = LocalDate.now(zone);
+//		Integer month_value = today.getMonthValue() + 3;
 		Integer month_value = today.getMonthValue() + 1;
 		if (month_value > 12) {
 			today.plusYears(1);
