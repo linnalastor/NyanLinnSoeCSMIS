@@ -1,736 +1,441 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INVOICE</title>
+<link th:href="@{/images/datlogo.png}" rel="icon" type="image/png"
+	sizes="18*18" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.4.slim.js"
+	integrity="sha256-dWvV84T6BhzO4vG6gWhsWVKVoa4lVmLnpBOZh/CAHU4="
+	crossorigin="anonymous"></script>
 
-    <!-- fav icon -->
-    <link th:href="@{/images/datlogo.png}" rel="icon" type="image/png" sizes="18*18" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
 
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" th:href="@{/css/dashboard.css}" type="text/css">
+<!-- font awesome -->
+<link rel="stylesheet" href="https://kit.fontawesome.com/e0faeaf50f.css"
+	crossorigin="anonymous">
 
-    <!-- bootstrap css1 js1 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+<script>
+	/* $(function() {
+		$('.datetimepicker').datetimepicker({
+			format : 'YYYY-MM-DD',
+			useCurrent : true,
+			showTodayButton : true,
+			showClear : true,
+			icons : {
+				time : 'fa fa-clock-o',
+				date : 'fa fa-calendar',
+				up : 'fa fa-chevron-up',
+				down : 'fa fa-chevron-down',
+				previous : 'fa fa-chevron-left',
+				next : 'fa fa-chevron-right',
+				today : 'fa fa-calendar-check-o',
+				clear : 'fa fa-trash',
+				close : 'fa fa-times',
+				
+			}
+		});
 
-    <!-- internal css -->
-    <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
-    <link rel="stylesheet" th:href="@{/css/faq.css}" />
-    <link rel="stylesheet" th:href="@{/css/register.css}" />
-    < <!-- font awesome -->
-        <link rel="stylesheet" href="https://kit.fontawesome.com/e0faeaf50f.css" crossorigin="anonymous">
+	}); */
+	$(function() {
+	    var currentDate = new Date();
+	    $('#paymentdate').datetimepicker({
+	        format: 'YYYY-MM-DD',
+	        defaultDate: currentDate,
+	        minDate: currentDate // add this line to set the minimum date
+	    });
+	    $('#paymentdate').val(moment(currentDate).format('YYYY-MM-DD'));
+	});
+	
 
+	function GetPrint() {
+		window.print();
+	}
+</script>
+<style>
+.paid_print_container{
+	display: none;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 5px;
+}
+.paid_print_container.show{
+	display: flex;
+}
 
-        <title>Invoice</title>
-        <!-- <link rel="stylesheet" href="css.css" /> -->
-
-        <style>
-            .titles {
-                /* background-color: green; */
-                text-transform: uppercase;
-                color: var(--txtcolor);
-                display: inline-block;
-                padding: 5px 20px;
-
-                position: relative;
-            }
-
-            .titles::before,
-            .titles::after {
-                content: "";
-                width: 20px;
-                height: 20px;
-
-                position: absolute;
-            }
-
-            .titles::before {
-                border-left: 3px solid var(--btncolor);
-                border-bottom: 3px solid var(--btncolor);
-
-                left: 0;
-                bottom: 0;
-            }
-
-            .titles::after {
-                border-right: 3px solid var(--btncolor);
-                border-top: 3px solid var(--btncolor);
-
-                right: 0;
-                top: 0;
-            }
-
-
-            .sidebars {
-                height: 140vh;
-
-                background-color: var(--btncolor);
-                /* border-right: 2px solid black; */
-                box-shadow: 3px 0 5px rgb(16, 176, 230);
-
-                position: absolute;
-                top: 10vh;
-                left: 0;
-            }
-
-            .div1 {
-                position: absolute;
-                top: 0px;
-                right: 0px;
-                left: 0px;
-                display: flex;
-                align-items: center;
-                flex-direction: column;
-            }
-
-            .div2 {
-                width: 65%;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
-
-            .div2 div {
-                display: flex;
-                flex-direction: row;
-                margin-bottom: 5px;
-            }
-
-            .div3 {
-                background: rgb(1, 80, 120);
-                color: white;
-                padding-right: 20px;
-                padding-left: 20px;
-                padding-top: 5px;
-                padding-bottom: 5px;
-                border-radius: 10px;
-                margin-right: 10px;
-            }
-
-            .div3:hover {
-                cursor: pointer;
-            }
-
-            .div4 {
-                background: rgb(255, 255, 255);
-                padding-right: 20px;
-                padding-left: 20px;
-                padding-top: 5px;
-                padding-bottom: 5px;
-                border-radius: 10px;
-                margin-right: 10px;
-            }
-
-            .div4:hover {
-                background: rgb(1, 80, 120);
-                color: white;
-                cursor: pointer;
-            }
-
-            /* Add custom styles here */
-
-
-            .invoice-list {
-                margin-top: 50px;
-            }
-
-            .invoice-list table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-
-            .first table {
-                width: 50%;
-                border-collapse: collapse;
-            }
-
-            .invoice-list th,
-            .invoice-list td {
-                border: 1px solid rgb(61, 53, 53);
-                padding: 8px;
-                text-align: center;
-            }
-
-            .invoice-list th {
-                background-color: lightblue;
-            }
-
-
-
-            .invoice-list .invoice-status {
-                display: inline-block;
-                padding: 4px 8px;
-                border-radius: 4px;
-                font-size: 12px;
-                font-weight: bold;
-            }
-
-            body {
-                background-color: #ebf5fb;
-            }
-
-
-
-            #navbar {
-                /* background: rgb(209, 225, 231); */
-                color: white;
-                padding: 8px 8px;
-                border-radius: 10px;
-                margin-right: 10px;
-
-            }
-
-            #navbar a {
-                float: left;
-                color: #221f1f;
-                text-align: center;
-                padding: 8px 8px;
-                text-decoration: none;
-                border-radius: 10px;
-            }
-
-            #navbar a:hover {
-                background-color: rgb(240, 235, 235);
-                color: black;
-            }
-
-            .active {
-                background-color: #94a794;
-                color: white;
-            }
-
-            .signs {
-                display: inline-block;
-                width: 200px;
-                border-bottom: 1px solid #2874a6;
-                background-color: red;
-            }
-
-            .dropdowns {
-                width: 200px;
-                border-color: #2874a6;
-            }
-
-            .dropdowns:focus {
-                outline: none;
-            }
-        </style>
+@media print {
+	.btn {
+		display: none;
+	}
+	.NOPrint {
+		display: none;
+	}
+	.form-control {
+		border: 0px;
+	}
+	.input-group-text {
+		border: 0px;
+		background-color: white;
+	}
+	.select-dropdown {
+		appearance: none;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		background: transparent;
+		border: none;
+	}
+}
+</style>
 </head>
 
+
 <body>
-    <h>h</h>
-    <header class="w-100 mt-0">
-        <!-- START BAVBAR -->
-        <nav class="navbar navbar-light">
+	<header class="NOPrint">
+		<!-- START BAVBAR -->
+		<nav class="navbar navbar-light">
 
-            <div id="mynavbar">
-                <div class="container-fluid m-0">
-                    <div class="row">
+			<div id="mynavbar">
+				<div class="container-fluid m-0">
+					<div class="row">
 
-                        <!-- Start Left Sidebar -->
-                        <div id="nav" class="col-xl-2 col-lg-3 col-md-4 fixed-top collapse sidebars">
+						<!-- Start Left Sidebar -->
+						<div id="nav"
+							class="col-xl-2 col-lg-3 col-md-4 fixed-top collapse sidebars">
 
-                            <div class="pb-3 mt-4 text-center borderbottoms">
-                                <a href="" class="btn btn-outline-light rounded-circle mb-1"><i
-                                        class="fa-solid fa-user fs-3"></i></a>
-                                <a href="#" class="text-white nav-link">DAT Admin</a>
-                            </div>
-                            <ul class="navbar-nav flex-column mt-4">
-                                <li class="navbar-item"><a th:href="@{/admin/dashboard}"
-                                        class="nav-link text-white px-2 py-2 mb-2 currents"><i
-                                            class="fas fa-home fa-lg me-3"></i>Dashboard</a></li>
-                                <li class="navbar-item"><a th:href="@{/admin/menu}"
-                                        class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-                                            class="fa-solid fa-utensils fa-lg ps-1 me-3"></i>Menu</a></li>
-                                <li class="navbar-item"><a th:href="@{/admin/registered_list/today}"
-                                        class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-                                            class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Registered List</a></li>
-                                <li class="navbar-item"><a th:href="@{/admin/report/today}"
-                                        class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-                                            class="fa-solid fa-money-check fa-lg me-3"></i>Report List</a></li>
-                                <li class="navbar-item"><a th:href="@{/admin/staff_list}"
-                                        class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-                                            class="fa-solid fa-users-line fa-lg me-3"></i>Staff List</a></li>
-                                <li class="navbar-item"><a th:href="@{/admin/invoice}"
-                                        class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-                                            class="fa-solid fa-sack-dollar fa-lg me-3"></i></i>Invoice</a></li>
-                                <li class="navbar-item"><a href="#"
-                                        class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-                                            class="fa-solid fa-id-card-clip fa-lg me-3"></i>Door Access File</a></li>
-                                <li class="navbar-item"><a href="#"
-                                        class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-                                            class="fa-brands fa-mdb fa-lg me-3"></i>Master Data Setup</a></li>
-                                <li class="navbar-item"><a href="#"
-                                        class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-                                            class="fa-solid fa-envelope fa-lg me-3"></i>Email</a></li>
-                                <li class="navbar-item"><a href="#"
-                                        class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-                                            class="fas fa-wrench fa-lg me-3"></i>About As</a></li>
-                                <li class="navbar-item"><a href="#"
-                                        class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-                                            class="fas fa-sign-out-alt fa-lg me-3"></i>Logout</a></li>
-                            </ul>
-                        </div>
+							<div class="pb-3 mt-4 text-center borderbottoms">
+								<a href="" class="btn btn-outline-light rounded-circle mb-1"><i
+									class="fa-solid fa-user fs-3"></i></a> <a href="#"
+									class="text-white nav-link">Phoe</a>
+							</div>
+							<ul class="navbar-nav flex-column mt-4">
+								<li class="navbar-item"><a th:href="@{/admin/dashboard}"
+									class="nav-link text-white px-2 py-2 mb-2 currents"><i
+										class="fas fa-home fa-lg me-3"></i>Dashboard</a></li>
+								<li class="navbar-item"><a th:href="@{/admin/menu}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-utensils fa-lg ps-1 me-3"></i>Menu</a></li>
+								<li class="navbar-item"><a
+									th:href="@{/admin/registered_list/today}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Registered
+										List</a></li>
+								<li class="navbar-item"><a th:href="@{/admin/report/today}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-money-check fa-lg me-3"></i>Report List</a></li>
+								<li class="navbar-item"><a th:href="@{/admin/staff_list}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-users-line fa-lg me-3"></i>Staff List</a></li>
+								<li class="navbar-item"><a th:href="@{/admin/invoice}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-sack-dollar fa-lg me-3"></i>Invoice</a></li>
+								<li class="navbar-item"><a href="#"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-id-card-clip fa-lg me-3"></i>Door Access
+										File</a></li>
+								<li class="navbar-item"><a
+									th:href="@{/admin/master_data_setup}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-brands fa-mdb fa-lg me-3"></i>Master Data Setup</a></li>
+								<li class="navbar-item"><a href="#"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-envelope fa-lg me-3"></i>Email</a></li>
+								<li class="navbar-item"><a href="#"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fas fa-wrench fa-lg me-3"></i>About As</a></li>
+								<li class="navbar-item"><a href="#"
+									onclick="event.preventDefault(); document.getElementById('logout_form').submit();"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"> <i
+										class="fas fa-sign-out-alt fa-lg me-3"></i>Logout
+								</a></li>
+							</ul>
+						</div>
 
-                        <!-- End Left Sidebar -->
+						<!-- End Left Sidebar -->
 
-                        <!-- Start Top Sidebar -->
-                        <div class="col-xl-12 col-lg-9 col-md-8 py-2 mb-4 ms-auto fixed-top topnavbars">
-                            <div class="row d-flex align-items-center justify-content-between ">
-                                <div class="d-flex justify-content-between">
-
-
-                                    <nav class="navbar navbar-dark ">
-                                        <div class="container-fluid">
-                                            <button class="navbar-toggler buttons" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
-                                                aria-expanded="false" aria-label="Toggle navigation">
-                                                <span class="navbar-toggler-icon"></span>
-                                            </button>
-                                        </div>
-                                    </nav>
-
-                                    <div class="navbar-brand text-light mx-3 ">
-                                        <img th:src="@{/images/datlogo.png}" width="60px" alt="favicon" />
-                                        <span class="text-uppercase pe-none mx-2 ">Catering Service</span>
-                                    </div>
-
-                                    <div class=" d-flex align-items-center">
-                                        <a href="" class="nav-link fs-4" data-bs-toggle="modal"
-                                            data-bs-target="#staticBackdrop"><i
-                                                class="fa-solid fa-circle-question fa-lg me-1 qicons"></i>
-                                            <span class="me-2">Help</span>
-                                        </a>
-                                    </div>
-                                </div>
+						<!-- Start Top Sidebar -->
+						<div
+							class="col-xl-12 col-lg-9 col-md-8 py-2 mb-4 ms-auto fixed-top topnavbars">
+							<div
+								class="row d-flex align-items-center justify-content-between ">
+								<div class="d-flex justify-content-between">
 
 
-                            </div>
-                        </div>
-                        <!-- End Top Sidebar -->
+									<nav class="navbar navbar-dark ">
+										<div class="container-fluid">
+											<button class="navbar-toggler buttons" type="button"
+												data-bs-toggle="collapse" data-bs-target="#nav"
+												aria-controls="nav" aria-expanded="false"
+												aria-label="Toggle navigation">
+												<span class="navbar-toggler-icon"></span>
+											</button>
+										</div>
+									</nav>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">How can I help you?</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div></div>
-                                        <section class="container my-5" id="maincontent">
-                                            <section id="accordion">
-                                                <a class="py-3 d-block h-100 w-100 position-relative z-index-1 pr-1 text-secondary border-top text-decoration-none"
-                                                    aria-controls="faq-17" aria-expanded="false" data-toggle="collapse"
-                                                    href="#faq-17" role="button">
-                                                    <div class="position-relative">
-                                                        <h2 class="h4 m-0 pr-3">
-                                                            What if I want custom gear?
-                                                        </h2>
-                                                        <div
-                                                            class="position-absolute top-0 right-0 h-100 d-flex align-items-center">
-                                                            <i class="fa fa-plus"></i>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="collapse" id="faq-17">
-                                                    <div class="card card-body border-0 p-0">
-                                                        <p>Custom gear can be ordered through our contact form.
-                                                            Additional fees may apply.</p>
+									<div class="navbar-brand text-light mx-3 ">
+										<img th:src="@{/images/datlogo.png}" width="60px"
+											alt="favicon" /> <span class="text-uppercase pe-none mx-2 ">Catering
+											Service</span>
+									</div>
 
-                                                    </div>
-                                                </div>
-
-                                                <a class="py-3 d-block h-100 w-100 position-relative z-index-1 pr-1 text-secondary border-top"
-                                                    aria-controls="faq-18" aria-expanded="false" data-toggle="collapse"
-                                                    href="#faq-18" role="button">
-                                                    <div class="position-relative">
-                                                        <h2 class="h4 m-0 pr-3">
-                                                            What is the official mission statement?
-                                                        </h2>
-                                                        <div
-                                                            class="position-absolute top-0 right-0 h-100 d-flex align-items-center">
-                                                            <i class="fa fa-plus"></i>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="collapse" id="faq-18">
-                                                    <div class="card card-body border-0 p-0">
-                                                        <p>Our official mission statement is lorem ipsum dolor sit.</p>
-                                                        <p>
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                                <a class="py-3 d-block h-100 w-100 position-relative z-index-1 pr-1 text-secondary border-top"
-                                                    aria-controls="faq-19" aria-expanded="false" data-toggle="collapse"
-                                                    href="#faq-19" role="button">
-                                                    <div class="position-relative">
-                                                        <h2 class="h4 m-0 pr-3">
-                                                            What is the purpose of LunarXP?
-                                                        </h2>
-                                                        <div
-                                                            class="position-absolute top-0 right-0 h-100 d-flex align-items-center">
-                                                            <i class="fa fa-plus"></i>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="collapse" id="faq-19">
-                                                    <div class="card card-body border-0 p-0">
-                                                        <p>The purpose of LunarXP is to give you the best Mars
-                                                            experience!</p>
-                                                        <p>
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                                <a class="py-3 d-block h-100 w-100 position-relative z-index-1 pr-1 text-secondary  border-top"
-                                                    aria-controls="faq-20" aria-expanded="false" data-toggle="collapse"
-                                                    href="#faq-20" role="button">
-                                                    <div class="position-relative">
-                                                        <h2 class="h4 m-0 pr-3">
-                                                            What is the best email to reach you at?
-                                                        </h2>
-                                                        <div
-                                                            class="position-absolute top-0 right-0 h-100 d-flex align-items-center">
-                                                            <i class="fa fa-plus"></i>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="collapse" id="faq-20">
-                                                    <div class="card card-body border-0 p-0">
-                                                        <p>The best email for any inquiries is email@email.com!</p>
-                                                        <p>
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                                <a class="py-3 d-block h-100 w-100 position-relative z-index-1 pr-1 text-secondary  border-top"
-                                                    aria-controls="faq-21" aria-expanded="false" data-toggle="collapse"
-                                                    href="#faq-21" role="button">
-                                                    <div class="position-relative">
-                                                        <h2 class="h4 m-0 pr-3">
-                                                            Where can I read more about this company?
-                                                        </h2>
-                                                        <div
-                                                            class="position-absolute top-0 right-0 h-100 d-flex align-items-center">
-                                                            <i class="fa fa-plus"></i>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="collapse" id="faq-21">
-                                                    <div class="card card-body border-0 p-0">
-                                                        <p>Lorem ipsum dolor sit!</p>
-                                                        <p>
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                                <a class="py-3 d-block h-100 w-100 position-relative z-index-1 pr-1 text-secondary  border-top"
-                                                    aria-controls="faq-22" aria-expanded="false" data-toggle="collapse"
-                                                    href="#faq-22" role="button">
-                                                    <div class="position-relative">
-                                                        <h2 class="h4 m-0 pr-3">
-                                                            What is the best time to call?
-                                                        </h2>
-                                                        <div
-                                                            class="position-absolute top-0 right-0 h-100 d-flex align-items-center">
-                                                            <i class="fa fa-plus"></i>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="collapse" id="faq-22">
-                                                    <div class="card card-body border-0 p-0">
-                                                        <p>The best time to call is 24/7! We are always available to
-                                                            answer any questions.</p>
-                                                        <p>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </section>
-                                        </section>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Modal -->
+									<div class=" d-flex align-items-center">
+										<a href="" class="nav-link fs-4"><i
+											class="fa-solid fa-circle-question fa-lg me-1 qicons"></i><span
+											class="me-2">Help</span></a>
+									</div>
+								</div>
 
 
-                    </div>
-                </div>
-            </div>
-
-        </nav>
-        <!-- END NAVBAR -->
-    </header>
-    <tbody>
-
-        <div class="div1 mt-4 pt-3">
-            <!-- start title -->
-            <div class="row text-center mt-5 mb-1">
-                <div class="col">
-                    <h3 class="titles text-dark">Invoice List</h3>
-                </div>
-            </div>
-            <!-- end title -->
-            <div class="div2 mt-1">
-                <div>
-                    <div class="div3" th:onclick="window.location.href='/admin/invoice'"><span>Unpaid Voucher List</span>
-                    </div>
-                    <div class="div4" th:onclick="window.location.href='/admin/paidinvoice'"><span>Paid Voucher List</span>
-                    </div>
-
-                </div>
-
-            </div>
+							</div>
+						</div>
+						<!-- End Top Sidebar -->
 
 
-            <!-- div2 close -->
+					</div>
+				</div>
+			</div>
 
-            <!-- <div
-                style="background-color: rgb(109, 138, 150); border-radius: 10px;width: 80%;display: flex;justify-content: center;">
-                <div class="navbar " style="width: 50%;">
-                    <a href="#" class="active" style="text-decoration: none;"></a>
-                    <div id="hovertest">Week1</div>
-                    </a>
-                    <a href="#" style="text-decoration: none;color: rgb(15, 18, 19);" id="hovertest">Week2</a>
-                    <a href="#" style="text-decoration: none;color: rgb(15, 18, 19);" id="hovertest">Week3</a>
-                    <a href="#" style="text-decoration: none;color: rgb(15, 18, 19);" id="hovertest">Week4</a>
-                </div>
-            </div> -->
+		</nav>
+		<!-- END NAVBAR -->
+	</header>
+	<div class="container w-100 mb-4 mt-5 pt-5 NOPrint">
+		<button type="button" class="btn btn-secondary me-3"
+			th:onclick="window.location.href='/admin/invoice'">Create
+			Voucher</button>
+		<button type="button" class="btn btn-primary me-3"
+			th:onclick="window.location.href='/admin/monthlyInvoice'">Paid
+			Voucher List</button>
+		<button type="button" class="btn btn-primary"
+			th:onclick="window.location.href='/admin/detailInvoice'">Detail
+			Invoice</button>
+	</div>
+	<div class="container  mb-5 w-100">
 
-            <div class="justify-content-center m-0" id="navbar">
+		<div class="card ">
+			<div class="card-header text-center">
+				<h4>INVOICE</h4>
+			</div>
+			<div class="card-body mt-3">
+				<div class="container ">
+					<div class="row">
+						<div class="col-10">
+							<form action="#" th:action="@{/admin/confirm}" method="POST"
+								class="form-inline">
+								<div class="input-group mb-3">
+									<!-- <input type="hidden" id="startDate" th:value="${startDate}" />
+									<input type="hidden" id="endDate" th:value="${endDate}" /> --> <span
+										class="input-group-text" id="basic-addon1">Invoice for</span>
+									<span class="input-group-text" id="basic-addon1">Start
+										Date </span> <input type="search" class="form-control"
+										 name="startDate"  th:value="${startDate}" readonly="readonly"
+										> <span class="input-group-text"
+										id="basic-addon1">End Date</span> <input type="search"
+										name="endDate"  class="form-control" th:value="${endDate}"
+										 readonly="readonly" >
+									<button type="submit" class="btn btn-success">Create</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<form th:action="@{/admin/save}" th:object="${Month}" method="post">
+						<div class="row">
+							<div class="col-7">
+								<div class="input-group mb-3">
+									<span class="input-group-text" id="basic-addon1">Catering
+										Service Name:</span> <select name="carteringServiceName"
+										class="outline-none p-1 dropdowns select-dropdown">
+										<option th:each="tempResturant : ${resturant}"
+											th:text="${tempResturant.name}"></option>
 
-                <a href="#">Week 3</a>
-                <a href="#">Week 2</a>
-                <a href="#">Week 1</a>
-                <a class="active" href="#">Current Week</a>
-            </div>
+									</select>
+								</div>
+								<div class="input-group mb-3">
+									<span class="input-group-text" id="basic-addon1">Payment
+										Method</span> <select name="paymentMethod"
+										class="outline-none p-1 dropdowns select-dropdown">
+										<option th:each="tempResturant : ${resturant}"
+											th:text="${tempResturant.name}"></option>
+									</select>
+								</div>
 
-            <div style="display: flex;justify-content: end;width: 80%;align-items: center;">
-                <button type="button" class="btn btn-outline-primary"
-                    style="width: 10%; border-radius: 10px;background: #2874a6; color: #fff;">Print</button>
-            </div>
+							</div>
+							<div class="col-5">
+								<div class="input-group mb-3">
+									<span class="input-group-text" id="basic-addon1">
+										Voucher No:</span> <input type="text" class="form-control"
+										placeholder=" Voucher No" aria-label="Username"
+										name="voucherNumber" aria-describedby="basic-addon1">
+								</div>
+								<div class="input-group mb-3">
+									<span class="input-group-text" id="current-date">Payment
+										Date</span> <input type="text" class="form-control"
+										name="paymentDate" data-format="YYYY-MM-DD" id="paymentdate">
+								</div>
+
+							</div>
+						</div>
+						<table class="table table-bordered">
+							<thead class="table-info">
+								<tr>
+									<th scope="col">Sr.no</th>
+									<th scope="col">Charges for a week</th>
+									<th scope="col" class="text-end">Register Head Count</th>
+									<th scope="col" class="text-end">Actual Head Count</th>
+									<th scope="col" class="text-end">Difference</th>
+									<th scope="col" class="text-end">Staff Cost</th>
+									<th scope="col" class="text-end">DAT Cost</th>
+									<th scope="col" class="text-end">Staff Amount</th>
+									<th scope="col" class="text-end">DAT Amount</th>
+								</tr>
+							</thead>
+							<tbody id="TBody">
+								<tr id="TRow" th:each="tempInvoice, index  : ${invoices}">
+
+									<th th:text="${index.count}"></th>
+									<td th:text="${tempInvoice.date}"></td>
+									<td th:text="${tempInvoice.registerHeadCount}"></td>
+									<td th:text="${tempInvoice.actualHeadCount}"></td>
+									<td th:text="${tempInvoice.difference}"></td>
+									<td th:text="${tempInvoice.staffCost}"></td>
+									<td th:text="${tempInvoice.companyCost}"></td>
+									<td th:text="${tempInvoice.samount}"></td>
+									<td th:text="${tempInvoice.camount}"></td>
+								</tr>
+
+							</tbody>
+						</table>
+
+						<div class="row">
+
+							<div class="col-7">
+								<input type="hidden" th:value="${numOfPax}" name="numberOfPax" />
+								<input type="hidden" th:value="${amount}" name="amount" /> <input
+									type="hidden" th:value="${price}" name="price" /> <input
+									type="hidden" th:value="${startDate}" name="invoiceStartDate" />
+								<input type="hidden" th:value="${endDate}" name="invoiceEndDate" />
 
 
-            <div class="my-2" style="background-color:lightblue;width: 80%;border-radius: 5px;">
-                <div class="mt-1">
-                    <h1 class="text-center">Payment Voucher</h1>
-                </div>
+								<div th:class="${status ? 'paid_print_container show' : 'paid_print_container'}">
+									<button type="button"
+										class="btn btn-primary"
+										onclick="GetPrint()">Print</button>
 
-                <div class="container first m-0">
-                    <table>
-                        <tr>
-                            <td>Voucher No:</td>
-                            <td>CS001-20230208</td>
-                        </tr>
-                        <tr>
-                            <td>Catering Service Name:</td>
-                            <td>
-                                <select name="my-dropdown-list"
-                                    class="border border-primary rounded outline-none p-1 dropdowns">
-                                    <option value="option1">One Two Four</option>
-                                    <option value="option2" selected>Kaung Myait Hein</option>
-                                    <option value="option3">Win</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Payment Date :</td>
-                            <td><input type="date" class="form-control w-50 p-1" /></td>
-                        </tr>
-                        <tr>
-                            <td class="pt-4">Invoice for :</td>
-                            <td class="d-flex">
-                                <div class="me-2">
-                                    <span>Start Date</span>
-                                    <input type="date" class="form-control p-1" />
-                                </div>
-                                <div>
-                                    <span>End Date</span>
-                                    <input type="date" class="form-control p-1" />
-                            </td>
-                </div>
-                </tr>
-                <tr>
-                    <td>Payment Method</td>
-                    <td>
-                        <select name="my-dropdown-list"
-                            class="border border-primary rounded outline-none p-1 dropdowns">
-                            <option value="option1">Option1</option>
-                            <option value="option2" selected>Option2</option>
-                            <option value="option3">Option2</option>
-                        </select>
-                    </td>
-                </tr>
-                </table>
-            </div>
-            <div class="container invoice-list mt-2">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Sr.no</th>
-                            <th>Catering Lunch Service Charges for a week </th>
-                            <th>Register Head Count</th>
-                            <th>Actual Head Count</th>
-                            <th>Difference</th>
-                            <th>Price</th>
-                            <th>Amount</th>
-                            <th>Remark</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>30th Jan 2023</td>
-                            <td>100</td>
-                            <td>178</td>
-                            <td>-78</td>
-                            <td>1300</td>
-                            <td>231400</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>31st Jan 2023</td>
-                            <td>220</td>
-                            <td>200</td>
-                            <td>20</td>
-                            <td>1300</td>
-                            <td>286000</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>1st Feb 2023</td>
-                            <td>190</td>
-                            <td>200</td>
-                            <td>-10</td>
-                            <td>1300</td>
-                            <td>260000</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>2nd Feb 2023</td>
-                            <td>180</td>
-                            <td>180</td>
-                            <td>0</td>
-                            <td>1300</td>
-                            <td>234000</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>3nd Feb 2023</td>
-                            <td>160</td>
-                            <td>155</td>
-                            <td>5</td>
-                            <td>1300</td>
-                            <td>201500</td>
-                            <td></td>
-                        </tr>
 
-                        <tr style="background-color:lightblue;">
-                            <td colspan="6">Total amount</td>
-                            <td>1211900</td>
-                            <td>Kyats</td>
-                        </tr>
+									<button type="submit"
+										class="btn btn-primary">Paid</button>
+								</div>
+							</div>
+							<div class="col-5">
+
+								<div class="input-group mb-3">
+									<span class="input-group-text" id="basic-addon1">Staff
+										Total</span> <input th:value="${Stotal}+-Kyats" class="form-control"
+										id="STotal" name="STotal" disabled="">
+
+								</div>
+								<div class="input-group mb-3">
+									<span class="input-group-text" id="basic-addon1">DAT
+										Total</span> <input th:value="${CTotal} +-Kyats" class="form-control"
+										id="CTotal" name="CTotal" disabled="">
+
+								</div>
+							</div>
+						</div>
+						<div class="container text-center mt-3">
+							<div class="row mb-5">
+								<div class="col-4">
+									<label for="username" class="me-3">Cashier</label><select
+										name="cashier"
+										class="outline-none p-1 dropdowns select-dropdown">
+										<option th:each="tempCashier : ${cashier}"
+											th:text="${tempCashier.name}"></option>
+
+									</select> <br> <br> <span class="ms-5 mb-3">Signature</span><span
+										class="signs px-5 ms-2 hide"></span>
+								</div>
+								<div class="col-4">
+									<label for="username" class="me-3">Received By</label><select
+										name="receivedBy"
+										class="outline-none p-1 dropdowns select-dropdown">
+										<option th:each="tempReveived : ${received}"
+											th:text="${tempReveived.name}"></option>
+
+									</select> <br> <br> <span class="ms-5 mb-5">Signature</span><span
+										class="signs px-5 ms-2 hide"></span>
+
+								</div>
+								<div class="col-4">
+									<label for="username" class="me-5">Approved By</label><select
+										name="approvedBy"
+										class="outline-none p-1 dropdowns select-dropdown">
+										<option th:each="tempApprove : ${approve}"
+											th:text="${tempApprove.name}"></option>
+
+									</select> <br> <br> <span class="ms-5 mb-5">Signature</span><span
+										class="signs px-5 ms-2 hide"></span>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+		crossorigin="anonymous"></script>
+	<!-- <script>
+		$(document).ready(
+				function() {
+					var startDate = $("#startDate").val();
+					var endDate = $("#endDate").val();
+					var currentdate = new Date();
+
+					console.log(endDate);
+					if (startDate != null && endDate != null && startDate != ""
+							&& endDate != "") {
+
+						$('#fromDate').datetimepicker({
+
+						});
+						$('#fromDate').val(
+								moment(startDate).format('YYYY-MM-DD'));
+						$('#toDate').val(moment(endDate).format('YYYY-MM-DD'));
+					}
+
+				});
+	</script> -->
+	<!-- <script>
+	$(document).ready(function(){
+		var currentDate = new Date();
+		var minDate = new Date(currentDate);
+		minDate.setDate(current.getDate()-1);
+		$('#paymentdate').datepicker({
+			startDate:minDate
+		});
+	}
+	</script> -->
 
 
 
-                    </tbody>
-                </table>
-            </div>
-            <div class="d-flex justify-content-around container invoice-list mb-3">
-                <div>
-                    <p>
-                        <span>Signature</span><span class="signs px-5 ms-2 hide"></span>
-                    </p>
-
-
-                    <form>
-                        <label for="username">Cashier</label>
-                        <select name="my-dropdown-list"
-                            class="border border-primary rounded outline-none p-1 dropdowns">
-                            <option value="option1">Nyan Lin Soe</option>
-                            <option value="option2" selected>Phoe Chit Sone</option>
-                            <option value="option3">Swan Htet Naing</option>
-                        </select>
-                    </form>
-                </div>
-                <div>
-                    <p>
-                        <span>Signature</span><span class="signs px-5 ms-2 hide"></span>
-                    </p>
-                    <form>
-                        <label for="username">Received by</label>
-                        <select name="my-dropdown-list"
-                            class="border border-primary rounded outline-none p-1 dropdowns">
-                            <option value="option1">Nyan Lin Soe</option>
-                            <option value="option2" selected>Phoe Chit Sone</option>
-                            <option value="option3">Swan Htet Naing</option>
-                        </select>
-                    </form>
-
-
-                </div>
-                <div>
-                    <p>
-                        <span>Signature</span><span class="signs px-5 ms-2 hide"></span>
-                    </p>
-                    <form>
-                        <label for="username" class="me-2">Approved by</label>
-                        <select name="my-dropdown-list"
-                            class="border border-primary rounded outline-none p-1 dropdowns">
-                            <option value="option1">Nyan Lin Soe</option>
-                            <option value="option2" selected>Phoe Chit Sone</option>
-                            <option value="option3">Swan Htet Naing</option>
-                        </select>
-
-                    </form>
-
-
-                </div>
-
-
-            </div>
-
-
-        </div>
-        <div class="mb-3" style="display: flex;justify-content: end;width: 80%;align-items: center;">
-            <button type="button" class="btn btn-outline-primary"
-                style="width: 10%; border-radius: 10px; color: #fff;background: #2874a6; ">Paid</button>
-        </div>
-
-        </div>
-
-    </tbody>
-
-
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
-
-
-    <script src="https://kit.fontawesome.com/e0faeaf50f.js" crossorigin="anonymous"></script>
-
-    <!-- bootstrap css1 js1 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        type="text/javascript"></script>
+	<script src="https://kit.fontawesome.com/e0faeaf50f.js"
+		crossorigin="anonymous"></script>
 
 </body>
 

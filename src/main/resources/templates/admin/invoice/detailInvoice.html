@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PAID VOUCHER LIST</title>
+<title>Detail Invoice</title>
 <link th:href="@{/images/datlogo.png}" rel="icon" type="image/png"
 	sizes="18*18" />
 
@@ -147,10 +147,10 @@
 	<div class="container w-100 mb-4 mt-5 pt-5 NOPrint">
 		<button type="button" class="btn btn-primary me-3"
 			th:onclick="window.location.href='/admin/invoice'">Create Voucher</button>
-		<button type="button" class="btn btn-secondary me-3"
+		<button type="button" class="btn btn-primary me-3"
 			th:onclick="window.location.href='/admin/monthlyInvoice'">Paid
 			Voucher List</button>
-		<button type="button" class="btn btn-primary"
+		<button type="button" class="btn btn-secondary"
 			th:onclick="window.location.href='/admin/detailInvoice'">Detail
 			Invoice</button>
 	</div>
@@ -158,46 +158,37 @@
 
 		<div class="card ">
 			<div class="card-header text-center">
-				<h4>PAID VOUCHER LIST</h4>
+				<h4>DETAIL INVOICE LIST</h4>
 			</div>
-			<div class="card-body">
+			<div class="card-body mt-5 ">
 				<div class="container ">
 					<table id="dataTable" class="table table-striped mt-5">
 						<thead class="table-info">
 							<tr>
-								<th scope="col">Sr.no</th>
-								<th scope="col">Description</th>
-								<th scope="col" class="text-end">Cashier</th>
-								<th scope="col" class="text-end">Received by</th>
-								<th scope="col" class="text-end">Approved by</th>
-								<th scope="col" class="text-end">No. of Pax</th>
-								<th scope="col" class="text-end">Price</th>
-								<th scope="col" class="text-end">Amount</th>
-								<th scope="col" class="text-end">Payment Date</th>
-								<th scope="col" class="text-end">Payment Method</th>
-								<th scope="col" class="text-end">Catering Service Name</th>
-								
-
-							</tr>
+									<th scope="col">Sr.no</th>
+									<th scope="col">Charges for a week</th>
+									<th scope="col" class="text-end">Register Head Count</th>
+									<th scope="col" class="text-end">Actual Head Count</th>
+									<th scope="col" class="text-end">Difference</th>
+									<th scope="col" class="text-end">Staff Cost</th>
+									<th scope="col" class="text-end">DAT Cost</th>
+									<th scope="col" class="text-end">Staff Amount</th>
+									<th scope="col" class="text-end">DAT Amount</th>
+								</tr>
 						</thead>
 						<tbody id="TBody">
-							<tr id="TRow"
-								th:each="tempMonthlyInvoice, index  : ${monthlyInvoice}">
+							<tr id="TRow" th:each="tempInvoice, index  : ${invoices}">
 
-								<th th:text="${index.count}"></th>
-								<td th:text="${tempMonthlyInvoice.voucherNumber}"></td>
-								<td th:text="${tempMonthlyInvoice.cashier}"></td>
-								<td th:text="${tempMonthlyInvoice.receivedBy}"></td>
-								<td th:text="${tempMonthlyInvoice.approvedBy}"></td>
-								<td th:text="${tempMonthlyInvoice.numberOfPax}"></td>
-								<td th:text="${tempMonthlyInvoice.price}"></td>
-								<td th:text="${tempMonthlyInvoice.amount}"></td>
-								<td th:text="${tempMonthlyInvoice.paymentDate}"></td>
-								<td th:text="${tempMonthlyInvoice.paymentMethod}"></td>
-								<td th:text="${tempMonthlyInvoice.carteringServiceName}"></td>
-							</tr>
-
-
+									<th th:text="${index.count}"></th>
+									<td th:text="${tempInvoice.date}"></td>
+									<td th:text="${tempInvoice.registerHeadCount}"></td>
+									<td th:text="${tempInvoice.actualHeadCount}"></td>
+									<td th:text="${tempInvoice.difference}"></td>
+									<td th:text="${tempInvoice.staffCost}"></td>
+									<td th:text="${tempInvoice.companyCost}"></td>
+									<td th:text="${tempInvoice.samount}"></td>
+									<td th:text="${tempInvoice.camount}"></td>
+								</tr>
 						</tbody>
 					</table>
 				</div>

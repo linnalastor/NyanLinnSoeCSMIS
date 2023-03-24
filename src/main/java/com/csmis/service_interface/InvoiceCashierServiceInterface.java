@@ -6,10 +6,14 @@ import com.csmis.entity.InvoiceCashier;
 
 public interface InvoiceCashierServiceInterface {
 
+
 	 public void saveInvoiceCashiers(List<InvoiceCashier> invoiceCashiers);
 
 	public List<InvoiceCashier> findAll();
 
 	public void save(InvoiceCashier theinvoiceCashier);
 	 
+
+    
+
 }

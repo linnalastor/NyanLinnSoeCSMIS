@@ -14,6 +14,9 @@ public class InvoiceReceiveByService implements InvoiceReceiveByServiceInterface
 {
         @Autowired
         private InvoiceReceiveByRepository invoiceReceiveByRepository;
+        public InvoiceReceiveByService(InvoiceReceiveByRepository theInvoiceReceiveByRepository) {
+        	invoiceReceiveByRepository=theInvoiceReceiveByRepository;
+        }
 	@Override
 	public void saveInvoiceReceiveBys(List<InvoiceReceiveBy> invoiceReceiveBys) {
 	
@@ -22,6 +25,7 @@ public class InvoiceReceiveByService implements InvoiceReceiveByServiceInterface
 	}
 	@Override
 	public List<InvoiceReceiveBy> findAll() {
+
 		// TODO Auto-generated method stub
 		return invoiceReceiveByRepository.findAll();
 	}
@@ -30,5 +34,7 @@ public class InvoiceReceiveByService implements InvoiceReceiveByServiceInterface
 		// TODO Auto-generated method stub
 		invoiceReceiveByRepository.save(theinvoiceReceiveBy);
 	}
+
+
 
 }

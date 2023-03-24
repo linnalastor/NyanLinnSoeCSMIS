@@ -7,8 +7,9 @@ import com.csmis.entity.Restaurant;
 public interface RestaurantServiceInterface {
 	
 	public void saveRestaurants(List<Restaurant> restaurants);
-
 	public List<Restaurant> findAll();
+
+	
 
 	public Restaurant findByName(String name);
 

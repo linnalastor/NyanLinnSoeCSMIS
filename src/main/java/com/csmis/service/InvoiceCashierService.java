@@ -11,22 +11,20 @@ import com.csmis.service_interface.InvoiceCashierServiceInterface;
 
 @Service
 public class InvoiceCashierService  implements InvoiceCashierServiceInterface{
-
-	
-	@Autowired
 	private InvoiceCashierRepository invoiceCashierRepository;
-	
-	@Override
-	public void saveInvoiceCashiers(List<InvoiceCashier> invoiceCashiers) {
-		
-		invoiceCashierRepository.saveAll(invoiceCashiers);
-		
+	@Autowired
+	public InvoiceCashierService(InvoiceCashierRepository theCashierRepository) {
+		invoiceCashierRepository=theCashierRepository;
 	}
-
 	@Override
 	public List<InvoiceCashier> findAll() {
-		// TODO Auto-generated method stub
+		
 		return invoiceCashierRepository.findAll();
+	}
+	@Override
+	public void saveInvoiceCashiers(List<InvoiceCashier> invoiceCashiers) {
+		 invoiceCashierRepository.saveAll(invoiceCashiers);
+		
 	}
 
 	@Override
@@ -34,5 +32,9 @@ public class InvoiceCashierService  implements InvoiceCashierServiceInterface{
 		// TODO Auto-generated method stub
 		invoiceCashierRepository.save(theinvoiceCashier);
 	}
+
+	
+	
+
 
 }

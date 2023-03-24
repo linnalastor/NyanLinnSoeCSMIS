@@ -13,8 +13,13 @@ import com.csmis.service_interface.RestaurantServiceInterface;
 @Service
 public class RestaurantService implements RestaurantServiceInterface {
 
-	@Autowired
+	
 	private RestaurantRepository restaurantRepository;
+	
+	@Autowired
+	public RestaurantService(RestaurantRepository theRestaurantRepository) {
+		restaurantRepository=theRestaurantRepository;
+	}
 	
 	@Override
 	public void saveRestaurants(List<Restaurant> restaurants) {
@@ -24,6 +29,7 @@ public class RestaurantService implements RestaurantServiceInterface {
 
 	@Override
 	public List<Restaurant> findAll() {
+
 		// TODO Auto-generated method stub
 		return restaurantRepository.findAll();
 	}
@@ -50,6 +56,9 @@ Restaurant restaurant = null;
 		// TODO Auto-generated method stub
 		
 	 restaurantRepository.save(theRestaurant);
+	
+
 	}
+
 
 }

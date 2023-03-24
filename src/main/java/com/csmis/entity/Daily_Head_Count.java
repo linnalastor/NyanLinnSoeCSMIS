@@ -1,5 +1,6 @@
 package com.csmis.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,7 +15,7 @@ public class Daily_Head_Count {
 	
 	@Id
 	@Column(name="date")
-	private Date date;
+	private LocalDate date;
 	
 	@Column(name="registered_head_count")
 	private int registered_head_count;
@@ -33,7 +34,7 @@ public class Daily_Head_Count {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Daily_Head_Count(Date date, int registered_head_count, int actual_head_count, int non_register_head_count,
+	public Daily_Head_Count(LocalDate date, int registered_head_count, int actual_head_count, int non_register_head_count,
 			int not_picked_head_count) {
 		super();
 		this.date = date;
@@ -43,11 +44,11 @@ public class Daily_Head_Count {
 		this.not_picked_head_count = not_picked_head_count;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 

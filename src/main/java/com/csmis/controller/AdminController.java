@@ -159,11 +159,11 @@ public class AdminController {
 		return "admin/employee-list/updatestafflist";
 	}
 
-	/* Invoice */
-	@GetMapping("/invoice")
-	public String invoice() {
-		return "admin/invoice/invoice";
-	}
+//	/* Invoice */
+//	@GetMapping("/invoice")
+//	public String invoice() {
+//		return "admin/invoice/invoice";
+//	}
 
 	@GetMapping("/invoice/paid")
 	public String paidInvoice() {
