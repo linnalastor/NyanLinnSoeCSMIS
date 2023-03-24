@@ -7,4 +7,10 @@ import com.csmis.entity.InvoiceApprovedBy;
 public interface InvoiceApprovedByServiceInterface {
 	public void saveInvoiceApprovedBys(List<InvoiceApprovedBy> invoiceApprovedBys);
 
+	public List<InvoiceApprovedBy> findAll();
+
+	public InvoiceApprovedBy findByName(String name);
+
+	public void save(InvoiceApprovedBy theinvoiceApprovedBy);
+
 }

@@ -9,11 +9,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.csmis.entity.Cost;
 import com.csmis.entity.InvoiceApprovedBy;
 import com.csmis.service_interface.InvoiceApprovedByServiceInterface;
 import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
@@ -29,6 +32,15 @@ public class Import_InvoiceApprovedBy_Controller {
 	{	
 		invoiceApprovedByService=theInvoiceApprovedByService;
 	}
+	@GetMapping("/show_invoiceApprovedBy")
+	public String showFormForUpdate( Model model) {
+		List<InvoiceApprovedBy> invoiceApprovedBy =invoiceApprovedByService.findAll();
+		  model.addAttribute("invoiceApprovedBy", invoiceApprovedBy);
+	        model.addAttribute("status", true); 
+		  return "/admin/InvoiceApprovedBy_Show_List";			
+	}
+	
+	
 	
 	@PostMapping("/import_invoiceApprovedBy")
 	public String import_InvoiceApprovedBy(@RequestParam("invoiceApprovedBy_file") MultipartFile file, Model model) {
@@ -52,8 +64,7 @@ public class Import_InvoiceApprovedBy_Controller {
 	                List<InvoiceApprovedBy> invoiceApprovedBy = csvToBean.parse();
 	            	
 	            	invoiceApprovedByService.saveInvoiceApprovedBys(invoiceApprovedBy);
-	           
-	            	  model.addAttribute("invoiceApprovedBy", invoiceApprovedBy);
+	                        invoiceApprovedBy=invoiceApprovedByService.findAll();	            	  model.addAttribute("invoiceApprovedBy", invoiceApprovedBy);
 	                  model.addAttribute("status", true); 
 
 
@@ -70,6 +81,43 @@ public class Import_InvoiceApprovedBy_Controller {
 	                  
 	                  
 	            }
-		 	 return "/admin/admin_datasetup";  
+		 	 return "/admin/InvoiceApprovedBy_Update_List";  
+	}
+
+	@GetMapping("/InvoiceApprovedByFormForUpdate")
+	public String showFormForUpdate(@RequestParam("invoiceApprovedBy_file") String name,
+									Model theModel) {
+	    
+		
+		InvoiceApprovedBy invoiceApprovedBy = invoiceApprovedByService.findByName(name);
+		
+		// set employee as a model attribute to pre-populate the form
+		theModel.addAttribute("invoiceApprovedBy", invoiceApprovedBy);
+		
+		// send over to our form
+		return "/admin/InvoiceApprovedBy_Update_List";			
+	}
+
+	@PostMapping("/saveInvoiceApprovedBy")
+	public String saveInvoiceApprovedBy(@ModelAttribute("invoiceApprovedBy") InvoiceApprovedBy theinvoiceApprovedBy,Model theModel) {
+		
+		invoiceApprovedByService.save(theinvoiceApprovedBy);
+	
+			List<InvoiceApprovedBy> invoiceApprovedBy =invoiceApprovedByService.findAll();
+			theModel.addAttribute("invoiceApprovedBy", invoiceApprovedBy);
+			theModel.addAttribute("status", true); 
+		   
+        return "/admin/invoiceApprovedBy_Show_List";
+	}
+
+	@GetMapping("/InvoiceApprovedByFormAdd")
+	public String showFormForAdd(Model theModel) {
+		
+		// create model attribute to bind form data
+		InvoiceApprovedBy invoiceApprovedBy = new InvoiceApprovedBy();
+		
+		theModel.addAttribute("invoiceApprovedBy", invoiceApprovedBy);
+		
+		return "/admin/InvoiceApprovedBy_Update_List";
 	}
 }

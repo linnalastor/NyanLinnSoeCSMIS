@@ -9,12 +9,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.csmis.entity.Cost;
+import com.csmis.entity.Staff;
 import com.csmis.service_interface.CostServiceInterface;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -27,8 +30,16 @@ public class Import_Cost_Controller {
 	
 	@Autowired
 	public   Import_Cost_Controller(CostServiceInterface theCostService) {
-		costService=theCostService;
+		this.costService=theCostService;
 	}
+	@GetMapping("/show_cost")
+	public String showFormForUpdate( Model model) {
+		List<Cost> cost =costService.findAll();
+		  model.addAttribute("cost", cost);
+	        model.addAttribute("status", true); 
+		  return "/admin/Cost_Show_List";			
+	}
+//	
 	@PostMapping("/import_cost")
     public String import_cost(@RequestParam("cost_file") MultipartFile file, Model model) {
         // validate file
@@ -52,7 +63,7 @@ public class Import_Cost_Controller {
 
                 // save users in DB?
                 costService.saveCosts(cost);
-
+                   cost=costService.findAll();
                 // save users list on model
                 model.addAttribute("cost", cost);
                 model.addAttribute("status", true); 
@@ -69,9 +80,44 @@ public class Import_Cost_Controller {
             }
         }
 
-        return "/admin/admin_datasetup";
+        return "/admin/Cost_Show_List";
     }
 	
-
+	@GetMapping("/CostFormForUpdate")
+	public String showFormForUpdate(@RequestParam("cost_file") String payer,
+									Model theModel) {
+	    
+		
+		Cost cost1 = costService.findByPayer(payer);
+		
+		// set employee as a model attribute to pre-populate the form
+		theModel.addAttribute("cost", cost1);
+		
+		// send over to our form
+		return "/admin/Cost_Update_Form";			
+	}
 	
+
+	@PostMapping("/saveCost")
+	public String saveCost(@ModelAttribute("cost") Cost thecost,Model theModel) {
+		
+		   costService.save(thecost);
+	
+			List<Cost> cost =costService.findAll();
+			theModel.addAttribute("cost", cost);
+			theModel.addAttribute("status", true); 
+		   
+        return "/admin/Cost_Show_List";
+	}
+
+	@GetMapping("/CostFormAdd")
+	public String showFormForAdd(Model theModel) {
+		
+		// create model attribute to bind form data
+		Cost cost = new Cost();
+		
+		theModel.addAttribute("cost", cost);
+		
+		return "/admin/Cost_Update_Form";
+	}
 }

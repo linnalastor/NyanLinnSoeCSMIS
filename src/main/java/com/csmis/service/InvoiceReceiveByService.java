@@ -20,5 +20,15 @@ public class InvoiceReceiveByService implements InvoiceReceiveByServiceInterface
 		invoiceReceiveByRepository.saveAll(invoiceReceiveBys);
 		
 	}
+	@Override
+	public List<InvoiceReceiveBy> findAll() {
+		// TODO Auto-generated method stub
+		return invoiceReceiveByRepository.findAll();
+	}
+	@Override
+	public void save(InvoiceReceiveBy theinvoiceReceiveBy) {
+		// TODO Auto-generated method stub
+		invoiceReceiveByRepository.save(theinvoiceReceiveBy);
+	}
 
 }

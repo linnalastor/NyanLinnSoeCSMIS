@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.csmis.entity.InvoiceCashier;
 import com.csmis.entity.InvoiceReceiveBy;
 import com.csmis.service_interface.InvoiceReceiveByServiceInterface;
 import com.opencsv.bean.CsvToBean;
@@ -31,6 +33,16 @@ public class Import_InvoiceReceiveBy_Controller {
 		
 		invoiceReceiveByService=theInvoiceReceiveByService;
 	}
+
+	@GetMapping("/show_invoiceReceiveBy")
+	public String showFormForUpdate( Model model) {
+		List<InvoiceReceiveBy> invoiceReceiveBy =invoiceReceiveByService.findAll();
+		  model.addAttribute("invoiceReceiveBy", invoiceReceiveBy);
+	        model.addAttribute("status", true); 
+			return	"/admin/InvoiceReceiveBy_Show_List";	
+	}
+	
+	
 
 	@PostMapping("/import_invoiceReceiveBy")
 	public String import_InvoiceReceiveBy(@RequestParam("invoiceReceiveBy_file") MultipartFile file, Model model) {
@@ -54,7 +66,7 @@ public class Import_InvoiceReceiveBy_Controller {
 	                List<InvoiceReceiveBy> invoiceReceiveBy = csvToBean.parse();
 	            	
 	                invoiceReceiveByService.saveInvoiceReceiveBys(invoiceReceiveBy);
-	           
+	           invoiceReceiveBy=invoiceReceiveByService.findAll();
 	            	  model.addAttribute("invoiceReceiveBy", invoiceReceiveBy);
 	                  model.addAttribute("status", true); 
 
@@ -72,9 +84,29 @@ public class Import_InvoiceReceiveBy_Controller {
 	                  
 	                  
 	            }
-		return	"/admin/admin_datasetup";
+		return	"/admin/InvoiceReceiveBy_Show_List";
 	}
+	@GetMapping("/InvoiceReceiveByFormAdd")
+	public String showFormForAdd(Model theModel) {
+		
+		// create model attribute to bind form data
+		InvoiceReceiveBy invoiceReceiveBy = new InvoiceReceiveBy();
+		
+		theModel.addAttribute("invoiceReceiveBy", invoiceReceiveBy);
+		
+		return "/admin/InvoiceReceiveBy_Update_List";
+	}
+	@PostMapping("/saveInvoiceReceiveBy")
+	public String saveInvoiceReceiveBy(@ModelAttribute("invoiceReceiveBy") InvoiceReceiveBy theinvoiceReceiveBy,Model theModel) {
+		
+		invoiceReceiveByService.save(theinvoiceReceiveBy);
 	
+			List<InvoiceReceiveBy> invoiceReceiveBy =invoiceReceiveByService.findAll();
+			theModel.addAttribute("invoiceReceiveBy", invoiceReceiveBy);
+			theModel.addAttribute("status", true); 
+		   
+        return "/admin/InvoiceReceiveBy_Show_List";
+	}
 
 	
 }

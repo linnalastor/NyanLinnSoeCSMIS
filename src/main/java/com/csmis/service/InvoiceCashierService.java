@@ -23,4 +23,16 @@ public class InvoiceCashierService  implements InvoiceCashierServiceInterface{
 		
 	}
 
+	@Override
+	public List<InvoiceCashier> findAll() {
+		// TODO Auto-generated method stub
+		return invoiceCashierRepository.findAll();
+	}
+
+	@Override
+	public void save(InvoiceCashier theinvoiceCashier) {
+		// TODO Auto-generated method stub
+		invoiceCashierRepository.save(theinvoiceCashier);
+	}
+
 }

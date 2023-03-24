@@ -4,21 +4,21 @@ package com.csmis.masterdatasetup.controller;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.commons.beanutils.converters.DateTimeConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.csmis.entity.Cost;
 import com.csmis.entity.Holiday;
 import com.csmis.entity.HolidayDTO;
 import com.csmis.service_interface.HolidayServiceInterface;
@@ -35,6 +35,16 @@ public class Import_Holiday_Controller {
   		holidayService=theholidayService;
   		
   	}
+  	
+
+	@GetMapping("/show_holiday")
+	public String showFormForUpdate( Model model) {
+		List<Holiday> holiday =holidayService.findAll();
+		  model.addAttribute("holiday", holiday);
+	        model.addAttribute("status", true); 
+	        return "/admin/Holiday_Show_List";  	
+	}
+  	
   	@PostMapping("/import_holiday")
   	public String import_holiday(@RequestParam("holiday_file")MultipartFile file, Model model) {
   	
@@ -59,6 +69,7 @@ public class Import_Holiday_Controller {
     		  List<HolidayDTO> holiday=csvToBean.parse();
     		  // save users in DB?
     		  holidayService.saveHolidays(holiday);
+    		
     		   // save users list on model
     		  model.addAttribute("holiday", holiday);
               model.addAttribute("status", true); 
@@ -79,5 +90,21 @@ public class Import_Holiday_Controller {
     	  
  
       }
-  	 return "/admin/admin_datasetup";  	}
+  	 return "/admin/Holiday_Show_List";  	}
+  	
+  	
+
+	@GetMapping("/HolidayFormForUpdate")
+	public String showFormForUpdate(@RequestParam("holiday_file") Date thedate,
+									Model theModel) {
+	    
+		
+		Holiday holiday2 = holidayService.findByDate(thedate);
+		
+		// set Holiday as a model attribute to pre-populate the form
+		theModel.addAttribute("holiday", holiday2);
+		
+		// send over to our form
+		return "/admin/Holiday_Update_List";			
+	}
  	  	}
