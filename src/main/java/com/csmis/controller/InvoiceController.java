@@ -70,7 +70,7 @@ public class InvoiceController {
 		LocalDate startDate = LocalDate.parse(latestDate,formatter).plusDays(3);
 		LocalDate endDate = startDate.plusDays(4);
 		System.out.println("Hello mother fucker------------"+startDate);
-		
+//		boolean isFirstTime = true;
 		int Ctotal = 0;
 		int Stotal = 0;
 		model.addAttribute("CTotal", Ctotal);
@@ -83,27 +83,32 @@ public class InvoiceController {
 		model.addAttribute("startDate",startDate);
 		model.addAttribute("endDate",endDate);
 		
+//		model.addAttribute("firstTime",isFirstTime);
+		
 
 		return "admin/invoice/invoice";
 	}
 
-	@PostMapping("/confirm")
+	@PostMapping("/create")
 	public String showData(Model model,
 			@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-			@RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
-		
+			@RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+			@RequestParam("paymentDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate paymentDate) {
+			
 		List<DailyInvoice> data = dailyInvoiceService.findByDateBetween(startDate, endDate);
 		List<InvoiceCashier> cashier = cashierSerivice.findAll();
 		List<InvoiceReceiveBy> received = receivedService.findAll();
 		List<InvoiceApprovedBy> approve = approvedByServie.findAll();
 		List<Restaurant> resturant = resturantService.findAll();
 		List<DailyInvoiceDTO> dto = new ArrayList<>();
+		System.out.println("Hello mother fucker+++++paymentDate------------"+paymentDate);
+		
 		int Ctotal = 0;
 		int Stotal = 0;
 		int numOfPax=0;
 		int amount=0;
 		int price=0;
-
+		
 		for (DailyInvoice dailyInvoice : data) {
 			DailyInvoiceDTO temp = new DailyInvoiceDTO();
 			temp.setActualHeadCount(dailyInvoice.getActualHeadCount());
@@ -147,10 +152,23 @@ public class InvoiceController {
 
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
+		model.addAttribute("paymentDate", paymentDate);
+		
+		System.out.println("Hello mother fucker+++++startDate------------"+startDate);
 		model.addAttribute("cashier", cashier);
 		model.addAttribute("received", received);
 		model.addAttribute("approve", approve);
 		model.addAttribute("resturant", resturant);
+		String SpaymentDate = paymentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		String SstartDate = startDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		String SendDate = endDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		String year = SpaymentDate.substring(0,4);
+		String month = SpaymentDate.substring(5,7);
+		String day = SpaymentDate.substring(8);
+		String voucherNo = "CSMIS-"+ year + month + day + ": " +year + month +
+							SstartDate.substring(8)+" ~"+ year + month + SendDate.substring(8); 
+		System.out.println("Hello mother fucker+++++voucherNo------------"+voucherNo);
+		model.addAttribute("voucherNo", voucherNo);
 		return "admin/invoice/invoice";
 	}
 	
