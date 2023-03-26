@@ -1,7 +1,6 @@
 package com.csmis.service;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -29,37 +28,13 @@ public class HolidayService implements HolidayServiceInterface {
 			h.HolidayDTO(hDTO.getDate(),hDTO.getDescription());
 			holidayRepository.save(h);
 		}
-		
-
 	}
 
 	@Override
 	public List<Holiday> findAll() {
-		// TODO Auto-generated method stub
 		return holidayRepository.findAll();
 	}
 
-	
-//
-//	@Override
-//	public Holiday findByDate(Date date) {
-//		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-//	    String dateString = formatter.format(date);
-//		Optional<Holiday> holiday2 = holidayRepository.findById(dateString);
-//		
-//		Holiday holiday1 = null;
-//		
-//		if (holiday2.isPresent()) {
-//			holiday1 = holiday2.get();
-//		}
-//		else {
-//			// we didn't find the employee
-//			throw new RuntimeException("Did not find Holiday date - " + date);
-//		}
-//		
-//		return holiday1;
-//	
-//	}
 	@Override
 	public Holiday findByDate(Date date) {
 	    LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -78,6 +53,10 @@ public class HolidayService implements HolidayServiceInterface {
 	    }
 	    
 	    return holiday1;
+	}
+	
+	public List<String> holiday_date_list() {
+		return null;
 	}
 
 }

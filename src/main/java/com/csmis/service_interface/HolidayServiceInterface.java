@@ -14,4 +14,5 @@ public interface HolidayServiceInterface {
 	public List<Holiday> findAll();
 
 	public Holiday findByDate(Date date);
+	public List<String> holiday_date_list();
 }

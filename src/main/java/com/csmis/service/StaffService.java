@@ -31,4 +31,9 @@ public class StaffService implements StaffServiceInterface{
 		return staffRepository.getById(id);
 	}
 
+	@Override
+	public String findID_By_DoorAccessID(String id) {
+		return staffRepository.getByDoor_Access_ID(id);
+	}
+
 }

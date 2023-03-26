@@ -31,6 +31,23 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 
 	}
 
+	@Override
+	public List<ConsumerList> getAllLunchPlan_by_MonthYear(String prefix) {
+		return consumerListRepository.findAll_by_MonthYear(prefix);
+	}
+
+	@Override
+	public ConsumerList getLunchRegistration_by_ID(String id) {
+		// TODO Auto-generated method stub
+		ConsumerList consumerList = new ConsumerList();
+		
+		try {
+			consumerList = consumerListRepository.getLunchPlanRegister_by_ID(id);
+		} catch (Exception e) {	}
+		
+		return consumerList;
+	}
+
 	// get dates of next month
 	public List<String> get_Monthly_Dates() {
 		ZoneId zone = ZoneId.systemDefault();

@@ -32,6 +32,11 @@ public class InvoiceService implements InvoiceServiceInterface {
 		return invoiceRepository.findByDateBetween(startDate, endDate);
 	}
 
+	@Override
+	public void save(DailyInvoice dailyInvoice) {
+		invoiceRepository.save(dailyInvoice);
+	}
+
 	
 
 }

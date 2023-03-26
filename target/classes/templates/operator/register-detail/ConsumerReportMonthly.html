@@ -177,7 +177,6 @@
 	<script th:inline="javascript">
 	var array = /*[[${notpickeddays}]]*/'';
 	var arr = JSON.parse(array);
-	console.log(arr);
 	for (var i = 0; i < arr.length; i++) {
 		var myvar = document.getElementById(arr[i] + "-showweekday");
 		
