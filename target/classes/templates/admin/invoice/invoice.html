@@ -57,24 +57,45 @@
 	    $('#paymentdate').datetimepicker({
 	        format: 'YYYY-MM-DD',
 	        defaultDate: currentDate,
-	        minDate: currentDate // add this line to set the minimum date
+	        minDate: currentDate ,// add this line to set the minimum date
+	       
 	    });
+	    
 	    $('#paymentdate').val(moment(currentDate).format('YYYY-MM-DD'));
-	});
-	
+	  
+		}); 
+	/*  $(function() {
+	        var currentDate = moment($('#paymentdate').val(), 'YYYY-MM-DD').toDate();
+	        $('#paymentdate').datetimepicker({
+	            format: 'YYYY-MM-DD',
+	            defaultDate: currentDate,
+	            minDate: currentDate,
+	            disabled: true // add this line to disable the date time picker
+	        });
+	    }); */
 
 	function GetPrint() {
 		window.print();
 	}
 </script>
 <style>
-.paid_print_container{
+.paid_print_container {
 	display: none;
 	align-items: center;
 	justify-content: flex-start;
-	gap: 5px;
+	gap: 10px;
 }
-.paid_print_container.show{
+
+.paid_print_container.show {
+	display: flex;
+}
+
+.voucher_no_container {
+	display: none;
+	align-items: center;
+}
+
+.voucher_no_container.show {
 	display: flex;
 }
 
@@ -229,32 +250,53 @@
 			<div class="card-header text-center">
 				<h4>INVOICE</h4>
 			</div>
-			<div class="card-body mt-3">
+			<div class="card-body ">
 				<div class="container ">
 					<div class="row">
-						<div class="col-10">
-							<form action="#" th:action="@{/admin/confirm}" method="POST"
-								class="form-inline">
-								<div class="input-group mb-3">
+						<form action="#" th:action="@{/admin/create}" method="POST"
+							class="form-inline">
+							<div class="col-10">
+
+								<div class="input-group mb-2">
 									<!-- <input type="hidden" id="startDate" th:value="${startDate}" />
-									<input type="hidden" id="endDate" th:value="${endDate}" /> --> <span
-										class="input-group-text" id="basic-addon1">Invoice for</span>
-									<span class="input-group-text" id="basic-addon1">Start
+									<input type="hidden" id="endDate" th:value="${endDate}" /> -->
+									<span class="input-group-text" id="basic-addon1">Invoice
+										for</span> <span class="input-group-text" id="basic-addon1">Start
 										Date </span> <input type="search" class="form-control"
-										 name="startDate"  th:value="${startDate}" readonly="readonly"
-										> <span class="input-group-text"
-										id="basic-addon1">End Date</span> <input type="search"
-										name="endDate"  class="form-control" th:value="${endDate}"
-										 readonly="readonly" >
+										name="startDate" th:value="${startDate}" readonly="readonly">
+									<span class="input-group-text" id="basic-addon1">End
+										Date</span> <input type="search" name="endDate" class="form-control"
+										th:value="${endDate}" readonly="readonly">
 									<button type="submit" class="btn btn-success">Create</button>
 								</div>
-							</form>
-						</div>
+								<div class="col-12">
+									<div class="input-group mb-2 mt-2">
+										<span class="input-group-text" id="current-date">Payment
+											Date</span> <input type="text" class="form-control" 
+											th:value="${paymentDate}"
+											name="paymentDate" data-format="YYYY-MM-DD" 
+											id="paymentdate"  th:attr="readonly=${status}">
+									</div>
+								</div>
+
+							</div>
+						</form>
 					</div>
 					<form th:action="@{/admin/save}" th:object="${Month}" method="post">
 						<div class="row">
-							<div class="col-7">
-								<div class="input-group mb-3">
+							<div class="col-10">
+								<div
+									th:class="${status ? 'voucher_no_container show' : 'paid_print_container'}">
+									<span class="input-group-text" id="basic-addon1">
+										Voucher No:</span> <input type="text" class="form-control"
+										placeholder=" Voucher No" aria-label="Username" th:value="${voucherNo}"
+										name="voucherNumber" aria-describedby="basic-addon1">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<div class="input-group mb-2 mt-2">
 									<span class="input-group-text" id="basic-addon1">Catering
 										Service Name:</span> <select name="carteringServiceName"
 										class="outline-none p-1 dropdowns select-dropdown">
@@ -263,7 +305,10 @@
 
 									</select>
 								</div>
-								<div class="input-group mb-3">
+
+							</div>
+							<div class="col-12">
+							<div class="input-group mb-3 ">
 									<span class="input-group-text" id="basic-addon1">Payment
 										Method</span> <select name="paymentMethod"
 										class="outline-none p-1 dropdowns select-dropdown">
@@ -271,24 +316,13 @@
 											th:text="${tempResturant.name}"></option>
 									</select>
 								</div>
-
-							</div>
-							<div class="col-5">
-								<div class="input-group mb-3">
-									<span class="input-group-text" id="basic-addon1">
-										Voucher No:</span> <input type="text" class="form-control"
-										placeholder=" Voucher No" aria-label="Username"
-										name="voucherNumber" aria-describedby="basic-addon1">
-								</div>
-								<div class="input-group mb-3">
-									<span class="input-group-text" id="current-date">Payment
-										Date</span> <input type="text" class="form-control"
-										name="paymentDate" data-format="YYYY-MM-DD" id="paymentdate">
-								</div>
-
+							
+							
+								
 							</div>
 						</div>
-						<table class="table table-bordered">
+
+						<table class="table table-bordered ">
 							<thead class="table-info">
 								<tr>
 									<th scope="col">Sr.no</th>
@@ -327,16 +361,18 @@
 									type="hidden" th:value="${price}" name="price" /> <input
 									type="hidden" th:value="${startDate}" name="invoiceStartDate" />
 								<input type="hidden" th:value="${endDate}" name="invoiceEndDate" />
+								<input type="hidden" th:value="${paymentDate}" name="paymentDate" />
+								
 
 
-								<div th:class="${status ? 'paid_print_container show' : 'paid_print_container'}">
-									<button type="button"
-										class="btn btn-primary"
+								<div
+									th:class="${status ? 'paid_print_container show' : 'paid_print_container'}">
+									<button type="button" class="btn btn-primary"
 										onclick="GetPrint()">Print</button>
+										
 
 
-									<button type="submit"
-										class="btn btn-primary">Paid</button>
+									<button type="submit" class="btn btn-primary">Paid</button>
 								</div>
 							</div>
 							<div class="col-5">
@@ -379,7 +415,7 @@
 
 								</div>
 								<div class="col-4">
-									<label for="username" class="me-5">Approved By</label><select
+									<label for="username" class="me-3">Approved By</label><select
 										name="approvedBy"
 										class="outline-none p-1 dropdowns select-dropdown">
 										<option th:each="tempApprove : ${approve}"
