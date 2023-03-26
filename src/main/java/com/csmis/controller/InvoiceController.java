@@ -54,6 +54,8 @@ public class InvoiceController {
 
 	@GetMapping("/invoice")
 	public String DailyInvoice(Model model) {
+		
+		LocalDate date=LocalDate.now();
 
 		List<InvoiceCashier> cashier = cashierSerivice.findAll();
 		List<InvoiceReceiveBy> received = receivedService.findAll();
@@ -63,13 +65,10 @@ public class InvoiceController {
 		
 		
 		String tempLatestDate = paidVoucherServiceInterface.getLastDate();
-		System.out.println("Hello mother fucker------------"+tempLatestDate);
 		String latestDate = tempLatestDate.substring(tempLatestDate.length()-8);
-		System.out.println("Hello mother fucker------------"+latestDate);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd"); 
 		LocalDate startDate = LocalDate.parse(latestDate,formatter).plusDays(3);
 		LocalDate endDate = startDate.plusDays(4);
-		System.out.println("Hello mother fucker------------"+startDate);
 //		boolean isFirstTime = true;
 		int Ctotal = 0;
 		int Stotal = 0;
@@ -82,7 +81,7 @@ public class InvoiceController {
 		model.addAttribute("status",false);
 		model.addAttribute("startDate",startDate);
 		model.addAttribute("endDate",endDate);
-		
+		model.addAttribute("paymentDate",date);
 //		model.addAttribute("firstTime",isFirstTime);
 		
 
@@ -101,7 +100,6 @@ public class InvoiceController {
 		List<InvoiceApprovedBy> approve = approvedByServie.findAll();
 		List<Restaurant> resturant = resturantService.findAll();
 		List<DailyInvoiceDTO> dto = new ArrayList<>();
-		System.out.println("Hello mother fucker+++++paymentDate------------"+paymentDate);
 		
 		int Ctotal = 0;
 		int Stotal = 0;
@@ -167,7 +165,6 @@ public class InvoiceController {
 		String day = SpaymentDate.substring(8);
 		String voucherNo = "CSMIS-"+ year + month + day + ": " +year + month +
 							SstartDate.substring(8)+" ~"+ year + month + SendDate.substring(8); 
-		System.out.println("Hello mother fucker+++++voucherNo------------"+voucherNo);
 		model.addAttribute("voucherNo", voucherNo);
 		return "admin/invoice/invoice";
 	}

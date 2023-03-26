@@ -53,6 +53,7 @@
 
 	}); */
 	$(function() {
+		var paymentDate=$('#paymentdate').val();
 	    var currentDate = new Date();
 	    $('#paymentdate').datetimepicker({
 	        format: 'YYYY-MM-DD',
@@ -61,8 +62,8 @@
 	       
 	    });
 	    
-	    $('#paymentdate').val(moment(currentDate).format('YYYY-MM-DD'));
-	  
+	    $('#paymentdate').val(moment(paymentDate).format('YYYY-MM-DD'));
+
 		}); 
 	/*  $(function() {
 	        var currentDate = moment($('#paymentdate').val(), 'YYYY-MM-DD').toDate();
