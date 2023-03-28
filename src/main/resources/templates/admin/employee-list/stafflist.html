@@ -194,14 +194,17 @@
 		</form>
 	</div>
 
-	<div class="container py-5">
+	<div class="container">
 		<div class="row">
-			<div class="col-10 mx-auto">
+			<div>
 				<!--display error if any-->
 				<div class="alert alert-danger" role="alert" th:if="${!status}">
 					<strong>Error:</strong> <span th:text="${message}"></span>
 				</div>
-
+<a th:href="@{/admin/StaffFormAdd}"
+			  class="btn btn-success btn-sm">
+			Add New Staff
+		</a>
 				<!--display users list-->
 				<table id="dataTable" class="table table-striped mt-5"
 					th:if="${status}">
@@ -217,6 +220,7 @@
 							<th>Team</th>
 							<th>Email</th>
 							<th>Status</th>
+								<th>Option</th>
 						</tr>
 					<thead>
 					<tbody>
@@ -230,6 +234,11 @@
 							<td th:text="${staff.team}"></td>
 							<td th:text="${staff.email}"></td>
 							<td th:text="${staff.status}"></td>
+						<td> 	<a th:href="@{/admin/staff_list/update(staff=${staff.id})}"
+							   class="btn btn-info btn-sm">
+								Update
+							</a>
+							</td>
 						</tr>
 					</tbody>
 				</table>

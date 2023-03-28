@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.csmis.entity.Staff;
 import com.csmis.service.PdfService;
@@ -155,8 +156,31 @@ public class AdminController {
 	}
 
 	@GetMapping("/staff_list/update")
-	public String updatStaff() {
+	public String updatStaff( @RequestParam("staff") String id,
+			Model theModel){
+		
+
+		Staff staff = staffService.findByID(id);
+		
+		// set employee as a model attribute to pre-populate the form
+		theModel.addAttribute("staff", staff);
+			
+		
 		return "admin/employee-list/updatestafflist";
+	}
+	
+	
+
+	@GetMapping("/StaffFormAdd")
+	public String StaffFormForAdd(Model theModel) {
+		
+		// create model attribute to bind form data
+		Staff staff = new Staff();
+		
+		theModel.addAttribute("staff", staff);
+		
+		return "admin/employee-list/updatestafflist";
+
 	}
 
 //	/* Invoice */

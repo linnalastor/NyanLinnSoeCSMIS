@@ -35,7 +35,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/admin")
 public class OTPController {
 //	StaffService staffService2;
 	String matchOtp;
@@ -64,7 +63,7 @@ public class OTPController {
 		model.addAttribute("OTPCode","");
 		
 //		  model.addAttribute("otp", staff);
-		return "/admin/OTPTest";
+		return "/OTPTest";
 
 	}
 
@@ -93,13 +92,13 @@ public class OTPController {
 			
 			model.addAttribute("otp", otp);
 			System.out.println(otp);
-			return "/admin/OTPTest";
+			return "/OTPTest";
 
 		} else {
 
 			model.addAttribute("emailerror", "Your email is not register.");
 			model.addAttribute("pass", true);
-			return "/admin/OTPTest";
+			return "/OTPTest";
 		}
 	}
 
@@ -118,7 +117,7 @@ public class OTPController {
 			model.addAttribute("status", true);
 			model.addAttribute("OTPCode",otp);
 			// TODO: validate the passwords and update the user's password
-			return "/admin/OTPTest";
+			return "/OTPTest";
 		}
 
 		else {
@@ -129,7 +128,7 @@ public class OTPController {
 			model.addAttribute("OTPCode","");
 			model.addAttribute("otpStatus", false);
 			
-			return "/admin/OTPTest";
+			return "/OTPTest";
 		}
 
 	}
