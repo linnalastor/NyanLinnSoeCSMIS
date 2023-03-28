@@ -10,4 +10,6 @@ public interface StaffServiceInterface {
 	public List<Staff> findAll();
 	public Staff findByID(String id);
 	public String findID_By_DoorAccessID(String id);
+	public void save(Staff thestaff);
+	public Staff findByEmail(String email);
 }

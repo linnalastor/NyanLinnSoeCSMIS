@@ -35,5 +35,20 @@ public class StaffService implements StaffServiceInterface{
 	public String findID_By_DoorAccessID(String id) {
 		return staffRepository.getByDoor_Access_ID(id);
 	}
+	
+	@Override
+	public void save(Staff thestaff) {
+		// TODO Auto-generated method stub
+		staffRepository.save(thestaff);
+	}
+
+	@Override
+	public Staff findByEmail(String email) {
+		Staff staff = new Staff();
+		staff=staffRepository.findByEmail(email);
+		return staff;
+	}
+	
+	
 
 }

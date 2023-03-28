@@ -165,11 +165,11 @@
 		<form method="POST" th:action="@{/admin/import_staff}"
 			enctype="multipart/form-data">
 			<div class="form-group mt-3">
-				<label for="staff_file">Import Staff CSV : </label> <input
+				<label for="staff_file fs-3"><b>Import Staff CSV : </b></label> <input
 					type="file" name="staff_file" class="form-control-file"
 					id="staff_file" accept=".csv">
-				<button type="submit" onclick="startLoading()">Import</button>
-				<script>
+				<button type="submit" onclick="startLoading()" class="btn btn-success">Import</button>
+				<!-- <script>
         				function startLoading() {
            				Notiflix.Loading.dots('Loading...');
 
@@ -178,7 +178,18 @@
 
             			Notiflix.Loading.remove();
         				}
-   				</script>
+   				</script> -->
+   				<script>
+    				function startLoading() {
+       				 Notiflix.Loading.dots('Loading.....');
+
+        			// Simulate a long-running task by waiting for 3 seconds
+       				 setTimeout(function() {
+           			 // Task complete, remove the loading indicator
+         			Notiflix.Loading.remove();
+        			}, 300000);
+   				 }
+			</script>
 			</div>
 		</form>
 	</div>
@@ -186,8 +197,6 @@
 	<div class="container py-5">
 		<div class="row">
 			<div class="col-10 mx-auto">
-				<h1 class="mb-5 text-center">File Upload Status</h1>
-
 				<!--display error if any-->
 				<div class="alert alert-danger" role="alert" th:if="${!status}">
 					<strong>Error:</strong> <span th:text="${message}"></span>

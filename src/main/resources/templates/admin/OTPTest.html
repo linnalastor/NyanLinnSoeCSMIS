@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<title>Forget Password</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
+
+<!-- Favicon -->
+<link href="img/favicon.ico" rel="icon">
+
+<!-- bootstrap css1 js1 -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+
+<!-- Google Web Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap"
+	rel="stylesheet">
+
+<!-- Icon Font Stylesheet -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+	rel="stylesheet">
+
+<!-- Libraries Stylesheet -->
+<link href="lib/owlcarousel/assets/owl.carousel.min.css"
+	rel="stylesheet">
+<link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css"
+	rel="stylesheet" />
+
+<!-- Customized Bootstrap Stylesheet -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Template Stylesheet -->
+<link href="css/style.css" rel="stylesheet">
+<script>
+	function validateForm() {
+		var emailInput = document.getElementById("email").value;
+		if (emailInput === "") {
+			alert("Please enter your register email address.");
+			return false;
+		}
+
+	}
+</script>
+<script>
+	function validateForm2() {
+		var emailInput = document.getElementById("otp").value;
+		if (emailInput === "") {
+			alert("Please enter your Otp code.");
+			return false;
+		}
+
+	}
+</script>
+<script>
+	function validateForm3() {
+		var emailInput = document.getElementById("confirmpassword").value;
+
+		var emailInput2 = document.getElementById("newpassword").value;
+		if (emailInput === "") {
+			alert("Yor password is invalid");
+			return false;
+		}
+		if (emailInput2 === "") {
+			alert("Yor password is invalid");
+			return false;
+		}
+
+	}
+</script>
+<style>
+/* Custom CSS styles */
+body {
+    background-color: #ebf5fb;
+	margin-bottom: 30px;
+}
+
+.card {
+	margin-top: 5%;
+	border: none;
+	box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+	background-color: #fff;
+	border-bottom: none;
+}
+
+.card-title {
+	font-size: 2rem;
+	font-weight: bold;
+	text-align: center;
+}
+
+.card-body {
+	padding: 30px;
+}
+
+.form-group {
+	margin-bottom: 25px;
+}
+
+.form-control {
+	border-radius: 0px;
+	border: none;
+	border-bottom: 2px solid #008080;
+	box-shadow: none;
+	font-size: 1.1rem;
+	font-weight: bold;
+}
+
+.form-control:focus {
+	border-color: #008080;
+	box-shadow: none;
+}
+
+.btn-custom {
+	background-color: #008080;
+	border-radius: 0px;
+	border: none;
+	font-weight: bold;
+	letter-spacing: 1px;
+	padding: 10px 25px;
+	transition: all 0.3s ease-in-out;
+}
+
+.btn-custom:hover, .btn-custom:focus {
+	background-color: #005050;
+	color: #fff;
+	outline: none;
+	box-shadow: none;
+}
+
+.paid_print_container {
+	display: none;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 10px;
+}
+
+
+</style>
+</head>
+
+<body>
+	<!--display error if any-->
+
+
+
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h1 class="card-title">Forget Password Form</h1>
+					</div>
+					<div class="card-body">
+						<form th:action="@{/admin/send-otp}" th:object="${staff}"
+							method="POST" id="myForm" onsubmit="return validateForm()">
+							<div class="mb-3">
+
+								<input type="email" name="email" class="form-control" id="email"
+									th:value="${email}" placeholder="Enter your register Email"
+									aria-describedby="forgetEmailHelp" th:attr="readonly=${sta}">
+								<span id="emailerror" th:text="${emailerror}"
+									class="text-danger "></span>
+
+							</div>
+							<button type="submit" class="btn btn-sm btn-primary " th:disabled="${sta}"
+								onclick="toggleForm()">Send OTP</button>
+						</form>
+
+						<form method="POST" id="myForm" th:action="@{/admin/password}"
+							onsubmit="return validateForm2()" th:object="${staff}">
+							<div class="mt-3">
+								<input type="hidden" th:value="${email}" name="otpemail">
+								
+							
+								<input type="text" placeholder="Enter your otp code here" th:value="${OTPCode}"
+									class="form-control" id="otp" th:attr="readonly=${status}"  
+									name="otp" aria-describedby=""> <span id="otperror"
+									th:text="${otperror}" class="text-danger "></span>
+							</div>
+
+							<button type="submit" class="btn btn-sm btn-primary mt-3" th:disabled="${otpStatus}">Comfirm</button>
+
+
+						</form>
+
+
+						<div class="mt-3">
+
+							<form method="POST" th:action="@{/admin/change-password}" th:object="${staff}" onsubmit="return validateForm3()"
+								oninput='confirmPassword.setCustomValidity(confirmPassword.value != newPassword.value ? "Passwords do not match." : "")'>
+
+
+								<input type="hidden" th:value="${email}" name="otpemail">
+								 <input th:value="${id}"
+									type="hidden" id="id" name="id"
+									readonly class="form-control" >    <span id="invalidStafffId"
+									th:text="${invalidStaffId}"></span>
+								 <input class="form-control mt-4"  type="password" id="newpassword"
+									name="newPassword" placeholder="Enter your new password"  th:attr="readonly=${pass}">
+
+							 <input
+								class="form-control mt-5 mb-5" 	type="password" id="confirmpassword" name="confirmPassword"
+									placeholder="Confirm your new password"  th:attr="readonly=${pass}">
+
+								<button type="submit"  class="btn btn-sm btn-primary ">Change Password</button>
+							</form>
+
+
+						</div>
+
+
+
+
+
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- bootstrap css1 js1 -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+		type="text/javascript"></script>
+
+
+</body>
+
+</html>
