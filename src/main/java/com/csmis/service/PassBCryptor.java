@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public class PassBCryptor {
 
 	public void BCryptEncoderFunction() {
-		String rawPass = "123";
+		String rawPass = "wearebombs2023";
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String encodedPass = encoder.encode(rawPass);
 		System.out.println(encodedPass);

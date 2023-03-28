@@ -38,6 +38,14 @@ public class Import_Restaurant_Controller {
 	        return "/admin/Restaurant_Show_List";  		
 	}
 	
+	@GetMapping("/restaurantRemove")
+	public String removeRestaurant(@ModelAttribute("restaurant") String name) {
+		Restaurant restaurant = restaurantService.findByName(name);
+		System.out.println(restaurant.getName());
+		restaurantService.delete(restaurant);
+		return "redirect:/admin/show_restaurant";
+	}
+	
 	@PostMapping("/import_restaurant")
 	  public String import_restaurant(@RequestParam("restaurant_file") MultipartFile file, Model model) {
 	
@@ -79,7 +87,7 @@ public class Import_Restaurant_Controller {
 	        	
 	        }
 		
-		 	 return "/admin/Restaurant_Show_List";  
+		 	 return "/admin//show_restaurant"; 
 		 	 
 }
 	
@@ -102,14 +110,8 @@ public class Import_Restaurant_Controller {
 
 	@PostMapping("/saveRestaurant")
 	public String saveCost(@ModelAttribute("restaurant") Restaurant theRestaurant,Model theModel) {
-		
 		restaurantService.save(theRestaurant);
-	
-			List<Restaurant> restaurant =restaurantService.findAll();
-			theModel.addAttribute("restaurant", restaurant);
-			theModel.addAttribute("status", true); 
-		   
-		 	 return "/admin/Restaurant_Show_List";  
+		return "redirect:/admin/Restaurant_Show_List";  
 	}
 		
 	
