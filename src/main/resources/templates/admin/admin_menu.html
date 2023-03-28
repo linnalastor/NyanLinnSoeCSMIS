@@ -113,9 +113,11 @@ body {
 								<li class="navbar-item"><a href="#"
 									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
 										class="fas fa-wrench fa-lg me-3"></i>About As</a></li>
-								<li class="navbar-item"><a href="#"
-									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-										class="fas fa-sign-out-alt fa-lg me-3"></i>Logout</a></li>
+								<li class="navbar-item">
+                                	<a  href="#" onclick="event.preventDefault(); document.getElementById('logout_form').submit();" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks">
+                                		<i class="fas fa-sign-out-alt fa-lg me-3"></i>Logout
+                                	</a>
+								</li>
 							</ul>
 						</div>
 
@@ -410,7 +412,9 @@ body {
 
 
 
-
+ <form th:action="@{/logout}" id="logout_form" method="POST">
+	 	<input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+	 </form>
 
 	<!-- END BODY CARD -->
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
