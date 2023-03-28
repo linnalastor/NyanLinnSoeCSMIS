@@ -8,7 +8,7 @@ import com.csmis.entity.Holiday;
 import com.csmis.entity.HolidayDTO;
 
 public interface HolidayServiceInterface {
-	
+
 	public void saveHolidays(List<HolidayDTO> holidays) throws ParseException;
 
 	public List<Holiday> findAll();

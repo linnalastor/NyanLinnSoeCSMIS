@@ -9,6 +9,7 @@ public interface InvoiceCashierServiceInterface {
 
 	 public void saveInvoiceCashiers(List<InvoiceCashier> invoiceCashiers);
 
+<<<<<<< Updated upstream
 	public List<InvoiceCashier> findAll();
 
 	public void save(InvoiceCashier theinvoiceCashier);
@@ -16,4 +17,6 @@ public interface InvoiceCashierServiceInterface {
 
     
 
+=======
+>>>>>>> Stashed changes
 }

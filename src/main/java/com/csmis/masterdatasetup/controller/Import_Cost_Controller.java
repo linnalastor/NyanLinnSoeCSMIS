@@ -25,9 +25,9 @@ import com.opencsv.bean.CsvToBeanBuilder;
 @Controller
 @RequestMapping("/admin")
 public class Import_Cost_Controller {
-	
+
 	CostServiceInterface costService;
-	
+
 	@Autowired
 	public   Import_Cost_Controller(CostServiceInterface theCostService) {
 		this.costService=theCostService;
@@ -59,19 +59,19 @@ public class Import_Cost_Controller {
 
                 // convert `CsvToBean` object to list of users
                 List<Cost> cost = csvToBean.parse();
-               
+
 
                 // save users in DB?
                 costService.saveCosts(cost);
                    cost=costService.findAll();
                 // save users list on model
                 model.addAttribute("cost", cost);
-                model.addAttribute("status", true); 
+                model.addAttribute("status", true);
 
                 try {
                 }catch(Exception ex) {
                 	 model.addAttribute("message", "An error occurred while saving the CSV file.");
-                     model.addAttribute("status", false); 
+                     model.addAttribute("status", false);
                 }
 
             } catch (Exception ex) {
@@ -82,6 +82,7 @@ public class Import_Cost_Controller {
 
         return "/admin/Cost_Show_List";
     }
+<<<<<<< Updated upstream
 	
 	@GetMapping("/CostFormForUpdate")
 	public String showFormForUpdate(@RequestParam("cost_file") String payer,
@@ -120,4 +121,9 @@ public class Import_Cost_Controller {
 		
 		return "/admin/Cost_Update_Form";
 	}
+=======
+
+
+
+>>>>>>> Stashed changes
 }

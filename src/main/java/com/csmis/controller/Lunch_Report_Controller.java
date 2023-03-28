@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+<<<<<<< Updated upstream
 import com.csmis.entity.ConsumerList;
 import com.csmis.entity.Lunch_Report;
 import com.csmis.service.HolidayService;
 import com.csmis.service.Operator_Register_Service;
+=======
+>>>>>>> Stashed changes
 import com.csmis.service.Operator_Report_Service;
 import com.csmis.service.StaffService;
 import com.csmis.service_interface.HolidayServiceInterface;
@@ -27,11 +30,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Lunch_Report_Controller {
 
 	@Autowired
+<<<<<<< Updated upstream
 	Operator_Report_Service operatorReportService;
 	@Autowired
 	Operator_Register_Service operatorRegisterService;
 	@Autowired
 	HolidayService holidayService;
+=======
+	Operator_Report_Service op;
+>>>>>>> Stashed changes
 
 	@Autowired
 	StaffService staffService;
@@ -114,6 +121,7 @@ public class Lunch_Report_Controller {
 	}
 
 	@GetMapping("/report/last_week")
+<<<<<<< Updated upstream
 	public String ConsumerReportWeekly(Model theModel, Authentication auth) throws JsonProcessingException {
 		
 		List<String> holidays= holidayService.getThisMonthHoliday(LocalDate.now());
@@ -170,11 +178,44 @@ public class Lunch_Report_Controller {
 		theModel.addAttribute("day_to_day", list.get(0) + " to " + list.get(list.size() - 1));
 		theModel.addAttribute("staff", staffService.findByID(auth.getName()));
 		theModel.addAttribute("listweeklydate", list);
+=======
+	public String ConsumerReportWeekly(Model theModel,Authentication auth) throws JsonProcessingException {
+
+		LocalDate today=LocalDate.now().minusMonths(1);
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		String notpickeddays=null;
+
+		String reportStatus=op.getLunch_Report(op.get_Month_Year_ReportMonthly(0)+"|"+auth.getName()).getReport_status();
+		List<String> notPickedDates=op.getNotPickedDays(reportStatus);
+
+		notpickeddays=objectMapper.writeValueAsString(notPickedDates);
+
+		List<String> list=op.getWeeklyDate();
+		theModel.addAttribute("Month_Year",today.getMonth().toString()+" / "+today.getYear());
+		theModel.addAttribute("day_to_day",list.get(0)+" to "+list.get(list.size()-1));
+		theModel.addAttribute("notpickeddays",notpickeddays);
+		theModel.addAttribute("staff",staffService.findByID(auth.getName()));
+		theModel.addAttribute("listweeklydate",list);
+>>>>>>> Stashed changes
 		return "operator/register-detail/ConsumerReportWeekly";
 	}
 
 	@GetMapping("/report/last_month")
+<<<<<<< Updated upstream
 	public String ConsumerReportMonthly(Model theModel, Authentication auth) throws JsonProcessingException {
+=======
+	public String ConsumerReportMonthly(Model theModel,Authentication auth) throws JsonProcessingException {
+		LocalDate today=LocalDate.now().minusMonths(1);
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		String notpickeddays=null;
+
+		String reportStatus=op.getLunch_Report(op.get_Month_Year_ReportMonthly(1)+"|"+auth.getName()).getReport_status();
+		List<String> notPickedDates=op.getNotPickedDays(reportStatus);
+
+		notpickeddays=objectMapper.writeValueAsString(notPickedDates);
+>>>>>>> Stashed changes
 
 		List<String> holidays= holidayService.getThisMonthHoliday(LocalDate.now());
 		List<String> notPickedDates=new ArrayList<>();

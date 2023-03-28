@@ -13,6 +13,7 @@ import com.csmis.service_interface.InvoiceApprovedByServiceInterface;
 @Service
 public class InvoiceApprovedByService implements InvoiceApprovedByServiceInterface {
 
+<<<<<<< Updated upstream
 	private InvoiceApprovedByRepository invoiceApprovedByRepository;
 
 	@Autowired
@@ -53,6 +54,16 @@ public class InvoiceApprovedByService implements InvoiceApprovedByServiceInterfa
 	public void save(InvoiceApprovedBy theinvoiceApprovedBy) {
 
 		invoiceApprovedByRepository.save(theinvoiceApprovedBy);
+=======
+	 @Autowired
+	 private InvoiceApprovedByRepository invoiceApprovedByRepository;
+
+	@Override
+	public void saveInvoiceApprovedBys(List<InvoiceApprovedBy> invoiceApprovedBys) {
+
+		invoiceApprovedByRepository.saveAll(invoiceApprovedBys);
+
+>>>>>>> Stashed changes
 	}
 
 }

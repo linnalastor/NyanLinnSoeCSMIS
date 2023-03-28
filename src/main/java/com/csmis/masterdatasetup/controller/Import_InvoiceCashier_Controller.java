@@ -25,14 +25,15 @@ import com.opencsv.bean.CsvToBeanBuilder;
 @Controller
 @RequestMapping("/admin")
 public class Import_InvoiceCashier_Controller {
-	
-	
+
+
 	InvoiceCashierServiceInterface invoiceCashierService;
 	@Autowired
 	public Import_InvoiceCashier_Controller(InvoiceCashierServiceInterface theInvoiceCashierService) {
 		invoiceCashierService=theInvoiceCashierService;
 	}
 
+<<<<<<< Updated upstream
 	@GetMapping("/show_invoiceCashier")
 	public String showFormForUpdate( Model model) {
 		List<InvoiceCashier> invoiceCashier =invoiceCashierService.findAll();
@@ -42,18 +43,20 @@ public class Import_InvoiceCashier_Controller {
 	}
 	
 	
+=======
+>>>>>>> Stashed changes
 	@PostMapping("/import_invoiceCashier")
 	public String import_InvoiceCashier(@RequestParam("invoiceCashier_file") MultipartFile file, Model model) {
-	
+
 		  if (file.isEmpty()) {
 	            model.addAttribute("message", "Please select the InvoiceCashier CSV file to import.");
 	            model.addAttribute("status", false);
 	        } else {
-	        	
-	        	
+
+
 	        	  // parse CSV file to create a list of `User` objects
 	            try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-	            	
+
 	            	  // create csv bean reader
 	            	CsvToBean<InvoiceCashier> csvToBean = new CsvToBeanBuilder<InvoiceCashier>(reader)
 	            			.withType(InvoiceCashier.class)
@@ -62,26 +65,31 @@ public class Import_InvoiceCashier_Controller {
 
 	                // convert `CsvToBean` object to list of users
 	                List<InvoiceCashier> invoiceCashier = csvToBean.parse();
-	            	
+
 	                invoiceCashierService.saveInvoiceCashiers(invoiceCashier);
+<<<<<<< Updated upstream
 	           invoiceCashier=invoiceCashierService.findAll();
+=======
+
+>>>>>>> Stashed changes
 	            	  model.addAttribute("invoiceCashier", invoiceCashier);
-	                  model.addAttribute("status", true); 
+	                  model.addAttribute("status", true);
 
 
 	                  try {
 	                  }catch(Exception ex) {
 	                  	 model.addAttribute("message", "An error occurred while saving the CSV file.");
-	                       model.addAttribute("status", false); 
+	                       model.addAttribute("status", false);
 	                  }
 
 	              } catch (Exception ex) {
 	                  model.addAttribute("message", "An error occurred while processing the CSV file.");
 	                  model.addAttribute("status", false);
 	              }
-	                  
-	                  
+
+
 	            }
+<<<<<<< Updated upstream
 		  return "/admin/InvoiceCashier_Show_List";  
 	}
 	
@@ -108,4 +116,11 @@ public class Import_InvoiceCashier_Controller {
         return "/admin/InvoiceCashier_Show_List";
 	}
 	
+=======
+		  return "/admin/admin_datasetup";
+	}
+
+
+
+>>>>>>> Stashed changes
 }

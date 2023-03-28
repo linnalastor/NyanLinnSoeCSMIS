@@ -9,7 +9,6 @@ import java.util.Base64;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -29,10 +28,10 @@ public class PdfService {
         // Create a Path object for the PDF file
         Path thisweek_pdfPath = resourceDirectory.resolve("ThisWeek.pdf");
         Path nextweek_pdfPath = resourceDirectory.resolve("NextWeek.pdf");
-        
+
         // Read the contents of the PDF file into a byte array
         byte[] fileData = Files.readAllBytes(nextweek_pdfPath);
-        
+
         // Write the PDF file to the resource directory
         Files.write(thisweek_pdfPath, fileData);
         Files.write(nextweek_pdfPath, pdfFile.getBytes());

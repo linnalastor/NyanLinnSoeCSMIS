@@ -39,6 +39,7 @@ public class Lunch_Plan_Register_Controller {
 		// for holiday
 		String[] holidays = { "05", "26" };
 
+
 		// for mordel addAttribute
 		String month_year = op.get_Month_Year_Monthly();
 		String year = month_year.substring(3);
@@ -57,7 +58,7 @@ public class Lunch_Plan_Register_Controller {
 
 		theModel.addAttribute("arrayJson", json);
 		theModel.addAttribute("jsonHoliday", jsonHoliday);
-		theModel.addAttribute("list", op.get_Monthly_Dates());
+		theModel.addAttribute("list", op.get_Monthly_Dates(1));
 		theModel.addAttribute("staff", staffService.findByID(auth.getName()));
 		theModel.addAttribute("month", Month.of(Integer.parseInt(month_year.substring(0, 2))) + " / " + year);
 
@@ -101,13 +102,15 @@ public class Lunch_Plan_Register_Controller {
 
 		theModel.addAttribute("arrayJson", json);
 		theModel.addAttribute("jsonHoliday", jsonHoliday);
-		theModel.addAttribute("list", op.get_Monthly_Dates());
+		theModel.addAttribute("list", op.get_Monthly_Dates(1));
 		theModel.addAttribute("staff", staffService.findByID(auth.getName()));
 		theModel.addAttribute("month", Month.of(Integer.parseInt(month_year.substring(0, 2))) + " / " + year);
 
 		return "operator/register/ConsumerListMonthly";
 	}
 	// End Consumer ListMonthly
+
+	//--------------------------------------------------------
 
 	// preparing for Lunch Plan By week page
 	@GetMapping("/lunch_plan/by_week")
@@ -117,7 +120,7 @@ public class Lunch_Plan_Register_Controller {
 		String jsonHoliday = null;
 
 		// set holiday
-		String[] holidays = { "24", "23" };
+		String[] holidays = { "05", "26" };
 
 		// get string of month and year of this week
 		String month_year = op.get_Month_Year_Weekly();
@@ -180,7 +183,7 @@ public class Lunch_Plan_Register_Controller {
 		// set and save staff info according to checker condition
 		if (checker) {
 			while (i < check_list.size()) {
-				
+
 				if (Integer.parseInt(check_list.get(i)) < 5)
 					next_month.add(check_list.get(i));
 				else
@@ -206,7 +209,7 @@ public class Lunch_Plan_Register_Controller {
 		String jsonHoliday = null;
 
 		// set holiday
-		String[] holidays = { "24", "23" };
+		String[] holidays = { "05", "26" };
 
 		// get string of month and year of this week
 		String month_year = op.get_Month_Year_Weekly();

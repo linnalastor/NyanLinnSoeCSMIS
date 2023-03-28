@@ -235,14 +235,14 @@
 			</div>
 		</div>
 	</div>
-	<!-- div1 close -->
+	<!-- Model  close -->
 
 
 	<script th:inline="javascript">
 		var array = /*[[${arrayJson}]]*/'';
 		var arr = JSON.parse(array);
 		var holidayarr = JSON.parse(/*[[${jsonHoliday}]]*/'');
-		/* console.log(holidayarr); */
+		console.log(holidayarr);
 		console.log(arr);
 
 		
@@ -277,10 +277,11 @@
 
 		for (var i = 0; i < holidayarr.length; i++) {
 			var myholiday = document.getElementById(holidayarr[i] + "-showweekday");
-			console.log(myholiday);
-			myholiday.style.backgroundColor = "yellow";
-			myholiday.style.color = "black";
-			myholiday.style.border = "1px solid white";
+			if(myholiday!=null){
+				myholiday.style.backgroundColor = "yellow";
+				myholiday.style.color = "black";
+				myholiday.style.border = "1px solid white";
+			}
 
 		}
 
@@ -293,15 +294,12 @@
 			var myholidayLabelPopUp = document
 					.getElementsByClassName(holidayarr[i])[0];
 			if (myholidayPopUp != null) {
-				/* console.log(myholidayPopUp); */
 				myholidayPopUp.disabled = true;
 				myholidayPopUp.style.backgroundColor = "yellow";
 				myholidayPopUp.style.border = "1px solid white";
-				/* console.log(myholidayLabelPopUp); */
 				myholidayLabelPopUp.style.backgroundColor = "yellow";
 				myholidayLabelPopUp.style.color = "black";
 				myholidayLabelPopUp.style.border = "1px solid white";
-				/* console.log(myholidayPopUp.value); */
 			}
 
 		}

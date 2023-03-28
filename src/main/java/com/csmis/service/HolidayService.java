@@ -23,7 +23,7 @@ public class HolidayService implements HolidayServiceInterface {
 
 	@Autowired
 	private HolidayRepository holidayRepository;
-	
+
 	@Override
 	public void saveHoliday(Holiday holiday) {
 		holidayRepository.save(holiday);
@@ -70,6 +70,7 @@ public class HolidayService implements HolidayServiceInterface {
 			LocalDate thisdate=holiday.getDate();
 			if(thisdate.getMonthValue()==date.getMonthValue()) days.add(""+thisdate.getDayOfMonth());
 		}
+<<<<<<< Updated upstream
 		
 		return null;
 	}
@@ -81,6 +82,9 @@ public class HolidayService implements HolidayServiceInterface {
 	public Date getDateOnly(Date date) throws ParseException {
 		Calendar cal = Calendar.getInstance();
         cal.setTime(date);
+=======
+
+>>>>>>> Stashed changes
 
         // Set the time fields to zero
         cal.set(Calendar.HOUR_OF_DAY, 0);

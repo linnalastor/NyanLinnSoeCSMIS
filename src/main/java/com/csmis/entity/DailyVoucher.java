@@ -21,12 +21,17 @@ public class DailyVoucher {
 	private int register_head_count;
 
 	@Column(name="actual_head_count")
+<<<<<<< Updated upstream
 	private int actual_head_count;
 	
+=======
+	private String actual_head_count;
+
+>>>>>>> Stashed changes
 	@Column(name="staff_cost")
 	private int staff_cost;
-	
-	
+
+
 	@Column(name="company_cost")
 	private int company_cost;
 
@@ -105,5 +110,5 @@ public class DailyVoucher {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-	
+
 }

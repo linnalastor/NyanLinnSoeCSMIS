@@ -15,11 +15,11 @@ public class CostService implements CostServiceInterface {
 
 	@Autowired
 	private CostRepository costRepository;
-	
+
 	@Override
 	public void saveCosts(List<Cost> costs) {
 		costRepository.saveAll(costs);
-		
+
 	}
 
 	@Override

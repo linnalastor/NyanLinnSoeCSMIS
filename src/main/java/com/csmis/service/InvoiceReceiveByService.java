@@ -19,9 +19,9 @@ public class InvoiceReceiveByService implements InvoiceReceiveByServiceInterface
         }
 	@Override
 	public void saveInvoiceReceiveBys(List<InvoiceReceiveBy> invoiceReceiveBys) {
-	
+
 		invoiceReceiveByRepository.saveAll(invoiceReceiveBys);
-		
+
 	}
 	@Override
 	public List<InvoiceReceiveBy> findAll() {
