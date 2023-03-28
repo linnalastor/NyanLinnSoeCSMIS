@@ -11,6 +11,7 @@ import com.csmis.service_interface.InvoiceCashierServiceInterface;
 
 @Service
 public class InvoiceCashierService  implements InvoiceCashierServiceInterface{
+<<<<<<< Updated upstream
 	private InvoiceCashierRepository invoiceCashierRepository;
 	@Autowired
 	public InvoiceCashierService(InvoiceCashierRepository theCashierRepository) {
@@ -25,6 +26,18 @@ public class InvoiceCashierService  implements InvoiceCashierServiceInterface{
 	public void saveInvoiceCashiers(List<InvoiceCashier> invoiceCashiers) {
 		 invoiceCashierRepository.saveAll(invoiceCashiers);
 		
+=======
+
+
+	@Autowired
+	private InvoiceCashierRepository invoiceCashierRepository;
+
+	@Override
+	public void saveInvoiceCashiers(List<InvoiceCashier> invoiceCashiers) {
+
+		invoiceCashierRepository.saveAll(invoiceCashiers);
+
+>>>>>>> Stashed changes
 	}
 
 	@Override

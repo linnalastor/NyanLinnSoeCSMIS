@@ -127,7 +127,6 @@ body{
     flex-direction: row;
 }
 .div7 div div div{
-    border: 1px solid black;
     background: rgb(103, 209, 103);
     width: 30px;
     height: 30px;
@@ -152,12 +151,10 @@ body{
     width: 100%;
 }
 .todayCounsumerListBorder{
-    border-bottom: 1px solid black;
 }
 
-.lists{
-    width: 85%;
-}
+
+
 
 .dropbuttons{
     position: relative;

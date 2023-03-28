@@ -12,20 +12,25 @@ import javax.persistence.Table;
 @Entity
 @Table(name="head_count")
 public class Daily_Head_Count {
-	
+
 	@Id
 	@Column(name="date")
+<<<<<<< Updated upstream
 	private LocalDate date;
 	
+=======
+	private Date date;
+
+>>>>>>> Stashed changes
 	@Column(name="registered_head_count")
 	private int registered_head_count;
-	
+
 	@Column(name="actual_head_count")
 	private int actual_head_count;
-	
+
 	@Column(name="non_register_head_count")
 	private int non_register_head_count;
-	
+
 	@Column(name="not_picked_head_count")
 	private int not_picked_head_count;
 
@@ -83,9 +88,9 @@ public class Daily_Head_Count {
 	public void setNot_picked_head_count(int not_picked_head_count) {
 		this.not_picked_head_count = not_picked_head_count;
 	}
-	
-	
-	
-	
+
+
+
+
 
 }

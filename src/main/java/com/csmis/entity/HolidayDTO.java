@@ -17,7 +17,13 @@ public class HolidayDTO {
 	public HolidayDTO() {
 
 	}
+<<<<<<< Updated upstream
 	
+=======
+
+
+
+>>>>>>> Stashed changes
 	public HolidayDTO(String date, String description) {
 		super();
 		this.date = date;

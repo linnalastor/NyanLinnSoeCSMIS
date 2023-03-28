@@ -19,19 +19,19 @@ import org.springframework.web.multipart.MultipartFile;
 import com.csmis.entity.Cost;
 import com.csmis.entity.InvoiceApprovedBy;
 import com.csmis.service_interface.InvoiceApprovedByServiceInterface;
-import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 @Controller
 @RequestMapping("/admin")
 public class Import_InvoiceApprovedBy_Controller {
-	
+
 	InvoiceApprovedByServiceInterface invoiceApprovedByService;
 	@Autowired
 	public  Import_InvoiceApprovedBy_Controller(InvoiceApprovedByServiceInterface theInvoiceApprovedByService)
-	{	
+	{
 		invoiceApprovedByService=theInvoiceApprovedByService;
 	}
+<<<<<<< Updated upstream
 	@GetMapping("/show_invoiceApprovedBy")
 	public String showFormForUpdate( Model model) {
 		List<InvoiceApprovedBy> invoiceApprovedBy =invoiceApprovedByService.findAll();
@@ -42,18 +42,21 @@ public class Import_InvoiceApprovedBy_Controller {
 	
 	
 	
+=======
+
+>>>>>>> Stashed changes
 	@PostMapping("/import_invoiceApprovedBy")
 	public String import_InvoiceApprovedBy(@RequestParam("invoiceApprovedBy_file") MultipartFile file, Model model) {
-	
+
 		  if (file.isEmpty()) {
 	            model.addAttribute("message", "Please select the InvoiceApprovedBy CSV file to import.");
 	            model.addAttribute("status", false);
 	        } else {
-	        	
-	        	
+
+
 	        	  // parse CSV file to create a list of `User` objects
 	            try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-	            	
+
 	            	  // create csv bean reader
 	            	CsvToBean<InvoiceApprovedBy> csvToBean = new CsvToBeanBuilder<InvoiceApprovedBy>(reader)
 	            			.withType(InvoiceApprovedBy.class)
@@ -62,25 +65,32 @@ public class Import_InvoiceApprovedBy_Controller {
 
 	                // convert `CsvToBean` object to list of users
 	                List<InvoiceApprovedBy> invoiceApprovedBy = csvToBean.parse();
-	            	
+
 	            	invoiceApprovedByService.saveInvoiceApprovedBys(invoiceApprovedBy);
+<<<<<<< Updated upstream
 	                        invoiceApprovedBy=invoiceApprovedByService.findAll();	            	  model.addAttribute("invoiceApprovedBy", invoiceApprovedBy);
 	                  model.addAttribute("status", true); 
+=======
+
+	            	  model.addAttribute("invoiceApprovedBy", invoiceApprovedBy);
+	                  model.addAttribute("status", true);
+>>>>>>> Stashed changes
 
 
 	                  try {
 	                  }catch(Exception ex) {
 	                  	 model.addAttribute("message", "An error occurred while saving the CSV file.");
-	                       model.addAttribute("status", false); 
+	                       model.addAttribute("status", false);
 	                  }
 
 	              } catch (Exception ex) {
 	                  model.addAttribute("message", "An error occurred while processing the CSV file.");
 	                  model.addAttribute("status", false);
 	              }
-	                  
-	                  
+
+
 	            }
+<<<<<<< Updated upstream
 		 	 return "/admin/InvoiceApprovedBy_Update_List";  
 	}
 
@@ -119,5 +129,8 @@ public class Import_InvoiceApprovedBy_Controller {
 		theModel.addAttribute("invoiceApprovedBy", invoiceApprovedBy);
 		
 		return "/admin/InvoiceApprovedBy_Update_List";
+=======
+		 	 return "/admin/admin_datasetup";
+>>>>>>> Stashed changes
 	}
 }

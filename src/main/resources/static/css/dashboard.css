@@ -60,6 +60,7 @@ body{
 
 .topnavbars{
     background-color: #5dade2;
+   
 }
 
 .borderbottoms{
@@ -72,7 +73,7 @@ body{
 }
 
 .sidebars{
-    height: 100vh;
+    height: 120vh;
 
     background-color: var(--btncolor);
     /* border-right: 2px solid black; */

@@ -11,19 +11,19 @@ import com.csmis.service.PassBCryptor;
 public class LoginController {
 	@Autowired
 	PassBCryptor passBCryptor;
-	
+
 	@GetMapping("/showMyLoginPage")
 	public String showMyLoginPage() {
 		return "fancy-login";
 
 	}
-	
+
 	@GetMapping("/welcome")
 	public String dashboard(Authentication auth) {
 		String role=null;
 		passBCryptor.BCryptEncoderFunction();
 		if(auth!=null) role=auth.getAuthorities().toArray()[0].toString();
-		
+
 		if(role==null) return "fancy-login";
 		else if(role.equals("ROLE_ADMIN")) {
 			return "admin/admin_dashboard";
@@ -31,7 +31,7 @@ public class LoginController {
 		else {
 			return "operator/User_Dashboard";
 		}
-		
+
 
 
 	}

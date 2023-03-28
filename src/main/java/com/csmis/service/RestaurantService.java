@@ -15,11 +15,14 @@ public class RestaurantService implements RestaurantServiceInterface {
 
 	private RestaurantRepository restaurantRepository;
 
+<<<<<<< Updated upstream
 	@Autowired
 	public RestaurantService(RestaurantRepository theRestaurantRepository) {
 		restaurantRepository = theRestaurantRepository;
 	}
 
+=======
+>>>>>>> Stashed changes
 	@Override
 	public void saveRestaurants(List<Restaurant> restaurants) {
 

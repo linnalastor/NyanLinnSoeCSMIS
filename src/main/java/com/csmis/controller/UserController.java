@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import com.csmis.service.Operator_Register_Service;
-import com.csmis.service.StaffService;
 import com.csmis.service.PdfService;
+import com.csmis.service.StaffService;
 @Controller
 @RequestMapping("/operator")
 public class UserController {
@@ -19,7 +20,7 @@ public class UserController {
 	@Autowired
 
 	Operator_Register_Service op;
-	
+
 
 
 	@Autowired
@@ -51,16 +52,16 @@ public class UserController {
 		String pdf="ThisWeek.pdf";
 		String encodedPdf =pdfService.getPdfAsByteString(pdf);
 		theModel.addAttribute("pdf", encodedPdf);
-        
+
         String next_pdf="NextWeek.pdf";
 		String next_encodedPdf =pdfService.getPdfAsByteString(next_pdf);
 		theModel.addAttribute("npdf", next_encodedPdf);
 
-		theModel.addAttribute(theModel);	
+		theModel.addAttribute(theModel);
 		return "operator/User_Menu";
 	}
 
-	
+
 	//End Consumer ListWeekly
 
 	@GetMapping("/lunch_plan/today")

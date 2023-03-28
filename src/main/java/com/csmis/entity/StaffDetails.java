@@ -38,13 +38,13 @@ public class StaffDetails {
 
 	@Column(name = "timestamp")
 	private Timestamp timestamp;
-	
+
 	@Column(name = "email_status")
 	private String email_status;
-	
+
 	@Column(name = "enabled")
 	private String enabled;
-	
+
 
 
 	public StaffDetails() {
@@ -173,6 +173,6 @@ public void StaffDetailsDTO(String id,String passwords, String description, Stri
 	public void setEnabled(String enabled) {
 		this.enabled = enabled;
 	}
-	
-	
+
+
 }
