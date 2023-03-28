@@ -1,16 +1,6 @@
 package com.csmis.entity;
 
-<<<<<<< Updated upstream
 import java.sql.Date;
-=======
-
-
-
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
->>>>>>> Stashed changes
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,7 +26,6 @@ public class Holiday {
 	}
 
 	public void HolidayDTO(String sdate, String description)throws ParseException {
-<<<<<<< Updated upstream
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         
 		try{
@@ -47,26 +36,6 @@ public class Holiday {
 		}
         
         this.description=description;
-=======
-
-		String[] formats = {"d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy", "dd/MM/yyyy"};
-		Date date = null;
-		for (String format : formats) {
-            SimpleDateFormat sdf = new SimpleDateFormat(format);
-            try {
-                date = sdf.parse(sdate);
-        	    System.out.println("here");
-                break;
-            } catch (ParseException e) {
-            }if (date != null) {
-                System.out.println(date);
-            } else {
-                System.err.println("Error parsing date string: " + sdate);
-            }
-        }
-		this.date = date;
-		this.description = description;
->>>>>>> Stashed changes
 	}
 
 	public Holiday(LocalDate date, String description) {

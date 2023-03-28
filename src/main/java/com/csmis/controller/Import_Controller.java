@@ -49,18 +49,18 @@ public class Import_Controller {
 	//Mapping For Import Menu Pdf
 		@PostMapping("/import_menu")
 		public String import_menu(@RequestParam("pdfFile") MultipartFile pdfFile,Model model) throws IOException,DocumentException {
-
+			
 			//get the name of the imported file
 			String thisweek_pdfFileName="ThisWeek.pdf";
 			String nextweek_pdfFileName="NextWeek.pdf";
-
+			
 			//save pdf file to resources/pdf
 			pdfService.storePdf(pdfFile);
-
+			
 			//convert pdf from resource/pdfs to byte string
 			String thisweek_encodedPdf =pdfService.getPdfAsByteString(thisweek_pdfFileName);
 			String nextweek_encodedPdf =pdfService.getPdfAsByteString(nextweek_pdfFileName);
-
+			
 
 	        model.addAttribute("pdf", thisweek_encodedPdf);
 	        model.addAttribute("npdf", nextweek_encodedPdf);
@@ -86,7 +86,6 @@ public class Import_Controller {
 	           			.withIgnoreLeadingWhiteSpace(true)
 	                       .build();
 
-<<<<<<< Updated upstream
 	               // convert `CsvToBean` object to list of users
 	               List<Staff> staff = csvToBean.parse();
 	              
@@ -131,25 +130,6 @@ public class Import_Controller {
 	               	 model.addAttribute("message", "An error occurred while saving the CSV file.");
 	                    model.addAttribute("status", false); 
 	               }
-=======
-               // convert `CsvToBean` object to list of users
-               List<Staff> staff = csvToBean.parse();
-
-               System.out.println(staff);
-               // save users in DB?
-               thestaffService.saveStaffs(staff);
-               staff=thestaffService.findAll();
-
-               // save users list on model
-               model.addAttribute("staff", staff);
-               model.addAttribute("status", true);
-
-               try {
-               }catch(Exception ex) {
-               	 model.addAttribute("message", "An error occurred while saving the CSV file.");
-                    model.addAttribute("status", false);
-               }
->>>>>>> Stashed changes
 
 	           } catch (Exception ex) {
 	               model.addAttribute("message", "An error occurred while processing the CSV file.");

@@ -24,7 +24,7 @@ import com.opencsv.bean.CsvToBeanBuilder;
 @Controller
 @RequestMapping("/admin")
 public class Import_Restaurant_Controller {
-
+	
 	RestaurantServiceInterface restaurantService;
 	@Autowired
 	public Import_Restaurant_Controller(RestaurantServiceInterface theRestaurantService) {
@@ -48,7 +48,7 @@ public class Import_Restaurant_Controller {
 	
 	@PostMapping("/import_restaurant")
 	  public String import_restaurant(@RequestParam("restaurant_file") MultipartFile file, Model model) {
-
+	
 		  if (file.isEmpty()) {
 	            model.addAttribute("message", "Please select the Restaurant CSV file to import.");
 	            model.addAttribute("status", false);
@@ -65,28 +65,27 @@ public class Import_Restaurant_Controller {
 	                // convert `CsvToBean` object to list of users
 	                List<Restaurant> restaurant = csvToBean.parse();
 	                System.out.println(restaurant);
-
+	               
 
 	                // save users in DB?
 	                restaurantService.saveRestaurants(restaurant);
                           restaurant=restaurantService.findAll();
 	                // save users list on model
 	                model.addAttribute("restaurant", restaurant);
-	                model.addAttribute("status", true);
+	                model.addAttribute("status", true); 
 
 	                try {
 	                }catch(Exception ex) {
 	                	 model.addAttribute("message", "An error occurred while saving the CSV file.");
-	                     model.addAttribute("status", false);
+	                     model.addAttribute("status", false); 
 	                }
 
 	            } catch (Exception ex) {
 	                model.addAttribute("message", "An Error occurred while processing the CSV file.");
 	                model.addAttribute("status", false);
 	            }
-
+	        	
 	        }
-<<<<<<< Updated upstream
 		
 		 	 return "/admin//show_restaurant"; 
 		 	 
@@ -127,13 +126,6 @@ public class Import_Restaurant_Controller {
 		
 		return "/admin/Restaurant_Update_List";
 	}
-=======
-
-		 	 return "/admin/admin_datasetup";
-
-}
-
->>>>>>> Stashed changes
 	}
 
 

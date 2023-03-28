@@ -47,7 +47,6 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 		}
 		return lunch_report;
 	}
-<<<<<<< Updated upstream
 
 	@Override
 	public List<Lunch_Report> findAll_Monthly(String prefix_id) {
@@ -60,12 +59,8 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 	}
 
 	// ==========================================> overwrite method finished here
-=======
->>>>>>> Stashed changes
 
-
-
-	// get dates of last month
+	// get dates of next month
 	public List<String> get_Monthly_Dates(int count) {
 		ZoneId zone = ZoneId.systemDefault();
 		LocalDate today = LocalDate.now(zone);
@@ -135,20 +130,10 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 		return days;
 	}
 
-<<<<<<< Updated upstream
 	// Weekly Date Real Page
 	public List<String> getWeeklyDate() {
 		ZoneId zone = ZoneId.systemDefault();
 		LocalDate today = LocalDate.now(zone);
-=======
-	// get last Week Date  Page
-		public List<String> getWeeklyDate() {
-			ZoneId zone = ZoneId.systemDefault();
-			LocalDate today = LocalDate.now(zone);
-
-			List<String> days = new ArrayList<>();
-			Integer temp;
->>>>>>> Stashed changes
 
 		List<String> days = new ArrayList<>();
 		Integer temp;
@@ -157,7 +142,6 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 		while (today.getDayOfWeek() != DayOfWeek.FRIDAY) {
 			today = today.minusDays(1);
 		}
-<<<<<<< Updated upstream
 		today = today.minusDays(5);
 		while (today.getDayOfWeek() != DayOfWeek.FRIDAY) {
 			today = today.plusDays(1);
@@ -235,16 +219,6 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 	//remove extra string '00' from month list
 	public List<String> removeExtraStringInList(List<String> monthly_dates) {
 		// remove '00' from monthly_date
-=======
-
-
-	//get not eat day
-	public List<String> getNotPickedDays(String confirmation){
-		List<String> days=new ArrayList<>();
-		List<String> monthly_dates=get_Monthly_Dates(0);
-
-		//remove '00' from monthly_date
->>>>>>> Stashed changes
 		String target = "00";
 		Iterator<String> iter = monthly_dates.iterator();
 		while (iter.hasNext()) {
@@ -253,25 +227,10 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 				iter.remove();
 			}
 		}
-<<<<<<< Updated upstream
 		return monthly_dates;
 	}
 
 	//get month and year string for last week
-=======
-
-		for(int i=0;i<monthly_dates.size();i++) {
-			try {
-				if(confirmation.charAt(i)=='x') days.add(monthly_dates.get(i));
-			}catch(Exception e) { break;}
-		}
-		return days;
-	}
-
-
-
-	//prefix id
->>>>>>> Stashed changes
 	public String get_Month_Year_ReportWeekly() {
 		ZoneId zone = ZoneId.systemDefault();
 		LocalDate today = LocalDate.now(zone);
@@ -283,33 +242,21 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 		String s = month + "/" + today.getYear();
 		return s;
 	}
-<<<<<<< Updated upstream
 
 	//get month and year string for last month
 	public String get_Month_Year_ReportMonthly(int count) {
 		ZoneId zone = ZoneId.systemDefault();
 		LocalDate today = LocalDate.now(zone);
 		Integer month_value = today.getMonthValue() - count;
-=======
-	//prefix id
-	public String get_Month_Year_ReportMonthly(int count) {
-		ZoneId zone = ZoneId.systemDefault();
-		LocalDate today = LocalDate.now(zone);
-		int month_value = today.getMonthValue()-count;
->>>>>>> Stashed changes
 		if (month_value > 12) {
 			today.plusYears(1);
 			month_value = 1;
 		} else if (month_value < 1) {
 			today.minusYears(1);
-<<<<<<< Updated upstream
 			month_value = 12;
-=======
-			month_value=12;
->>>>>>> Stashed changes
 
 		}
-		String month = Integer.toString(month_value);
+		String month = month_value.toString();
 		if (month.length() < 2)
 			month = "0" + month;
 		String s = month + "/" + today.getYear();

@@ -38,13 +38,13 @@ public class StaffDetails {
 
 	@Column(name = "timestamp")
 	private Timestamp timestamp;
-
+	
 	@Column(name = "email_status")
 	private String email_status;
-
+	
 	@Column(name = "enabled")
 	private String enabled;
-
+	
 
 
 	public StaffDetails() {
@@ -175,4 +175,14 @@ public void StaffDetailsDTO(String id,String passwords, String description, Stri
 	}
 
 
+	public String getEmail_status() {
+		return email_status;
+	}
+
+
+	public void setEmail_status(String email_status) {
+		this.email_status = email_status;
+	}
+	
+	
 }

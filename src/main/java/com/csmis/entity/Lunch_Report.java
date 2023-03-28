@@ -47,5 +47,5 @@ public class Lunch_Report {
 	public void setReport_status(String report_status) {
 		this.report_status = report_status;
 	}
-
+	
 }

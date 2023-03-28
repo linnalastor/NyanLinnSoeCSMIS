@@ -202,14 +202,10 @@ public class PaymentVoucher {
 	public void setPaymentMethod(String paymentMethod) {
 		this.paymentMethod = paymentMethod;
 	}
-<<<<<<< Updated upstream
 	
 
 
 	
 	
 	
-=======
-
->>>>>>> Stashed changes
 }
