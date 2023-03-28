@@ -18,6 +18,8 @@ public class HolidayDTO {
 
 	}
 	
+	
+
 	public HolidayDTO(String date, String description) {
 		super();
 		this.date = date;

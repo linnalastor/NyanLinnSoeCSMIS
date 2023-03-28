@@ -21,7 +21,6 @@ public class LoginController {
 	@GetMapping("/welcome")
 	public String dashboard(Authentication auth) {
 		String role=null;
-		passBCryptor.BCryptEncoderFunction();
 		if(auth!=null) role=auth.getAuthorities().toArray()[0].toString();
 		
 		if(role==null) return "fancy-login";
@@ -40,6 +39,7 @@ public class LoginController {
 
 	@GetMapping("/access-denied")
 	public String showAccessDenied() {
+
 		return "error404";
 
 	}

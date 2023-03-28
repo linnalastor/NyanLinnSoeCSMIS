@@ -1,7 +1,7 @@
 package com.csmis.service_interface;
 
 import java.text.ParseException;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import com.csmis.entity.Holiday;
@@ -13,9 +13,6 @@ public interface HolidayServiceInterface {
 
 	public List<Holiday> findAll();
 
-	public Holiday findByDate(LocalDate date);
+	public Holiday findByDate(Date date);
 	public List<String> holiday_date_list();
-	public void deleteAll();
-
-	public void saveHoliday(Holiday holiday);
 }

@@ -1,24 +1,27 @@
 package com.csmis.entity;
 
-import java.sql.Date;
+
+
+
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+
 
 @Entity
-@Table(name = "holiday")
+@Table(name="holiday")
 public class Holiday {
 	@Id
-	@Column(name = "date")
-	private LocalDate date;
+	@Column(name="date")
+	private Date date;
 
-	@Column(name = "description")
+	@Column(name="description")
 	private String description;
 
 	public Holiday() {
@@ -26,29 +29,37 @@ public class Holiday {
 	}
 
 	public void HolidayDTO(String sdate, String description)throws ParseException {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        
-		try{
-			this.date=LocalDate.parse(sdate,formatter);
-		}catch(Exception e) {
-			formatter = DateTimeFormatter.ofPattern("dd-MM-yy");
-			this.date=LocalDate.parse(sdate,formatter);
-		}
-        
-        this.description=description;
+		
+		String[] formats = {"d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy", "dd/MM/yyyy"};
+		Date date = null;
+		for (String format : formats) {
+            SimpleDateFormat sdf = new SimpleDateFormat(format);
+            try {
+                date = sdf.parse(sdate);
+        	    System.out.println("here");
+                break;
+            } catch (ParseException e) {
+            }if (date != null) {
+                System.out.println(date);
+            } else {
+                System.err.println("Error parsing date string: " + sdate);
+            }
+        }
+		this.date = date;
+		this.description = description;
 	}
 
-	public Holiday(LocalDate date, String description) {
+	public Holiday(Date date, String description) {
 		super();
 		this.date = date;
 		this.description = description;
 	}
 
-	public LocalDate getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
@@ -64,5 +75,7 @@ public class Holiday {
 	public String toString() {
 		return "holiday [date=" + date + ", description=" + description + "]";
 	}
+
+
 
 }

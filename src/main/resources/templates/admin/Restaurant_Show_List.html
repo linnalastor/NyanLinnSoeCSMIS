@@ -216,8 +216,8 @@
 							<td th:text="${restaurant.address}"></td>
 							<td th:text="${restaurant.phone_number}"></td>
 							<td><a
-								th:href="@{/admin/restaurantRemove(restaurant=${restaurant.name})}"
-								class="btn btn-primary btn-sm"> Remove </a></td>
+								th:href="@{/admin/RestaurantFormForUpdate(restaurant_file=${restaurant.name})}"
+								class="btn btn-primary btn-sm"> Update </a></td>
 						</tr>
 					</tbody>
 				</table>
