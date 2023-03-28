@@ -59,17 +59,5 @@ public class StaffDetailsService implements StaffDetailsServiceInterface {
 				// TODO Auto-generated method stub
 				staffDetailsRepository.save(staffDetails);
 			}
-			
-			@Override
-			public StaffDetails getStaffDetailByID(String id) {
-				// TODO Auto-generated method stub
-				return staffDetailsRepository.getByID(id);
-			}
-			
-			@Override
-			public List<StaffDetails> findByEmailStatus() {
-				// TODO Auto-generated method stub
-				return staffDetailsRepository.getEmailStatus();
-			}
 		
 		}

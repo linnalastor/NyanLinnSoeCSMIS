@@ -173,16 +173,6 @@ public void StaffDetailsDTO(String id,String passwords, String description, Stri
 	public void setEnabled(String enabled) {
 		this.enabled = enabled;
 	}
-
-
-	public String getEmail_status() {
-		return email_status;
-	}
-
-
-	public void setEmail_status(String email_status) {
-		this.email_status = email_status;
-	}
 	
 	
 }
