@@ -9,6 +9,9 @@
 <!-- fav icon -->
 <link th:href="@{/images/datlogo.png}" rel="icon" type="image/png"
 	sizes="18*18" />
+	
+	<link rel="stylesheet" type="text/css" href="/notiflix.min.css">
+<script src="/js/notiflix-aio-3.2.6.min.js"></script>
 
 
 <!-- bootstrap css1 js1 -->
@@ -156,21 +159,30 @@
 		</div>
 		<!-- end title -->
 	</div>
-	
+
 
 	<div class="container text-center">
 		<form method="POST" th:action="@{/admin/import_staff}"
-	
 			enctype="multipart/form-data">
 			<div class="form-group mt-3">
-				<label for="staff_file">Import Staff CSV : </label> <input type="file"
-					name="staff_file" class="form-control-file" id="staff_file"
-					accept=".csv">
-				<button type="submit">Import</button>
+				<label for="staff_file">Import Staff CSV : </label> <input
+					type="file" name="staff_file" class="form-control-file"
+					id="staff_file" accept=".csv">
+				<button type="submit" onclick="startLoading()">Import</button>
+				<script>
+        				function startLoading() {
+           				Notiflix.Loading.dots('Loading...');
+
+            			// Perform some long-running task
+            			// ...
+
+            			Notiflix.Loading.remove();
+        				}
+   				</script>
 			</div>
 		</form>
 	</div>
-	
+
 	<div class="container py-5">
 		<div class="row">
 			<div class="col-10 mx-auto">

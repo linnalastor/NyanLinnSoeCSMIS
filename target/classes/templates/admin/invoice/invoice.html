@@ -29,6 +29,9 @@
 <!-- font awesome -->
 <link rel="stylesheet" href="https://kit.fontawesome.com/e0faeaf50f.css"
 	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/notiflix.min.css">
+<script src="/js/notiflix-aio-3.2.6.min.js"></script>
+
 
 <script>
 	/* $(function() {
@@ -77,7 +80,43 @@
 
 	function GetPrint() {
 		window.print();
+		
 	}
+	 /*    $(document).ready(function() {
+	    	  $('#paid-button').click(function() {
+	    	    var password = prompt("Please enter admin password:");
+	    	    if (password === "admin123") {
+	    	    	
+	    	      // Correct password, let the paid process
+	    	      alert("Paid process completed successfully.");
+	    	      return true
+	    	      // Your paid process code here
+	    	    } else if (password !== null && password != "admin123") {
+	    	      // Incorrect password, show error message and prompt again
+	    	      alert("Incorrect password, please try again.");
+	    	      var password = prompt("Please enter admin password:");
+	    	    }
+	    	    // Do nothing if user clicks cancel in the password prompt
+	    	    return false
+	    	  });
+	    	}); */
+	    $(document).ready(function() {
+	    	  $('#paid-button').click(function() {
+	    	    var password = prompt("Check your invoice.If you sure,Please enter admin password:");
+	    	    while (password !== "admin123") {
+	    	      if (password === null) {
+	    	        // User clicked cancel, exit loop
+	    	        return false;
+	    	      }
+	    	      alert("Incorrect password, please try again.");
+	    	      password = prompt("Please enter admin password:");
+	    	    }
+	    	    // Password is correct, let the paid process
+	    	    alert("Paid process completed successfully.");
+	    	    return true;
+	    	    // Your paid process code here
+	    	  });
+	    	});
 </script>
 <style>
 .paid_print_container {
@@ -234,6 +273,10 @@
 		</nav>
 		<!-- END NAVBAR -->
 	</header>
+
+
+
+
 	<div class="container w-100 mb-4 mt-5 pt-5 NOPrint">
 		<button type="button" class="btn btn-secondary me-3"
 			th:onclick="window.location.href='/admin/invoice'">Create
@@ -252,6 +295,7 @@
 				<h4>INVOICE</h4>
 			</div>
 			<div class="card-body ">
+
 				<div class="container ">
 					<div class="row">
 						<form action="#" th:action="@{/admin/create}" method="POST"
@@ -268,15 +312,26 @@
 									<span class="input-group-text" id="basic-addon1">End
 										Date</span> <input type="search" name="endDate" class="form-control"
 										th:value="${endDate}" readonly="readonly">
-									<button type="submit" class="btn btn-success">Create</button>
+									<button type="submit" onclick="startLoading()"
+										class="btn btn-success">Create</button>
+									<script>
+        								function startLoading() {
+           								Notiflix.Loading.dots('Loading...');
+
+            							// Perform some long-running task
+            							// ...
+
+            							Notiflix.Loading.remove();
+        								}
+   									</script>
 								</div>
 								<div class="col-12">
 									<div class="input-group mb-2 mt-2">
 										<span class="input-group-text" id="current-date">Payment
-											Date</span> <input type="text" class="form-control" 
-											th:value="${paymentDate}"
-											name="paymentDate" data-format="YYYY-MM-DD" 
-											id="paymentdate"  th:attr="readonly=${status}">
+											Date</span> <input type="text" class="form-control"
+											th:value="${paymentDate}" name="paymentDate"
+											data-format="YYYY-MM-DD" id="paymentdate"
+											th:attr="readonly=${status}">
 									</div>
 								</div>
 
@@ -290,8 +345,9 @@
 									th:class="${status ? 'voucher_no_container show' : 'paid_print_container'}">
 									<span class="input-group-text" id="basic-addon1">
 										Voucher No:</span> <input type="text" class="form-control"
-										placeholder=" Voucher No" aria-label="Username" th:value="${voucherNo}"
-										name="voucherNumber" aria-describedby="basic-addon1">
+										placeholder=" Voucher No" aria-label="Username"
+										th:value="${voucherNo}" name="voucherNumber"
+										aria-describedby="basic-addon1">
 								</div>
 							</div>
 						</div>
@@ -309,7 +365,7 @@
 
 							</div>
 							<div class="col-12">
-							<div class="input-group mb-3 ">
+								<div class="input-group mb-3 ">
 									<span class="input-group-text" id="basic-addon1">Payment
 										Method</span> <select name="paymentMethod"
 										class="outline-none p-1 dropdowns select-dropdown">
@@ -317,9 +373,9 @@
 											th:text="${tempResturant.name}"></option>
 									</select>
 								</div>
-							
-							
-								
+
+
+
 							</div>
 						</div>
 
@@ -362,18 +418,21 @@
 									type="hidden" th:value="${price}" name="price" /> <input
 									type="hidden" th:value="${startDate}" name="invoiceStartDate" />
 								<input type="hidden" th:value="${endDate}" name="invoiceEndDate" />
-								<input type="hidden" th:value="${paymentDate}" name="paymentDate" />
-								
+								<input type="hidden" th:value="${paymentDate}"
+									name="paymentDate" />
+
 
 
 								<div
 									th:class="${status ? 'paid_print_container show' : 'paid_print_container'}">
 									<button type="button" class="btn btn-primary"
 										onclick="GetPrint()">Print</button>
-										
 
 
-									<button type="submit" class="btn btn-primary">Paid</button>
+
+									<button type="submit" class="btn btn-primary" id="paid-button">Paid</button>
+
+
 								</div>
 							</div>
 							<div class="col-5">

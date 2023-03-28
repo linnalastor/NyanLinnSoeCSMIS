@@ -31,6 +31,21 @@
 	background-color: #28a745;
 	color: #fff;
 }
+
+.paid_print_container {
+	display: none;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 10px;
+}
+
+.paid_print_container.show {
+	display: flex;
+}
+
+#basic-addon1{
+background-color:lightblue;
+}
 </style>
 
 </head>
@@ -146,7 +161,8 @@
 	</header>
 	<div class="container w-100 mb-4 mt-5 pt-5 NOPrint">
 		<button type="button" class="btn btn-primary me-3"
-			th:onclick="window.location.href='/admin/invoice'">Create Voucher</button>
+			th:onclick="window.location.href='/admin/invoice'">Create
+			Voucher</button>
 		<button type="button" class="btn btn-primary me-3"
 			th:onclick="window.location.href='/admin/monthlyInvoice'">Paid
 			Voucher List</button>
@@ -154,44 +170,77 @@
 			th:onclick="window.location.href='/admin/detailInvoice'">Detail
 			Invoice</button>
 	</div>
-	<div class="container mt-3 mb-5 w-150">
+	<div class="container mt-3 mb-3 w-150">
 
 		<div class="card ">
 			<div class="card-header text-center">
 				<h4>DETAIL INVOICE LIST</h4>
 			</div>
-			<div class="card-body mt-5 ">
+			<div class="card-body mt-3 ">
 				<div class="container ">
+					<div class="row">
+						<form action="#" th:action="@{/admin/search}" method="GET"
+							class="form-inline">
+							<div class="input-group mb-3">
+								<input type="search" name="voucherNo" class="form-control">
+								<button type="submit" class="btn btn-success">Search</button>
+							</div>
+						</form>
+					</div>
+
 					<table id="dataTable" class="table table-striped mt-5">
 						<thead class="table-info">
 							<tr>
-									<th scope="col">Sr.no</th>
-									<th scope="col">Charges for a week</th>
-									<th scope="col" class="text-end">Register Head Count</th>
-									<th scope="col" class="text-end">Actual Head Count</th>
-									<th scope="col" class="text-end">Difference</th>
-									<th scope="col" class="text-end">Staff Cost</th>
-									<th scope="col" class="text-end">DAT Cost</th>
-									<th scope="col" class="text-end">Staff Amount</th>
-									<th scope="col" class="text-end">DAT Amount</th>
-								</tr>
+								<th scope="col">Sr.no</th>
+								<th scope="col">Charges for a week</th>
+								<th scope="col" class="text-end">Register Head Count</th>
+								<th scope="col" class="text-end">Actual Head Count</th>
+								<th scope="col" class="text-end">Difference</th>
+								<th scope="col" class="text-end">Staff Cost</th>
+								<th scope="col" class="text-end">DAT Cost</th>
+								<th scope="col" class="text-end">Staff Amount</th>
+								<th scope="col" class="text-end">DAT Amount</th>
+							</tr>
 						</thead>
 						<tbody id="TBody">
 							<tr id="TRow" th:each="tempInvoice, index  : ${invoices}">
 
-									<th th:text="${index.count}"></th>
-									<td th:text="${tempInvoice.date}"></td>
-									<td th:text="${tempInvoice.registerHeadCount}"></td>
-									<td th:text="${tempInvoice.actualHeadCount}"></td>
-									<td th:text="${tempInvoice.difference}"></td>
-									<td th:text="${tempInvoice.staffCost}"></td>
-									<td th:text="${tempInvoice.companyCost}"></td>
-									<td th:text="${tempInvoice.samount}"></td>
-									<td th:text="${tempInvoice.camount}"></td>
-								</tr>
+								<th th:text="${index.count}"></th>
+								<td th:text="${tempInvoice.date}"></td>
+								<td th:text="${tempInvoice.registerHeadCount}"></td>
+								<td th:text="${tempInvoice.actualHeadCount}"></td>
+								<td th:text="${tempInvoice.difference}"></td>
+								<td th:text="${tempInvoice.staffCost}"></td>
+								<td th:text="${tempInvoice.companyCost}"></td>
+								<td th:text="${tempInvoice.samount}"></td>
+								<td th:text="${tempInvoice.camount}"></td>
+							</tr>
 						</tbody>
+
 					</table>
+					<div class="row mt-3">
+						<div class="col-6"></div>
+						<div class="col-6">
+							<div
+								th:class="${status ? 'paid_print_container show' : 'paid_print_container'}">
+
+								<div class="input-group mb-3">
+									<span class="input-group-text" id="basic-addon1">Staff
+										Total</span> <input th:value="${Stotal}+-Kyats" class="form-control"
+										id="STotal" name="STotal" disabled="">
+
+								</div>
+								<div class="input-group mb-3">
+									<span class="input-group-text" id="basic-addon1">DAT
+										Total</span> <input th:value="${CTotal} +-Kyats" class="form-control"
+										id="CTotal" name="CTotal" disabled="">
+
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>
