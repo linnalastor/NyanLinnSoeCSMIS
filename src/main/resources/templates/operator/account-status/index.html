@@ -1,229 +1,272 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="htttp://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Account Status</title>
-    <!-- fav icon -->
-    <link th:href="@{/images/datlogo.png}" rel="icon" type="image/png" sizes="18*18" />
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Account Status</title>
+<!-- fav icon -->
+<link th:href="@{/images/datlogo.png}" rel="icon" type="image/png"
+	sizes="18*18" />
 
-    <!-- bootstrap css1 js1 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+<!-- bootstrap css1 js1 -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
 
-    <!-- internal css -->
-    <link rel="stylesheet" th:href="@{/css/dashboard.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/css/register.css}">
-    <link rel="stylesheet" th:href="@{/css/faq.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/css/toggle.css}">
+<!-- internal css -->
+<link rel="stylesheet" th:href="@{/css/dashboard.css}" type="text/css">
 
-    <!-- font awesome -->
-    <link rel="stylesheet" href="https://kit.fontawesome.com/e0faeaf50f.css" crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/faq.css}" />
 
-    <!-- FontAwesome CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
-    
+
+
+
+<!-- font awesome -->
+<link rel="stylesheet" href="https://kit.fontawesome.com/e0faeaf50f.css"
+	crossorigin="anonymous">
+
+
+
 </head>
 <body>
-  
-    <header class="w-100 mt-0">
-        <!-- START BAVBAR -->
-        <nav class="navbar navbar-light">
 
-          <div id="mynavbar">
-              <div class="container-fluid">
-                  <div class="row">
-                      
-                      <!-- Start Left Sidebar -->
-                      <div id="nav" class="col-xl-2 col-lg-3 col-md-4 fixed-top collapse sidebars">
-  
-                          <div class="pb-3 mt-4 text-center borderbottoms">
-                              <a href="" class="btn btn-outline-light rounded-circle mb-1"><i class="fa-solid fa-user fs-3"></i></a>
-                              <a href="#" class="text-white nav-link">Ms.July</a>
-                          </div>
-                          <ul class="navbar-nav flex-column mt-4">
-                                <li class="navbar-item"><a th:href="@{/operator/dashboard}" class="nav-link text-white px-2 py-2 mb-2 currents"><i class="fas fa-home fa-lg me-3"></i>Dashboard</a></li>
-                                <li class="navbar-item"><a th:href="@{/operator/menu}" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-utensils fa-lg me-3"></i>Menu</a></li>
-                                <li class="navbar-item"><a th:href="@{/operator/lunch_plan/by_month}" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Lunch Plan</a></li>
-                                <li class="navbar-item"><a th:href="@{/operator/report/yesterday}" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-money-check fa-lg me-3"></i>Report</a></li>
-                                <li class="navbar-item"><a th:href="@{/operator/account}" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fa-solid fa-clipboard-user fa-lg me-3"></i>Account Status</a></li>
-                                <li class="navbar-item"><a href="#" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fas fa-wrench fa-lg me-3"></i>About As</a></li>
-                                <li class="navbar-item"><a href="#" class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i class="fas fa-sign-out-alt fa-lg me-3"></i>Logout</a></li>
-                            </ul>
-                      </div>
-          
-                      <!-- End Left Sidebar --> 
-  
-                      <!-- Start Top Sidebar -->
-                      <div class="col-xl-12 col-lg-9 col-md-8 py-2 ms-auto fixed-top topnavbars">
-                          <div class="row d-flex align-items-center justify-content-between ">
-                              <div class="d-flex justify-content-between">
-                                  
-                                  
-                                  <nav class="navbar navbar-dark ">
-                                      <div class="container-fluid">
-                                        <button class="navbar-toggler buttons" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
-                                          <span class="navbar-toggler-icon"></span>
-                                        </button>
-                                      </div>
-                                  </nav>
-                              
-                                  <div class="navbar-brand text-light mx-3 ">
-                                    <img th:src="@{/images/datlogo.png}" width="60px" alt="favicon" />
-                                    <span class="text-uppercase pe-none mx-2 ">Catering Service</span>
-                                  </div>
-                                  
-                                  <div class=" d-flex align-items-center">
-                                      <a href="" class="nav-link fs-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-circle-question fa-lg me-1 qicons"></i>
-                                          <span class="me-2">Help</span>
-                                          </a>
-                                  </div>
-                              </div>
-  
-  
-                          </div>
-                      </div>
-                      <!-- End Top Sidebar -->
+	<header class="w-100 mt-0">
+		<!-- START BAVBAR -->
+		<nav class="navbar navbar-light">
 
-                       <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <div class="modal-dialog">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h5 class="modal-title">How can I help you?</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                  <div class="modal-body">
-                      <div></div>
-                        <section class="container my-5" id="maincontent">
-                          <section id="accordion">
-                            <a class="py-3 d-block h-100 w-100 position-relative z-index-1 pr-1 text-secondary border-top text-decoration-none" aria-controls="faq-17" aria-expanded="false" data-toggle="collapse" href="#faq-17" role="button">
-                              <div class="position-relative">
-                                <h2 class="h4 m-0 pr-3">
-                                  How Description Button works?
-                                </h2>
-                                <div class="position-absolute top-0 right-0 h-100 d-flex align-items-center">
-                                  <i class="fa fa-plus"></i>
-                                </div>
-                              </div>
-                            </a>
-                            <div class="collapse" id="faq-17">
-                              <div class="card card-body border-0 p-0">
-                                <p>Clicked or Tapped Description Button,dropdown list will be open and select avoid meat then click "Update" Button.</p>
-                      
-                              </div>
-                            </div>
-                      
-                            <a class="py-3 d-block h-100 w-100 position-relative z-index-1 pr-1 text-secondary border-top text-decoration-none" aria-controls="faq-17" aria-expanded="false" data-toggle="collapse" href="#faq-17" role="button">
-                              <div class="position-relative">
-                                <h2 class="h4 m-0 pr-3">
-                                  How Update Password Button works?
-                                </h2>
-                                <div class="position-absolute top-0 right-0 h-100 d-flex align-items-center">
-                                  <i class="fa fa-plus"></i>
-                                </div>
-                              </div>
-                            </a>
-                            <div class="collapse" id="faq-17">
-                              <div class="card card-body border-0 p-0">
-                                <p>We created Update Password Button for if u want to change your Password.Firstly type your old password in "Old Password" and then type your new password and re-type your new password.If new password and re-new password is not match u can't update.</p>
-                      
-                              </div>
-                            </div>
-                      
-                          
-                          </section>
-                        </section>
-                  </div>
-                  <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  </div>
-              </div>
-              </div>
-          </div>
-          <!-- End Modal -->
-  
-  
-                  </div>
-              </div>
-          </div>
-          
-      </nav>
-      <!-- END NAVBAR -->
-    </header>
+			<div id="mynavbar">
+				<div class="container-fluid">
+					<div class="row">
 
-  <div class="d-flex justify-content-center align-items-center flex-column pt-5 mt-5 ">
+						<!-- Start Left Sidebar -->
+						<div id="nav"
+							class="col-xl-2 col-lg-3 col-md-4 fixed-top collapse sidebars">
 
-    <!-- start title -->
-    <div class="row text-center my-1">
-      <div class="col">
-          <h3 class="titles text-dark">Account</h3>
-      </div>
-    </div>
-    <!-- end title -->
+							<div class="pb-3 mt-4 text-center borderbottoms">
+								<a href="" class="btn btn-outline-light rounded-circle mb-1"><i
+									class="fa-solid fa-user fs-3"></i></a> <a href="#"
+									class="text-white nav-link">Mr S</a>
+							</div>
+							<ul class="navbar-nav flex-column mt-4">
+								<li class="navbar-item"><a th:href="@{/operator/dashboard}"
+									class="nav-link text-white px-2 py-2 mb-2 currents"><i
+										class="fas fa-home fa-lg me-3"></i>Dashboard</a></li>
+								<li class="navbar-item"><a th:href="@{/operator/menu}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-utensils fa-lg me-3"></i>Menu</a></li>
+								<li class="navbar-item"><a
+									th:href="@{/operator/lunch_plan/by_month}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Lunch Plan</a></li>
+								<li class="navbar-item"><a
+									th:href="@{/operator/report/yesterday}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-money-check fa-lg me-3"></i>Report</a></li>
+								<li class="navbar-item"><a th:href="@{/operator/account}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-clipboard-user fa-lg me-3"></i>Account
+										Status</a></li>
+								<li class="navbar-item"><a href="#"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fas fa-wrench fa-lg me-3"></i>About As</a></li>
+								<li class="navbar-item"><a href="#"
+									onclick="event.preventDefault(); document.getElementById('logout_form').submit();"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"> <i
+										class="fas fa-sign-out-alt fa-lg me-3"></i>Logout
+								</a></li>
+							</ul>
+						</div>
 
-    <div class="card mt-2" style="width: 30%;">
-      <div class="card-header" >
-        
-        <div style="font-size: large;font-weight: 500;background:#14A44D;width: 100%;display: flex;align-items: center;justify-content: center;padding-top: 1%;">Account Status</div>
-        
-        <div style="display: flex;justify-content: start;flex-direction: column;align-items: center;">
-          <div style="width: 50%;">Name - Nyan Linn Soe</div>
-          <div style="width: 50%;">Staff ID - 100001</div>
-          <div style="width: 50%;">Division - DIV 1</div>
-          <div style="width: 50%;">Department - Department 17</div>
-          <div style="width: 50%;">Team - Bombs</div>
-            <button class="btn btn-primary text-light text-start buttons"  
-                data-bs-toggle="collapse" data-bs-target="#collapse1" 
-                 style="width: 50%;">
-                Description
-            </button>
-          
-          <div id="collapse1" class="collapse">
-            <div class="card-body" style="display: flex;justify-content: start;flex-direction: column;align-items: center;"> 
-              <div style="display: flex;justify-content: center;flex-direction: column;"> 
-                <ul style="color: red;">
-                    <li>Pork</li>
-                    <li>Beef</li>
-                    <li>Lamb</li>
-                </ul>
-                <div style="display: flex;justify-content: center;flex-direction: row;">
-                <form th:action="@{/account_status}" method="POST">
-					<div class="toggle">
-						<input type="hidden" id="myHiddenParam" name="myHiddenParam"
-							th:value="${status}" />
-						<button type="button" class="toggle-button"
-							onclick="myFunction()"></button>
+						<!-- End Left Sidebar -->
+
+						<!-- Start Top Sidebar -->
+						<div
+							class="col-xl-12 col-lg-9 col-md-8 py-2 ms-auto fixed-top topnavbars">
+							<div
+								class="row d-flex align-items-center justify-content-between ">
+								<div class="d-flex justify-content-between">
+
+
+									<nav class="navbar navbar-dark ">
+										<div class="container-fluid">
+											<button class="navbar-toggler buttons" type="button"
+												data-bs-toggle="collapse" data-bs-target="#nav"
+												aria-controls="nav" aria-expanded="false"
+												aria-label="Toggle navigation">
+												<span class="navbar-toggler-icon"></span>
+											</button>
+										</div>
+									</nav>
+
+									<div class="navbar-brand text-light mx-3 ">
+										<img th:src="@{/images/datlogo.png}" width="60px"
+											alt="favicon" /> <span class="text-uppercase pe-none mx-2 ">Catering
+											Service</span>
+									</div>
+
+									 <div class=" d-flex align-items-center">
+										<a class="nav-link fs-4" onclick="openModal()"><i
+											class="fa-solid fa-circle-question fa-lg me-3 qicons"></i><span
+											class="me-2">Help</span></a>
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+						<!-- End Top Sidebar -->
+
+
 					</div>
-					<div class="text">Get Notification OFF</div>
-					<input type="submit" />
-				</form>
-                    <button class="btn btn-primary text-light text-start buttons">Update</button>
-                </div>
-              </div>       
-          </div>
-          </div>
+				</div>
+			</div>
 
+		</nav>
+		<!-- END NAVBAR -->
+	</header>
 
-				<button class="btn btn-primary text-light text-start buttons"
-				style="width: 50%; margin-top: 1%;"
-				th:onclick="window.location.href='/update'">Update
-				Password</button>
+	<div
+		class="d-flex justify-content-between align-items-center flex-column pt-5 mt-5">
+
+		<div class="form-check form-switch align-self-end me-5">
+
+			<label class="form-check-label pt-1" for="flexSwitchCheckDefault"><i
+				class="fa-solid fa-bell fs-4 me-2"></i>Notifications</label> <input
+				class="form-check-input fs-4 ms-2 float-end" type="checkbox"
+				role="switch" th:checked="${noti}" id="toggle-switch">
 		</div>
-      </div>
-     </div>
-  </div>
-  		
-	
-  <!-- END BODY CARD -->
-  <script th:src="@{/js/toggle.js}"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-  <script src="https://kit.fontawesome.com/e0faeaf50f.js" crossorigin="anonymous" ></script>
-  <!-- bootstrap css1 js1 -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" type="text/javascript" ></script>
-  
+		<!-- start title -->
+		<div class="row text-center my-1">
+			<div class="col">
+				<h3 class="titles text-dark">Account</h3>
+			</div>
+		</div>
+		<!-- end title -->
+
+		<div class="card mt-2" style="width: 30%;">
+			<div class="card-header">
+
+				<div
+					style="font-size: large; font-weight: 500; background: #14A44D; width: 100%; display: flex; align-items: center; justify-content: center; padding-top: 1%;">Account
+					Status</div>
+
+				<div
+					style="display: flex; justify-content: start; flex-direction: column; align-items: center;">
+					<div style="width: 50%;">Name - Nyan Linn Soe</div>
+					<div style="width: 50%;">Staff ID - 100001</div>
+					<div style="width: 50%;">Division - DIV 1</div>
+					<div style="width: 50%;">Department - Department 17</div>
+					<div style="width: 50%;">Team - Bombs</div>
+					<button class="btn btn-primary text-light text-start buttons"
+						data-bs-toggle="collapse" data-bs-target="#collapse1"
+						style="width: 50%;">Description</button>
+
+					<div id="collapse1" class="collapse">
+						<div class="card-body"
+							style="display: flex; justify-content: start; flex-direction: column; align-items: center;">
+							<div
+								style="display: flex; justify-content: center; flex-direction: column;">
+
+								<ul class="">
+								    <li th:each="description : ${descriptionLists}" th:text="${description}"></li>
+								 </ul>
+								 
+								<div
+									style="display: flex; justify-content: center; flex-direction: row;">
+									<button class="btn btn-primary text-light text-start buttons"
+										data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<button class="btn btn-primary text-light text-start buttons"
+						style="width: 50%; margin-top: 1%;"
+						th:onclick="window.location.href='/operator/update'">Update
+						Password</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Avoid Meat
+						Lists</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form class="text-center">
+						<label for="datalist">Meats :</label> <input type="text"
+							list="options" id="datalist">
+						<datalist id="options">
+							<option value="Pork">
+							<option value="Beef">
+							<option value="Lamb">
+						</datalist>
+						<button type="button" onclick="displayData()">
+							<i class="fa-solid fa-check"></i>
+						</button>
+					</form>
+
+					<br>
+					<div id="display" class="text-center"></div>
+				</div>
+				<form th:action="@{/operator/save_avoidMeats}"
+					 method="POST" class="modal-footer">
+					<input id="selectedMeats" type="hidden" name="selectedMeats"
+						value="" />
+
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-secondary"
+						data-bs-dismiss="modal">Save Changes</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--End Modal -->
+
+
+	<!-- Logout Form -->
+	<form th:action="@{/logout}" id="logout_form" method="POST">
+		<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+	</form>
+
+
+	<script th:inline="javascript">
+		var array = /*[[${json}]]*/'';
+		var arr = JSON.parse(array);
+		var element;
+		for(var i=0;i < arr.length;i++){
+			if(arr[i] == "1"){
+				document.getElementById('toggle-switch').checked = true;
+			}
+		}
+	</script>
+
+	<!-- END BODY CARD -->
+	
+	<script th:src="@{/js/dataList.js}"></script>
+	<script th:src="@{/js/toggle.js}"></script>
+	
+	<script th:src="@{/js/modalHelpOperator.js}"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	 
+	<script src="https://kit.fontawesome.com/e0faeaf50f.js" crossorigin="anonymous"></script>
+	
+	<!-- bootstrap css1 js1 -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+
 </body>
 </html>

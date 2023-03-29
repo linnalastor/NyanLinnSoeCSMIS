@@ -124,8 +124,14 @@ public void StaffDetailsDTO(String id,String passwords, String description, Stri
 		this.description = description;
 	}
 
+	public String getEmail_status() {
+		return email_status;
+	}
 
 
+	public void setEmail_status(String email_status) {
+		this.email_status = email_status;
+	}
 
 
 	public String getCreated_by() {

@@ -15,6 +15,8 @@ public interface StaffDetailsServiceInterface {
 	
 	public StaffDetails getByID(String id);
 	public void save(StaffDetails staffDetails);
+	public StaffDetails getStaffDetailByID(String id);
+	public List<StaffDetails> findByEmailStatus();
 
 
 

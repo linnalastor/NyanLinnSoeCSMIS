@@ -76,7 +76,7 @@ public class Admin_Register_Controller {
 
 
 		// for mordel addAttribute
-		String month_year = op.get_Month_Year_Monthly();
+		String month_year = op.get_Month_Year_Monthly(1);
 		String year = month_year.substring(3);
 
 		// get confirmation of user updated dates
@@ -86,7 +86,7 @@ public class Admin_Register_Controller {
 				String[] holidays = { "05", "26" };
 
 				// set staff already selected not registered dates into selection
-				list = op.getMonthlyNotRegisteredDate(op.get_Month_Year_Monthly());
+				list = op.getMonthlyNotRegisteredDate(op.get_Month_Year_Monthly(1));
 				try {
 					// add selected dates into json file
 					json = objectMapper.writeValueAsString(list);
