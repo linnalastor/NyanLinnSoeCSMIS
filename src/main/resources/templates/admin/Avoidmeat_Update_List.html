@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login Form</title>
+    <title>Add AvoideMeat Form</title>
     <!-- fav icon -->
     <link href="../img/datlogo.png" rel="icon" type="image/png" sizes="18*18" />
 
@@ -90,21 +90,21 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <h1 class="card-title">Update InvoiceCashier Form</h1>
+                        <h1 class="card-title">Update AvoidMeat Form</h1>
                     </div>
                     <div class="card-body">
-                       <form th:action="@{/admin/saveInvoiceCashier}"
-			  th:object="${invoiceCashier}" method="POST">
+                       <form th:action="@{/admin/saveAvoidmeat}"
+			  th:object="${avoidmeat}" method="POST">
 		
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control" th:value="${name}" th:field="*{name}" id="name" placeholder="Enter Name" required>
+                                <input type="text" class="form-control" th:value="${name}" th:field="*{name}"  id="name" placeholder="Enter avoidMeat" >
                                 
                             </div>
                        
 
                             <div class="d-flex row justify-content-between">
-                                <button type="button" onclick="window.location.href='/admin/show_invoiceCashier'"
+                                <button type="button" onclick="window.location.href='/admin/show_avoidmeat'"
                                 class="btn btn-danger btn-block col-4">Cancel</button>
 							 
                                 <button type="submit"

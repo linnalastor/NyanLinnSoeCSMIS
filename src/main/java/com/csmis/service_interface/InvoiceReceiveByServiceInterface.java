@@ -10,5 +10,7 @@ public void saveInvoiceReceiveBys(List<InvoiceReceiveBy> invoiceReceiveBys);
 public List<InvoiceReceiveBy> findAll();
 
 public void save(InvoiceReceiveBy theinvoiceReceiveBy);
+public InvoiceReceiveBy findByName(String name);
+public void delete(InvoiceReceiveBy invoiceReceiveBy);
 
 }

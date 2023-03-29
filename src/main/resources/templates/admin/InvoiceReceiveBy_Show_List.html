@@ -207,12 +207,9 @@
                    
                     <td th:text="${invoiceReceiveBy.name}"></td>
                     
-                    <td>	<a th:href="@{/admin/InvoiceReceiveByFormForUpdate(invoiceReceiveBy_file=${invoiceReceiveBy.name})}"
-							   class="btn btn-primary btn-sm">
-								Update
-							</a>
-						
-							
+                    <td>	<a
+								th:href="@{/admin/invoiceReceiveByRemove(invoiceReceiveBy=${invoiceReceiveBy.name})}"
+								class="btn btn-primary btn-sm"> Remove </a>
 							</td>
                 </tr>
                        </tbody>

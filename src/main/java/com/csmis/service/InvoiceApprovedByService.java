@@ -55,4 +55,11 @@ public class InvoiceApprovedByService implements InvoiceApprovedByServiceInterfa
 		invoiceApprovedByRepository.save(theinvoiceApprovedBy);
 	}
 
+	@Override
+	public void delete(InvoiceApprovedBy invoiceApprovedBy) {
+
+		invoiceApprovedByRepository.delete(invoiceApprovedBy);	
+		
+	}
+
 }

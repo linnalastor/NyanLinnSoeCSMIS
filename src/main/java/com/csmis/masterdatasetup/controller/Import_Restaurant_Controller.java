@@ -110,8 +110,14 @@ public class Import_Restaurant_Controller {
 
 	@PostMapping("/saveRestaurant")
 	public String saveCost(@ModelAttribute("restaurant") Restaurant theRestaurant,Model theModel) {
+		
 		restaurantService.save(theRestaurant);
-		return "/admin/Restaurant_Show_List";  
+	
+			List<Restaurant> restaurant =restaurantService.findAll();
+			theModel.addAttribute("restaurant", restaurant);
+			theModel.addAttribute("status", true); 
+		   
+		 	 return "/admin/Restaurant_Show_List";  
 	}
 		
 	

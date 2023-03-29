@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.csmis.entity.InvoiceCashier;
 import com.csmis.entity.InvoiceReceiveBy;
+import com.csmis.entity.Restaurant;
 import com.csmis.service_interface.InvoiceReceiveByServiceInterface;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -107,6 +108,12 @@ public class Import_InvoiceReceiveBy_Controller {
 		   
         return "/admin/InvoiceReceiveBy_Show_List";
 	}
-
+	@GetMapping("/invoiceReceiveByRemove")
+	public String removeInvoiceReceiveBy(@ModelAttribute("invoiceReceiveBy") String name) {
+		InvoiceReceiveBy invoiceReceiveBy = invoiceReceiveByService.findByName(name);
+		System.out.println(invoiceReceiveBy.getName());
+		invoiceReceiveByService.delete(invoiceReceiveBy);
+		return "redirect:/admin/show_invoiceReceiveBy";
+	}
 	
 }

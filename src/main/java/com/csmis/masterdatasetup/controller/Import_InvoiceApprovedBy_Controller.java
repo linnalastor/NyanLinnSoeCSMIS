@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.csmis.entity.Cost;
 import com.csmis.entity.InvoiceApprovedBy;
+import com.csmis.entity.Restaurant;
 import com.csmis.service_interface.InvoiceApprovedByServiceInterface;
 import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 import com.opencsv.bean.CsvToBean;
@@ -81,7 +82,7 @@ public class Import_InvoiceApprovedBy_Controller {
 	                  
 	                  
 	            }
-		 	 return "/admin/InvoiceApprovedBy_Update_List";  
+		 	 return "/admin/InvoiceApprovedBy_Show_List";  
 	}
 
 	@GetMapping("/InvoiceApprovedByFormForUpdate")
@@ -119,5 +120,12 @@ public class Import_InvoiceApprovedBy_Controller {
 		theModel.addAttribute("invoiceApprovedBy", invoiceApprovedBy);
 		
 		return "/admin/InvoiceApprovedBy_Update_List";
+	}
+	@GetMapping("/invoiceApprovedByRemove")
+	public String removeInvoiceApprovedBy(@ModelAttribute("invoiceApprovedBy") String name) {
+		InvoiceApprovedBy invoiceApprovedBy = invoiceApprovedByService.findByName(name);
+		System.out.println(invoiceApprovedBy.getName());
+		invoiceApprovedByService.delete(invoiceApprovedBy);
+		return "redirect:/admin/show_invoiceApprovedBy";
 	}
 }

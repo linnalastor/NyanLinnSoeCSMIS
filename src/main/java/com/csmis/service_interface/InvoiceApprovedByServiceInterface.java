@@ -13,5 +13,6 @@ public interface InvoiceApprovedByServiceInterface {
 	public InvoiceApprovedBy findByName(String name);
 
 	public void save(InvoiceApprovedBy theinvoiceApprovedBy);
+	public void delete(InvoiceApprovedBy invoiceApprovedBy);
 
 }

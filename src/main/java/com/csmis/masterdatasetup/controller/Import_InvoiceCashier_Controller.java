@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.csmis.entity.InvoiceApprovedBy;
 import com.csmis.entity.InvoiceCashier;
+import com.csmis.entity.Restaurant;
 import com.csmis.service_interface.InvoiceCashierServiceInterface;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -107,5 +108,11 @@ public class Import_InvoiceCashier_Controller {
 		   
         return "/admin/InvoiceCashier_Show_List";
 	}
-	
+	@GetMapping("/invoiceCashierRemove")
+	public String removeInvoiceCashier(@ModelAttribute("invoiceCashier") String name) {
+		InvoiceCashier invoiceCashier = invoiceCashierService.findByName(name);
+		System.out.println(invoiceCashier.getName());
+		invoiceCashierService.delete(invoiceCashier);
+		return "redirect:/admin/show_invoiceCashier";
+	}
 }

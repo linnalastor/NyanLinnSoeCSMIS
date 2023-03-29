@@ -212,8 +212,8 @@
 								<td th:text="${invoiceApprovedBy.name}"></td>
 
 								<td><a
-									th:href="@{/admin/InvoiceApprovedByFormForUpdate(invoiceApprovedBy_file=${invoiceApprovedBy.name})}"
-									class="btn btn-primary btn-sm"> Update </a></td>
+								th:href="@{/admin/invoiceApprovedByRemove(invoiceApprovedBy=${invoiceApprovedBy.name})}"
+								class="btn btn-primary btn-sm"> Remove </a></td>
 							</tr>
 						</tbody>
 					</table>

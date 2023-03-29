@@ -153,7 +153,7 @@
     <!-- start title -->
     <div class="row text-center mt-5 mb-3">
       <div class="col">
-          <h3 class="titles text-dark">InvoiceCashier Show List</h3>
+          <h3 class="titles text-dark">Paymentmethod Show List</h3>
       </div>
     </div>
     <!-- end title -->
@@ -163,11 +163,11 @@
 
 			
 
-			<form method="POST" th:action="@{/admin/import_invoiceCashier}"
+			<form method="POST" th:action="@{/admin/import_paymentmethod}"
 									enctype="multipart/form-data">
 
-<label for="invoiceCashier_file"><b>Import InvoiceCashier CSV</b></label>
-<input type="file" name="invoiceCashier_file" id="invoiceCashier_file" accept=".csv"><button type="submit" class="btn btn-success"
+<label for="paymentmethod_file"><b>Import Paymentmethod CSV</b></label>
+<input type="file" name="paymentmethod_file" id="paymentmethod_file" accept=".csv"><button type="submit" class="btn btn-success"
 									>Import</button>
 				
 			</form>
@@ -183,17 +183,17 @@
 <div class="container ">
 		<div class="row  col-8 d-flex justify-content-center">
 				<div class="col-3  mt-3  m-0 p-0">
-	<a th:href="@{/admin/InvoiceCashierByFormAdd}"
+	<a th:href="@{/admin/PaymentmethodFormAdd}"
 			  class="btn btn-success btn-sm">
-			Add InvoiceCashier
+			Add paymentmethod
 		</a>
             </div>
             </div>
             
 			<div class=" mx-auto w-75">
-          <form method="POST" th:action="@{/admin/import_invoiceCashier}"
+          <form method="POST" th:action="@{/admin/import_paymentmethod}"
 									enctype="multipart/form-data">
-    <table id="dataTable" align="center" class="mt-1 w-75table table-striped" th:if="${status}">
+    <table  align="center" class="mt-1 w-75table table-striped" th:if="${status}">
         <thead>
           <tr class="fw-bolder">
             <th>SR</th>
@@ -203,13 +203,13 @@
           </tr>
         </thead>
        <tbody>
-           <tr th:each="invoiceCashier, i : ${invoiceCashier}">
+           <tr th:each="paymentmethod, i : ${paymentmethod}">
                     <td th:text="${i.count}"></td>
                    
-                    <td th:text="${invoiceCashier.name}"></td>
+                    <td th:text="${paymentmethod.name}"></td>
                     
                     <td><a
-								th:href="@{/admin/invoiceCashierRemove(invoiceCashier=${invoiceCashier.name})}"
+								th:href="@{/admin/paymentmethodRemove(paymentmethod=${paymentmethod.name})}"
 								class="btn btn-primary btn-sm"> Remove </a>
 							</td>
                 </tr>

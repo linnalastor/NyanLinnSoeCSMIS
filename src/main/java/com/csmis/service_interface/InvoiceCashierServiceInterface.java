@@ -12,6 +12,10 @@ public interface InvoiceCashierServiceInterface {
 	public List<InvoiceCashier> findAll();
 
 	public void save(InvoiceCashier theinvoiceCashier);
+
+	public InvoiceCashier findByName(String name);
+
+	public void delete(InvoiceCashier invoiceCashier);
 	 
 
     
