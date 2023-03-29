@@ -1,5 +1,6 @@
 package com.csmis.controller;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -59,17 +60,42 @@ public class InvoiceController {
 	public String DailyInvoice(Model model) {
 
 		LocalDate date = LocalDate.now();
+		LocalDate firstDate = LocalDate.now();
+		LocalDate startDate = null;
+		LocalDate endDate = null;
 
 		List<InvoiceCashier> cashier = cashierSerivice.findAll();
 		List<InvoiceReceiveBy> received = receivedService.findAll();
 		List<InvoiceApprovedBy> approve = approvedByServie.findAll();
 		List<Restaurant> resturant = resturantService.findAll();
 
-		String tempLatestDate = paidVoucherServiceInterface.getLastDate();
-		String latestDate = tempLatestDate.substring(tempLatestDate.length() - 8);
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-		LocalDate startDate = LocalDate.parse(latestDate, formatter).plusDays(3);
-		LocalDate endDate = startDate.plusDays(4);
+		String tempLatestDate = null;
+		try {
+			tempLatestDate = paidVoucherServiceInterface.getLastDate();
+			String latestDate = tempLatestDate.substring(tempLatestDate.length() - 8);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+			startDate = LocalDate.parse(latestDate, formatter).plusDays(3);
+			endDate = startDate.plusDays(4);
+		} catch (Exception e) {
+		}
+		if( tempLatestDate == null) {
+			firstDate=dailyInvoiceService.getFirstDate();
+		}
+		
+		if(firstDate.getDayOfWeek().getValue()<DayOfWeek.FRIDAY.getValue()) {
+			while(firstDate.getDayOfWeek()!=DayOfWeek.MONDAY) {
+				firstDate = firstDate.minusDays(1);
+				System.out.println(firstDate.getDayOfWeek());
+			}
+		}else{
+			while(firstDate.getDayOfWeek()!=DayOfWeek.MONDAY) {
+				firstDate = firstDate.plusDays(1);
+			}
+		}
+		startDate=firstDate;
+		endDate=startDate.plusDays(4);
+		
+
 //		boolean isFirstTime = true;
 		int Ctotal = 0;
 		int Stotal = 0;

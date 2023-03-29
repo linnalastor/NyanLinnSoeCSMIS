@@ -222,11 +222,8 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 	// Weekly Date Real Page
 	public List<String> getWeeklyDate() {
 		ZoneId zone = ZoneId.systemDefault();
-//		LocalDate day = LocalDate.now(zone);
 		LocalDate today = LocalDate.now(zone);
 
-//		LocalDate today = day.withDayOfMonth(1).plusMonths(2);
-//		today=today.plusDays(25);
 
 		List<String> days = new ArrayList<>();
 		Integer temp;
@@ -244,9 +241,7 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 				if (days.get(i).length() < 2)
 					days.set(i, "0" + days.get(i));
 			}
-
 		}
-
 		return days;
 	}
 
@@ -301,7 +296,7 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 	}
 
 	// Get/Set value from/to database
-	public List<String> getWeeklyConfirmDate(String id) {
+	public List<String> getWeeklyConfirmDate(String id,int count) {
 		ConsumerList consumerList = new ConsumerList();
 		String confirmation = null;
 		try {
@@ -309,12 +304,16 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 			confirmation = consumerList.getConfirmation();
 		} catch (Exception exception) {
 		}
+		System.out.println(confirmation);
 
 		boolean isweekend;
 		ZoneId zone = ZoneId.systemDefault();
-		LocalDate today = LocalDate.now(zone);
+		LocalDate today = LocalDate.now(zone).plusMonths(count);
 		LocalDate day = today.withDayOfMonth(1);
 		List<String> days = new ArrayList<>();
+
+		System.out.println("Week day value"+day);
+		System.out.println("Week day value"+today);
 		Integer temp;
 		String strTemp;
 
@@ -322,6 +321,7 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 			isweekend = false;
 			if (day.getDayOfWeek() == DayOfWeek.SATURDAY || day.getDayOfWeek() == DayOfWeek.SUNDAY)
 				isweekend = true;
+			
 			if (!isweekend) {
 				temp = day.getDayOfMonth();
 				strTemp = Integer.toString(temp);
@@ -344,11 +344,10 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 		return retuenList;
 	}
 
-	public String get_Month_Year_Weekly() {
+	public String get_Month_Year_Weekly(int count) {
 		ZoneId zone = ZoneId.systemDefault();
 		LocalDate today = LocalDate.now(zone);
-//		Integer month_value = today.getMonthValue()+2;
-		Integer month_value = today.getMonthValue();
+		Integer month_value = today.getMonthValue()+count;
 		String month = month_value.toString();
 		if (month.length() < 2)
 			month = "0" + month;
@@ -356,11 +355,10 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 		return s;
 	}
 
-	public String get_Month_Year_Monthly() {
+	public String get_Month_Year_Monthly(int count) {
 		ZoneId zone = ZoneId.systemDefault();
 		LocalDate today = LocalDate.now(zone);
-//		Integer month_value = today.getMonthValue() + 3;
-		Integer month_value = today.getMonthValue() + 1;
+		Integer month_value = today.getMonthValue() + count;
 		if (month_value > 12) {
 			today.plusYears(1);
 			month_value = 1;

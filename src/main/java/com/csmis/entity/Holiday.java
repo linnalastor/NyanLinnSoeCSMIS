@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 @Entity
@@ -19,7 +21,7 @@ import java.text.SimpleDateFormat;
 public class Holiday {
 	@Id
 	@Column(name="date")
-	private Date date;
+	private LocalDate date;
 
 	@Column(name="description")
 	private String description;
@@ -30,36 +32,27 @@ public class Holiday {
 
 	public void HolidayDTO(String sdate, String description)throws ParseException {
 		
-		String[] formats = {"d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy", "dd/MM/yyyy"};
-		Date date = null;
-		for (String format : formats) {
-            SimpleDateFormat sdf = new SimpleDateFormat(format);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             try {
-                date = sdf.parse(sdate);
-        	    System.out.println("here");
-                break;
-            } catch (ParseException e) {
-            }if (date != null) {
-                System.out.println(date);
-            } else {
-                System.err.println("Error parsing date string: " + sdate);
+            	this.date = LocalDate.parse(sdate,formatter);
+            } catch (Exception e) {
+            	formatter = DateTimeFormatter.ofPattern("dd-MM-yy");
+            	this.date = LocalDate.parse(sdate,formatter);
             }
-        }
-		this.date = date;
 		this.description = description;
 	}
 
-	public Holiday(Date date, String description) {
+	public Holiday(LocalDate date, String description) {
 		super();
 		this.date = date;
 		this.description = description;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 

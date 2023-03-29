@@ -14,5 +14,6 @@ public interface RestaurantServiceInterface {
 	public Restaurant findByName(String name);
 
 	public void save(Restaurant theRestaurant);
+	public void delete(Restaurant restaurant);
 
 }

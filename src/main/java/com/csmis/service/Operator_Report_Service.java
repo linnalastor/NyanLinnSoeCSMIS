@@ -10,9 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.csmis.dao.ConsumerListRepository;
 import com.csmis.dao.LunchReportRepository;
-import com.csmis.entity.ConsumerList;
 import com.csmis.entity.Lunch_Report;
 import com.csmis.service_interface.OperatorRegisterServiceInterface;
 import com.csmis.service_interface.OperatorReportServiceInterface;
@@ -64,10 +62,12 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 	public List<String> get_Monthly_Dates(int count) {
 		ZoneId zone = ZoneId.systemDefault();
 		LocalDate today = LocalDate.now(zone);
+		
+		Integer temp;
 
 		LocalDate day = today.withDayOfMonth(1).minusMonths(count);
+		
 		List<String> days = new ArrayList<>();
-		Integer temp;
 
 		// input first week of the month
 		if (day.getDayOfWeek() == DayOfWeek.SATURDAY || day.getDayOfWeek() == DayOfWeek.SUNDAY)
@@ -160,39 +160,36 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 	}
 
 	//get picked days by user report
-	public List<String> getPickedDays(String report) {
+	public List<String> getPickedDays(String report,int count) {
 
 		List<String> days = new ArrayList<>();
 
 		// get dates of last month
-		List<String> monthly_dates = get_Monthly_Dates(1);
+		List<String> monthly_dates = get_Monthly_Dates(count);
 		// remove '00' from monthly_dates
 		monthly_dates = removeExtraStringInList(monthly_dates);
 
 		// get picked dates which is '1' in report
 		for (int i = 0; i < monthly_dates.size(); i++) {
-			try {
 				if (report.charAt(i) == '1')
 					days.add(monthly_dates.get(i));
-			} catch (Exception e) {
-				break;
-			}
 		}
 		return days;
 	}
 
 	//get not picked days by user report
-	public List<String> getNotPickedDays(String report, String confirmation) {
+	public List<String> getNotPickedDays(String report, String confirmation,int count) {
 
 		List<String> days = new ArrayList<>();
 
 		// get dates of last month
-		List<String> monthly_dates = get_Monthly_Dates(1);
+		List<String> monthly_dates = get_Monthly_Dates(count);
 		// remove '00' from monthly_dates
 		monthly_dates = removeExtraStringInList(monthly_dates);
 
 		// get not picked dates which is 'x' in report
 		for (int i = 0; i < report.length(); i++) {
+			if(confirmation.charAt(i)=='1')
 				if (report.charAt(i) == 'x')
 					days.add(monthly_dates.get(i));
 		}
@@ -200,12 +197,12 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 	}
 
 	//get not registered picked days by user report
-	public List<String> getPickedUpWithoutRegisteredDays(String report) {
+	public List<String> getPickedUpWithoutRegisteredDays(String report,int count) {
 
 		List<String> days = new ArrayList<>();
 
 		// get dates of last month
-		List<String> monthly_dates = get_Monthly_Dates(1);
+		List<String> monthly_dates = get_Monthly_Dates(count);
 		// remove '00' from monthly_dates
 		monthly_dates = removeExtraStringInList(monthly_dates);
 

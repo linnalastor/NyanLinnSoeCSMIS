@@ -36,6 +36,13 @@ public class InvoiceService implements InvoiceServiceInterface {
 	public void save(DailyInvoice dailyInvoice) {
 		invoiceRepository.save(dailyInvoice);
 	}
+	
+	@Override
+	public LocalDate getFirstDate() {
+		return invoiceRepository.getFirstDate();
+		
+	}
+	
 
 	
 

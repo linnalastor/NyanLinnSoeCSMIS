@@ -14,9 +14,6 @@ public class DailyInvoice {
 		@Column(name="date")
 		private LocalDate date;
 		
-		@Column(name="cartering_service_name")
-		private String catheringServiceName;
-		
 		@Column(name="register_head_count")
 		private int registerHeadCount;
 		
@@ -31,32 +28,20 @@ public class DailyInvoice {
 		@Column(name="company_cost")
 		private int companyCost;
 		
-		@Column(name="amount")
-		private int amount;
-		
-		public int getAmount() {
-			return amount;
-		}
-
-		public void setAmount(int amount) {
-			this.amount = amount;
-		}
 
 		public DailyInvoice() {
 			
 		}
 		
 		
-		public DailyInvoice(LocalDate date, String catheringServiceName, int registerHeadCount, int actualHeadCount,
-				int staffCost, int companyCost, int amount) {
+		public DailyInvoice(LocalDate date, int registerHeadCount, int actualHeadCount,
+				int staffCost, int companyCost) {
 			super();
 			this.date = date;
-			this.catheringServiceName = catheringServiceName;
 			this.registerHeadCount = registerHeadCount;
 			this.actualHeadCount = actualHeadCount;
 			this.staffCost = staffCost;
 			this.companyCost = companyCost;
-			this.amount = amount;
 		}
 
 		public int getStaffCost() {
@@ -80,12 +65,6 @@ public class DailyInvoice {
 		}
 		public void setDate(LocalDate date) {
 			this.date = date;
-		}
-		public String getCatheringServiceName() {
-			return catheringServiceName;
-		}
-		public void setCatheringServiceName(String catheringServiceName) {
-			this.catheringServiceName = catheringServiceName;
 		}
 		public int getRegisterHeadCount() {
 			return registerHeadCount;

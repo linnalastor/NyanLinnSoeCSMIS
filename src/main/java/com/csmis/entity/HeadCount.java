@@ -27,7 +27,7 @@ public class HeadCount {
 	private int not_picked_head_count;
 
 	@Column(name="updated_by")
-	private int updated_by;
+	private String updated_by;
 
 	public HeadCount() {
 		super();
@@ -35,7 +35,7 @@ public class HeadCount {
 	}
 
 	public HeadCount(LocalDate date, int actual_head_count, int registered_head_count, int not_registered_head_count,
-			int not_picked_head_count, int updated_by) {
+			int not_picked_head_count, String updated_by) {
 		super();
 		this.date = date;
 		this.actual_head_count = actual_head_count;
@@ -85,12 +85,12 @@ public class HeadCount {
 		this.not_picked_head_count = not_picked_head_count;
 	}
 
-	public int getUpdated_by() {
+	public String getUpdated_by() {
 		return updated_by;
 	}
 
-	public void setUpdated_by(int updated_by) {
+	public void setUpdated_by(String updated_by) {
 		this.updated_by = updated_by;
 	}
-
+	
 }

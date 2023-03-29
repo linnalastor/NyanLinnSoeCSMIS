@@ -9,5 +9,3 @@ import com.csmis.entity.Restaurant;
 public interface RestaurantRepository extends JpaRepository<Restaurant, String> {
 
 }
-
-

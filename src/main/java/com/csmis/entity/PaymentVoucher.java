@@ -49,7 +49,6 @@ public class PaymentVoucher {
 	@Column(name="amount")
 	private int amount;
 
-
 	@Column(name="payment_date")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate paymentDate;
@@ -65,9 +64,9 @@ public class PaymentVoucher {
 	}
 
 
-	public PaymentVoucher(String voucherNumber, String carteringServiceName, LocalDate invoiceStartDate, LocalDate invoiceEndDate,
-			String cashier, String receivedBy, String approvedBy, int numberOfPax, int price, int amount,
-			LocalDate paymentDate, String paymentMethod) {
+	public PaymentVoucher(String voucherNumber, String carteringServiceName, LocalDate invoiceStartDate,
+			LocalDate invoiceEndDate, String cashier, String receivedBy, String approvedBy, int numberOfPax, int price,
+			int amount, LocalDate paymentDate, String paymentMethod) {
 		super();
 		this.voucherNumber = voucherNumber;
 		this.carteringServiceName = carteringServiceName;
@@ -202,10 +201,5 @@ public class PaymentVoucher {
 	public void setPaymentMethod(String paymentMethod) {
 		this.paymentMethod = paymentMethod;
 	}
-	
 
-
-	
-	
-	
 }

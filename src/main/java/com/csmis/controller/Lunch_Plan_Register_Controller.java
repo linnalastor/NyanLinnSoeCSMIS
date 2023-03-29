@@ -1,5 +1,7 @@
 package com.csmis.controller;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +42,7 @@ public class Lunch_Plan_Register_Controller {
 		String[] holidays = { "05", "26" };
 
 		// for mordel addAttribute
-		String month_year = op.get_Month_Year_Monthly();
+		String month_year = op.get_Month_Year_Monthly(1);
 		String year = month_year.substring(3);
 
 		// set staff already selected dates into selection
@@ -74,7 +76,7 @@ public class Lunch_Plan_Register_Controller {
 		ConsumerList consumerList = new ConsumerList();
 
 		// for mordel addAttribute
-		String month_year = op.get_Month_Year_Monthly();
+		String month_year = op.get_Month_Year_Monthly(1);
 		String year = month_year.substring(3);
 
 		// get confirmation of user updated dates
@@ -82,14 +84,14 @@ public class Lunch_Plan_Register_Controller {
 
 		// set consumer and save
 		consumerList.setConfirmation(confirmation);
-		consumerList.setConsumer_information_id(op.get_Month_Year_Monthly() + "|" + auth.getName());
+		consumerList.setConsumer_information_id(op.get_Month_Year_Monthly(1) + "|" + auth.getName());
 		op.saveConsumerMonthlyRegistration(consumerList);
 
 		// for holiday
 		String[] holidays = { "05", "26" };
 
 		// set staff already selected not registered dates into selection
-		list = op.getMonthlyNotRegisteredDate(op.get_Month_Year_Monthly() + "|" + auth.getName());
+		list = op.getMonthlyNotRegisteredDate(op.get_Month_Year_Monthly(1) + "|" + auth.getName());
 		try {
 			// add selected dates into json file
 			json = objectMapper.writeValueAsString(list);
@@ -113,14 +115,29 @@ public class Lunch_Plan_Register_Controller {
 	@GetMapping("/lunch_plan/by_week")
 	public String ConsumerListWeekly(Model theModel, Authentication auth) {
 
+		LocalDate today= LocalDate.now();
+		Integer monthValue = today.getMonthValue()+1;
+		while(today.getDayOfWeek() != DayOfWeek.MONDAY) {
+			today = today.plusDays(1);
+		}
+		
+		int count=0;
+		boolean checker = false;
+		
+		if(today.getMonthValue()==monthValue) {
+			checker =true;
+			count = 1;
+		}
+		
 		String json = null;
 		String jsonHoliday = null;
 
 		// set holiday
 		String[] holidays = { "24", "23" };
+		String month_year = null;
 
 		// get string of month and year of this week
-		String month_year = op.get_Month_Year_Weekly();
+		month_year = op.get_Month_Year_Weekly(count);
 
 		// get this week days
 		List<String> dates = op.getWeeklyDate();
@@ -131,7 +148,7 @@ public class Lunch_Plan_Register_Controller {
 		String day_to_day = "( " + dates.get(0) + " - " + dates.get(dates.size() - 1) + " )";
 
 		// set confirmation of user into list
-		List<String> list = op.getWeeklyConfirmDate(month_year + "|" + auth.getName());
+		List<String> list = op.getWeeklyConfirmDate(month_year + "|" + auth.getName(),count);
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		try {
@@ -156,6 +173,12 @@ public class Lunch_Plan_Register_Controller {
 	public String weekly_register(@RequestParam(value = "listweeklydate", required = false) List<String> check_list,
 			Model theModel, Authentication auth) {
 
+		LocalDate today= LocalDate.now();
+		Integer monthValue = today.getMonthValue()+1;
+		while(today.getDayOfWeek() != DayOfWeek.MONDAY) {
+			today = today.plusDays(1);
+		}
+		
 		List<String> this_month = new ArrayList<>();
 		List<String> next_month = new ArrayList<>();
 		ConsumerList consumerList = new ConsumerList();
@@ -166,6 +189,9 @@ public class Lunch_Plan_Register_Controller {
 
 		// check if this week contain next month's days
 		boolean checker = false;
+		
+		if(today.getMonthValue()==monthValue) checker =true;
+			
 		while (i < list.size() - 1) {
 			if (Integer.parseInt(list.get(i)) > Integer.parseInt(list.get(++i))) {
 				checker = true;
@@ -181,7 +207,7 @@ public class Lunch_Plan_Register_Controller {
 		if (checker) {
 			while (i < check_list.size()) {
 				
-				if (Integer.parseInt(check_list.get(i)) < 5)
+				if (Integer.parseInt(check_list.get(i)) < 10)
 					next_month.add(check_list.get(i));
 				else
 					this_month.add(check_list.get(i));
@@ -189,15 +215,15 @@ public class Lunch_Plan_Register_Controller {
 			}
 
 			consumerList.setConfirmation(op.getWeeklConfirmation(this_month));
-			consumerList.setConsumer_information_id(op.get_Month_Year_Weekly() + "|" + auth.getName());
+			consumerList.setConsumer_information_id(op.get_Month_Year_Weekly(0) + "|" + auth.getName());
 			op.saveConsumerMonthlyRegistration(consumerList);
 
 			consumerList.setConfirmation(op.getMonthlyConfirmation(next_month));
-			consumerList.setConsumer_information_id(op.get_Month_Year_Monthly() + "|" + auth.getName());
+			consumerList.setConsumer_information_id(op.get_Month_Year_Monthly(1) + "|" + auth.getName());
 			op.saveConsumerMonthlyRegistration(consumerList);
 		} else {
 			consumerList.setConfirmation(op.getWeeklConfirmation(check_list));
-			consumerList.setConsumer_information_id(op.get_Month_Year_Weekly() + "|" + auth.getName());
+			consumerList.setConsumer_information_id(op.get_Month_Year_Weekly(0) + "|" + auth.getName());
 			op.saveConsumerMonthlyRegistration(consumerList);
 		}
 
@@ -209,7 +235,7 @@ public class Lunch_Plan_Register_Controller {
 		String[] holidays = { "24", "23" };
 
 		// get string of month and year of this week
-		String month_year = op.get_Month_Year_Weekly();
+		String month_year = op.get_Month_Year_Weekly(1);
 
 		// get this week days
 		List<String> dates = op.getWeeklyDate();
@@ -220,7 +246,7 @@ public class Lunch_Plan_Register_Controller {
 		String day_to_day = "( " + dates.get(0) + " - " + dates.get(dates.size() - 1) + " )";
 
 		// set confirmation of user into list
-		list = op.getWeeklyConfirmDate(month_year + "|" + auth.getName());
+		list = op.getWeeklyConfirmDate(month_year + "|" + auth.getName(),1);
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		try {

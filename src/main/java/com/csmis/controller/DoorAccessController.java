@@ -146,8 +146,8 @@ public class DoorAccessController {
 		headCount.setDate(date);
 		headCount.setActual_head_count(count);
 		headCount.setRegistered_head_count(CountList.get(0));
-		headCount.setNot_registered_head_count(CountList.get(1));
-		headCount.setNot_picked_head_count(CountList.get(2));
+		headCount.setNot_registered_head_count(CountList.get(2));
+		headCount.setNot_picked_head_count(CountList.get(1));
 		// save head counts
 		headCountService.save(headCount);
 

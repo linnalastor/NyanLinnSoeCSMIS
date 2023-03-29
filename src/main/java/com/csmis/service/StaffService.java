@@ -38,7 +38,6 @@ public class StaffService implements StaffServiceInterface{
 	
 	@Override
 	public void save(Staff thestaff) {
-		// TODO Auto-generated method stub
 		staffRepository.save(thestaff);
 	}
 

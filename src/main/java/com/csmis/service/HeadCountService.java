@@ -14,6 +14,12 @@ public class HeadCountService implements HeadCountServiceInterface {
 	
 	@Override
 	public void save(HeadCount headCount) {
+		System.out.println(headCount.getDate());
+		System.out.println(headCount.getActual_head_count());
+		System.out.println(headCount.getNot_picked_head_count());
+		System.out.println(headCount.getNot_registered_head_count());
+		System.out.println(headCount.getRegistered_head_count());
+		System.out.println(headCount.getDate());
 		headCountRepository.save(headCount);
 	}
 
