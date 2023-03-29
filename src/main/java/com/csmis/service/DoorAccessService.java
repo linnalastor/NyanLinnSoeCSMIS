@@ -169,7 +169,6 @@ public class DoorAccessService {
 		String prefix_id = "" + month + "/" + date.getYear() + "|";
 
 		int count = 0;
-		int NRCount = 0;
 
 		// get all lunch plan of this month
 		List<ConsumerList> lunchPlanList = operator_register_service.getAllLunchPlan_by_MonthYear(prefix_id);
@@ -182,22 +181,41 @@ public class DoorAccessService {
 		// add registered staff count to list
 		countList.add(count);
 
+		
 		count = 0;
-
 		// get all lunch report of this month
 		List<Lunch_Report> lunchReportList = operator_report_service.findAll_Monthly(prefix_id);
 
 		// get registered and not registered lunch picked count
 		for (Lunch_Report l : lunchReportList) {
-			if (l.getReport_status().charAt(index) == '1')
+			if (l.getReport_status().charAt(index) == 'n')
 				count++;
-			else if (l.getReport_status().charAt(index) == 'n')
-				NRCount++;
+		}
+		// add not registered lunch picked count to list
+		countList.add(count);
+		
+		count = 0;
+		for(int i=0;i<lunchPlanList.size();i++) {
+			boolean picked= false;
+			for(int j=0;j<lunchReportList.size();j++) {
+				String reportid = lunchReportList.get(j).getReport_id();
+				String report = lunchReportList.get(j).getReport_status();
+				String registerid = lunchPlanList.get(i).getConsumer_information_id();
+				String register = lunchPlanList.get(i).getConfirmation();
+				if(reportid.equals(registerid)) {
+					if(register.charAt(index)=='1') {
+						if(report.charAt(index)!='1') count++;
+						else picked=true;
+					}
+					lunchReportList.remove(j);
+					j--;
+				}
+			}
+			if(!picked) count++;
 			
 		}
-		// add registered and not registered lunch picked count to list
+		// add not picked lunch picked count to list
 		countList.add(count);
-		countList.add(NRCount);
 
 		return countList;
 	}

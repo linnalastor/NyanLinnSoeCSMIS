@@ -131,13 +131,54 @@
 	</header>
 
 	<div class="mt-5">
-		<form th:action="@{/admin/door_access/validation}" method="post" enctype="multipart/form-data">
+		<form th:action="@{/admin/door_access/validation}" method="post"
+			enctype="multipart/form-data">
 			<input class="mt-5" type="file" name="file"
-				id="invoiceReceiveBy_file" accept=".xlsx">
-				<label for="dateInput">Select a date:</label>
-    		<input type="date" name="date" id="dateInput" />
-			<button type="submit"> Import</button>
+				id="invoiceReceiveBy_file" accept=".xlsx" required> <label
+				for="dateInput">Select a date:</label> <input type="date"
+				name="date" id="dateInput" required />
+			<button type="submit">Import</button>
 		</form>
+	</div>
+
+	<div class="container py-5">
+		<div class="row">
+			<div class="col-10 mx-auto">
+
+				<!--display error if any-->
+				<div class="alert alert-danger" role="alert" th:if="${!status}">
+					<strong>Error:</strong> <span th:text="${message}"></span>
+				</div>
+				<table id="dataTable" align="center"
+					class=" w-75table table-striped" th:if="${status}">
+					<thead>
+						<tr class="fw-bolder">
+							<th>No.</th>
+							
+							<th>Date</th>
+							<th>Actual</th>
+							<th>Registered</th>
+							<th>Not Registered</th>
+							<th>Not Picked</th>
+
+							<th>Updated By</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="headCount, i : ${headCountList}">
+							<td th:text="${i.count}"></td>
+
+							<td th:text="${headCount.date}"></td>
+							<td th:text="${headCount.actual_head_count}"></td>
+							<td th:text="${headCount.registered_head_count}"></td>
+							<td th:text="${headCount.not_registered_head_count}"></td>
+							<td th:text="${headCount.not_picked_head_count}"></td>
+							<td/>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
 
 

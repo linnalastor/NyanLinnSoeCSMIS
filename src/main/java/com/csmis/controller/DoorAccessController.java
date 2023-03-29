@@ -51,7 +51,11 @@ public class DoorAccessController {
 	OperatorReportServiceInterface operatorReportService;
 
 	@GetMapping("/door_access")
-	public String door_access() {
+	public String door_access(Model model) {
+		List<HeadCount> headCount = headCountService.findAllDesc();
+		System.out.println(headCount);
+		model.addAttribute("headCountList",headCount);
+		model.addAttribute("status",true);
 		return "admin/door_access";
 	}
 
@@ -146,8 +150,8 @@ public class DoorAccessController {
 		headCount.setDate(date);
 		headCount.setActual_head_count(count);
 		headCount.setRegistered_head_count(CountList.get(0));
-		headCount.setNot_registered_head_count(CountList.get(2));
-		headCount.setNot_picked_head_count(CountList.get(1));
+		headCount.setNot_registered_head_count(CountList.get(1));
+		headCount.setNot_picked_head_count(CountList.get(2));
 		// save head counts
 		headCountService.save(headCount);
 
@@ -156,8 +160,8 @@ public class DoorAccessController {
 		dailyInvoice.setDate(date);
 		dailyInvoice.setRegisterHeadCount(CountList.get(0));
 		dailyInvoice.setActualHeadCount(count);
-		dailyInvoice.setStaffCost(cost_list.get(0).getCost());
-		dailyInvoice.setCompanyCost(cost_list.get(1).getCost());
+		dailyInvoice.setStaffCost(cost_list.get(1).getCost());
+		dailyInvoice.setCompanyCost(cost_list.get(0).getCost());
 		// save today invoice
 		invoiceService.save(dailyInvoice);
 

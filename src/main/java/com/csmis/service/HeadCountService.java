@@ -1,5 +1,7 @@
 package com.csmis.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,18 +16,17 @@ public class HeadCountService implements HeadCountServiceInterface {
 	
 	@Override
 	public void save(HeadCount headCount) {
-		System.out.println(headCount.getDate());
-		System.out.println(headCount.getActual_head_count());
-		System.out.println(headCount.getNot_picked_head_count());
-		System.out.println(headCount.getNot_registered_head_count());
-		System.out.println(headCount.getRegistered_head_count());
-		System.out.println(headCount.getDate());
 		headCountRepository.save(headCount);
 	}
 
 	@Override
 	public HeadCount find_by_id(String id) {
 		return headCountRepository.find_by_id(id);
+	}
+	
+	@Override
+	public List<HeadCount> findAllDesc() {
+		return headCountRepository.findAllDesc();
 	}
 
 }
