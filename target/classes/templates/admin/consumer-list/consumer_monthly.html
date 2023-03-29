@@ -42,8 +42,7 @@
 					<div class="row">
 
 						<!-- Start Left Sidebar -->
-						<div id="nav"
-							class="col-xl-2 col-lg-3 col-md-4 fixed-top collapse sidebars">
+						<div id="nav" class="col-xl-2 col-lg-3 col-md-4 collapse sidebars">
 
 							<div class="pb-3 pt-5 mt-5 text-center borderbottoms">
 								<a href="" class="btn btn-outline-light rounded-circle mb-1"><i
@@ -300,12 +299,12 @@
 
 		<div class="div2">
 			<div>
+				<div class="div4"
+					th:onclick="window.location.href='/admin/consumer_list/today'">Today</div>
+				<div class="div4"
+					th:onclick="window.location.href='/admin/consumer_list/by_week'">Weekly</div>
 				<div class="div3"
-					th:onclick="window.location.href='/adminconsumertoday'">Today</div>
-				<div class="div4"
-					th:onclick="window.location.href='/adminconsumerweekly'">Weekly</div>
-				<div class="div4"
-					th:onclick="window.location.href='/adminconsumermonthly'">Monthly</div>
+					th:onclick="window.location.href='/admin/consumer_list/by_month'">Monthly</div>
 				<div class="div4"
 					th:onclick="window.location.href='/adminconsumerbydays'">By
 					Days</div>
@@ -314,22 +313,21 @@
 		</div>
 		<!-- div2 close -->
 
-		<div
-			style="display: flex; justify-content: space-between; width: 90%;">
-			<span class="fs-5 text-uppercase showdates">March - 2023</span>
-			<div class="searchdiv">
-				<div></div>
-				<div style="display: flex; flex-direction: row;">
-					<input type="text" class="form-control text-muted me-2 searchnames"
-						placeholder="Search someone by id...">
-					<div class="div4 ms-2">Search</div>
-				</div>
-			</div>
+		<div class="col-lg-10 col-md-12 mb-2 d-flex justify-content-between">
+			<span class="fs-5 showdates"><span th:text="${month}"></span>
+			</span>
+			
+				<form action="/admin/consumer_list/by_month"  style="display: flex; flex-direction: row;">
+					<input type="text" name="search" class="form-control text-muted me-2 searchnames"
+						placeholder="Search .....">
+					<button type="submit" class="div4 ms-2">Search</button>
+				</form>
+			
 		</div>
 
 		<!-- Start consumer_monthly card -->
 
-		<div class=" lists">
+		<div class="col-lg-10 col-md-12 lists">
 			<div th:each="staff : ${staffList}">
 
 				<div class="card">
@@ -362,9 +360,9 @@
 										<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">T-</label></li>
 										<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">F-</label></li>
 										<li class="px-3 mb-3" th:each="list : ${list}"><label
-											class="px-2 mb-1"
-											style="background-color: green; border: 1px solid #000"
-											th:id="${list} + '-show'" th:text="${list}"
+											class="px-2 mb-1 "
+											style="background-color: green; border: 1px solid #000;"
+											th:id="${list}  + ${staff.id} + '-show'" th:text="${list}"
 											th:attr="data-bs-target='#' + ${list}"></label></li>
 									</ul>
 								</div>
@@ -391,38 +389,42 @@
 				aria-labelledby="staticBackdropLabel" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered">
 
-					<form th:action="@{/monthly_register }" class="modal-content">
-
+					<form th:action="@{monthly_register }" class="modal-content">
+						<input type="hidden" name="staffId" th:value="${staff.id}" />
 						<div class="modal-body">
 							<div style="width: 100%; display: flex; justify-content: center;"
 								class="mb-5">
 								<div
 									style="width: 100%; background-color: lightblue; display: flex; flex-direction: column; align-items: center; border-radius: 25px; padding-bottom: 1%;">
 									<div
-										style="font-size: large; font-weight: 500; background: #14A44D; width: 100%; display: flex; align-items: center; justify-content: center; border-top-right-radius: 25px; border-top-left-radius: 25px; padding-top: 1%;">Account
-										Status</div>
+										style="font-size: large; font-weight: 500; background: #14A44D; width: 100%; display: flex; align-items: center; justify-content: center; border-top-right-radius: 25px; border-top-left-radius: 25px; padding-top: 1%; padding-bottom: 1%;">
+										Lunch Plan Register Monthly</div>
 									<div class="mb-3 text-center">
 
-										<div th:text="${staff.name}"></div>
-										<div th:text="${staff.id}"></div>
-										<div th:text="${staff.division}"></div>
-										<div th:text="${staff.department}"></div>
-										<div th:text="${staff.team}"></div>
+										<div class="py-2" th:text="'Staff Name : '+${staff.name}"></div>
+										<div class="pb-2" th:text="'Staff Id : '+${staff.id}"></div>
+										<div class="pb-2"
+											th:text="'Staff Division : '+${staff.division}"></div>
+										<div class="pb-2"
+											th:text="'Staff Department : '+${staff.department}"></div>
+										<div th:text="'Staff Team : '+${staff.team}"></div>
 
 										<div
 											style="margin-top: 5%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
 
 											<ul class="d-flex jsutify-content:center flex-wrap"
-												style="width: 80%">
-												<li class="px-2 mb-3"><label class="px-2 mb-1 dayLabel">M-</label></li>
+												style="width: 85%">
+												<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">M-</label></li>
 												<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">T-</label></li>
 												<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">W-</label></li>
 												<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">T-</label></li>
 												<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">F-</label></li>
-												<li class="px-3 mb-3" th:each="list : ${list}"><input
-													type="checkbox" th:class="${list} + 'checkbox' "
-													th:id="${list}" name="list" th:value="${list}" /> <label
-													th:for="${list}" th:class="${list}" th:text="${list}"></label>
+												<li class="px-3 mb-3" th:each="list : ${list}">
+													<input type="checkbox" th:class="${list} + ${staff.id} + 'checkbox' "
+														th:id="${list} + ${staff.id}" name="list" th:value="${list}" /> 
+													<label th:for="${list} + ${staff.id}" th:class="${list} + ${staff.id} + 'checkbox' "
+														th:text="${list}">
+													</label>
 												</li>
 											</ul>
 										</div>
@@ -442,13 +444,14 @@
 			</div>
 		</div>
 		<!-- End Modal PopUP -->
+	</div>
 
 
-		<script th:inline="javascript">
+	<script th:inline="javascript">
 		var array = /*[[${arrayJson}]]*/'';
 		var arr = JSON.parse(array);
 		var holidayarr = JSON.parse(/*[[${jsonHoliday}]]*/'');
-		console.log(holidayarr);
+		/* console.log(holidayarr); */
 		/* console.log(arr); */
 
 		/* Start date disabled 00 */
@@ -468,54 +471,95 @@
 
 		/* Start Selected Real Page */
 		for (var i = 0; i < arr.length; i++) {
-			var myvar = document.getElementById(arr[i] + "-show");
+			for (var j = 0; j < arr[i].length; j++) {
+				var myvar = document.getElementById(arr[i][j] + "-show");
+				/* console.log(arr[i][j]); */
+				/* console.log(myvar); */
+				if (myvar != null) {
 
-			/* console.log(arr[i] + "-show");
-			console.log(myvar); */
+					myvar.style.backgroundColor = "red";
+					myvar.style.color = "white";
+					myvar.style.border = "1px solid white";
+					/* console.log(arr[i]); */
+				}
+			}
 
-			myvar.style.backgroundColor = "red";
-			myvar.style.color = "white";
-			myvar.style.border = "1px solid white";
-			/* console.log(arr[i]); */
 		}
 
 		/* End Selected Real Page */
 
 		/* Start Selected PopUp Page */
 		for (var i = 0; i < arr.length; i++) {
-			var popUpDay = document.getElementsByClassName(arr[i] + "checkbox")[0];
-			if (popUpDay != null) {
-				/* console.log(popUpDay); */
-				popUpDay.checked = true;
-				/* console.log(popUpDay.value); */
+			for (var j = 0; j < arr[i].length; j++) {
+				var popUpDay = document.getElementsByClassName(arr[i][j]
+						+ "checkbox")[0];
+				if (popUpDay != null) {
+					popUpDay.checked = true;
 
+				}
 			}
+
 		}
 		/* End Selected PopUp Page */
 
-		
+		// Start Holiday Real Page
+		for (var i = 0; i < holidayarr.length; i++) {
+			for (var j = 0; j < holidayarr.length; j++) {
+				var myholiday = document.getElementById(holidayarr[i][j]
+						+ "-show");
+				/* console.log(holidayarr[i][j]); */
+				/* console.log(myholiday); */
+				if (myholiday != null) {
+					myholiday.style.backgroundColor = "yellow";
+					myholiday.style.color = "black";
+					myholiday.style.border = "1px solid white";
+				}
+
+			}
+		}
+		//start holiday pop up
+		for (var i = 0; i < holidayarr.length; i++) {
+			for (var j = 0; j < holidayarr[i].length; j++) {
+				var myholidayPopUp = document
+						.getElementsByClassName(holidayarr[i][j] + "checkbox")[1];
+				var myholidayLabelPopUp = document
+						.getElementsByClassName(holidayarr[i][j] + "checkbox")[1];
+
+				/* console.log(myholidayPopUp);
+				console.log("Label");
+				console.log(myholidayLabelPopUp); */
+				if (myholidayPopUp != null) {
+					myholidayPopUp.disabled = true;
+					myholidayPopUp.style.backgroundColor = "yellow";
+					myholidayPopUp.style.border = "1px solid white";
+					myholidayLabelPopUp.style.backgroundColor = "yellow";
+					myholidayLabelPopUp.style.color = "black";
+					myholidayLabelPopUp.style.border = "1px solid white";
+				}
+			}
+		}
 	</script>
 
 
 
-		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-			integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-			crossorigin="anonymous"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-			crossorigin="anonymous"></script>
-		<script
-			src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-			integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-			crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
 
-		<script src="https://kit.fontawesome.com/e0faeaf50f.js"
-			crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/e0faeaf50f.js"
+		crossorigin="anonymous"></script>
 
-		<!-- bootstrap css1 js1 -->
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-			type="text/javascript"></script>
+	<!-- bootstrap css1 js1 -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+		type="text/javascript"></script>
 </body>
 </html>
