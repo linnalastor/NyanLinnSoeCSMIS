@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.csmis.dao.StaffDetailsRepository;
+import com.csmis.entity.Authorities;
 import com.csmis.entity.Staff;
 import com.csmis.entity.StaffDetails;
 import com.csmis.entity.StaffDetailsDTO;
+import com.csmis.service.AuthoritiesService;
 import com.csmis.service.PdfService;
 import com.csmis.service.StaffDetailsService;
 import com.csmis.service_interface.StaffDetailsServiceInterface;
@@ -31,6 +34,10 @@ import com.opencsv.bean.CsvToBeanBuilder;
 @Controller
 @RequestMapping("/admin")
 public class Import_Controller {
+	
+	// for authorities
+	AuthoritiesService authoritiesService;
+
 	StaffDetailsRepository staffDetailsRepository;
 
 	StaffDetailsService staffDetailsService;
@@ -39,10 +46,11 @@ public class Import_Controller {
 	StaffDetailsServiceInterface staffDetailsServiceInterface;
 	StaffServiceInterface thestaffService;
 	@Autowired
-	public Import_Controller(StaffServiceInterface staffService,StaffDetailsService staffDetailsService,StaffDetailsServiceInterface theStaffDetailsService) {
+	public Import_Controller(StaffServiceInterface staffService,StaffDetailsService staffDetailsService,StaffDetailsServiceInterface theStaffDetailsService, AuthoritiesService authoritiesService) {
 		thestaffService=staffService;
 		this.staffDetailsService=staffDetailsService;
 		staffDetailsServiceInterface=theStaffDetailsService;
+		this.authoritiesService = authoritiesService;
 
 	}
 
@@ -100,7 +108,12 @@ public class Import_Controller {
 	               StaffDetailsDTO staffDetailsDTO= new StaffDetailsDTO();
 
 	               List<StaffDetails> staffDetailsList=staffDetailsService.getStaffDetails();
-	               StaffDetails staffDetails= new StaffDetails();
+
+	           	// authorities
+
+					List<Authorities> AuthoritiesList = authoritiesService.getAuthorities();
+
+					Authorities authorities = new Authorities();
 
 	               for(Staff s:staff) {
 	                   boolean checker=false;
@@ -121,6 +134,28 @@ public class Import_Controller {
 
 	           	staffDetailsService.saveStaffDetails(staffDetailsDTOList);
 
+	        	// author
+				for (Staff st2 : staff) {
+					boolean checker2 = false;
+					for (Authorities Authorities2 : AuthoritiesList) {
+						if (Authorities2.getId().equals(st2.getId())) {
+							checker2 = true;
+						break;
+					}
+					}
+					if (!checker2) {
+						authorities.setId(st2.getId());
+						authorities.setAuthority("ROLE_EMPLOYEE");
+
+						AuthoritiesList.add(authorities);
+//						 authoritiesService.getAuthorities();
+
+					}
+					authoritiesService.saveAuthorities(AuthoritiesList);
+
+				}
+	           	
+	           	
 	               // save users list on model
 	               model.addAttribute("staff", staff);
 	               model.addAttribute("status", true);
@@ -140,14 +175,71 @@ public class Import_Controller {
 	    }
 
 		@PostMapping("/saveStaff")
-		public String saveStaff(@ModelAttribute("staff") Staff thestaff,Model theModel) {
+		public String saveStaff(@ModelAttribute("staff") Staff thestaff, Model theModel) {
 
 			thestaffService.save(thestaff);
+			List<Staff> staff = thestaffService.findAll();
 
-				List<Staff> staff =thestaffService.findAll();
-				theModel.addAttribute("staff", staff);
-				theModel.addAttribute("status", true);
+			List<StaffDetailsDTO> staffDetailsDTOList = new ArrayList<>();
+			StaffDetailsDTO staffDetailsDTO = new StaffDetailsDTO();
 
-				return "admin/employee-list/stafflist";
+			List<StaffDetails> staffDetailsList = staffDetailsService.getStaffDetails();
+
+			for (Staff s : staff) {
+				boolean checker = false;
+				for (StaffDetails staffDetail : staffDetailsList) {
+					if (staffDetail.getId().equals(s.getId())) {
+						checker = true;
+						break;
+					}
+				}
+
+				if (!checker) {
+					staffDetailsDTO.setId(s.getId());
+					staffDetailsDTO.setPassword(staffDetailsService.encodedPassword(s.getId()));
+					staffDetailsDTO.setEnabled("1");
+					staffDetailsDTOList.add(staffDetailsDTO);
+
+					try {
+						staffDetailsService.saveStaffDetails(staffDetailsDTOList);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+
+			}
+
+			List<Authorities> AuthoritiesList =authoritiesService.getAuthorities();
+
+			Authorities authorities = new Authorities();
+
+			// author
+			for (Staff st2 : staff) {
+				boolean checker2 = false;
+				for (Authorities Authorities2 : AuthoritiesList) {
+					if (Authorities2.getId().equals(st2.getId())) {
+						checker2 = true;
+						break;
+					}
+
+				}
+				if (!checker2) {
+					authorities.setId(st2.getId());
+					authorities.setAuthority("ROLE_EMPLOYEE");
+
+					AuthoritiesList.add(authorities);
+//					 authoritiesService.getAuthorities();
+					authoritiesService.saveAuthorities(AuthoritiesList);
+
+				}
+			}
+
+			theModel.addAttribute("staff", staff);
+			theModel.addAttribute("status", true);
+
+			return "admin/employee-list/stafflist";
 		}
-}
+
+	}
