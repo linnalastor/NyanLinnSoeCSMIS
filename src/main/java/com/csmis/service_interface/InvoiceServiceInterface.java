@@ -11,4 +11,5 @@ public interface InvoiceServiceInterface {
 	List<DailyInvoice> findByDateBetween(LocalDate startDate, LocalDate endDate);
 	public void save(DailyInvoice dailyInvoice);
 	LocalDate getFirstDate();
+	LocalDate getLastDate();
 }

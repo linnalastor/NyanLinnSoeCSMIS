@@ -32,8 +32,9 @@
 <link rel="stylesheet" type="text/css" href="/notiflix.min.css">
 <script src="/js/notiflix-aio-3.2.6.min.js"></script>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
 <script>
+
 	/* $(function() {
 		$('.datetimepicker').datetimepicker({
 			format : 'YYYY-MM-DD',
@@ -56,18 +57,18 @@
 
 	}); */
 	$(function() {
-		var paymentDate=$('#paymentdate').val();
-	    var currentDate = new Date();
-	    $('#paymentdate').datetimepicker({
-	        format: 'YYYY-MM-DD',
-	        defaultDate: currentDate,
-	        minDate: currentDate ,// add this line to set the minimum date
-	       
-	    });
-	    
-	    $('#paymentdate').val(moment(paymentDate).format('YYYY-MM-DD'));
+		var paymentDate = $('#paymentdate').val();
+		var currentDate = new Date();
+		$('#paymentdate').datetimepicker({
+			format : 'YYYY-MM-DD',
+			defaultDate : currentDate,
+			minDate : currentDate,// add this line to set the minimum date
 
-		}); 
+		});
+
+		$('#paymentdate').val(moment(paymentDate).format('YYYY-MM-DD'));
+
+	});
 	/*  $(function() {
 	        var currentDate = moment($('#paymentdate').val(), 'YYYY-MM-DD').toDate();
 	        $('#paymentdate').datetimepicker({
@@ -80,43 +81,34 @@
 
 	function GetPrint() {
 		window.print();
-		
+
 	}
-	 /*    $(document).ready(function() {
-	    	  $('#paid-button').click(function() {
-	    	    var password = prompt("Please enter admin password:");
-	    	    if (password === "admin123") {
-	    	    	
-	    	      // Correct password, let the paid process
-	    	      alert("Paid process completed successfully.");
-	    	      return true
-	    	      // Your paid process code here
-	    	    } else if (password !== null && password != "admin123") {
-	    	      // Incorrect password, show error message and prompt again
-	    	      alert("Incorrect password, please try again.");
-	    	      var password = prompt("Please enter admin password:");
-	    	    }
-	    	    // Do nothing if user clicks cancel in the password prompt
-	    	    return false
-	    	  });
-	    	}); */
-	    $(document).ready(function() {
-	    	  $('#paid-button').click(function() {
-	    	    var password = prompt("Check your invoice.If you sure,Please enter admin password:");
-	    	    while (password !== "admin123") {
-	    	      if (password === null) {
-	    	        // User clicked cancel, exit loop
-	    	        return false;
-	    	      }
-	    	      alert("Incorrect password, please try again.");
-	    	      password = prompt("Please enter admin password:");
-	    	    }
-	    	    // Password is correct, let the paid process
-	    	    alert("Paid process completed successfully.");
-	    	    return true;
-	    	    // Your paid process code here
-	    	  });
-	    	});
+
+	$(document)
+			.ready(
+					function() {
+						$('#paid-button')
+								.click(
+										function() {
+											
+											
+											var password = prompt("Check your invoice.If you sure,Please enter admin password:");
+											
+											
+											while (password !== "admin123") {
+												if (password === null) {
+													// User clicked cancel, exit loop
+													return false;
+												}
+												alert("Incorrect password, please try again.");
+												password = prompt("Please enter admin password:");
+											}
+											// Password is correct, let the paid process
+											alert("Paid process completed successfully.");
+											return true;
+											// Your paid process code here
+										});
+					});
 </script>
 <style>
 .paid_print_container {
@@ -298,6 +290,7 @@
 
 				<div class="container ">
 					<div class="row">
+						
 						<form action="#" th:action="@{/admin/create}" method="POST"
 							class="form-inline">
 							<div class="col-10">
@@ -311,19 +304,22 @@
 										name="startDate" th:value="${startDate}" readonly="readonly">
 									<span class="input-group-text" id="basic-addon1">End
 										Date</span> <input type="search" name="endDate" class="form-control"
-										th:value="${endDate}" readonly="readonly">
-									<button type="submit" onclick="startLoading()"
+										id="endDate" th:value="${endDate}" readonly="readonly">
+									<input type="hidden" th:value="${lastDate}"
+										class="form-control" id="lastDate" readonly="readonly">
+									<button type="submit" onclick="startLoading()" id="createInvoiceButton"
 										class="btn btn-success">Create</button>
 									<script>
-        								function startLoading() {
-           								Notiflix.Loading.dots('Loading...');
+										function startLoading() {
+											Notiflix.Loading.dots('Loading...');
 
-            							// Perform some long-running task
-            							// ...
+											// Perform some long-running task
+											// ...
 
-            							Notiflix.Loading.remove();
-        								}
-   									</script>
+											Notiflix.Loading.remove();
+										}
+									</script>
+
 								</div>
 								<div class="col-12">
 									<div class="input-group mb-2 mt-2">
@@ -331,7 +327,7 @@
 											Date</span> <input type="text" class="form-control"
 											th:value="${paymentDate}" name="paymentDate"
 											data-format="YYYY-MM-DD" id="paymentdate"
-											th:attr="readonly=${status}">
+											th:attr="readonly=${status}" required>
 									</div>
 								</div>
 
@@ -420,13 +416,15 @@
 								<input type="hidden" th:value="${endDate}" name="invoiceEndDate" />
 								<input type="hidden" th:value="${paymentDate}"
 									name="paymentDate" />
+									<input type="hidden" th:value="${staffPassword}"
+									name="staffPassword"  id="staffPassword"/>
 
 
 
 								<div
 									th:class="${status ? 'paid_print_container show' : 'paid_print_container'}">
 									<button type="button" class="btn btn-primary"
-										onclick="GetPrint()">Print</button>
+										onclick="GetPrint()" >Print</button>
 
 
 
@@ -532,6 +530,7 @@
 
 	<script src="https://kit.fontawesome.com/e0faeaf50f.js"
 		crossorigin="anonymous"></script>
+		<script src="/js/invoiceCreate.js"></script>
 
 </body>
 
