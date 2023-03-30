@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.csmis.entity.ConsumerList;
+import com.csmis.service.DateService;
+import com.csmis.service.HolidayService;
 import com.csmis.service.Operator_Register_Service;
-import com.csmis.service.StaffService;
+import com.csmis.service.Prefix_ID_Service;
+import com.csmis.service_interface.StaffServiceInterface;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -28,7 +31,16 @@ public class Lunch_Plan_Register_Controller {
 	Operator_Register_Service op;
 
 	@Autowired
-	StaffService staffService;
+	StaffServiceInterface staffService;
+	
+	@Autowired
+	Prefix_ID_Service prefix_ID_Service;
+	
+	@Autowired
+	DateService dateService;
+	
+	@Autowired
+	HolidayService holidayService;
 
 	// Start Consumer List Monthly
 	@GetMapping("/lunch_plan/by_month")
@@ -122,22 +134,20 @@ public class Lunch_Plan_Register_Controller {
 		}
 
 		int count=0;
-		boolean checker = false;
 
 		if(today.getMonthValue()==monthValue) {
-			checker =true;
 			count = 1;
 		}
 
 		String json = null;
 		String jsonHoliday = null;
-
-		// set holiday
-		String[] holidays = { "24", "23" };
 		String month_year = null;
 
+		// set holiday
+		List<String> holidays = holidayService.getThisMonthHoliday(today);
+
 		// get string of month and year of this week
-		month_year = op.get_Month_Year_Weekly(count);
+		month_year = prefix_ID_Service.getPrefix_ID(today);
 
 		// get this week days
 		List<String> dates = op.getWeeklyDate();
@@ -148,7 +158,7 @@ public class Lunch_Plan_Register_Controller {
 		String day_to_day = "( " + dates.get(0) + " - " + dates.get(dates.size() - 1) + " )";
 
 		// set confirmation of user into list
-		List<String> list = op.getWeeklyConfirmDate(month_year + "|" + auth.getName(),count);
+		List<String> list = dateService.getUncheckedList(month_year + "|" + auth.getName(), today);
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		try {
@@ -174,7 +184,9 @@ public class Lunch_Plan_Register_Controller {
 			Model theModel, Authentication auth) {
 
 		LocalDate today= LocalDate.now();
-		Integer monthValue = today.getMonthValue()+1;
+		LocalDate nextMonthDay = today.plusMonths(1);
+		Integer monthValue = nextMonthDay.getMonthValue();
+		
 		while(today.getDayOfWeek() != DayOfWeek.MONDAY) {
 			today = today.plusDays(1);
 		}
@@ -191,8 +203,8 @@ public class Lunch_Plan_Register_Controller {
 		boolean checker = false;
 		boolean check2month = false;
 
-		String thisMonth_id =op.get_Month_Year_Weekly(0) + "|" + auth.getName();
-		String nextMonth_id =op.get_Month_Year_Weekly(1) + "|" + auth.getName();
+		String thisMonth_id = prefix_ID_Service.getPrefix_ID(today)+ "|" + auth.getName();
+		String nextMonth_id = prefix_ID_Service.getPrefix_ID(nextMonthDay)+ "|" + auth.getName();
 
 		if(today.getMonthValue()==monthValue) checker =true;
 
@@ -234,47 +246,9 @@ public class Lunch_Plan_Register_Controller {
 			consumerList.setConfirmation(op.getWeeklConfirmation(check_list,uncheckedList,thisMonth_id));
 			consumerList.setConsumer_information_id(thisMonth_id);
 			op.saveConsumerMonthlyRegistration(consumerList);
-		}
-
-		// for model data add attribute
-		String json = null;
-		String jsonHoliday = null;
-
-		// set holiday
-		String[] holidays = { "24", "23" };
-
-		// get string of month and year of this week
-		String month_year = op.get_Month_Year_Weekly(1);
-
-		// get this week days
-		List<String> dates = op.getWeeklyDate();
-
-		// for model
-		Integer month = Integer.parseInt(month_year.substring(0, 2));
-		String year = month_year.substring(3);
-		String day_to_day = "( " + dates.get(0) + " - " + dates.get(dates.size() - 1) + " )";
-
-		// set confirmation of user into list
-		uncheckedList = op.getWeeklyConfirmDate(month_year + "|" + auth.getName(),1);
-
-		ObjectMapper objectMapper = new ObjectMapper();
-		try {
-			// add selected dates into json file
-			json = objectMapper.writeValueAsString(uncheckedList);
-			// add holidays into json file
-			jsonHoliday = objectMapper.writeValueAsString(holidays);
-
-		} catch (JsonProcessingException e) {
-		}
-		// model data add attribute ends here
-
-		theModel.addAttribute("month", Month.of(month) + " / " + year);
-		theModel.addAttribute("day_to_day", day_to_day);
-		theModel.addAttribute("listweeklydate", dates);
-		theModel.addAttribute("arrayJson", json);
-		theModel.addAttribute("jsonHoliday", jsonHoliday);
-		theModel.addAttribute("staff", staffService.findByID(auth.getName()));
-		return "operator/register/ConsumerListWeekly";
+			}
+		
+		return "redirect:/operator/lunch_plan/by_week";
 	}
 
 }

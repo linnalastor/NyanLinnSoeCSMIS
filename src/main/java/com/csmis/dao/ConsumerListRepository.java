@@ -14,4 +14,5 @@ public interface ConsumerListRepository extends JpaRepository<ConsumerList, Stri
 
 	@Query(value="Select * from Consumer_list where consumer_information_id Like %?1%",nativeQuery = true)
 	public List<ConsumerList> findAll_by_MonthYear(String prefix);
+
 }

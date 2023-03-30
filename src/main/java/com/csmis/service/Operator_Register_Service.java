@@ -171,11 +171,9 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 		ZoneId zone = ZoneId.systemDefault();
 		LocalDate today = LocalDate.now(zone);
 
-//		LocalDate day = today.withDayOfMonth(1).plusMonths(3);
 		LocalDate day = today.withDayOfMonth(1).plusMonths(1);
 
 		// get confirmation string for a month
-//		while (day.getMonthValue() == today.getMonthValue() + 3) {
 		while (day.getMonthValue() == today.getMonthValue() + 1) {
 			isweekend = false;
 			if (day.getDayOfWeek() == DayOfWeek.SATURDAY || day.getDayOfWeek() == DayOfWeek.SUNDAY)
@@ -190,26 +188,23 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 						holiday = true;
 
 				if (list == null) {
-					if (holiday)
-						confirmation += "h";
-					else
-						confirmation += "1";
+					// h=hoiliday
+					if (holiday) confirmation += "h";
+					// 1=registered
+					else confirmation += "1";
 				} else {
 
 					// checker = 'true' on the selected days
-					for (String s : list)
-						if (Integer.parseInt(s) == day.getDayOfMonth())
-							checker = true;
+					for (String s : list) {
+						if (Integer.parseInt(s) == day.getDayOfMonth()) checker = true;
+					}
 
 					// x=not register
-					if (checker)
-						confirmation += "x";
+					if (checker) confirmation += "x";
 					// h=hoiliday
-					else if (holiday)
-						confirmation += "h";
+					else if (holiday) confirmation += "h";
 					// 1=registered
-					else
-						confirmation += "1";
+					else confirmation += "1";
 				}
 			}
 			day = day.plusDays(1);
