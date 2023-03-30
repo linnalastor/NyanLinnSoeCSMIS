@@ -86,7 +86,7 @@ public class Import_Paymentmethod_Controller {
 
 	@PostMapping("/savePaymentmethod")
 	public String savePaymentmethod(@ModelAttribute("paymentmethod") Paymentmethod thepaymentmethod, Model theModel) {
-		
+
 		paymentmethodService.save(thepaymentmethod);
 
 		List<Paymentmethod> paymentmethod = paymentmethodService.findAll();

@@ -12,12 +12,12 @@ import com.csmis.entity.StaffDetails;
 public interface StaffDetailsRepository  extends JpaRepository<StaffDetails, String> {
 
 	boolean existsById(Long id);
-	
-	
+
+
 	@Query(value="SELECT * FROM staff_detail WHERE email_status = 1",nativeQuery = true)
 	public List<StaffDetails> getEmailStatus ();
-	
-	
+
+
 	@Query(value="Select * from staff_detail where id=?1",nativeQuery=true)
 	public StaffDetails getByID(String id);
 

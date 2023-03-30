@@ -62,11 +62,11 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 	public List<String> get_Monthly_Dates(int count) {
 		ZoneId zone = ZoneId.systemDefault();
 		LocalDate today = LocalDate.now(zone);
-		
+
 		Integer temp;
 
 		LocalDate day = today.withDayOfMonth(1).minusMonths(count);
-		
+
 		List<String> days = new ArrayList<>();
 
 		// input first week of the month
@@ -153,9 +153,9 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 
 		return days;
 	}
-	
+
 	public String getStatus(String report, String confirmation, String day) {
-		
+
 		return day;
 	}
 
@@ -245,7 +245,7 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 	public String get_Month_Year_ReportMonthly(int count) {
 		ZoneId zone = ZoneId.systemDefault();
 		LocalDate today = LocalDate.now(zone);
-		Integer month_value = today.getMonthValue() - count;
+		int month_value = today.getMonthValue() - count;
 		if (month_value > 12) {
 			today.plusYears(1);
 			month_value = 1;
@@ -254,7 +254,7 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 			month_value = 12;
 
 		}
-		String month = month_value.toString();
+		String month = Integer.toString(month_value);
 		if (month.length() < 2)
 			month = "0" + month;
 		String s = month + "/" + today.getYear();

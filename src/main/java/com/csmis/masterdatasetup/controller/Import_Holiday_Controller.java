@@ -27,14 +27,14 @@ import com.opencsv.bean.CsvToBeanBuilder;
 @Controller
 @RequestMapping("/admin")
 public class Import_Holiday_Controller {
-	
+
   	HolidayServiceInterface holidayService;
   	@Autowired
   	public Import_Holiday_Controller(HolidayServiceInterface theholidayService) {
   		holidayService=theholidayService;
-  		
+
   	}
-  	
+
   	@PostMapping("/saveHoliday")
   	public String save(@ModelAttribute("holiday")HolidayDTO holidaydto) throws ParseException {
   		Holiday holiday=new Holiday();
@@ -47,10 +47,10 @@ public class Import_Holiday_Controller {
 	public String showFormForUpdate( Model model) {
 		List<Holiday> holiday =holidayService.findAll();
 		  model.addAttribute("holiday", holiday);
-	        model.addAttribute("status", true); 
-	        return "/admin/Holiday_Show_List";  	
+	        model.addAttribute("status", true);
+	        return "/admin/Holiday_Show_List";
 	}
-  	
+
   	@PostMapping("/import_holiday")
   	public String import_holiday(@RequestParam("holiday_file")MultipartFile file, Model model) {
   	  if (file.isEmpty()) {
@@ -67,32 +67,32 @@ public class Import_Holiday_Controller {
     		  List<HolidayDTO> holiday=csvToBean.parse();
     		  // save users in DB?
     		  holidayService.deleteAll();
-    		  
+
     		  holidayService.saveHolidays(holiday);
-              
+
     	  }catch (Exception ex) {
                 model.addAttribute("message", "An error is occurred while processing the CSV file.");
                 model.addAttribute("status", false);
-            } 
+            }
       }
   	 return "redirect:/admin/show_holiday";  	}
-  	
-  	
+
+
 
 	@GetMapping("/HolidayFormForUpdate")
 	public String showFormForUpdate(@RequestParam("holiday_date") String thedate,
 									Model theModel) {
 	    LocalDate date = LocalDate.parse(thedate);
 	    System.out.println("Parsed Date"+date);
-	    
+
 		Holiday holiday = holidayService.findByDate(date);
 		System.out.println("here");
 		HolidayDTO hdto= new HolidayDTO();
 		hdto.setDate(holiday.getDate().toString());
 		hdto.setDescription(holiday.getDescription());
-		
+
 		theModel.addAttribute("holiday", hdto);
-		
-		return "/admin/Holiday_Update_List";			
+
+		return "/admin/Holiday_Update_List";
 	}
  	  	}

@@ -16,8 +16,8 @@ public interface InvoiceCashierServiceInterface {
 	public InvoiceCashier findByName(String name);
 
 	public void delete(InvoiceCashier invoiceCashier);
-	 
 
-    
+
+
 
 }

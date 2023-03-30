@@ -17,26 +17,26 @@ import com.csmis.service_interface.StaffServiceInterface;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	
+
 	@Autowired
 	PdfService pdfService;
-	
-	
+
+
 	StaffServiceInterface staffService;
-	
+
 	@Autowired
 	public AdminController(StaffServiceInterface staffService) {
 		this.staffService=staffService;
 	}
-	
-	
+
+
 	//Mapping for importing master data setup files page
 	@GetMapping("/master_data_setup")
     public String index() {
         return "admin/admin_datasetup";
     }
 
-	
+
 
 	/* Dashboard */
 	@GetMapping("/dashboard")
@@ -50,7 +50,7 @@ public class AdminController {
 		String pdf="ThisWeek.pdf";
 		String encodedPdf =pdfService.getPdfAsByteString(pdf);
         model.addAttribute("pdf", encodedPdf);
-        
+
         String next_pdf="NextWeek.pdf";
 		String next_encodedPdf =pdfService.getPdfAsByteString(next_pdf);
         model.addAttribute("npdf", next_encodedPdf);
@@ -151,34 +151,34 @@ public class AdminController {
 
         // save users list on model
         model.addAttribute("staff", staff);
-        model.addAttribute("status", true); 
+        model.addAttribute("status", true);
 		return "admin/employee-list/stafflist";
 	}
 
 	@GetMapping("/staff_list/update")
 	public String updatStaff( @RequestParam("staff") String id,
 			Model theModel){
-		
+
 
 		Staff staff = staffService.findByID(id);
-		
+
 		// set employee as a model attribute to pre-populate the form
 		theModel.addAttribute("staff", staff);
-			
-		
+
+
 		return "admin/employee-list/updatestafflist";
 	}
-	
-	
+
+
 
 	@GetMapping("/StaffFormAdd")
 	public String StaffFormForAdd(Model theModel) {
-		
+
 		// create model attribute to bind form data
 		Staff staff = new Staff();
-		
+
 		theModel.addAttribute("staff", staff);
-		
+
 		return "admin/employee-list/updatestafflist";
 
 	}

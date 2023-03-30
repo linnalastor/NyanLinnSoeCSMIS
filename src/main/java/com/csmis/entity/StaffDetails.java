@@ -5,8 +5,6 @@ import java.text.ParseException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -38,18 +36,18 @@ public class StaffDetails {
 
 	@Column(name = "timestamp")
 	private Timestamp timestamp;
-	
+
 	@Column(name = "email_status")
 	private String email_status;
-	
+
 	@Column(name = "enabled")
 	private String enabled;
-	
+
 
 
 	public StaffDetails() {
 		super();
-		
+
 	}
 
 
@@ -58,22 +56,22 @@ public void StaffDetailsDTO(String id,String passwords, String description, Stri
 
 	 BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	    this.password = encoder.encode(passwords);
-	   
+
 	       this.id=id;
 	       this.description=description;
 	       this.enabled=enabled;
 	   	this.created_by=created_by;
 		this.last_updated_by=last_updated_by;
 		this.getTimestamp();
-	       
-	       
+
+
 }
 
-	
-	
-	
-	
-	
+
+
+
+
+
 
 	public StaffDetails(String id, String password, String description, String created_by,
 			String last_updated_by, Timestamp timestamp, String enabled) {
@@ -179,6 +177,6 @@ public void StaffDetailsDTO(String id,String passwords, String description, Stri
 	public void setEnabled(String enabled) {
 		this.enabled = enabled;
 	}
-	
-	
+
+
 }

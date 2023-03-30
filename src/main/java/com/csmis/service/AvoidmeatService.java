@@ -17,9 +17,9 @@ public class AvoidmeatService implements AvoidmeatServiceInterface {
 	public AvoidmeatService(AvoidmeatRepository theAvoidmeatRepository) {
 		avoidmeatRepository=theAvoidmeatRepository;
 	}
-	
-	
-	
+
+
+
 	@Override
 	public List<Avoidmeat> findAll() {
 		// TODO Auto-generated method stub
@@ -30,7 +30,7 @@ public class AvoidmeatService implements AvoidmeatServiceInterface {
 	public void saveAvoidmeat(List<Avoidmeat> avoidmeats) {
 		// TODO Auto-generated method stub
 		avoidmeatRepository.saveAll(avoidmeats);
-		
+
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class AvoidmeatService implements AvoidmeatServiceInterface {
 			throw new RuntimeException("Did not find Avoidmeat name - " + name);
 		}
 
-		return avoidmeat;		
+		return avoidmeat;
 	}
 
 	@Override

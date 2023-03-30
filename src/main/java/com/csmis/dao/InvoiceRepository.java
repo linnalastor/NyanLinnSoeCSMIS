@@ -9,9 +9,9 @@ import com.csmis.entity.DailyInvoice;
 
 
 public interface InvoiceRepository extends JpaRepository<DailyInvoice, Integer>{
-	
+
 	 List<DailyInvoice> findByDateBetween(LocalDate startDate, LocalDate endDate);
-	 
+
 	 @Query(value="Select date from Daily_voucher LIMIT 1",nativeQuery = true)
 		public LocalDate getFirstDate();
 

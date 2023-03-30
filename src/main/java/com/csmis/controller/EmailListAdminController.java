@@ -19,13 +19,13 @@ import com.csmis.service_interface.StaffDetailsServiceInterface;
 public class EmailListAdminController {
 	private StaffDetailsServiceInterface staffDetailsServiceInterface;
 	private StaffService staffService;
-	
+
 	@Autowired
 	public EmailListAdminController(StaffDetailsServiceInterface theStaffDetailsServiceInterface,StaffService staffService) {
 		staffDetailsServiceInterface = theStaffDetailsServiceInterface;
 		this.staffService=staffService;
 	}
-	
+
 	@GetMapping("/email")
 	public String emailList(Model model) {
 		List<StaffDetails> staffDetail1 = staffDetailsServiceInterface.findByEmailStatus();

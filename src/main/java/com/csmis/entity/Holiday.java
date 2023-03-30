@@ -4,16 +4,14 @@ package com.csmis.entity;
 
 
 
-import java.util.Date;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 
 @Entity
@@ -31,7 +29,7 @@ public class Holiday {
 	}
 
 	public void HolidayDTO(String sdate, String description)throws ParseException {
-		
+
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             try {
             	this.date = LocalDate.parse(sdate,formatter);

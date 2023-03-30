@@ -32,7 +32,7 @@ import com.opencsv.bean.CsvToBeanBuilder;
 @RequestMapping("/admin")
 public class Import_Controller {
 	StaffDetailsRepository staffDetailsRepository;
-	
+
 	StaffDetailsService staffDetailsService;
 	@Autowired
 	PdfService pdfService;
@@ -49,18 +49,18 @@ public class Import_Controller {
 	//Mapping For Import Menu Pdf
 		@PostMapping("/import_menu")
 		public String import_menu(@RequestParam("pdfFile") MultipartFile pdfFile,Model model) throws IOException,DocumentException {
-			
+
 			//get the name of the imported file
 			String thisweek_pdfFileName="ThisWeek.pdf";
 			String nextweek_pdfFileName="NextWeek.pdf";
-			
+
 			//save pdf file to resources/pdf
 			pdfService.storePdf(pdfFile);
-			
+
 			//convert pdf from resource/pdfs to byte string
 			String thisweek_encodedPdf =pdfService.getPdfAsByteString(thisweek_pdfFileName);
 			String nextweek_encodedPdf =pdfService.getPdfAsByteString(nextweek_pdfFileName);
-			
+
 
 	        model.addAttribute("pdf", thisweek_encodedPdf);
 	        model.addAttribute("npdf", nextweek_encodedPdf);
@@ -88,47 +88,47 @@ public class Import_Controller {
 
 	               // convert `CsvToBean` object to list of users
 	               List<Staff> staff = csvToBean.parse();
-	              
+
 	               System.out.println(staff);
 	               // save users in DB?
 	               thestaffService.saveStaffs(staff);
-	               
+
 	               staff=thestaffService.findAll();
 
-	              
+
 	             List  <StaffDetailsDTO> staffDetailsDTOList=new ArrayList<>();
 	               StaffDetailsDTO staffDetailsDTO= new StaffDetailsDTO();
-	               
+
 	               List<StaffDetails> staffDetailsList=staffDetailsService.getStaffDetails();
 	               StaffDetails staffDetails= new StaffDetails();
-	               
+
 	               for(Staff s:staff) {
 	                   boolean checker=false;
 	               	for(StaffDetails staffDetail:staffDetailsList) {
 	               		if(staffDetail.getId().equals(s.getId())) checker=true;
 	               	}
 	               	if(!checker) {
-	    
+
 	               		staffDetailsDTO.setId(s.getId());
 	               		staffDetailsDTO.setPassword(staffDetailsService.encodedPassword(s.getId()));
 	               		staffDetailsDTO.setEnabled("1");
 	               		staffDetailsDTOList.add(staffDetailsDTO);
-	               	
+
 	               	}
-	                    
+
 	               }
-		       
-	               
+
+
 	           	staffDetailsService.saveStaffDetails(staffDetailsDTOList);
-	            
+
 	               // save users list on model
 	               model.addAttribute("staff", staff);
-	               model.addAttribute("status", true); 
+	               model.addAttribute("status", true);
 
 	               try {
 	               }catch(Exception ex) {
 	               	 model.addAttribute("message", "An error occurred while saving the CSV file.");
-	                    model.addAttribute("status", false); 
+	                    model.addAttribute("status", false);
 	               }
 
 	           } catch (Exception ex) {
@@ -138,15 +138,15 @@ public class Import_Controller {
 	       }
 			return "admin/employee-list/stafflist";
 	    }
-		
+
 		@PostMapping("/saveStaff")
 		public String saveStaff(@ModelAttribute("staff") Staff thestaff,Model theModel) {
-			
+
 			thestaffService.save(thestaff);
-		
+
 				List<Staff> staff =thestaffService.findAll();
 				theModel.addAttribute("staff", staff);
-				theModel.addAttribute("status", true); 
+				theModel.addAttribute("status", true);
 
 				return "admin/employee-list/stafflist";
 		}

@@ -58,8 +58,8 @@ public class InvoiceApprovedByService implements InvoiceApprovedByServiceInterfa
 	@Override
 	public void delete(InvoiceApprovedBy invoiceApprovedBy) {
 
-		invoiceApprovedByRepository.delete(invoiceApprovedBy);	
-		
+		invoiceApprovedByRepository.delete(invoiceApprovedBy);
+
 	}
 
 }

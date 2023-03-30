@@ -13,7 +13,7 @@ public class HeadCountService implements HeadCountServiceInterface {
 
 	@Autowired
 	HeadCountRepository headCountRepository;
-	
+
 	@Override
 	public void save(HeadCount headCount) {
 		headCountRepository.save(headCount);
@@ -23,7 +23,7 @@ public class HeadCountService implements HeadCountServiceInterface {
 	public HeadCount find_by_id(String id) {
 		return headCountRepository.find_by_id(id);
 	}
-	
+
 	@Override
 	public List<HeadCount> findAllDesc() {
 		return headCountRepository.findAllDesc();

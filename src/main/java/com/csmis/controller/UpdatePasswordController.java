@@ -17,29 +17,29 @@ import com.csmis.service_interface.StaffDetailsServiceInterface;
 @RequestMapping("/operator")
 public class UpdatePasswordController {
 	StaffDetailsServiceInterface staffDetailsServiceInterface;
-	
+
 	@Autowired
 	public UpdatePasswordController(StaffDetailsServiceInterface theStaffDetailsServiceInterface) {
 		staffDetailsServiceInterface = theStaffDetailsServiceInterface;
 	}
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@PostMapping("/oldPassword")
 	public String oldPassword(@RequestParam("oldPassword") String oldPassword, Model model,Authentication auth) {
 		//System.out.println("input old password is >>>> " + oldPassword);
-		
+
 		StaffDetails staffDetail = staffDetailsServiceInterface.getStaffDetailByID(auth.getName());
 		//System.out.println(staffDetail);
 		String staffPassword = staffDetail.getPassword();
 		//System.out.println("orginal  password is >>>>> " + staffPassword);
-				
-		
+
+
 		boolean passwordsMatch = passwordEncoder.matches(oldPassword, staffPassword);
 		//System.out.println(passwordsMatch);
-		
-		
+
+
 		if (passwordsMatch) {
 			model.addAttribute("success", true);
 			model.addAttribute("status",false);
@@ -47,10 +47,10 @@ public class UpdatePasswordController {
 			  model.addAttribute("error", "The old password is incorrect.");
 			  model.addAttribute("status",true);
 		  }
-		
+
 		return "/operator/account-status/update";
 	}
-	
+
 	@PostMapping("/update-password")
 	public String updatePassword(
 								@RequestParam("newPassword") String newPassword,
@@ -64,16 +64,16 @@ public class UpdatePasswordController {
 		 * true); }else { model.addAttribute("error",
 		 * "New Password and Confirm Password is not match!"); }
 		 */
-		
+
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String staffNewPassword = encoder.encode(newPassword);
 		//System.out.println(staffNewPassword);
-	
-		
+
+
 		 staffDetail.setPassword(staffNewPassword);
 		 staffDetailsServiceInterface.save(staffDetail);
-		
-		 
+
+
 		return "/operator/account-status/index";
 	}
 }

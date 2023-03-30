@@ -9,7 +9,7 @@ import com.csmis.service_interface.EmailStatusServiceInterface;
 @Service
 public class EmailStatusService implements EmailStatusServiceInterface{
 	private EmailStatusRepository emailStatusRepository;
-	
+
 	public EmailStatusService(EmailStatusRepository theEmailStatusRepository) {
 		emailStatusRepository = theEmailStatusRepository;
 	}

@@ -15,42 +15,42 @@ import com.csmis.service_interface.PaidVoucherServiceInterface;
 public class PaidVoucherService implements PaidVoucherServiceInterface {
 	private PaidVoucherRepository paidVoucherRepository;
 	private DailyVoucherRepository dailyVoucherRepository;
-	
+
 	@Autowired
 	public PaidVoucherService(PaidVoucherRepository thePaidVoucherRepository,DailyVoucherRepository dailyVoucherRepository) {
 		paidVoucherRepository=thePaidVoucherRepository;
 		this.dailyVoucherRepository = dailyVoucherRepository;
 	}
-	
+
 	@Override
 	public LocalDate getFirstDate() {
 		return dailyVoucherRepository.getFirstDate();
-		
+
 	}
 
 	@Override
 	public void save(PaymentVoucher thePaymentVoucher) {
-		
+
 		paidVoucherRepository.save(thePaymentVoucher);
-		
+
 	}
 
 	@Override
 	public List<PaymentVoucher> findAll() {
-		
+
 		return paidVoucherRepository.findAll();
 	}
 
 	@Override
 	public String getLastDate() {
-		
+
 		return paidVoucherRepository.getLastDate();
 	}
 
-	
 
-	
 
-	
+
+
+
 
 }

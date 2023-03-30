@@ -15,7 +15,7 @@ import com.csmis.service_interface.StaffDetailsServiceInterface;
 @RequestMapping("/operator")
 public class StaffDetailsController {
 	StaffDetailsServiceInterface staffDetailsServiceInterface;
-	
+
 	@Autowired
 	public StaffDetailsController(StaffDetailsServiceInterface theStaffDetailsServiceInterface) {
 		staffDetailsServiceInterface = theStaffDetailsServiceInterface;
@@ -26,7 +26,7 @@ public class StaffDetailsController {
 		StaffDetails staffDetail=staffDetailsServiceInterface.getStaffDetailByID(auth.getName());
 		staffDetail.setDescription(selectedMeats);
 		staffDetailsServiceInterface.save(staffDetail);
-		
-		return "redirect:/operator/account"; 
+
+		return "redirect:/operator/account";
 	}
 }

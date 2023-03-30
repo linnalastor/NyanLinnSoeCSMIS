@@ -8,14 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.csmis.dao.InvoiceRepository;
 import com.csmis.entity.DailyInvoice;
-
 import com.csmis.service_interface.InvoiceServiceInterface;
 
 @Service
 public class InvoiceService implements InvoiceServiceInterface {
 
 	private InvoiceRepository invoiceRepository;
-	 
+
 	@Autowired
 	public InvoiceService(InvoiceRepository theInvoiceRepository) {
 		invoiceRepository = theInvoiceRepository;
@@ -23,12 +22,12 @@ public class InvoiceService implements InvoiceServiceInterface {
 
 	@Override
 	public List<DailyInvoice> findAll() {
-	
+
 		return invoiceRepository.findAll();
 	}
 	@Override
 	public List<DailyInvoice> findByDateBetween(LocalDate startDate, LocalDate endDate) {
-		
+
 		return invoiceRepository.findByDateBetween(startDate, endDate);
 	}
 
@@ -36,14 +35,14 @@ public class InvoiceService implements InvoiceServiceInterface {
 	public void save(DailyInvoice dailyInvoice) {
 		invoiceRepository.save(dailyInvoice);
 	}
-	
+
 	@Override
 	public LocalDate getFirstDate() {
 		return invoiceRepository.getFirstDate();
-		
-	}
-	
 
-	
+	}
+
+
+
 
 }

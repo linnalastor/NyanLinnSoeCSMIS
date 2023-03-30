@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.csmis.entity.StaffDetails;
 import com.csmis.service.Operator_Register_Service;
+import com.csmis.service.PdfService;
+import com.csmis.service.StaffDetailsService;
 import com.csmis.service.StaffService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.csmis.service.PdfService;
-import com.csmis.service.StaffDetailsService;
 @Controller
 @RequestMapping("/operator")
 public class UserController {
@@ -27,7 +27,7 @@ public class UserController {
 	@Autowired
 
 	Operator_Register_Service op;
-	
+
 
 
 	@Autowired
@@ -35,7 +35,7 @@ public class UserController {
 
 	@Autowired
 	StaffService staffService;
-	
+
 	@Autowired
 	StaffDetailsService staffDetailsService;
 
@@ -62,16 +62,16 @@ public class UserController {
 		String pdf="ThisWeek.pdf";
 		String encodedPdf =pdfService.getPdfAsByteString(pdf);
 		theModel.addAttribute("pdf", encodedPdf);
-        
+
         String next_pdf="NextWeek.pdf";
 		String next_encodedPdf =pdfService.getPdfAsByteString(next_pdf);
 		theModel.addAttribute("npdf", next_encodedPdf);
 
-		theModel.addAttribute(theModel);	
+		theModel.addAttribute(theModel);
 		return "operator/User_Menu";
 	}
 
-	
+
 	//End Consumer ListWeekly
 
 	@GetMapping("/lunch_plan/today")
@@ -83,31 +83,31 @@ public class UserController {
 	@GetMapping("/account")
 	public String account(Model theModel,Authentication auth) {
 		StaffDetails staff = staffDetailsService.getStaffDetailByID(auth.getName());
-		
+
 		StaffDetails staffDetail=staffDetailsService.getStaffDetailByID(auth.getName());
 		String description = staffDetail.getDescription();
 		//System.out.println("Desceiptopn ==>"+description);
 		List<String> descriptionLists = Arrays.asList(description.split(","));
 		theModel.addAttribute("descriptionLists",descriptionLists);
-		
-		
+
+
 		//System.out.println("mail noti is :" + staff.getEmail_status());
 		theModel.addAttribute(staff.getEmail_status());
 		ObjectMapper objectMapper = new ObjectMapper();
 		String json = null;
 		try {
 			json = objectMapper.writeValueAsString(staff.getEmail_status());
-			
+
 		}catch(JsonProcessingException e){
-			
+
 		}
-		theModel.addAttribute("json",json);	
+		theModel.addAttribute("json",json);
 		return "/operator/account-status/index";
 	}
 
 	@PostMapping("/account_status")
 	public String accountStatus(Model model) {
-		
+
 		return "/operator/account-status/index";
 	}
 

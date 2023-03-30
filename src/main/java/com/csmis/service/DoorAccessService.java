@@ -107,7 +107,7 @@ public class DoorAccessService {
 				break;
 			}
 		}
-		
+
 		// get lunch plan of staff if available
 		ConsumerList lunch_plan = null;
 		try {
@@ -122,7 +122,7 @@ public class DoorAccessService {
 			if (confirmation.charAt(index) == '1')
 				registered = true;
 		}
-		
+
 		// get lunch report of staff if available
 		Lunch_Report lunch_report = null;
 		try {
@@ -139,7 +139,7 @@ public class DoorAccessService {
 		}else {
 			report = lunch_report.getReport_status();
 		}
-		
+
 		while(index>=report.length()) report+='x';
 
 		// change to '1' if registered
@@ -181,7 +181,7 @@ public class DoorAccessService {
 		// add registered staff count to list
 		countList.add(count);
 
-		
+
 		count = 0;
 		// get all lunch report of this month
 		List<Lunch_Report> lunchReportList = operator_report_service.findAll_Monthly(prefix_id);
@@ -193,7 +193,7 @@ public class DoorAccessService {
 		}
 		// add not registered lunch picked count to list
 		countList.add(count);
-		
+
 		count = 0;
 		for(int i=0;i<lunchPlanList.size();i++) {
 			boolean picked= false;
@@ -212,7 +212,7 @@ public class DoorAccessService {
 				}
 			}
 			if(!picked) count++;
-			
+
 		}
 		// add not picked lunch picked count to list
 		countList.add(count);

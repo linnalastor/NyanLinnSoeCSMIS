@@ -2,7 +2,6 @@ package com.csmis.entity;
 
 import java.time.LocalDate;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -60,7 +59,7 @@ public class PaymentVoucher {
 
 	public PaymentVoucher() {
 		super();
-		
+
 	}
 
 

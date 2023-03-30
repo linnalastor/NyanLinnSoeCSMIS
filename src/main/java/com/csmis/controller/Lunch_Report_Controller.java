@@ -37,15 +37,15 @@ public class Lunch_Report_Controller {
 	@GetMapping("/report/yesterday")
 	public String ConsumerReportToday(Model theModel, Authentication auth) {
 
-		
+
 		String status = null;
 		boolean checker=true;
 
 		// get yesterday date
 		LocalDate yesterday = LocalDate.now().minusDays(1);
-		
+
 		List<String> holiday= holidayService.getThisMonthHoliday(yesterday);
-		
+
 		Integer temp = yesterday.getDayOfMonth();
 		String month = temp.toString();
 		String dayvalue=""+yesterday.getDayOfMonth();
@@ -73,18 +73,18 @@ public class Lunch_Report_Controller {
 		for(String s:holiday) {
 			if(dayvalue.equals(s)) checker=false;
 			status="holiday";
-			
-			
+
+
 		}
 
-		if(reportStatus!=null && checker==true) {
+		if(reportStatus!=null && checker) {
 			// get list of picked days of user
 			for (String s : operatorReportService.getPickedDays(reportStatus,0)) {
 				// check if today lunch is picked
 				if ( dayvalue.equals(s))
 					status = "picked";
 			}
-			
+
 			if(lunchConfirmation!=null) {
 				// get list of lunch not picked days of user
 				for (String s : operatorReportService.getNotPickedDays(reportStatus, lunchConfirmation,0)) {
@@ -99,38 +99,38 @@ public class Lunch_Report_Controller {
 				if (dayvalue.equals(s))
 					status = "notRegistered";
 			}
-			
+
 		}
-		
+
 		theModel.addAttribute("day", yesterday);
 		// picked/not picked/not registered/holiday status
 		theModel.addAttribute("status", status);
-		
+
 		theModel.addAttribute("staff", staffService.findByID(auth.getName()));
-		
+
 		return "operator/register-detail/ConsumerReportToday";
 	}
 
 	@GetMapping("/report/last_week")
 	public String ConsumerReportWeekly(Model theModel, Authentication auth) throws JsonProcessingException {
-		
+
 		List<String> holidays= holidayService.getThisMonthHoliday(LocalDate.now());
 		List<String> notPickedDates=new ArrayList<>();
 		List<String> notRegisteredDates=new ArrayList<>();
 		List<String> pickedDates=new ArrayList<>();
-		
+
 		//get today date in last month
 		LocalDate today = LocalDate.now().minusMonths(1);
-		
-		
-		
+
+
+
 		ObjectMapper objectMapper = new ObjectMapper();
 		String notPickedDatesString = null;
 		String notRegisteredDatesString=null;
 		String pickedDatesString=null;
 		String holidayString=null;
-		
-		
+
+
 		// get report for user
 		String id = operatorReportService.get_Month_Year_ReportMonthly(0) + "|" + auth.getName();
 
@@ -145,7 +145,7 @@ public class Lunch_Report_Controller {
 			lunchConfirmation = operatorRegisterService.getLunchRegistration_by_ID(id).getConfirmation();
 		} catch (Exception e) {
 		}
-		
+
 		if(reportStatus!=null) {
 			if(lunchConfirmation!=null) {
 				pickedDates = operatorReportService.getPickedDays(reportStatus, 0);
@@ -178,7 +178,7 @@ public class Lunch_Report_Controller {
 		List<String> notPickedDates=new ArrayList<>();
 		List<String> notRegisteredDates=new ArrayList<>();
 		List<String> pickedDates=new ArrayList<>();
-		
+
 		LocalDate today = LocalDate.now().minusMonths(1);
 
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -201,7 +201,7 @@ public class Lunch_Report_Controller {
 		} catch (Exception e) {
 		}
 
-		
+
 		if(reportStatus!=null) {
 			if(lunchConfirmation!=null) {
 				pickedDates = operatorReportService.getPickedDays(reportStatus, 0);
@@ -209,7 +209,7 @@ public class Lunch_Report_Controller {
 			}
 			notRegisteredDates = operatorReportService.getPickedUpWithoutRegisteredDays(reportStatus, 0);
 		}
-		
+
 		holidayString = objectMapper.writeValueAsString(holidays);
 		notRegisteredDatesString = objectMapper.writeValueAsString(notRegisteredDates);
 		pickedDatesString = objectMapper.writeValueAsString(pickedDates);
@@ -219,7 +219,7 @@ public class Lunch_Report_Controller {
 		theModel.addAttribute("notregistereddays", notRegisteredDatesString);
 		theModel.addAttribute("pickeddays", pickedDatesString);
 		theModel.addAttribute("notpickeddays", notPickedDatesString);
-		
+
 		theModel.addAttribute("Month_Year", today.getMonth().toString() + " / " + today.getYear());
 		theModel.addAttribute("staff", staffService.findByID(auth.getName()));
 		theModel.addAttribute("listweeklydate", operatorReportService.get_Monthly_Dates(1));

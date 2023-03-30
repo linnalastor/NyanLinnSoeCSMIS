@@ -6,8 +6,6 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -50,7 +48,7 @@ public class StaffDetailsDTO {
 	@Column(name = "timestamp")
 	@CsvBindByName(column="timestamp")
 	private Timestamp timestamp;
-	
+
 	@Column(name = "enabled")
 	@CsvBindByName(column="enabled")
     private String enabled;

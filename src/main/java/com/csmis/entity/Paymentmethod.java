@@ -34,5 +34,5 @@ public class Paymentmethod
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 }

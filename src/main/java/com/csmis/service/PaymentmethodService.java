@@ -13,12 +13,12 @@ import com.csmis.service_interface.PaymentmethodServiceInterface;
 public class PaymentmethodService implements PaymentmethodServiceInterface  {
 
 	 private PaymentmethodRepository paymentmethodRepository;
-	 
+
 	 @Autowired
 	 public PaymentmethodService( PaymentmethodRepository thePaymentmethodRepository) {
 		paymentmethodRepository=thePaymentmethodRepository;
 	 }
-	
+
 	@Override
 	public List<Paymentmethod> findAll() {
 		// TODO Auto-generated method stub
@@ -50,15 +50,15 @@ public class PaymentmethodService implements PaymentmethodServiceInterface  {
 			throw new RuntimeException("Did not find Paymentmethod name - " + name);
 		}
 
-		return paymentmethod;		
-	
+		return paymentmethod;
+
 	}
 
 	@Override
 	public void delete(Paymentmethod paymentmethod) {
 
 		paymentmethodRepository.delete(paymentmethod);
-		
+
 	}
 
 }

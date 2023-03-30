@@ -40,20 +40,21 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 	public ConsumerList getLunchRegistration_by_ID(String id) {
 		// TODO Auto-generated method stub
 		ConsumerList consumerList = new ConsumerList();
-		
+
 		try {
 			consumerList = consumerListRepository.getLunchPlanRegister_by_ID(id);
-		} catch (Exception e) {	}
-		
+		} catch (Exception e) {
+		}
+
 		return consumerList;
 	}
 
 	// get dates of next month
-	public List<String> get_Monthly_Dates() {
+	public List<String> get_Monthly_Dates(int count) {
 		ZoneId zone = ZoneId.systemDefault();
 		LocalDate today = LocalDate.now(zone);
 
-		LocalDate day = today.withDayOfMonth(1).plusMonths(1);
+		LocalDate day = today.withDayOfMonth(1).plusMonths(count);
 		List<String> days = new ArrayList<>();
 		Integer temp;
 
@@ -99,7 +100,7 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 		}
 
 		// input other week days of the month
-		while (day.getMonthValue() == today.getMonthValue() + 1) {
+		while (day.getMonthValue() == today.getMonthValue() + count) {
 			isweekend = false;
 			if (day.getDayOfWeek() == DayOfWeek.SATURDAY || day.getDayOfWeek() == DayOfWeek.SUNDAY)
 				isweekend = true;
@@ -218,12 +219,10 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 	}
 	// End getConfirmation Monthly
 
-	
 	// Weekly Date Real Page
 	public List<String> getWeeklyDate() {
 		ZoneId zone = ZoneId.systemDefault();
 		LocalDate today = LocalDate.now(zone);
-
 
 		List<String> days = new ArrayList<>();
 		Integer temp;
@@ -245,58 +244,71 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 		return days;
 	}
 
-	//set and return monthly confirmation with the weekly selected list
-	public String getWeeklConfirmation(List<String> list) {
+	// set and return monthly confirmation with the weekly selected list
+	public String getWeeklConfirmation(List<String> checkedList, List<String> uncheckedList, String id) {
 		String[] holidays = { "05", "26" };
-		String confirmation = "";
 		boolean checker;
-		boolean holiday;
-		ZoneId zone = ZoneId.systemDefault();
-		LocalDate today = LocalDate.now(zone);
 
-//		LocalDate day = today.withDayOfMonth(1).plusMonths(2);
-		LocalDate day = today.withDayOfMonth(1);
 
-//		while (day.getMonthValue() == today.getMonthValue()+2) {
-		while (day.getMonthValue() == today.getMonthValue()) {
-		
-			isweekend = false;
-			if (day.getDayOfWeek() == DayOfWeek.SATURDAY || day.getDayOfWeek() == DayOfWeek.SUNDAY)
-				isweekend = true;
-			if (!isweekend) {
-				checker = false;
-				holiday = false;
-				for (String s : holidays) {
-					if (Integer.parseInt(s) == day.getDayOfMonth())
-						holiday = true;
-				}
-				if (list == null) {
-					if (holiday)
-						confirmation += "h";
-					else
-						confirmation += "1";
-				} else {
-					for (String s : list) {
-						if (Integer.parseInt(s) == day.getDayOfMonth())
-							checker = true;
-					}
-
-					if (checker)
-						confirmation += "x";
-					else if (holiday)
-						confirmation += "h";
-					else
-						confirmation += "1";
-				}
-			}
-			day = day.plusDays(1);
+		ConsumerList consumerList = new ConsumerList();
+		String confirmation = "";
+		try {
+			consumerList = consumerListRepository.getById(id);
+			confirmation = consumerList.getConfirmation();
+		} catch (Exception exception) {
 		}
 
+		// for checking if all day in next week is in next month
+		LocalDate today = LocalDate.now();
+		Integer monthValue = today.getMonthValue() + 1;
+
+		// get next monday date in today
+		while (today.getDayOfWeek() != DayOfWeek.MONDAY) {
+			today = today.plusDays(1);
+		}
+
+		// for method usages
+		int count = 0;
+
+		// check if all day in next week is in next month
+		if (today.getMonthValue() == monthValue) {
+			count = 1;
+		}
+
+		List<String> days = get_Monthly_Dates(count);
+
+		if (confirmation == "") {
+			for (String s : days)
+				confirmation += "x";
+		}
+
+		for (int i = 0; i < days.size(); i++) {
+			checker = true;
+			if (checkedList != null) {
+				for (String s : checkedList) {
+					if (days.get(i).equals(s)) {
+						confirmation = confirmation.substring(0, i) + "x" + confirmation.substring(i+1);
+						checker = false;
+						break;
+					}
+				}
+			}
+			if (checker) {
+				if (uncheckedList != null) {
+					for (String s : uncheckedList) {
+						if (days.get(i).equals(s)) {
+							confirmation = confirmation.substring(0, i) + "1" + confirmation.substring(i+1);
+							break;
+						}
+					}
+				}
+			}
+		}
 		return confirmation;
 	}
 
 	// Get/Set value from/to database
-	public List<String> getWeeklyConfirmDate(String id,int count) {
+	public List<String> getWeeklyConfirmDate(String id, int count) {
 		ConsumerList consumerList = new ConsumerList();
 		String confirmation = null;
 		try {
@@ -304,7 +316,6 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 			confirmation = consumerList.getConfirmation();
 		} catch (Exception exception) {
 		}
-		System.out.println(confirmation);
 
 		boolean isweekend;
 		ZoneId zone = ZoneId.systemDefault();
@@ -312,8 +323,6 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 		LocalDate day = today.withDayOfMonth(1);
 		List<String> days = new ArrayList<>();
 
-		System.out.println("Week day value"+day);
-		System.out.println("Week day value"+today);
 		Integer temp;
 		String strTemp;
 
@@ -321,7 +330,7 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 			isweekend = false;
 			if (day.getDayOfWeek() == DayOfWeek.SATURDAY || day.getDayOfWeek() == DayOfWeek.SUNDAY)
 				isweekend = true;
-			
+
 			if (!isweekend) {
 				temp = day.getDayOfMonth();
 				strTemp = Integer.toString(temp);
@@ -347,8 +356,8 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 	public String get_Month_Year_Weekly(int count) {
 		ZoneId zone = ZoneId.systemDefault();
 		LocalDate today = LocalDate.now(zone);
-		Integer month_value = today.getMonthValue()+count;
-		String month = month_value.toString();
+		int month_value = today.getMonthValue() + count;
+		String month = Integer.toString(month_value);
 		if (month.length() < 2)
 			month = "0" + month;
 		String s = month + "/" + today.getYear();
@@ -358,12 +367,12 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 	public String get_Month_Year_Monthly(int count) {
 		ZoneId zone = ZoneId.systemDefault();
 		LocalDate today = LocalDate.now(zone);
-		Integer month_value = today.getMonthValue() + count;
+		int month_value = today.getMonthValue() + count;
 		if (month_value > 12) {
 			today.plusYears(1);
 			month_value = 1;
 		}
-		String month = month_value.toString();
+		String month = Integer.toString(month_value);
 		if (month.length() < 2)
 			month = "0" + month;
 		String s = month + "/" + today.getYear();

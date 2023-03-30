@@ -14,5 +14,5 @@ public class DailyVoucherService implements DailyVoucherServiceInterface{
 	public void save(DailyVoucher vouchers) {
 		dailyVoucherRepository.save(vouchers);
 	}
-	
+
 }

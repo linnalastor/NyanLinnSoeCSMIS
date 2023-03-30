@@ -15,7 +15,7 @@ import com.csmis.service_interface.StaffDetailsServiceInterface;
 @Service
 public class StaffDetailsService implements StaffDetailsServiceInterface {
 
-	
+
 	 @Autowired
 	 private StaffDetailsRepository staffDetailsRepository;
 	@Override
@@ -25,28 +25,28 @@ public class StaffDetailsService implements StaffDetailsServiceInterface {
 		for(StaffDetailsDTO hDTO:staffDetails) {
 			staffDetail.StaffDetailsDTO(hDTO.getId(), hDTO.getPassword(), hDTO.getDescription(), hDTO.getEnabled(),hDTO.getCreated_by(),hDTO.getLast_updated_by(),hDTO.getTimestamp());
 			System.out.println("hho"+staffDetail.getId());
-			
+
 			staffDetailsRepository.save(staffDetail);
 			System.out.println("hho"+staffDetail.getId());
 		}
-		
-		
+
+
 	}
 	public String encodedPassword(String pass) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		pass=encoder.encode(pass);
 		return pass;
-		
+
 	}
 			@Override
 			public List<StaffDetails> getStaffDetails() {
-				
-				
+
+
 				return staffDetailsRepository.findAll();
 			}
-			
-			
-			
+
+
+
 			@Override
 			public StaffDetails getByID(String id) {
 				StaffDetails staffDetails=new StaffDetails();
@@ -69,5 +69,5 @@ public class StaffDetailsService implements StaffDetailsServiceInterface {
 				// TODO Auto-generated method stub
 				return staffDetailsRepository.getEmailStatus();
 			}
-		
+
 		}

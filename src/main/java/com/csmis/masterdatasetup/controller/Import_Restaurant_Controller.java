@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.csmis.entity.Cost;
 import com.csmis.entity.Restaurant;
 import com.csmis.service_interface.RestaurantServiceInterface;
 import com.opencsv.bean.CsvToBean;
@@ -24,7 +23,7 @@ import com.opencsv.bean.CsvToBeanBuilder;
 @Controller
 @RequestMapping("/admin")
 public class Import_Restaurant_Controller {
-	
+
 	RestaurantServiceInterface restaurantService;
 	@Autowired
 	public Import_Restaurant_Controller(RestaurantServiceInterface theRestaurantService) {
@@ -34,10 +33,10 @@ public class Import_Restaurant_Controller {
 	public String showFormForUpdate( Model model) {
 		List<Restaurant> restaurant =restaurantService.findAll();
 		  model.addAttribute("restaurant", restaurant);
-	        model.addAttribute("status", true); 
-	        return "/admin/Restaurant_Show_List";  		
+	        model.addAttribute("status", true);
+	        return "/admin/Restaurant_Show_List";
 	}
-	
+
 	@GetMapping("/restaurantRemove")
 	public String removeRestaurant(@ModelAttribute("restaurant") String name) {
 		Restaurant restaurant = restaurantService.findByName(name);
@@ -45,10 +44,10 @@ public class Import_Restaurant_Controller {
 		restaurantService.delete(restaurant);
 		return "redirect:/admin/show_restaurant";
 	}
-	
+
 	@PostMapping("/import_restaurant")
 	  public String import_restaurant(@RequestParam("restaurant_file") MultipartFile file, Model model) {
-	
+
 		  if (file.isEmpty()) {
 	            model.addAttribute("message", "Please select the Restaurant CSV file to import.");
 	            model.addAttribute("status", false);
@@ -65,71 +64,71 @@ public class Import_Restaurant_Controller {
 	                // convert `CsvToBean` object to list of users
 	                List<Restaurant> restaurant = csvToBean.parse();
 	                System.out.println(restaurant);
-	               
+
 
 	                // save users in DB?
 	                restaurantService.saveRestaurants(restaurant);
                           restaurant=restaurantService.findAll();
 	                // save users list on model
 	                model.addAttribute("restaurant", restaurant);
-	                model.addAttribute("status", true); 
+	                model.addAttribute("status", true);
 
 	                try {
 	                }catch(Exception ex) {
 	                	 model.addAttribute("message", "An error occurred while saving the CSV file.");
-	                     model.addAttribute("status", false); 
+	                     model.addAttribute("status", false);
 	                }
 
 	            } catch (Exception ex) {
 	                model.addAttribute("message", "An Error occurred while processing the CSV file.");
 	                model.addAttribute("status", false);
 	            }
-	        	
+
 	        }
-		
-		 	 return "/admin/Restaurant_Show_List"; 
-		 	 
+
+		 	 return "/admin/Restaurant_Show_List";
+
 }
-	
-	
+
+
 
 	@GetMapping("/RestaurantFormForUpdate")
 	public String showFormForUpdate(@RequestParam("restaurant_file") String name,
 									Model theModel) {
-	    
-		
+
+
 		Restaurant 		restaurant = restaurantService.findByName(name);
-		
+
 		// set employee as a model attribute to pre-populate the form
 		theModel.addAttribute("restaurant", restaurant);
-		
+
 		// send over to our form
-		return "/admin/Restaurant_Update_List";			
+		return "/admin/Restaurant_Update_List";
 	}
-	
+
 
 	@PostMapping("/saveRestaurant")
 	public String saveCost(@ModelAttribute("restaurant") Restaurant theRestaurant,Model theModel) {
-		
+
 		restaurantService.save(theRestaurant);
-	
+
 			List<Restaurant> restaurant =restaurantService.findAll();
 			theModel.addAttribute("restaurant", restaurant);
-			theModel.addAttribute("status", true); 
-		   
-		 	 return "/admin/Restaurant_Show_List";  
+			theModel.addAttribute("status", true);
+
+		 	 return "/admin/Restaurant_Show_List";
 	}
-		
-	
+
+
 	@GetMapping("/RestaurantFormAdd")
 	public String showFormForAdd(Model theModel) {
-		
+
 		// create model attribute to bind form data
 		Restaurant restaurant = new Restaurant();
 
 
 		theModel.addAttribute("restaurant", restaurant);
-		
+
 		return "/admin/Restaurant_Update_List";
 	}
 	}

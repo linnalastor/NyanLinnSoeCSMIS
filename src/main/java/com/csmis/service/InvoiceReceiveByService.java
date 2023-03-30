@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.csmis.dao.InvoiceReceiveByRepository;
 import com.csmis.entity.InvoiceReceiveBy;
-import com.csmis.entity.Restaurant;
 import com.csmis.service_interface.InvoiceReceiveByServiceInterface;
 
 @Service
@@ -21,9 +20,9 @@ public class InvoiceReceiveByService implements InvoiceReceiveByServiceInterface
         }
 	@Override
 	public void saveInvoiceReceiveBys(List<InvoiceReceiveBy> invoiceReceiveBys) {
-	
+
 		invoiceReceiveByRepository.saveAll(invoiceReceiveBys);
-		
+
 	}
 	@Override
 	public List<InvoiceReceiveBy> findAll() {
@@ -51,15 +50,15 @@ public class InvoiceReceiveByService implements InvoiceReceiveByServiceInterface
 		}
 
 		return invoiceReceiveBy;
-	
-	
-	
-	
+
+
+
+
 	}
 	@Override
 	public void delete(InvoiceReceiveBy invoiceReceiveBy) {
 
-		
+
 		invoiceReceiveByRepository.delete(invoiceReceiveBy);
 	}
 

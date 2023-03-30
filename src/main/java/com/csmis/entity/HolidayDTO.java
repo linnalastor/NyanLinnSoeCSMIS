@@ -17,8 +17,8 @@ public class HolidayDTO {
 	public HolidayDTO() {
 
 	}
-	
-	
+
+
 
 	public HolidayDTO(String date, String description) {
 		super();

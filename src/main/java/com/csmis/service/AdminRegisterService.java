@@ -29,15 +29,11 @@ public class AdminRegisterService {
 	
 	// get not eat day
 		public List<String> getStaffIdList(List<ConsumerList> consumerLists,String month_year) {
-
 			LocalDate today = LocalDate.now();
 			int index = 0;
 
 			List<String> days = get_Monthly_Dates(0);
-//			System.out.println("days list >> " + days);
 
-			ConsumerList consumerList = new ConsumerList();
-			String confirmation = null;
 			List<String> staff_id_list = new ArrayList<>();
 
 
@@ -50,9 +46,7 @@ public class AdminRegisterService {
 					iter.remove();
 				}
 			}
-			System.out.println("days list >> " + days);
 
-			String subConfirmation = null;
 
 			String subString;
 			String staff_id;
@@ -67,14 +61,9 @@ public class AdminRegisterService {
 				subString = c.getConsumer_information_id();
 				subString = subString.substring(0,7);
 				staff_id  = c.getConsumer_information_id().substring(8);
-				System.out.println("staff_id " + staff_id);
-				System.out.println("subString "+subString);
-				System.out.println("month_year "+month_year);
 				if(subString.equals(month_year)) {
-					System.out.println("confirmation id check >> "+c.getConsumer_information_id());
 					if(c.getConfirmation().charAt(index) == '1') {
 						staff_id_list.add(staff_id);
-						System.out.println(staff_id_list);
 					}
 				}
 			}
@@ -82,7 +71,6 @@ public class AdminRegisterService {
 
 
 
-			System.out.println("Index confirmation >> "+index);
 			return staff_id_list;
 
 		}

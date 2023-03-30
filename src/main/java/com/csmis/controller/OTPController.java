@@ -1,38 +1,22 @@
 
 package com.csmis.controller;
 
-import com.csmis.dao.StaffDetailsRepository;
-import com.csmis.entity.Cost;
-import com.csmis.entity.Staff;
-import com.csmis.entity.StaffDetails;
-import com.csmis.service.OTPSenderService;
-import com.csmis.service.StaffService;
-import com.csmis.service_interface.CostServiceInterface;
-import com.csmis.service_interface.StaffDetailsServiceInterface;
-import com.csmis.service_interface.StaffServiceInterface;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.io.JsonEOFException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.List;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.csmis.entity.Staff;
+import com.csmis.entity.StaffDetails;
+import com.csmis.service.OTPSenderService;
+import com.csmis.service_interface.StaffDetailsServiceInterface;
+import com.csmis.service_interface.StaffServiceInterface;
 
 @Controller
 public class OTPController {
@@ -61,7 +45,7 @@ public class OTPController {
 		model.addAttribute("status", true);
 		model.addAttribute("pass", true);
 		model.addAttribute("OTPCode","");
-		
+
 //		  model.addAttribute("otp", staff);
 		return "/OTPTest";
 
@@ -89,7 +73,7 @@ public class OTPController {
 			model.addAttribute("email", email);
 			model.addAttribute("sta", true);
 			model.addAttribute("pass", true);
-			
+
 			model.addAttribute("otp", otp);
 			System.out.println(otp);
 			return "/OTPTest";
@@ -102,13 +86,13 @@ public class OTPController {
 		}
 	}
 
-//   
+//
 	@PostMapping("/password")
 	public String OTPCheckt(@RequestParam("otp") String otp, @RequestParam("otpemail") String email, Model model) {
 
 		Staff staff = staffService.findByEmail(email);
 		model.addAttribute("id", staff.getId());
-//    	   
+//
 		// Check if the OTP is correct
 		if (otp.equals(matchOtp)) {
 			model.addAttribute("email", email);
@@ -127,7 +111,7 @@ public class OTPController {
 			model.addAttribute("pass", true);
 			model.addAttribute("OTPCode","");
 			model.addAttribute("otpStatus", false);
-			
+
 			return "/OTPTest";
 		}
 
@@ -137,7 +121,7 @@ public class OTPController {
 	@PostMapping("/change-password")
 	public String Changpass(@RequestParam("id") String id, @RequestParam("confirmPassword") String confirmPassword,
 			Model model, @RequestParam("otpemail") String email) {
-		
+
 		model.addAttribute("email", email);
 		StaffDetails staffDetails = staffDetailsService.getByID(id);
 
@@ -148,9 +132,9 @@ public class OTPController {
 
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-		
+
 		staffDetails.setPassword(encoder.encode(confirmPassword));
-		
+
 		staffDetailsService.save(staffDetails);
 		return "/fancy-login";
 

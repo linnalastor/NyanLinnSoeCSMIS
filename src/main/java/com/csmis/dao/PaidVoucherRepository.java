@@ -8,7 +8,7 @@ import com.csmis.entity.PaymentVoucher;
 
 public interface PaidVoucherRepository extends JpaRepository<PaymentVoucher, Integer> {
 	@Query(value = "SELECT MAX(e.voucher_number)  FROM payment_voucher e",nativeQuery=true)
-	public String getLastDate(); 
-	
+	public String getLastDate();
+
 
 }

@@ -22,7 +22,7 @@ public class DailyInvoiceDTO {
 	}
 
 	public DailyInvoiceDTO() {
-		super();	
+		super();
 	}
 
 	public int getCamount() {
@@ -79,6 +79,6 @@ public class DailyInvoiceDTO {
 	public void setDifference(int difference) {
 		this.difference = difference;
 	}
-	
+
 
 }

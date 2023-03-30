@@ -59,7 +59,7 @@ public class Lunch_Plan_Register_Controller {
 
 		theModel.addAttribute("arrayJson", json);
 		theModel.addAttribute("jsonHoliday", jsonHoliday);
-		theModel.addAttribute("list", op.get_Monthly_Dates());
+		theModel.addAttribute("list", op.get_Monthly_Dates(1));
 		theModel.addAttribute("staff", staffService.findByID(auth.getName()));
 		theModel.addAttribute("month", Month.of(Integer.parseInt(month_year.substring(0, 2))) + " / " + year);
 
@@ -103,7 +103,7 @@ public class Lunch_Plan_Register_Controller {
 
 		theModel.addAttribute("arrayJson", json);
 		theModel.addAttribute("jsonHoliday", jsonHoliday);
-		theModel.addAttribute("list", op.get_Monthly_Dates());
+		theModel.addAttribute("list", op.get_Monthly_Dates(1));
 		theModel.addAttribute("staff", staffService.findByID(auth.getName()));
 		theModel.addAttribute("month", Month.of(Integer.parseInt(month_year.substring(0, 2))) + " / " + year);
 
@@ -120,15 +120,15 @@ public class Lunch_Plan_Register_Controller {
 		while(today.getDayOfWeek() != DayOfWeek.MONDAY) {
 			today = today.plusDays(1);
 		}
-		
+
 		int count=0;
 		boolean checker = false;
-		
+
 		if(today.getMonthValue()==monthValue) {
 			checker =true;
 			count = 1;
 		}
-		
+
 		String json = null;
 		String jsonHoliday = null;
 
@@ -178,23 +178,27 @@ public class Lunch_Plan_Register_Controller {
 		while(today.getDayOfWeek() != DayOfWeek.MONDAY) {
 			today = today.plusDays(1);
 		}
-		
+
 		List<String> this_month = new ArrayList<>();
 		List<String> next_month = new ArrayList<>();
 		ConsumerList consumerList = new ConsumerList();
 		int i = 0;
 
 		// get this week days
-		List<String> list = op.getWeeklyDate();
+		List<String> uncheckedList = op.getWeeklyDate();
 
 		// check if this week contain next month's days
 		boolean checker = false;
-		
+		boolean check2month = false;
+
+		String thisMonth_id =op.get_Month_Year_Weekly(0) + "|" + auth.getName();
+		String nextMonth_id =op.get_Month_Year_Weekly(1) + "|" + auth.getName();
+
 		if(today.getMonthValue()==monthValue) checker =true;
-			
-		while (i < list.size() - 1) {
-			if (Integer.parseInt(list.get(i)) > Integer.parseInt(list.get(++i))) {
-				checker = true;
+
+		while (i < uncheckedList.size() - 1) {
+			if (Integer.parseInt(uncheckedList.get(i)) > Integer.parseInt(uncheckedList.get(++i))) {
+				check2month = true;
 				break;
 			}
 			i++;
@@ -204,9 +208,9 @@ public class Lunch_Plan_Register_Controller {
 		i = 0;
 
 		// set and save staff info according to checker condition
-		if (checker) {
+		if (check2month) {
 			while (i < check_list.size()) {
-				
+
 				if (Integer.parseInt(check_list.get(i)) < 10)
 					next_month.add(check_list.get(i));
 				else
@@ -214,16 +218,21 @@ public class Lunch_Plan_Register_Controller {
 				i++;
 			}
 
-			consumerList.setConfirmation(op.getWeeklConfirmation(this_month));
-			consumerList.setConsumer_information_id(op.get_Month_Year_Weekly(0) + "|" + auth.getName());
+			consumerList.setConfirmation(op.getWeeklConfirmation(this_month,uncheckedList,thisMonth_id));
+			consumerList.setConsumer_information_id(thisMonth_id);
 			op.saveConsumerMonthlyRegistration(consumerList);
 
-			consumerList.setConfirmation(op.getMonthlyConfirmation(next_month));
-			consumerList.setConsumer_information_id(op.get_Month_Year_Monthly(1) + "|" + auth.getName());
+			consumerList.setConfirmation(op.getWeeklConfirmation(next_month,uncheckedList,nextMonth_id));
+			consumerList.setConsumer_information_id(thisMonth_id);
 			op.saveConsumerMonthlyRegistration(consumerList);
-		} else {
-			consumerList.setConfirmation(op.getWeeklConfirmation(check_list));
-			consumerList.setConsumer_information_id(op.get_Month_Year_Weekly(0) + "|" + auth.getName());
+		}else if(checker){
+			consumerList.setConfirmation(op.getWeeklConfirmation(check_list,uncheckedList,nextMonth_id));
+			consumerList.setConsumer_information_id(nextMonth_id);
+			op.saveConsumerMonthlyRegistration(consumerList);
+		}
+			else {
+			consumerList.setConfirmation(op.getWeeklConfirmation(check_list,uncheckedList,thisMonth_id));
+			consumerList.setConsumer_information_id(thisMonth_id);
 			op.saveConsumerMonthlyRegistration(consumerList);
 		}
 
@@ -246,12 +255,12 @@ public class Lunch_Plan_Register_Controller {
 		String day_to_day = "( " + dates.get(0) + " - " + dates.get(dates.size() - 1) + " )";
 
 		// set confirmation of user into list
-		list = op.getWeeklyConfirmDate(month_year + "|" + auth.getName(),1);
+		uncheckedList = op.getWeeklyConfirmDate(month_year + "|" + auth.getName(),1);
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		try {
 			// add selected dates into json file
-			json = objectMapper.writeValueAsString(list);
+			json = objectMapper.writeValueAsString(uncheckedList);
 			// add holidays into json file
 			jsonHoliday = objectMapper.writeValueAsString(holidays);
 

@@ -15,19 +15,19 @@ public class CostService implements CostServiceInterface {
 
 	@Autowired
 	private CostRepository costRepository;
-	
+
 	@Override
 	public void saveCosts(List<Cost> costs) {
 		costRepository.saveAll(costs);
-		
+
 	}
 
 	@Override
 	public Cost findByPayer(String payer) {
 	Optional<Cost> costt = costRepository.findById(payer);
-		
+
 		Cost cost = null;
-		
+
 		if (costt.isPresent()) {
 			cost = costt.get();
 		}
@@ -35,21 +35,21 @@ public class CostService implements CostServiceInterface {
 			// we didn't find the employee
 			throw new RuntimeException("Did not find Cost payer - " + payer);
 		}
-		
+
 		return cost;
-	
+
 	}
 
-	
-	
+
+
 	@Override
 	public void save(Cost thecost) {
 	 costRepository.save(thecost);
-	
+
 	}
 
-	
-	
+
+
 	@Override
 	public List<Cost> findAll() {
 		// TODO Auto-generated method stub

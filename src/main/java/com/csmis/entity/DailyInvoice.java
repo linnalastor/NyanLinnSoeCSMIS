@@ -13,27 +13,27 @@ public class DailyInvoice {
 		@Id
 		@Column(name="date")
 		private LocalDate date;
-		
+
 		@Column(name="register_head_count")
 		private int registerHeadCount;
-		
+
 		@Column(name="actual_head_count")
 		private int actualHeadCount;
-		
-		
-		
+
+
+
 		@Column(name="staff_cost")
 		private int staffCost;
-		
+
 		@Column(name="company_cost")
 		private int companyCost;
-		
+
 
 		public DailyInvoice() {
-			
+
 		}
-		
-		
+
+
 		public DailyInvoice(LocalDate date, int registerHeadCount, int actualHeadCount,
 				int staffCost, int companyCost) {
 			super();
@@ -78,8 +78,8 @@ public class DailyInvoice {
 		public void setActualHeadCount(int actualHeadCount) {
 			this.actualHeadCount = actualHeadCount;
 		}
-		
-		
-		
+
+
+
 
 }

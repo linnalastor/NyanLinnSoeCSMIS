@@ -32,5 +32,5 @@ public class Avoidmeat {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 }
