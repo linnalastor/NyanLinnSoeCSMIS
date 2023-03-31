@@ -19,6 +19,9 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 	boolean isweekend;
 
 	ConsumerListRepository consumerListRepository;
+	
+	@Autowired
+	HolidayService holidayService;
 
 	@Autowired
 	public Operator_Register_Service(ConsumerListRepository consumerListRepository) {
@@ -164,7 +167,6 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 	// Start getConfirm Monthly
 	public String getMonthlyConfirmation(List<String> list) {
 
-		String[] holidays = { "05", "26" };
 		String confirmation = "";
 		boolean checker;
 		boolean holiday;
@@ -172,6 +174,15 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 		LocalDate today = LocalDate.now(zone);
 
 		LocalDate day = today.withDayOfMonth(1).plusMonths(1);
+		
+		// get holidays in this month
+		List<String> holidays = null;
+		try {
+			holidays = holidayService.getThisMonthHoliday(day);
+			for(int i=0; i<holidays.size(); i++) {
+				if(holidays.get(i).length()<2) holidays.set(i, "0"+holidays.get(i));
+			}
+		} catch (Exception e1) { }
 
 		// get confirmation string for a month
 		while (day.getMonthValue() == today.getMonthValue() + 1) {

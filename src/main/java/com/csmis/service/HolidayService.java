@@ -62,12 +62,10 @@ public class HolidayService implements HolidayServiceInterface {
 
 	public List<String> getThisMonthHoliday(LocalDate date) {
 		List<Holiday> holidays = holidayRepository.findAll();
-		System.out.println(holidays);
 		List<String> days = new ArrayList<>();
 
 		for (Holiday holiday : holidays) {
 			LocalDate thisdate = holiday.getDate();
-			System.out.println(thisdate);
 			if (thisdate.getMonthValue() == date.getMonthValue())
 				days.add("" + thisdate.getDayOfMonth());
 		}
@@ -95,14 +93,17 @@ public class HolidayService implements HolidayServiceInterface {
 		return dateOnly;
 	}
 
-	public List<ConsumerList> getUpdatedConsumerList(List<Holiday> holidays) {
+	public void getUpdatedConsumerList(List<Holiday> holidays) {
 
-		List<ConsumerList> lunchRegisterList = consumerListRepository.findAll();
-		List<ConsumerList> updatedList = new ArrayList<>();
 		List<LocalDate> dates = new ArrayList<>();
-		List<String> IDs = new ArrayList<>();
 		List<Integer> days;
 		int index=0;
+		
+
+		List<ConsumerList> lunchRegisterList=null;
+		try {
+			lunchRegisterList = consumerListRepository.findAll();
+		} catch (Exception e) {	}
 
 		for (Holiday h : holidays) {
 			dates.add(h.getDate());
@@ -110,42 +111,48 @@ public class HolidayService implements HolidayServiceInterface {
 
 		for (LocalDate date : dates) {
 			for (ConsumerList lunchList : lunchRegisterList) {
+
+				String temp="";
+				String confirmation = lunchList.getConfirmation();
+				for(int i=0;i<confirmation.length();i++) {
+					if(confirmation.charAt(i)=='h')
+						try {
+							temp = confirmation.substring(i+1);
+						} catch (Exception e) { }
+						confirmation = confirmation.substring(0,i)+"x"+temp;
+						lunchList.setConfirmation(confirmation);
+						
+				}
 				if (Integer.parseInt(lunchList.getConsumer_information_id().substring(3, 7)) == date.getYear()) {
 					if (Integer.parseInt(lunchList.getConsumer_information_id().substring(0, 2)) == date
 							.getMonthValue()) {
 						
 						days = getMonthlyDays(date);
-						System.out.println(days);
 
 						boolean flag=false;
 						for(int i=0; i<days.size();i++) {
 							if(date.getDayOfMonth()==days.get(i)) {
 								index=i;
-								System.out.println(days.get(i)+"Match date ==> "+date.getDayOfMonth());
 								flag=true;
 								break;
 							}
 						}
 						if(flag) {
-							String confirmation = lunchList.getConfirmation();
-							System.out.println("index ==> "+index);
-							confirmation = confirmation.substring(0,index)+"h"+confirmation.substring(index+1);
+							try {
+								temp = confirmation.substring(index+1);
+							} catch (Exception e) { }
+							confirmation = confirmation.substring(0,index)+"h"+temp;
 							lunchList.setConfirmation(confirmation);
-							
 						}
 					}
 				}
 				consumerListRepository.save(lunchList);
 			}
 		}
-
-		return updatedList;
-
 	}
 
 	public List<Integer> getMonthlyDays(LocalDate day) {
 		boolean isweekend = false;
-		Integer temp;
 
 		day = day.withDayOfMonth(1);
 		LocalDate thisMonth = day;

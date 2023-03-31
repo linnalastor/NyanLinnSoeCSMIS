@@ -28,10 +28,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Lunch_Plan_Register_Controller {
 
 	@Autowired
-	Operator_Register_Service op;
+	StaffServiceInterface staffService;
 
 	@Autowired
-	StaffServiceInterface staffService;
+	Operator_Register_Service op;
 	
 	@Autowired
 	Prefix_ID_Service prefix_ID_Service;
@@ -42,34 +42,45 @@ public class Lunch_Plan_Register_Controller {
 	@Autowired
 	HolidayService holidayService;
 
+
 	// Start Consumer List Monthly
 	@GetMapping("/lunch_plan/by_month")
 	public String ConsumerListMonthly(Model theModel, Authentication auth) {
-
+		
+		// set date to next month's 1st date
+		LocalDate date= LocalDate.now();
+		date = date.withDayOfMonth(1).plusMonths(1);
+		
 		ObjectMapper objectMapper = new ObjectMapper();
-		String json = null;
+		String jsonUncheckedDates = null;
 		String jsonHoliday = null;
 
-		// for holiday
-		String[] holidays = { "05", "26" };
+		// get holidays in this month
+		List<String> holidays = null;
+		try {
+			holidays = holidayService.getThisMonthHoliday(date);
+			for(int i=0; i<holidays.size(); i++) {
+				if(holidays.get(i).length()<2) holidays.set(i, "0"+holidays.get(i));
+			}
+		} catch (Exception e1) { }
+		
 
 		// for mordel addAttribute
-		String month_year = op.get_Month_Year_Monthly(1);
+		String month_year = prefix_ID_Service.getPrefix_ID(date);
 		String year = month_year.substring(3);
 
 		// set staff already selected dates into selection
-		List<String> list = op.getMonthlyNotRegisteredDate(month_year + "|" + auth.getName());
+		List<String> list = dateService.getMonthlyNotRegisteredDate(month_year+ "|" + auth.getName(), date);
 
 		try {
 			// add selected dates into json file
-			json = objectMapper.writeValueAsString(list);
+			jsonUncheckedDates = objectMapper.writeValueAsString(list);
 			// add holidays into json file
 			jsonHoliday = objectMapper.writeValueAsString(holidays);
-
 		} catch (JsonProcessingException e) {
 		}
 
-		theModel.addAttribute("arrayJson", json);
+		theModel.addAttribute("arrayJson", jsonUncheckedDates);
 		theModel.addAttribute("jsonHoliday", jsonHoliday);
 		theModel.addAttribute("list", op.get_Monthly_Dates(1));
 		theModel.addAttribute("staff", staffService.findByID(auth.getName()));
@@ -82,14 +93,7 @@ public class Lunch_Plan_Register_Controller {
 	public String monthly_register(@RequestParam(value = "list", required = false) List<String> list, Model theModel,
 			Authentication auth) {
 
-		ObjectMapper objectMapper = new ObjectMapper();
-		String json = null;
-		String jsonHoliday = null;
 		ConsumerList consumerList = new ConsumerList();
-
-		// for mordel addAttribute
-		String month_year = op.get_Month_Year_Monthly(1);
-		String year = month_year.substring(3);
 
 		// get confirmation of user updated dates
 		String confirmation = op.getMonthlyConfirmation(list);
@@ -98,56 +102,36 @@ public class Lunch_Plan_Register_Controller {
 		consumerList.setConfirmation(confirmation);
 		consumerList.setConsumer_information_id(op.get_Month_Year_Monthly(1) + "|" + auth.getName());
 		op.saveConsumerMonthlyRegistration(consumerList);
-
-		// for holiday
-		String[] holidays = { "05", "26" };
-
-		// set staff already selected not registered dates into selection
-		list = op.getMonthlyNotRegisteredDate(op.get_Month_Year_Monthly(1) + "|" + auth.getName());
-		try {
-			// add selected dates into json file
-			json = objectMapper.writeValueAsString(list);
-			// add holidays into json file
-			jsonHoliday = objectMapper.writeValueAsString(holidays);
-
-		} catch (JsonProcessingException e) {
-		}
-
-		theModel.addAttribute("arrayJson", json);
-		theModel.addAttribute("jsonHoliday", jsonHoliday);
-		theModel.addAttribute("list", op.get_Monthly_Dates(1));
-		theModel.addAttribute("staff", staffService.findByID(auth.getName()));
-		theModel.addAttribute("month", Month.of(Integer.parseInt(month_year.substring(0, 2))) + " / " + year);
-
-		return "operator/register/ConsumerListMonthly";
+		
+		return "redirect:/operator/lunch_plan/by_month";
 	}
-	// End Consumer ListMonthly
 
 	// preparing for Lunch Plan By week page
 	@GetMapping("/lunch_plan/by_week")
 	public String ConsumerListWeekly(Model theModel, Authentication auth) {
-
+		
+		//get today date 
 		LocalDate today= LocalDate.now();
-		Integer monthValue = today.getMonthValue()+1;
+		
+		String jsonUncheckedDates = null;
+		String jsonHoliday = null;
+		
+		// add days to today till monday
 		while(today.getDayOfWeek() != DayOfWeek.MONDAY) {
 			today = today.plusDays(1);
 		}
 
-		int count=0;
-
-		if(today.getMonthValue()==monthValue) {
-			count = 1;
-		}
-
-		String json = null;
-		String jsonHoliday = null;
-		String month_year = null;
-
-		// set holiday
-		List<String> holidays = holidayService.getThisMonthHoliday(today);
-
 		// get string of month and year of this week
-		month_year = prefix_ID_Service.getPrefix_ID(today);
+		String month_year = prefix_ID_Service.getPrefix_ID(today);
+
+		// get holidays in this month
+		List<String> holidays = null;
+		try {
+			holidays = holidayService.getThisMonthHoliday(today);
+			for(int i=0; i<holidays.size(); i++) {
+				if(holidays.get(i).length()<2) holidays.set(i, "0"+holidays.get(i));
+			}
+		} catch (Exception e1) { }
 
 		// get this week days
 		List<String> dates = op.getWeeklyDate();
@@ -163,7 +147,7 @@ public class Lunch_Plan_Register_Controller {
 		ObjectMapper objectMapper = new ObjectMapper();
 		try {
 			// add selected dates into json file
-			json = objectMapper.writeValueAsString(list);
+			jsonUncheckedDates = objectMapper.writeValueAsString(list);
 			// add holidays into json file
 			jsonHoliday = objectMapper.writeValueAsString(holidays);
 
@@ -173,7 +157,7 @@ public class Lunch_Plan_Register_Controller {
 		theModel.addAttribute("month", Month.of(month) + " / " + year);
 		theModel.addAttribute("day_to_day", day_to_day);
 		theModel.addAttribute("listweeklydate", dates);
-		theModel.addAttribute("arrayJson", json);
+		theModel.addAttribute("arrayJson", jsonUncheckedDates);
 		theModel.addAttribute("jsonHoliday", jsonHoliday);
 		theModel.addAttribute("staff", staffService.findByID(auth.getName()));
 		return "operator/register/ConsumerListWeekly";
@@ -197,7 +181,7 @@ public class Lunch_Plan_Register_Controller {
 		int i = 0;
 
 		// get this week days
-		List<String> uncheckedList = op.getWeeklyDate();
+		List<String> uncheckedList = dateService.getWeeklyDate();
 
 		// check if this week contain next month's days
 		boolean checker = false;

@@ -116,8 +116,18 @@ public class DateService {
 		public List<String> getMonthlyNotRegisteredDate(String id, LocalDate today) {
 
 			String confirmation = getConfirmation(id);
-			List<String> days;
-			return null;
+			List<String> days = getMonthlyDates(today);
+			List<String> notRegisteredDates = new ArrayList<>();
+			
+			if (confirmation != null) {
+				for (int i = 0; i < confirmation.length(); i++) {
+					char c = confirmation.charAt(i);
+					if (c == 'x') {
+						notRegisteredDates.add(days.get(i));
+					}
+				}
+			}
+			return notRegisteredDates;
 		}
 		
 		public List<String> getUncheckedList(String id, LocalDate date){
