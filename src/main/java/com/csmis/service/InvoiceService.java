@@ -42,6 +42,12 @@ public class InvoiceService implements InvoiceServiceInterface {
 
 	}
 
+	@Override
+	public LocalDate getLastDate() {
+
+		return invoiceRepository.getLastDate();
+	}
+
 
 
 

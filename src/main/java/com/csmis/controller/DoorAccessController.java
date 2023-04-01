@@ -22,7 +22,7 @@ import com.csmis.entity.DailyInvoice;
 import com.csmis.entity.HeadCount;
 import com.csmis.entity.Lunch_Report;
 import com.csmis.service.DoorAccessService;
-import com.csmis.service.ExcelImporter;
+import com.csmis.service.ExcelService;
 import com.csmis.service_interface.CostServiceInterface;
 import com.csmis.service_interface.HeadCountServiceInterface;
 import com.csmis.service_interface.InvoiceServiceInterface;
@@ -34,7 +34,7 @@ import com.csmis.service_interface.StaffServiceInterface;
 public class DoorAccessController {
 
 	@Autowired
-	private ExcelImporter excelImporter;
+	private ExcelService excelImporter;
 	@Autowired
 	DoorAccessService door_Access_Service;
 	@Autowired

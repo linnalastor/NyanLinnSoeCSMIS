@@ -304,10 +304,11 @@
 
 		for (var i = 0; i < holidayarr.length; i++) {
 			var myholiday = document.getElementById(holidayarr[i] + "-show");
-			/* console.log(myholiday); */
-			myholiday.style.backgroundColor = "yellow";
-			myholiday.style.color = "black";
-			myholiday.style.border = "1px solid white";
+			if(myholiday!=null){
+				myholiday.style.backgroundColor = "yellow";
+				myholiday.style.color = "black";
+				myholiday.style.border = "1px solid white";
+			}
 
 		}
 

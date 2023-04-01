@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,12 +24,14 @@ import com.csmis.entity.InvoiceCashier;
 import com.csmis.entity.InvoiceReceiveBy;
 import com.csmis.entity.PaymentVoucher;
 import com.csmis.entity.Restaurant;
+import com.csmis.entity.StaffDetails;
 import com.csmis.service_interface.InvoiceApprovedByServiceInterface;
 import com.csmis.service_interface.InvoiceCashierServiceInterface;
 import com.csmis.service_interface.InvoiceReceiveByServiceInterface;
 import com.csmis.service_interface.InvoiceServiceInterface;
 import com.csmis.service_interface.PaidVoucherServiceInterface;
 import com.csmis.service_interface.RestaurantServiceInterface;
+import com.csmis.service_interface.StaffDetailsServiceInterface;
 
 @Controller
 @RequestMapping("/admin")
@@ -39,12 +42,13 @@ public class InvoiceController {
 	private InvoiceApprovedByServiceInterface approvedByServie;
 	private RestaurantServiceInterface resturantService;
 	private PaidVoucherServiceInterface paidVoucherServiceInterface;
+	private StaffDetailsServiceInterface staffDetailsServiceInterface;
 
 	@Autowired
 	public InvoiceController(InvoiceServiceInterface theInvoiceService,
 			InvoiceCashierServiceInterface theCashierSerivice, InvoiceReceiveByServiceInterface theReceivedService,
 			InvoiceApprovedByServiceInterface theApprovedByServie, RestaurantServiceInterface theResturantService,
-			PaidVoucherServiceInterface thePaidVoucherServiceInterface) {
+			PaidVoucherServiceInterface thePaidVoucherServiceInterface,StaffDetailsServiceInterface theStaffDetailsServiceInterface) {
 
 		dailyInvoiceService = theInvoiceService;
 		cashierSerivice = theCashierSerivice;
@@ -52,11 +56,12 @@ public class InvoiceController {
 		approvedByServie = theApprovedByServie;
 		resturantService = theResturantService;
 		paidVoucherServiceInterface = thePaidVoucherServiceInterface;
+		staffDetailsServiceInterface = theStaffDetailsServiceInterface;
 
 	}
 
 	@GetMapping("/invoice")
-	public String DailyInvoice(Model model) {
+	public String DailyInvoice(Model model,Authentication auth) {
 
 		LocalDate date = LocalDate.now();
 		LocalDate firstDate = LocalDate.now();
@@ -67,24 +72,28 @@ public class InvoiceController {
 		List<InvoiceReceiveBy> received = receivedService.findAll();
 		List<InvoiceApprovedBy> approve = approvedByServie.findAll();
 		List<Restaurant> resturant = resturantService.findAll();
+		StaffDetails staffDetail = staffDetailsServiceInterface.getStaffDetailByID(auth.getName());
+		//System.out.println(staffDetail);
+		String staffPassword = staffDetail.getPassword();
+		LocalDate lastDate = LocalDate.now();
 
 		String tempLatestDate = null;
 		try {
 			tempLatestDate = paidVoucherServiceInterface.getLastDate();
 			String latestDate = tempLatestDate.substring(tempLatestDate.length() - 8);
+			System.out.println("hey latestDate++++++++"+latestDate);
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
 			startDate = LocalDate.parse(latestDate, formatter).plusDays(3);
 			endDate = startDate.plusDays(4);
 		} catch (Exception e) {
 		}
 		if( tempLatestDate == null) {
 			firstDate=dailyInvoiceService.getFirstDate();
-		}
 
 		if(firstDate.getDayOfWeek().getValue()<DayOfWeek.FRIDAY.getValue()) {
 			while(firstDate.getDayOfWeek()!=DayOfWeek.MONDAY) {
 				firstDate = firstDate.minusDays(1);
-				System.out.println(firstDate.getDayOfWeek());
 			}
 		}else{
 			while(firstDate.getDayOfWeek()!=DayOfWeek.MONDAY) {
@@ -93,6 +102,7 @@ public class InvoiceController {
 		}
 		startDate=firstDate;
 		endDate=startDate.plusDays(4);
+		}
 
 
 //		boolean isFirstTime = true;
@@ -104,10 +114,14 @@ public class InvoiceController {
 		model.addAttribute("received", received);
 		model.addAttribute("approve", approve);
 		model.addAttribute("resturant", resturant);
+		model.addAttribute("staffPassword", staffPassword);
 		model.addAttribute("status", false);
+
+
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
 		model.addAttribute("paymentDate", date);
+		model.addAttribute("lastDate", lastDate);
 //		model.addAttribute("firstTime",isFirstTime);
 
 		return "admin/invoice/invoice";
@@ -177,19 +191,28 @@ public class InvoiceController {
 		model.addAttribute("endDate", endDate);
 		model.addAttribute("paymentDate", paymentDate);
 
+
 		System.out.println("Hello mother fucker+++++startDate------------" + startDate);
 		model.addAttribute("cashier", cashier);
 		model.addAttribute("received", received);
 		model.addAttribute("approve", approve);
 		model.addAttribute("resturant", resturant);
+
 		String SpaymentDate = paymentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		String SstartDate = startDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		String SendDate = endDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		String year = SpaymentDate.substring(0, 4);
-		String month = SpaymentDate.substring(5, 7);
-		String day = SpaymentDate.substring(8);
-		String voucherNo = "CSMIS-" + year + month + day + ": " + year + month + SstartDate.substring(8) + " ~" + year
-				+ month + SendDate.substring(8);
+		String pYear = SpaymentDate.substring(0, 4);
+	    String pMonth = SpaymentDate.substring(5, 7);
+		String pDay = SpaymentDate.substring(8);
+//		String voucherNo = "CSMIS-" + year + month + day + ": " + year + month + SstartDate.substring(8) + " ~" + year
+//				+ month + SendDate.substring(8);
+		String sYear = SstartDate.substring(0, 4);
+		 String sMonth = SstartDate.substring(5, 7);
+			String sDay = SstartDate.substring(8);
+		String eYear= SendDate.substring(0, 4);
+		 String eMonth = SendDate.substring(5, 7);
+			String eDay = SendDate.substring(8);
+		String voucherNo="CSMIS-"+pYear+pMonth+pDay+": "+sYear+sMonth+sDay+" ~"+eYear+eMonth+eDay;
 		model.addAttribute("voucherNo", voucherNo);
 		return "admin/invoice/invoice";
 	}
@@ -198,6 +221,7 @@ public class InvoiceController {
 	public String MonthlyInvoice(Model model) {
 		List<PaymentVoucher> monthlyInvoice = paidVoucherServiceInterface.findAll();
 		model.addAttribute("monthlyInvoice", monthlyInvoice);
+
 		return "admin/invoice/paidinvoice";
 
 	}
@@ -207,7 +231,8 @@ public class InvoiceController {
 
 		paidVoucherServiceInterface.save(thePaymentVoucher);
 
-		return "redirect:/admin/monthlyInvoice";
+
+		return "redirect:/admin/invoice";
 
 	}
 

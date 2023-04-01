@@ -15,18 +15,18 @@ import com.csmis.entity.ConsumerList;
 
 @Service
 public class AdminRegisterService {
-	
+
 	boolean isweekend;
 
 	ConsumerListRepository consumerListRepository;
-	
+
 
 	@Autowired
 	public AdminRegisterService(ConsumerListRepository consumerListRepository) {
 		this.consumerListRepository = consumerListRepository;
 	}
-	
-	
+
+
 	// get not eat day
 		public List<String> getStaffIdList(List<ConsumerList> consumerLists,String month_year) {
 			LocalDate today = LocalDate.now();
@@ -80,8 +80,8 @@ public class AdminRegisterService {
 		//---------------------------------------------------
 
 		//Month Register
-		
-		
+
+
 		// get dates of next month
 		public List<String> get_Monthly_Dates(int count) {
 			ZoneId zone = ZoneId.systemDefault();
@@ -149,7 +149,7 @@ public class AdminRegisterService {
 			}
 			return days;
 		}
-		
+
 		// get admin non register date from database
 		public List<String> getAdminMonthlyNotRegisteredDate(String id) {
 			ConsumerList consumerList = new ConsumerList();
@@ -196,7 +196,7 @@ public class AdminRegisterService {
 			}
 			return retuenList;
 		}
-		
+
 		//---------------------------------------------------
 
 		//Week Register

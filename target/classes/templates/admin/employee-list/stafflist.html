@@ -167,28 +167,12 @@
 			<div class="form-group mt-3">
 				<label for="staff_file fs-3"><b>Import Staff CSV : </b></label> <input
 					type="file" name="staff_file" class="form-control-file"
-					id="staff_file" accept=".csv">
+					id="staff_file">
 				<button type="submit" onclick="startLoading()" class="btn btn-success">Import</button>
-				<!-- <script>
-        				function startLoading() {
-           				Notiflix.Loading.dots('Loading...');
-
-            			// Perform some long-running task
-            			// ...
-
-            			Notiflix.Loading.remove();
-        				}
-   				</script> -->
    				<script>
     				function startLoading() {
-       				 Notiflix.Loading.dots('Loading.....');
-
-        			// Simulate a long-running task by waiting for 3 seconds
-       				 setTimeout(function() {
-           			 // Task complete, remove the loading indicator
-         			Notiflix.Loading.remove();
-        			}, 300000);
-   				 }
+       					Notiflix.Loading.dots('Loading.....');
+   				 	}
 			</script>
 			</div>
 		</form>
@@ -206,8 +190,7 @@
 			Add New Staff
 		</a>
 				<!--display users list-->
-				<table id="dataTable" class="table table-striped mt-5"
-					th:if="${status}">
+				<table id="dataTable" class="table table-striped mt-5">
 
 					<thead>
 						<tr>
