@@ -166,8 +166,13 @@ body{
 .reporttables th{
     top: 0;
     position: sticky;
-    background-color: #2874a6;
+   background-color: rgb(1, 80, 120);
 }
+
+.reporttables td{
+	background-color: lightblue;	
+}
+
 
 .searchnames{
     width: 300px;

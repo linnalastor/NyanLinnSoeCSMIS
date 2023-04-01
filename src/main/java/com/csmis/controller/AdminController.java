@@ -80,69 +80,69 @@ public class AdminController {
 //		return "admin/consumer-list/consumer_today";
 //	}
 
-	/* Report List by day */
-	@GetMapping("/report/by_days")
-	public String reportList() {
-		return "admin/report-list/byday-report-list/report";
-	}
-
-	@GetMapping("/report/by_days/nonregistered")
-	public String nonRegister() {
-		return "admin/report-list/byday-report-list/nonregister";
-	}
-
-	@GetMapping("/report/by_days/not_picked")
-	public String nonConsumer() {
-		return "admin/report-list/byday-report-list/nonconsumer";
-	}
-
-	/* Report List Monthly */
-	@GetMapping("/report/by_month/")
-	public String reportListMonth() {
-		return "admin/report-list/month-report-list/report";
-	}
-
-	@GetMapping("/report/by_month/nonregisteredr")
-	public String reportMonthNoRegister() {
-		return "admin/report-list/month-report-list/monthnonregister";
-	}
-
-	@GetMapping("/report/by_month/not_picked")
-	public String reportMonthNoConsumer() {
-		return "admin/report-list/month-report-list/monthnoconsumer";
-	}
-
-	/* Report List Weekly */
-	@GetMapping("/report/by_week")
-	public String reportListWeek() {
-		return "admin/report-list/week-report-list/weekreport";
-	}
-
-	@GetMapping("/report/by_week/nonregistered")
-	public String reportWeekNoRegister() {
-		return "admin/report-list/week-report-list/weeknoregister";
-	}
-
-	@GetMapping("/report/by_week/not_picked")
-	public String reportWeekNoConsumer() {
-		return "admin/report-list/week-report-list/weeknoconsumer";
-	}
-
-	/* Report List Today */
-	@GetMapping("/report/today")
-	public String reportToday() {
-		return "admin/report-list/today-report-list/todayreport";
-	}
-
-	@GetMapping("/report/today/nonregistered")
-	public String reportTodayNoRegister() {
-		return "admin/report-list/today-report-list/todaynoregister";
-	}
-
-	@GetMapping("/report/today/not_picked")
-	public String reportTodayNoConsumer() {
-		return "admin/report-list/today-report-list/todaynoconsumer";
-	}
+//	/* Report List by day */
+//	@GetMapping("/report/by_days")
+//	public String reportList() {
+//		return "admin/report-list/byday-report-list/report";
+//	}
+//
+//	@GetMapping("/report/by_days/nonregistered")
+//	public String nonRegister() {
+//		return "admin/report-list/byday-report-list/nonregister";
+//	}
+//
+//	@GetMapping("/report/by_days/not_picked")
+//	public String nonConsumer() {
+//		return "admin/report-list/byday-report-list/nonconsumer";
+//	}
+//
+//	/* Report List Monthly */
+//	@GetMapping("/report/by_month/")
+//	public String reportListMonth() {
+//		return "admin/report-list/month-report-list/report";
+//	}
+//
+//	@GetMapping("/report/by_month/nonregisteredr")
+//	public String reportMonthNoRegister() {
+//		return "admin/report-list/month-report-list/monthnonregister";
+//	}
+//
+//	@GetMapping("/report/by_month/not_picked")
+//	public String reportMonthNoConsumer() {
+//		return "admin/report-list/month-report-list/monthnoconsumer";
+//	}
+//
+//	/* Report List Weekly */
+//	@GetMapping("/report/by_week")
+//	public String reportListWeek() {
+//		return "admin/report-list/week-report-list/weekreport";
+//	}
+//
+//	@GetMapping("/report/by_week/nonregistered")
+//	public String reportWeekNoRegister() {
+//		return "admin/report-list/week-report-list/weeknoregister";
+//	}
+//
+//	@GetMapping("/report/by_week/not_picked")
+//	public String reportWeekNoConsumer() {
+//		return "admin/report-list/week-report-list/weeknoconsumer";
+//	}
+//
+//	/* Report List Today */
+//	@GetMapping("/report/today")
+//	public String reportToday() {
+//		return "admin/report-list/today-report-list/todayreport";
+//	}
+//
+//	@GetMapping("/report/today/nonregistered")
+//	public String reportTodayNoRegister() {
+//		return "admin/report-list/today-report-list/todaynoregister";
+//	}
+//
+//	@GetMapping("/report/today/not_picked")
+//	public String reportTodayNoConsumer() {
+//		return "admin/report-list/today-report-list/todaynoconsumer";
+//	}
 
 	/* EmployeeList */
 	@GetMapping("/staff_list")

@@ -136,13 +136,16 @@
 				<div class="div4"
 					th:onclick="window.location.href='/operator/report/yesterday'">Yesterday</div>
 				<div class="div4"
-					th:onclick="window.location.href='/operator/report/last_week'">Last Week</div>
+					th:onclick="window.location.href='/operator/report/last_week'">Last
+					Week</div>
 				<div class="div3"
-					th:onclick="window.location.href='/operator/report/last_month'">Last Month</div>
+					th:onclick="window.location.href='/operator/report/last_month'">Last
+					Month</div>
 			</div>
 		</div>
 
-		<div style="font-size: x-large; font-weight: 600; margin-top: 1%;" th:text="${Month_Year}"></div>
+		<div style="font-size: x-large; font-weight: 600; margin-top: 1%;"
+			th:text="${Month_Year}"></div>
 		<div
 			style="width: 35%; background-color: lightblue; display: flex; flex-direction: column; align-items: center; border-radius: 25px; padding-bottom: 1%;">
 			<div class="p-2"
@@ -164,32 +167,77 @@
 					<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">T-</label></li>
 					<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">F-</label></li>
 					<li class="px-3 mb-3" th:each="listweeklydate : ${listweeklydate}">
-						<label class="px-2 mb-1" style="background-color: green;"
+						<label class="px-2 mb-1" style="background-color: grey;"
 						th:id="${listweeklydate} + '-showweekday'"
 						th:text="${listweeklydate}"></label>
 					</li>
 				</ul>
 			</div>
-				
+
 		</div>
 	</div>
-	
+
 	<script th:inline="javascript">
-	var array = /*[[${notpickeddays}]]*/'';
-	var arr = JSON.parse(array);
-	for (var i = 0; i < arr.length; i++) {
-		var myvar = document.getElementById(arr[i] + "-showweekday");
-		
-		if(myvar!=null){
-			myvar.style.backgroundColor = "red";
-			myvar.style.color = "white";
-			myvar.style.border = "1px solid white";
-			console.log(arr[i]);
+		var notPickedArray = /*[[${notpickeddays}]]*/'';
+		var notPickedArr = JSON.parse(notPickedArray);
+		for (var i = 0; i < notPickedArr.length; i++) {
+			var myvar = document.getElementById(notPickedArr[i]
+					+ "-showweekday");
+
+			if (myvar != null) {
+				myvar.style.backgroundColor = "red";
+				myvar.style.color = "white";
+				myvar.style.border = "1px solid white";
+				console.log(notPickedArr[i]);
+			}
 		}
-	}
-	</script>	
-	
-	
+
+		var pickedArray = /*[[${pickeddays}]]*/'';
+		var pickedArr = JSON.parse(pickedArray);
+		for (var i = 0; i < pickedArr.length; i++) {
+			var myvar = document.getElementById(pickedArr[i] + "-showweekday");
+
+			if (myvar != null) {
+				myvar.style.backgroundColor = "green";
+				myvar.style.color = "white";
+				myvar.style.border = "1px solid white";
+				
+				console.log(pickedArr[i]);
+			}
+		}
+		var notRegisterArray = /*[[${notregistereddays}]]*/'';
+		console.log("..."+ notRegisterArray);
+		var notRegisterArr = JSON.parse(notRegisterArray);
+		for (var i = 0; i < notRegisterArr.length; i++) {
+			var myvar = document.getElementById(notRegisterArr[i] + "-showweekday");
+
+			if (myvar != null) {
+				myvar.style.backgroundColor = "yellow";
+				myvar.style.color = "white";
+				myvar.style.border = "1px solid white";
+				
+				console.log(notRegisterArr[i]);
+			}
+		}
+		
+		var holidayArray = /*[[${holidays}]]*/'';
+		
+		var holidayArr = JSON.parse(holidayArray);
+		
+		
+		for (var i = 0; i < holidayArr.length; i++) {
+			var myvar = document.getElementById(holidayArr[i] + "-showweekday");
+			
+			if (myvar != null) {
+				myvar.style.backgroundColor = "white";
+				myvar.style.color = "black";
+				myvar.style.border = "1px solid black";
+			}
+		}
+	</script>
+
+
+
 	<script src="https://kit.fontawesome.com/e0faeaf50f.js"
 		crossorigin="anonymous"></script>
 	<!-- bootstrap css1 js1 -->

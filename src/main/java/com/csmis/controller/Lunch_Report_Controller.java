@@ -26,8 +26,10 @@ public class Lunch_Report_Controller {
 
 	@Autowired
 	Operator_Report_Service operatorReportService;
+	
 	@Autowired
 	Operator_Register_Service operatorRegisterService;
+	
 	@Autowired
 	HolidayService holidayService;
 
@@ -71,8 +73,11 @@ public class Lunch_Report_Controller {
 		} catch (Exception e) {
 		}
 		for(String s:holiday) {
-			if(dayvalue.equals(s)) checker=false;
-			status="holiday";
+			if(dayvalue.equals(s)) {
+				checker=false;
+				System.out.println("Checker Holiday ==> "+s);
+				status="holiday";
+			}
 
 
 		}
@@ -97,10 +102,11 @@ public class Lunch_Report_Controller {
 			for (String s : operatorReportService.getPickedUpWithoutRegisteredDays(reportStatus,0)) {
 				// check if today is not picked day
 				if (dayvalue.equals(s))
-					status = "notRegistered";
+					status = "notregistered";
 			}
 
-		}
+		}else status = "notpicked";
+		System.out.println(status);
 
 		theModel.addAttribute("day", yesterday);
 		// picked/not picked/not registered/holiday status
@@ -120,17 +126,20 @@ public class Lunch_Report_Controller {
 		List<String> pickedDates=new ArrayList<>();
 
 		//get today date in last month
-		LocalDate today = LocalDate.now().minusMonths(1);
+		LocalDate today = LocalDate.now().minusMonths(0);
 
-
+		for (int i = 0; i < holidays.size(); i++) {
+			if (holidays.get(i).length() < 2)
+				holidays.set(i, "0" + holidays.get(i));
+		}
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		String notPickedDatesString = null;
 		String notRegisteredDatesString=null;
 		String pickedDatesString=null;
 		String holidayString=null;
-
-
+		
+		
 		// get report for user
 		String id = operatorReportService.get_Month_Year_ReportMonthly(0) + "|" + auth.getName();
 
@@ -145,6 +154,8 @@ public class Lunch_Report_Controller {
 			lunchConfirmation = operatorRegisterService.getLunchRegistration_by_ID(id).getConfirmation();
 		} catch (Exception e) {
 		}
+		
+		
 
 		if(reportStatus!=null) {
 			if(lunchConfirmation!=null) {
@@ -153,6 +164,7 @@ public class Lunch_Report_Controller {
 			}
 			notRegisteredDates = operatorReportService.getPickedUpWithoutRegisteredDays(reportStatus, 0);
 		}
+		
 		holidayString = objectMapper.writeValueAsString(holidays);
 		notRegisteredDatesString = objectMapper.writeValueAsString(notRegisteredDates);
 		pickedDatesString = objectMapper.writeValueAsString(pickedDates);
@@ -162,6 +174,8 @@ public class Lunch_Report_Controller {
 		theModel.addAttribute("notregistereddays", notRegisteredDatesString);
 		theModel.addAttribute("pickeddays", pickedDatesString);
 		theModel.addAttribute("notpickeddays", notPickedDatesString);
+		
+		
 
 		List<String> list = operatorReportService.getWeeklyDate();
 		theModel.addAttribute("Month_Year", today.getMonth().toString() + " / " + today.getYear());
@@ -179,6 +193,11 @@ public class Lunch_Report_Controller {
 		List<String> notRegisteredDates=new ArrayList<>();
 		List<String> pickedDates=new ArrayList<>();
 
+		for (int i = 0; i < holidays.size(); i++) {
+			if (holidays.get(i).length() < 2)
+				holidays.set(i, "0" + holidays.get(i));
+		}
+		
 		LocalDate today = LocalDate.now().minusMonths(1);
 
 		ObjectMapper objectMapper = new ObjectMapper();

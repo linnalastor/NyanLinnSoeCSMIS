@@ -171,8 +171,12 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 
 		// get picked dates which is '1' in report
 		for (int i = 0; i < monthly_dates.size(); i++) {
-				if (report.charAt(i) == '1')
-					days.add(monthly_dates.get(i));
+				try {
+					if (report.charAt(i) == '1')
+						days.add(monthly_dates.get(i));
+				} catch (Exception e) {
+					
+				}
 		}
 		return days;
 	}
@@ -208,8 +212,12 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 
 		// get not registered picked dates which is 'n' in report
 		for (int i = 0; i < monthly_dates.size(); i++) {
-				if (report.charAt(i) == 'n')
-					days.add(monthly_dates.get(i));
+				try {
+					if (report.charAt(i) == 'n')
+						days.add(monthly_dates.get(i));
+				} catch (Exception e) {
+					
+				}
 		}
 		return days;
 	}
