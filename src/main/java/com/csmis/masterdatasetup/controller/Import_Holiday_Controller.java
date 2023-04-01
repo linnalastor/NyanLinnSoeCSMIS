@@ -69,7 +69,7 @@ public class Import_Holiday_Controller {
     		  holidayService.deleteAll();
 
     		  holidayService.saveHolidays(holiday);
-    		  
+
 
     	  }catch (Exception ex) {
                 model.addAttribute("message", "An error is occurred while processing the CSV file.");

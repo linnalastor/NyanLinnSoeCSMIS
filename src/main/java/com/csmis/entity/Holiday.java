@@ -32,7 +32,7 @@ public class Holiday {
 
 		String[] dateFormats = {"dd-MM-yy","d-MM-yy","dd-m-yy","d-m-yy"};
 		for(String foramat: dateFormats) {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern(foramat);	
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern(foramat);
             try {
             	this.date = LocalDate.parse(sdate,formatter);
             	break;

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
@@ -82,14 +83,14 @@ public class InvoiceController {
 			String latestDate = tempLatestDate.substring(tempLatestDate.length() - 8);
 			System.out.println("hey latestDate++++++++"+latestDate);
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-			
+
 			startDate = LocalDate.parse(latestDate, formatter).plusDays(3);
 			endDate = startDate.plusDays(4);
 		} catch (Exception e) {
 		}
 		if( tempLatestDate == null) {
 			firstDate=dailyInvoiceService.getFirstDate();
-		
+
 		if(firstDate.getDayOfWeek().getValue()<DayOfWeek.FRIDAY.getValue()) {
 			while(firstDate.getDayOfWeek()!=DayOfWeek.MONDAY) {
 				firstDate = firstDate.minusDays(1);
@@ -102,7 +103,7 @@ public class InvoiceController {
 		startDate=firstDate;
 		endDate=startDate.plusDays(4);
 		}
-		
+
 
 //		boolean isFirstTime = true;
 		int Ctotal = 0;
@@ -115,8 +116,8 @@ public class InvoiceController {
 		model.addAttribute("resturant", resturant);
 		model.addAttribute("staffPassword", staffPassword);
 		model.addAttribute("status", false);
-	
-		 
+
+
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
 		model.addAttribute("paymentDate", date);
@@ -138,7 +139,7 @@ public class InvoiceController {
 		List<InvoiceApprovedBy> approve = approvedByServie.findAll();
 		List<Restaurant> resturant = resturantService.findAll();
 		List<DailyInvoiceDTO> dto = new ArrayList<>();
-		
+
 		int Ctotal = 0;
 		int Stotal = 0;
 		int numOfPax = 0;
@@ -189,14 +190,14 @@ public class InvoiceController {
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
 		model.addAttribute("paymentDate", paymentDate);
-		
+
 
 		System.out.println("Hello mother fucker+++++startDate------------" + startDate);
 		model.addAttribute("cashier", cashier);
 		model.addAttribute("received", received);
 		model.addAttribute("approve", approve);
 		model.addAttribute("resturant", resturant);
-		
+
 		String SpaymentDate = paymentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		String SstartDate = startDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		String SendDate = endDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -220,7 +221,7 @@ public class InvoiceController {
 	public String MonthlyInvoice(Model model) {
 		List<PaymentVoucher> monthlyInvoice = paidVoucherServiceInterface.findAll();
 		model.addAttribute("monthlyInvoice", monthlyInvoice);
-		
+
 		return "admin/invoice/paidinvoice";
 
 	}
@@ -229,7 +230,7 @@ public class InvoiceController {
 	public String MonthlyInvoice(@ModelAttribute("Month}") PaymentVoucher thePaymentVoucher) {
 
 		paidVoucherServiceInterface.save(thePaymentVoucher);
-		
+
 
 		return "redirect:/admin/invoice";
 
@@ -239,7 +240,7 @@ public class InvoiceController {
 	public String DetailInvoice(Model model) {
 		List<DailyInvoice> theInvoices = dailyInvoiceService.findAll();
 		List<DailyInvoiceDTO> dto = new ArrayList<>();
-		
+
 
 		for (DailyInvoice dailyInvoice : theInvoices) {
 			DailyInvoiceDTO temp = new DailyInvoiceDTO();
@@ -263,7 +264,7 @@ public class InvoiceController {
 		}
 		// add to the spring model
 		model.addAttribute("invoices", dto);
-		
+
 		model.addAttribute("status", false);
 
 		return "admin/invoice/detailInvoice";

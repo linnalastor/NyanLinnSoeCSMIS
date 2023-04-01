@@ -32,13 +32,13 @@ public class Lunch_Plan_Register_Controller {
 
 	@Autowired
 	Operator_Register_Service op;
-	
+
 	@Autowired
 	Prefix_ID_Service prefix_ID_Service;
-	
+
 	@Autowired
 	DateService dateService;
-	
+
 	@Autowired
 	HolidayService holidayService;
 
@@ -46,11 +46,11 @@ public class Lunch_Plan_Register_Controller {
 	// Start Consumer List Monthly
 	@GetMapping("/lunch_plan/by_month")
 	public String ConsumerListMonthly(Model theModel, Authentication auth) {
-		
+
 		// set date to next month's 1st date
 		LocalDate date= LocalDate.now();
 		date = date.withDayOfMonth(1).plusMonths(1);
-		
+
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonUncheckedDates = null;
 		String jsonHoliday = null;
@@ -63,7 +63,7 @@ public class Lunch_Plan_Register_Controller {
 				if(holidays.get(i).length()<2) holidays.set(i, "0"+holidays.get(i));
 			}
 		} catch (Exception e1) { }
-		
+
 
 		// for mordel addAttribute
 		String month_year = prefix_ID_Service.getPrefix_ID(date);
@@ -102,20 +102,20 @@ public class Lunch_Plan_Register_Controller {
 		consumerList.setConfirmation(confirmation);
 		consumerList.setConsumer_information_id(op.get_Month_Year_Monthly(1) + "|" + auth.getName());
 		op.saveConsumerMonthlyRegistration(consumerList);
-		
+
 		return "redirect:/operator/lunch_plan/by_month";
 	}
 
 	// preparing for Lunch Plan By week page
 	@GetMapping("/lunch_plan/by_week")
 	public String ConsumerListWeekly(Model theModel, Authentication auth) {
-		
-		//get today date 
+
+		//get today date
 		LocalDate today= LocalDate.now();
-		
+
 		String jsonUncheckedDates = null;
 		String jsonHoliday = null;
-		
+
 		// add days to today till monday
 		while(today.getDayOfWeek() != DayOfWeek.MONDAY) {
 			today = today.plusDays(1);
@@ -170,7 +170,7 @@ public class Lunch_Plan_Register_Controller {
 		LocalDate today= LocalDate.now();
 		LocalDate nextMonthDay = today.plusMonths(1);
 		Integer monthValue = nextMonthDay.getMonthValue();
-		
+
 		while(today.getDayOfWeek() != DayOfWeek.MONDAY) {
 			today = today.plusDays(1);
 		}
@@ -231,7 +231,7 @@ public class Lunch_Plan_Register_Controller {
 			consumerList.setConsumer_information_id(thisMonth_id);
 			op.saveConsumerMonthlyRegistration(consumerList);
 			}
-		
+
 		return "redirect:/operator/lunch_plan/by_week";
 	}
 

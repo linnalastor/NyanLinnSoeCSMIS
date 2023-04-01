@@ -14,7 +14,7 @@ import com.csmis.entity.ConsumerList;
 
 @Service
 public class DateService {
-	
+
 	@Autowired
 	ConsumerListRepository consumerListRepository;
 
@@ -41,15 +41,15 @@ public class DateService {
 			}
 			return days;
 		}
-		
-		
+
+
 		// get dates of next month
 		public List<String> getMonthlyDates(LocalDate today) {
-			
+
 			boolean isweekend = false;
-			
+
 			LocalDate day = today.withDayOfMonth(1);
-			
+
 			List<String> days = new ArrayList<>();
 			Integer temp;
 
@@ -111,14 +111,14 @@ public class DateService {
 			}
 			return days;
 		}
-		
-		
+
+
 		public List<String> getMonthlyNotRegisteredDate(String id, LocalDate today) {
 
 			String confirmation = getConfirmation(id);
 			List<String> days = getMonthlyDates(today);
 			List<String> notRegisteredDates = new ArrayList<>();
-			
+
 			if (confirmation != null) {
 				for (int i = 0; i < confirmation.length(); i++) {
 					char c = confirmation.charAt(i);
@@ -129,14 +129,14 @@ public class DateService {
 			}
 			return notRegisteredDates;
 		}
-		
+
 		public List<String> getUncheckedList(String id, LocalDate date){
-			
+
 			String confirmation = getConfirmation(id);
 
 			List<String> days = getMonthlyDates(date);
 			List<String> uncheckedDates = new ArrayList<>();
-			
+
 			if(confirmation!=null) {
 				for (int i = 0; i < confirmation.length(); i++) {
 					char c = confirmation.charAt(i);
@@ -147,17 +147,17 @@ public class DateService {
 			}
 			return uncheckedDates;
 		}
-		
+
 		public String getConfirmation(String id) {
 			ConsumerList consumerList = new ConsumerList();
 			String confirmation = null;
-			
+
 			try {
 				consumerList = consumerListRepository.getReferenceById(id);
 				confirmation = consumerList.getConfirmation();
 			} catch (Exception exception) { }
-			
+
 			return confirmation;
 		}
-		
+
 }

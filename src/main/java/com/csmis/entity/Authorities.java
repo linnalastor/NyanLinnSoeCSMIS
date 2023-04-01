@@ -34,7 +34,7 @@ public class Authorities {
 	super();
 	this.id = id;
 	this.authority = authority;
-	
+
 }
 
 
@@ -73,5 +73,5 @@ public class Authorities {
 
 
 
-	
+
 }

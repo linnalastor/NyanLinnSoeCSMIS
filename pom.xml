@@ -89,11 +89,22 @@
 			<version>1.5.5</version>
 		</dependency>
 		<!--Encode password -->
-			<dependency>
-    <groupId>org.springframework.security</groupId>
-    <artifactId>spring-security-crypto</artifactId>
-    
-</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-crypto</artifactId>
+		</dependency>
+		<!--FileNameUtils-->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+		<!--Loading effect-->
+		<!--<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>notiflix</artifactId>
+			<version>2.7.0</version>
+		</dependency>-->
 	</dependencies>
 	<build>
 		<plugins>

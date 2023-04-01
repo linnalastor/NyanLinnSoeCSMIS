@@ -19,7 +19,7 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 	boolean isweekend;
 
 	ConsumerListRepository consumerListRepository;
-	
+
 	@Autowired
 	HolidayService holidayService;
 
@@ -174,7 +174,7 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 		LocalDate today = LocalDate.now(zone);
 
 		LocalDate day = today.withDayOfMonth(1).plusMonths(1);
-		
+
 		// get holidays in this month
 		List<String> holidays = null;
 		try {

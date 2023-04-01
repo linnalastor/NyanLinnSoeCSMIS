@@ -24,10 +24,7 @@ public class StaffDetailsService implements StaffDetailsServiceInterface {
 		StaffDetails staffDetail=new StaffDetails();
 		for(StaffDetailsDTO hDTO:staffDetails) {
 			staffDetail.StaffDetailsDTO(hDTO.getId(), hDTO.getPassword(), hDTO.getDescription(), hDTO.getEnabled(),hDTO.getCreated_by(),hDTO.getLast_updated_by(),hDTO.getTimestamp());
-			System.out.println("hho"+staffDetail.getId());
-
 			staffDetailsRepository.save(staffDetail);
-			System.out.println("hho"+staffDetail.getId());
 		}
 
 
@@ -40,8 +37,6 @@ public class StaffDetailsService implements StaffDetailsServiceInterface {
 	}
 			@Override
 			public List<StaffDetails> getStaffDetails() {
-
-
 				return staffDetailsRepository.findAll();
 			}
 
@@ -50,23 +45,25 @@ public class StaffDetailsService implements StaffDetailsServiceInterface {
 			@Override
 			public StaffDetails getByID(String id) {
 				StaffDetails staffDetails=new StaffDetails();
-				// TODO Auto-generated method stub
-				staffDetails=staffDetailsRepository.getByID(id);
+				try {
+					staffDetails=staffDetailsRepository.getByID(id);
+				} catch (Exception e) {	}
 				return staffDetails;
 			}
 			@Override
 			public void save(StaffDetails staffDetails) {
-				// TODO Auto-generated method stub
 				staffDetailsRepository.save(staffDetails);
 			}
 			@Override
 			public StaffDetails getStaffDetailByID(String id) {
-				// TODO Auto-generated method stub
-				return staffDetailsRepository.getByID(id);
+				StaffDetails staffDetails=new StaffDetails();
+				try {
+					staffDetails=staffDetailsRepository.getByID(id);
+				} catch (Exception e) {	}
+				return staffDetails;
 			}
 			@Override
 			public List<StaffDetails> findByEmailStatus() {
-				// TODO Auto-generated method stub
 				return staffDetailsRepository.getEmailStatus();
 			}
 
