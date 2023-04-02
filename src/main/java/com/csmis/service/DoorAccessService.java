@@ -17,7 +17,9 @@ public class DoorAccessService {
 	@Autowired
 	Operator_Report_Service operator_report_service;
 	@Autowired
-	Operator_Register_Service operator_register_service;
+	Operator_Register_Service operator_register_service;	
+	@Autowired
+	DateService dateService;
 
 	int index = 0;
 
@@ -81,39 +83,26 @@ public class DoorAccessService {
 		String prefix_id = "" + month + "/" + date.getYear() + "|";
 		String report = "";
 		String confirmation = "";
-		String target = "00";
 
 		boolean registered = false;
 
-		String[] holidays = { "05", "26" };
 
 		// get all dates of this month without SAT &SUN
-		List<String> days = operator_report_service.get_Monthly_Dates(0);
+		List<String> days = dateService.getMonthlyDates(date);
 
-		// remove '00' from list
-		Iterator<String> iter = days.iterator();
-		while (iter.hasNext()) {
-			String str = iter.next();
-			if (str.equals(target)) {
-				iter.remove();
-			}
-		}
 		// pre setting report String
 		// setting index of today in report string
 		for (int j = 0; j < days.size(); j++) {
 			report += "x";
 			if (Integer.parseInt(days.get(j)) == date.getDayOfMonth()) {
 				this.index = j;
-				break;
 			}
 		}
-
 		// get lunch plan of staff if available
 		ConsumerList lunch_plan = null;
 		try {
 			lunch_plan = operator_register_service.getLunchRegistration_by_ID(prefix_id + id);
 		} catch (Exception e) {
-			System.out.println(" operator_register_service.getLunchRegistration_by_ID(prefix_id + id); error");
 		}
 
 		// check if staff is registered or not
@@ -128,7 +117,6 @@ public class DoorAccessService {
 		try {
 			lunch_report = operator_report_service.getLunch_Report(prefix_id + id);
 		} catch (Exception e) {
-			System.out.println("lunch_report = operator_report_service.getLunch_Report(prefix_id+id); error");
 		}
 		// get report status of staff
 		if (lunch_report == null) {
@@ -140,17 +128,19 @@ public class DoorAccessService {
 			report = lunch_report.getReport_status();
 		}
 
-		while(index>=report.length()) report+='x';
-
+		String temp = null;
+		try {
+			temp = report.substring(index+1);
+		}catch (Exception e) {	}
 		// change to '1' if registered
 		// change to 'n' if not registered
 		if (registered) {
-			report = report.substring(0, index) + '1' + report.substring(index+1);
+			report = report.substring(0, index) + '1' + temp;
 		}
 		else {
-			report = report.substring(0, index) + 'n' + report.substring(index+1);
+			report = report.substring(0, index) + 'n' + temp;
 		}
-
+		System.out.println("Updated ==> Lunch Report ==>"+report);
 		// set report status string into lunch report of staff
 		lunch_report.setReport_status(report);
 

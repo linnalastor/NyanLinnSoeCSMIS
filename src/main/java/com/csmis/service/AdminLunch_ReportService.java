@@ -15,8 +15,6 @@ public class AdminLunch_ReportService implements AdminReportServiceInterface{
 	LunchReportRepository lunchReportRepository;
 	
 	StaffRepository staffRepository;
-
-	
 	
 	public AdminLunch_ReportService(LunchReportRepository lunchReportRepository) {
 		this.lunchReportRepository = lunchReportRepository;
@@ -24,7 +22,6 @@ public class AdminLunch_ReportService implements AdminReportServiceInterface{
 
 	@Override
 	public List<Lunch_Report> getAllLunch_Reports() {
-	
 		return lunchReportRepository.findAll();
 	}
 

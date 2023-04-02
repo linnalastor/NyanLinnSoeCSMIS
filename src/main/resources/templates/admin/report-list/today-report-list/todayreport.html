@@ -290,7 +290,7 @@
 				<!-- start title -->
 				<div class="row text-center mb-3">
 					<div class="col">
-						<h3 class="titles text-dark">Report List</h3>
+						<h3 class="titles text-dark">Yesterday Report List</h3>
 					</div>
 				</div>
 				<!-- end title -->
@@ -305,9 +305,6 @@
 					<li class="list-inline-item btn reportlists"
 						th:onclick="window.location.href='/admin/report/by_month'">Last
 						Month</li>
-					<li class="list-inline-item btn reportlists"
-						th:onclick="window.location.href='/admin/report/by_days'">By
-						Day</li>
 				</ul>
 				<!-- End Report Lists -->
 
@@ -338,14 +335,14 @@
 				<div class="d-flex justify-content-center my-2">
 
 					<div class="btn-group col-10 d-flex justify-content-center">
-						<a th:href="@{/reportListToday}"
-							class="btn text-light btn-secondary disabled">Register : 125</a>
-						<a th:href="@{/reportListToday}"
-							class="btn text-light btn-secondary disabled">Consumer : 120</a>
-						<a th:href="@{/reporttodaynoconsumer}"
-							class="btn text-light btn-secondary">Non Consumer : 3</a> <a
-							th:href="@{/reporttodaynoregister}"
-							class="btn text-light btn-secondary">Non Register : 2</a>
+						<a th:href="@{/reportListToday}" class="btn text-light btn-secondary disabled">
+							Register : <span th:text="${headcount.registered_head_count}"></span></a>
+						<a th:href="@{/reportListToday}" class="btn text-light btn-secondary disabled">
+							Consumer : <span th:text="${headcount.actual_head_count}"></span></a>
+						<a th:href="@{/reporttodaynoconsumer}" class="btn text-light btn-secondary">
+						Non Consumer : <span th:text="${headcount.not_picked_head_count}"></span></a> 
+						<a th:href="@{/reporttodaynoregister}" class="btn text-light btn-secondary">
+							Non Register : <span th:text="${headcount.not_registered_head_count}"></span></a>
 
 					</div>
 				</div>

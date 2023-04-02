@@ -75,7 +75,6 @@ public class Lunch_Report_Controller {
 		for(String s:holiday) {
 			if(dayvalue.equals(s)) {
 				checker=false;
-				System.out.println("Checker Holiday ==> "+s);
 				status="holiday";
 			}
 
@@ -106,7 +105,6 @@ public class Lunch_Report_Controller {
 			}
 
 		}else status = "notpicked";
-		System.out.println(status);
 
 		theModel.addAttribute("day", yesterday);
 		// picked/not picked/not registered/holiday status

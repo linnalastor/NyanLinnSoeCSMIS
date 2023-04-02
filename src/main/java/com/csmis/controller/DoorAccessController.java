@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,11 +50,15 @@ public class DoorAccessController {
 	OperatorReportServiceInterface operatorReportService;
 
 	@GetMapping("/door_access")
-	public String door_access(Model model) {
+	public String door_access(Model model,@ModelAttribute(name = "message") String message,@ModelAttribute(name = "status") String status) {
 		List<HeadCount> headCount = headCountService.findAllDesc();
 		System.out.println(headCount);
 		model.addAttribute("headCountList",headCount);
-		model.addAttribute("status",true);
+		model.addAttribute("message",message);
+		if(status == "true")
+			model.addAttribute("status",false);
+		else 
+			model.addAttribute("status",true);
 		return "admin/door_access";
 	}
 
@@ -62,9 +67,17 @@ public class DoorAccessController {
 			@RequestParam("date") String dateString, RedirectAttributes redirectAttributes) {
 
 		LocalDate date = LocalDate.parse(dateString);
+		LocalDate today = LocalDate.now();
 		HeadCount headCount = headCountService.find_by_id(dateString);
 
-		if (headCount == null) {
+		
+
+		//if the selected date hasn't reached yet, go back to dooraccess upload file page with error message
+		if(date.getYear()>today.getYear() && date.getMonthValue()>today.getMonthValue() && date.getDayOfMonth()>today.getDayOfMonth() ) {
+			redirectAttributes.addFlashAttribute("message", "Selected date hasn't reached yet!");
+			redirectAttributes.addFlashAttribute("status", "true");
+			return "redirect:/admin/door_access";
+		}else if (headCount == null) {
 
 			// create file for incoming xlsx file
 			File tempFile = null;
@@ -79,14 +92,10 @@ public class DoorAccessController {
 
 			return "redirect:/admin/door_access/import?date=" + dateString;
 		}
-		//if the selected date hasn't reached yet, go back to dooraccess upload file page with error message
-		else if(date.getDayOfMonth()>LocalDate.now().getDayOfMonth()) {
-			System.out.println("Selected date hasn't reached yet");
-			return "redirect:/admin/door_access";
-		}
 		//if the selected date is already uploaded, go back to dooraccess upload file page with error message
 		else {
-			System.out.println("Date Already Exists");
+			redirectAttributes.addFlashAttribute("message", "Selected date hasn already imported!");
+			redirectAttributes.addFlashAttribute("status", "true");
 			return "redirect:/admin/door_access";
 		}
 	}

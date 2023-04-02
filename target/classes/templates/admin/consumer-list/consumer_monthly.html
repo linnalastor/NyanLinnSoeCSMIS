@@ -447,8 +447,6 @@
 		var array = /*[[${arrayJson}]]*/'';
 		var arr = JSON.parse(array);
 		var holidayarr = JSON.parse(/*[[${jsonHoliday}]]*/'');
-		/* console.log(holidayarr); */
-		/* console.log(arr); */
 
 		/* Start date disabled 00 */
 		var disable = document.getElementById("00");
@@ -469,17 +467,13 @@
 		for (var i = 0; i < arr.length; i++) {
 			for (var j = 0; j < arr[i].length; j++) {
 				var myvar = document.getElementById(arr[i][j] + "-show");
-				/* console.log(arr[i][j]); */
-				/* console.log(myvar); */
 				if (myvar != null) {
 
 					myvar.style.backgroundColor = "red";
 					myvar.style.color = "white";
 					myvar.style.border = "1px solid white";
-					/* console.log(arr[i]); */
 				}
 			}
-
 		}
 
 		/* End Selected Real Page */
@@ -503,8 +497,6 @@
 			for (var j = 0; j < holidayarr.length; j++) {
 				var myholiday = document.getElementById(holidayarr[i][j]
 						+ "-show");
-				/* console.log(holidayarr[i][j]); */
-				/* console.log(myholiday); */
 				if (myholiday != null) {
 					myholiday.style.backgroundColor = "yellow";
 					myholiday.style.color = "black";
@@ -521,9 +513,6 @@
 				var myholidayLabelPopUp = document
 						.getElementsByClassName(holidayarr[i][j] + "checkbox")[1];
 
-				/* console.log(myholidayPopUp);
-				console.log("Label");
-				console.log(myholidayLabelPopUp); */
 				if (myholidayPopUp != null) {
 					myholidayPopUp.disabled = true;
 					myholidayPopUp.style.backgroundColor = "yellow";

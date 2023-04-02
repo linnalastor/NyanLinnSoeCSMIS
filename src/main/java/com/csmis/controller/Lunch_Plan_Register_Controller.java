@@ -82,9 +82,9 @@ public class Lunch_Plan_Register_Controller {
 
 		theModel.addAttribute("arrayJson", jsonUncheckedDates);
 		theModel.addAttribute("jsonHoliday", jsonHoliday);
-		theModel.addAttribute("list", op.get_Monthly_Dates(1));
+		theModel.addAttribute("list", dateService.getMonthlyDates(date));
 		theModel.addAttribute("staff", staffService.findByID(auth.getName()));
-		theModel.addAttribute("month", Month.of(Integer.parseInt(month_year.substring(0, 2))) + " / " + year);
+		theModel.addAttribute("month", date.getMonth() + " / " + year);
 
 		return "operator/register/ConsumerListMonthly";
 	}
@@ -167,12 +167,12 @@ public class Lunch_Plan_Register_Controller {
 	public String weekly_register(@RequestParam(value = "listweeklydate", required = false) List<String> check_list,
 			Model theModel, Authentication auth) {
 
-		LocalDate today= LocalDate.now();
-		LocalDate nextMonthDay = today.plusMonths(1);
+		LocalDate date= LocalDate.now();
+		LocalDate nextMonthDay = date.plusMonths(1);
 		Integer monthValue = nextMonthDay.getMonthValue();
 
-		while(today.getDayOfWeek() != DayOfWeek.MONDAY) {
-			today = today.plusDays(1);
+		while(date.getDayOfWeek() != DayOfWeek.MONDAY) {
+			date = date.plusDays(1);
 		}
 
 		List<String> this_month = new ArrayList<>();
@@ -181,16 +181,16 @@ public class Lunch_Plan_Register_Controller {
 		int i = 0;
 
 		// get this week days
-		List<String> uncheckedList = dateService.getWeeklyDate();
+		List<String> uncheckedList = dateService.getWeeklyDate(date);
 
 		// check if this week contain next month's days
 		boolean checker = false;
 		boolean check2month = false;
 
-		String thisMonth_id = prefix_ID_Service.getPrefix_ID(today)+ "|" + auth.getName();
+		String thisMonth_id = prefix_ID_Service.getPrefix_ID(date)+ "|" + auth.getName();
 		String nextMonth_id = prefix_ID_Service.getPrefix_ID(nextMonthDay)+ "|" + auth.getName();
 
-		if(today.getMonthValue()==monthValue) checker =true;
+		if(date.getMonthValue()==monthValue) checker =true;
 
 		while (i < uncheckedList.size() - 1) {
 			if (Integer.parseInt(uncheckedList.get(i)) > Integer.parseInt(uncheckedList.get(++i))) {

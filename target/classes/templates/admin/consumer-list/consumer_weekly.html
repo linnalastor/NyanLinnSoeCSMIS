@@ -288,12 +288,11 @@
 		<!-- END NAVBAR -->
 
 	</header>
-	<section class="container">
-	<div class="container-fluid bg-danger div1 mt-5 pt-5">
+	<div class="container-fluid div1 mt-5 pt-5">
 		<!-- -->
 		<div class="row text-center mt-2 mb-3">
 			<div class="col">
-				<h3 class="titles text-dark">Consumer List</h3>
+				<h3 class="titles text-dark">Weekly Consumer List</h3>
 			</div>
 		</div>
 
@@ -440,15 +439,11 @@
 		<!-- End Modal PopUP -->
 
 	</div>
-	</section>
 
 	<script th:inline="javascript">
 		var array = /*[[${arrayJson}]]*/'';
 		var arr = JSON.parse(array);
 		var holidayarr = JSON.parse(/*[[${jsonHoliday}]]*/'');
-		console.log(holidayarr);
-		console.log(arr);
-		
 		
 		/* Start date disabled 00 */
 		var disable = document.getElementById("00");
@@ -503,14 +498,11 @@
 			for (var j = 0; j < holidayarr.length; j++) {
 				var myholiday = document.getElementById(holidayarr[i][j]
 						+ "-showweekday");
-				/* console.log(holidayarr[i][j]); */
-				/* console.log(myholiday); */
 				if (myholiday != null) {
 					myholiday.style.backgroundColor = "yellow";
 					myholiday.style.color = "black";
 					myholiday.style.border = "1px solid white";
 				}
-
 			}
 		}
 		
@@ -522,9 +514,6 @@
 				var myholidayLabelPopUp = document
 						.getElementsByClassName(holidayarr[i][j] + "checkbox")[1];
 
-				console.log(myholidayPopUp);
-				console.log("Label");
-				console.log(myholidayLabelPopUp); 
 				if (myholidayPopUp != null) {
 					myholidayPopUp.disabled = true;
 					myholidayPopUp.style.backgroundColor = "yellow";
@@ -553,7 +542,6 @@
 		crossorigin="anonymous"></script>
 	<script src="https://kit.fontawesome.com/e0faeaf50f.js"
 		crossorigin="anonymous"></script>
-
 	<!-- bootstrap css1 js1 -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
