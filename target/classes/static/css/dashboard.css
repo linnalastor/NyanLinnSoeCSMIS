@@ -3,7 +3,7 @@
 }
 :root{
     --bgcolor: #00b4d8;
-    --btncolor: #03045e;
+    --btncolor:rgb(18, 67, 99);
     --txtcolor: #fff;
 }
 
@@ -84,14 +84,14 @@ body{
 }
 
 .currents{
-    background-color: var(--bgcolor);
+    background-color: gold;
     border-radius: 7px;
 
     transition: all 0.3s;
 }
 
 .currents:hover{
-    background-color: var(--bgcolor);
+    background-color: gold;
     transform: translateY(-1px);
 }
 
@@ -100,7 +100,7 @@ body{
 }
 
 .sidebarlinks:hover{
-    background-color: var(--bgcolor);
+    background-color: gold;
     border-radius: 7px;
 }
 
@@ -110,7 +110,7 @@ body{
 
 .allcards{
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -122,7 +122,8 @@ body{
 
 .cardheads{
     font-size: 18px;
-    background-color:#5dade2;
+    background-color:rgb(18, 67, 99);
+    color : white;
 }
 
 .cardbodys a{
@@ -130,7 +131,7 @@ body{
     font-size: 4rem;
     font-weight: bold;
     text-decoration: none;
-    color:#2874a6;
+    color: gold;
 
     line-height: 130px;
 }

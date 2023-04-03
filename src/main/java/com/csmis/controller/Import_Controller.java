@@ -132,7 +132,9 @@ public class Import_Controller {
 					if (!checker) {
 						staffDetailsDTO.setId(s.getId());
 						staffDetailsDTO.setPassword(s.getId());
+						staffDetailsDTO.setDescription(" ");
 						staffDetailsDTO.setEnabled("1");
+						staffDetailsDTO.setEmail_status("0");
 						staffDetailsDTOList.add(staffDetailsDTO);
 					}
 				}
@@ -179,7 +181,6 @@ public class Import_Controller {
 
 		thestaffService.save(thestaff);
 
-		StaffDetailsDTO staffDetailsDTO = new StaffDetailsDTO();
 		Authorities authorities = new Authorities();
 
 		StaffDetails staffDetails = null;
@@ -189,9 +190,12 @@ public class Import_Controller {
 		}
 
 		if (staffDetails == null) {
-			staffDetailsDTO.setId(thestaff.getId());
-			staffDetailsDTO.setPassword(staffDetailsService.encodedPassword(thestaff.getId()));
-			staffDetailsDTO.setEnabled("1");
+			staffDetails = new StaffDetails();
+			staffDetails.setId(thestaff.getId());
+			staffDetails.setPassword(staffDetailsService.encodedPassword(thestaff.getId()));
+			staffDetails.setDescription(" ");
+			staffDetails.setEmail_status("0");
+			staffDetails.setEnabled("1");
 			staffDetailsService.save(staffDetails);
 
 			authorities.setId(thestaff.getId());
@@ -199,7 +203,7 @@ public class Import_Controller {
 			authoritiesService.save(authorities);
 
 		}
-		return "redirect:admin/staff_list";
+		return "redirect:/admin/staff_list";
 	}
 
 //	private void startLoading() {

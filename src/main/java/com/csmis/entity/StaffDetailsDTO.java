@@ -11,153 +11,104 @@ import javax.persistence.Table;
 
 import com.opencsv.bean.CsvBindByName;
 
-@Entity
-@Table(name="staff_detail")
 public class StaffDetailsDTO {
 
-	@Id
-	@Column(name="id")
-	@CsvBindByName(column="id")
 	private String id;
 
-
-
-	@Column(name="password")
-	@CsvBindByName(column="password")
 	private String password;
 
-	@Column(name="description")
-	@CsvBindByName(column="description")
 	private String description;
 
-//
-//	@Column(name="division")
-//	@CsvBindByName(column="division")
-//	private String division;
-
-
-	@Column(name = "created_by")
-	@CsvBindByName(column="created_by")
 	private String created_by;
 
-	@Column(name="last_updated_by")
-	@CsvBindByName(column="last_updated_by")
 	private String last_updated_by;
 
-
-	@Column(name = "timestamp")
-	@CsvBindByName(column="timestamp")
 	private Timestamp timestamp;
 
-	@Column(name = "enabled")
-	@CsvBindByName(column="enabled")
     private String enabled;
-
-	public String getEnabled() {
-		return enabled;
-	}
-
-
-	public void setEnabled(String enabled) {
-		this.enabled = enabled;
-	}
-
+	
+	private String email_status;
 
 	public StaffDetailsDTO() {
-		}
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-
-
-	public StaffDetailsDTO(String id, String password, String description, String enabled, String created_by, String last_updated_by, Timestamp timestamp) {
+	public StaffDetailsDTO(String id, String password, String description, String created_by, String last_updated_by,
+			Timestamp timestamp, String enabled, String email_status) {
 		super();
 		this.id = id;
 		this.password = password;
 		this.description = description;
+		this.created_by = created_by;
+		this.last_updated_by = last_updated_by;
+		this.timestamp = timestamp;
 		this.enabled = enabled;
-		this.created_by=created_by;
-		this.last_updated_by=last_updated_by;
-		this.timestamp=timestamp;
+		this.email_status = email_status;
 	}
-
 
 	public String getId() {
 		return id;
 	}
 
-
 	public void setId(String id) {
 		this.id = id;
 	}
-
-
-	public String getDescription() {
-		return description;
-	}
-
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 
 	public String getPassword() {
 		return password;
 	}
 
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+	public String getDescription() {
+		return description;
+	}
 
-//	public String getDivision() {
-//		return division;
-//	}
-//
-//
-//	public void setDivision(String division) {
-//		this.division = division;
-//	}
-//
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	public String getCreated_by() {
 		return created_by;
 	}
 
-
 	public void setCreated_by(String created_by) {
 		this.created_by = created_by;
 	}
-
 
 	public String getLast_updated_by() {
 		return last_updated_by;
 	}
 
-
 	public void setLast_updated_by(String last_updated_by) {
 		this.last_updated_by = last_updated_by;
 	}
-
 
 	public Timestamp getTimestamp() {
 		return timestamp;
 	}
 
-
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
 	}
 
+	public String getEnabled() {
+		return enabled;
+	}
 
-//	@Override
-//	public String toString() {
-//		return "StaffDetails [id=" + id + ", description=" + description + ", password=" + password + ", division="
-//				+ division + ", created_by=" + created_by + ", last_updated_by=" + last_updated_by + ", timestamp="
-//				+ timestamp + "]";
-//	}
+	public void setEnabled(String enabled) {
+		this.enabled = enabled;
+	}
 
+	public String getEmail_status() {
+		return email_status;
+	}
 
-
+	public void setEmail_status(String email_status) {
+		this.email_status = email_status;
+	}
 
 }

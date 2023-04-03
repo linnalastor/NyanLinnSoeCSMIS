@@ -15,56 +15,61 @@ import com.csmis.service_interface.StaffDetailsServiceInterface;
 @Service
 public class StaffDetailsService implements StaffDetailsServiceInterface {
 
+	@Autowired
+	private StaffDetailsRepository staffDetailsRepository;
 
-	 @Autowired
-	 private StaffDetailsRepository staffDetailsRepository;
 	@Override
-	public void saveStaffDetails(List<StaffDetailsDTO> staffDetails)throws ParseException {
+	public void saveStaffDetails(List<StaffDetailsDTO> staffDetails) throws ParseException {
 		// TODO Auto-generated method stub
-		StaffDetails staffDetail=new StaffDetails();
-		for(StaffDetailsDTO hDTO:staffDetails) {
-			staffDetail.StaffDetailsDTO(hDTO.getId(), hDTO.getPassword(), hDTO.getDescription(), hDTO.getEnabled(),hDTO.getCreated_by(),hDTO.getLast_updated_by(),hDTO.getTimestamp());
+		StaffDetails staffDetail = new StaffDetails();
+		for (StaffDetailsDTO hDTO : staffDetails) {
+			staffDetail.StaffDetailsDTO(hDTO.getId(), hDTO.getPassword(), hDTO.getDescription(), hDTO.getEnabled(),
+					hDTO.getCreated_by(), hDTO.getLast_updated_by(), hDTO.getTimestamp());
 			staffDetailsRepository.save(staffDetail);
 		}
 
-
 	}
+
 	public String encodedPassword(String pass) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		pass=encoder.encode(pass);
+		pass = encoder.encode(pass);
 		return pass;
 
 	}
-			@Override
-			public List<StaffDetails> getStaffDetails() {
-				return staffDetailsRepository.findAll();
-			}
 
+	@Override
+	public List<StaffDetails> getStaffDetails() {
+		return staffDetailsRepository.findAll();
+	}
 
-
-			@Override
-			public StaffDetails getByID(String id) {
-				StaffDetails staffDetails=new StaffDetails();
-				try {
-					staffDetails=staffDetailsRepository.getByID(id);
-				} catch (Exception e) {	}
-				return staffDetails;
-			}
-			@Override
-			public void save(StaffDetails staffDetails) {
-				staffDetailsRepository.save(staffDetails);
-			}
-			@Override
-			public StaffDetails getStaffDetailByID(String id) {
-				StaffDetails staffDetails=new StaffDetails();
-				try {
-					staffDetails=staffDetailsRepository.getByID(id);
-				} catch (Exception e) {	}
-				return staffDetails;
-			}
-			@Override
-			public List<StaffDetails> findByEmailStatus() {
-				return staffDetailsRepository.getEmailStatus();
-			}
-
+	@Override
+	public StaffDetails getByID(String id) {
+		StaffDetails staffDetails = new StaffDetails();
+		try {
+			staffDetails = staffDetailsRepository.getByID(id);
+		} catch (Exception e) {
 		}
+		return staffDetails;
+	}
+
+	@Override
+	public void save(StaffDetails staffDetails) {
+		staffDetailsRepository.save(staffDetails);
+	}
+
+	@Override
+	public StaffDetails getStaffDetailByID(String id) {
+		StaffDetails staffDetails = new StaffDetails();
+		try {
+			staffDetails = staffDetailsRepository.getByID(id);
+		} catch (Exception e) {
+		}
+		return staffDetails;
+	}
+
+	@Override
+	public List<StaffDetails> findByEmailStatus() {
+		return staffDetailsRepository.getEmailStatus();
+	}
+
+}

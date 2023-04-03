@@ -30,13 +30,14 @@ public class Holiday {
 
 	public void HolidayDTO(String sdate, String description)throws ParseException {
 
-		String[] dateFormats = {"dd-MM-yy","d-MM-yy","dd-m-yy","d-m-yy"};
+		String[] dateFormats = {"dd-MM-yy","d-MM-yy","dd-m-yy","d-m-yy","yyyy-MM-dd"};
 		for(String foramat: dateFormats) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern(foramat);
             try {
             	this.date = LocalDate.parse(sdate,formatter);
             	break;
-            } catch (Exception e) { }
+            } catch (Exception e) {
+            }
 		}
 		this.description = description;
 	}

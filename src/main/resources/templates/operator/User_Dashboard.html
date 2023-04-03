@@ -12,8 +12,6 @@
     <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
 	<link rel="stylesheet" th:href="@{/css/faq.css}" />
 	<link rel="stylesheet" th:href="@{/css/modalHelp.css}">
-   
-    
 
     <!-- font awesome -->
     <link rel="stylesheet" href="https://kit.fontawesome.com/e0faeaf50f.css" crossorigin="anonymous">
@@ -96,9 +94,9 @@
 
     <!-- START BODY CARD -->
 
-    <section class="container-fluid pt-5 mt-5 mx-5 col-12 allcards">
+    <section class="container-fluid d-flex justify-content-start flax-warp  pt-5 mt-5 mx-5 col-12 allcards">
 
-            <div class="card text-center col-3 me-5 my-3 cards"
+            <div class="card text-center col-3 me-5 my-3 cards mx-5"
                 th:onclick="window.location.href='/operator/menu'">
                 <div class="card-header text-uppercase cardheads">
                     Menu
@@ -152,7 +150,7 @@
                 </div>
             </div>
 
-            <div class="card text-center col-3 me-5 my-3 cards"
+            <div class="card text-center col-3 me-5 my-3 cards mx-5"
             th:onclick="window.location.href='/operator/account'">
                 <div class="card-header text-uppercase cardheads">
                     Account Status
