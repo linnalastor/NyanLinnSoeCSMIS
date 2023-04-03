@@ -245,6 +245,7 @@ public class Admin_Report_Controller {
 		theModel.addAttribute("list", dates);
 		theModel.addAttribute("staffList", staffList);
 		theModel.addAttribute("month", Month.of(month) + " / " + year);
+		theModel.addAttribute("listweeklydate", adminReportService.get_Monthly_Dates(1));
 		
 		return "admin/report-list/month-report-list/report";
 	}
@@ -363,6 +364,7 @@ public class Admin_Report_Controller {
 				theModel.addAttribute("jasonNotPickedWeeklyDate", jasonNotPickedWeeklyDate);
 				theModel.addAttribute("jasonPickedWeeklyDateLists", jasonPickedWeeklyDateLists);
 				theModel.addAttribute("jsonHoliday", jsonHoliday);
+				theModel.addAttribute("listweeklydate",adminReportService.getWeeklyDate());
 				theModel.addAttribute("staffList", staffList);
 		
 		return "admin/report-list/week-report-list/weekreport";

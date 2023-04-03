@@ -323,12 +323,13 @@
 				<!-- Start about discription -->
 
 				<div class="d-flex justify-content-between mb-2 text-center">
-					<span class="fs-5 text-uppercase showdates"><span th:text="${month}"></span></span>
-					<form action="/admin/report/by_month"  class="d-flex">
-						<input type="text" name = "search"
+					<span class="fs-5 text-uppercase showdates"><span
+						th:text="${month}"></span></span>
+					<form action="/admin/report/by_month" class="d-flex">
+						<input type="text" name="search"
 							class="form-control text-muted me-2 searchnames"
 							placeholder="Search by ... " />
-							<button type="submit" class="btn searchbtns ms-2">Search</button>
+						<button type="submit" class="btn searchbtns ms-2">Search</button>
 					</form>
 				</div>
 				<!-- End about discription -->
@@ -339,12 +340,12 @@
 				<div class="d-flex justify-content-center my-2">
 					<div class="btn-group  col-10 d-flex justify-content-center">
 						<a th:href="@{/admin/reportmonth}"
-							class="btn text-light btn-secondary disabled">Register : 125</a> <a
-							th:href="@{/admin/reportmonth}"
-							class="btn text-light btn-secondary disabled">Consumer : 120</a> <a
-							th:href="@{/admin/reportmonthnoconsumer}"
-							class="btn text-light btn-secondary">Non Consumer : 3</a>
-						<a th:href="@{/admin/reportmonthnoregister}"
+							class="btn text-light btn-secondary disabled">Register : 125</a>
+						<a th:href="@{/admin/reportmonth}"
+							class="btn text-light btn-secondary disabled">Consumer : 120</a>
+						<a th:href="@{/admin/reportmonthnoconsumer}"
+							class="btn text-light btn-secondary">Non Consumer : 3</a> <a
+							th:href="@{/admin/reportmonthnoregister}"
 							class="btn text-light btn-secondary ">Non Register : 2</a>
 
 					</div>
@@ -366,7 +367,7 @@
 												class="btn btn-primary text-light text-start dropbuttons"
 												data-bs-toggle="collapse"
 												th:data-bs-target="'#collapse' + ${staff.id}">
-												<div class="d-flex justify-content-between col-10 mx-auto">
+												<div class="d-flex justify-content-between col-lg-12 col-md-6 px-2 mx-auto">
 													<div class="col-2" th:text="${staff.name}"></div>
 													<div class="col-2" th:text="${staff.id}"></div>
 													<div class="col-2" th:text="${staff.division}"></div>
@@ -380,25 +381,20 @@
 									<div th:id="'collapse' + ${staff.id}" class="collapse">
 										<div class="card-body listboxs">
 											<div
-												style="display: flex; flex-direction: row; justify-content: center;">
-												<div class="col-lg-4">
+												style="display: flex;  flex-direction: row; justify-content: center;">
+												<div class="col-lg-5" style = "background-color: lightblue;">
 													<ul
-														class="d-flex jsutify-content-center flex-wrap bg-info mx-4">
-														<li class="px-3 mb-3"><label
-															class="px-2 mb-1 dayLabel">M-</label></li>
-														<li class="px-3 mb-3"><label
-															class="px-2 mb-1 dayLabel">T-</label></li>
-														<li class="px-3 mb-3"><label
-															class="px-2 mb-1 dayLabel">W-</label></li>
-														<li class="px-3 mb-3"><label
-															class="px-2 mb-1 dayLabel">T-</label></li>
-														<li class="px-3 mb-3"><label
-															class="px-2 mb-1 dayLabel">F-</label></li>
-														<li class="px-3 mb-3" th:each="list : ${list}"><label
-															class="px-2 mb-1 "
-															style="background-color: green; border: 1px solid #000;"
-															th:id="${list}  + ${staff.id} + '-show'"
-															th:text="${list}" th:attr="data-bs-target='#' + ${list}"></label></li>
+														class="row d-flex justify-content-center text-center m-0 py-2 px-3">
+														<li class="col-2 me-2"><label class="text-uppercase">Mon</label></li>
+														<li class="col-2 me-2"><label class="text-uppercase">Tue</label></li>
+														<li class="col-2 me-2"><label class="text-uppercase">Wed</label></li>
+														<li class="col-2 me-2"><label class="text-uppercase">Thu</label></li>
+														<li class="col-2"><label class="text-uppercase">Fri</label></li>
+														<li class="row col-2 px-3 mx-1 my-2 text-center"
+															th:each="listweeklydate : ${listweeklydate}"><label
+															class="px-2 mb-1" style="background-color: grey;border:1px solid #000"
+															th:id="${listweeklydate} + ${staff.id} + '-showweekday'"
+															th:text="${listweeklydate}"></label></li>
 													</ul>
 												</div>
 											</div>
@@ -409,7 +405,7 @@
 							</div>
 						</div>
 
-					
+
 					</div>
 				</div>
 			</div>
@@ -419,16 +415,80 @@
 
 		</div>
 
-
-
-
-
-
-		</div>
-
-
-
 	</section>
+
+	<script th:inline="javascript">
+		var notPickedArray = /*[[${jasonNotPickedWeeklyDate}]]*/'';
+		var notPickedArr = JSON.parse(notPickedArray);
+		for (var i = 0; i < notPickedArr.length; i++) {
+			for (var j = 0; j < notPickedArr[i].length; j++) {
+				var myvar = document.getElementById(notPickedArr[i][j]
+						+ "-showweekday");
+
+				if (myvar != null) {
+					myvar.style.backgroundColor = "red";
+					myvar.style.color = "white";
+					myvar.style.border = "1px solid white";
+					console.log(notPickedArr[i]);
+				}
+			}
+
+		}
+
+		var pickedArray = /*[[${jasonPickedWeeklyDateLists}]]*/'';
+		var pickedArr = JSON.parse(pickedArray);
+		for (var i = 0; i < pickedArr.length; i++) {
+			for (var j = 0; j < pickedArr[i].length; j++) {
+				var myvar = document.getElementById(pickedArr[i][j]
+						+ "-showweekday");
+
+				if (myvar != null) {
+					myvar.style.backgroundColor = "green";
+					myvar.style.color = "white";
+					myvar.style.border = "1px solid white";
+
+					console.log(pickedArr[i]);
+				}
+			}
+
+		}
+		var notRegisterArray = /*[[${jasonNotRegisterWeeklyDateLists}]]*/'';
+		console.log("..." + notRegisterArray);
+		var notRegisterArr = JSON.parse(notRegisterArray);
+		for (var i = 0; i < notRegisterArr.length; i++) {
+			for (var j = 0; j < notRegisterArr[i].length; j++) {
+				var myvar = document.getElementById(notRegisterArr[i][j]
+						+ "-showweekday");
+				console.log(">>>>>" + myvar);
+				if (myvar != null) {
+					myvar.style.backgroundColor = "yellow";
+					myvar.style.color = "black";
+					myvar.style.border = "1px solid white";
+
+					console.log(notRegisterArr[i]);
+				}
+			}
+
+		}
+
+		var holidayArray = /*[[${jsonHoliday}]]*/'';
+
+		var holidayArr = JSON.parse(holidayArray);
+
+		for (var i = 0; i < holidayArr.length; i++) {
+			for (var j = 0; j < holidayArr[i].length; j++) {
+				var myvar = document.getElementById(holidayArr[i][j]
+						+ "-showweekday");
+
+				if (myvar != null) {
+					myvar.style.backgroundColor = "white";
+					myvar.style.color = "black";
+					myvar.style.border = "1px solid black";
+				}
+			}
+
+		}
+	</script>
 
 	<!-- end byday report section -->
 
