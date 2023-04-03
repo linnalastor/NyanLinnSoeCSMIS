@@ -15,11 +15,14 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap5.min.css">
+  
+  <link rel="stylesheet" type="text/css" href="/notiflix.min.css">
 
 <!-- internal css -->
 <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
 <link rel="stylesheet" th:href="@{/css/faq.css}" />
-<link rel="stylesheet" th:href="@{/css/modalHelp.css}" />
+
+
 
 <!-- font awesome -->
 <link rel="stylesheet" href="https://kit.fontawesome.com/e0faeaf50f.css"
@@ -164,20 +167,83 @@
                 </tr>
               </tbody>
         </table>
+        
+
+		<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mt-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  To Send Email
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">To send email</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form th:action="@{/emailSending}" method="post">
+		  <div class="form-group">
+		    <label for="exampleFormControlInput1">Subject</label>
+		    <input type="text" class="form-control" id="exampleFormControlInput1" name="subject">
+		  </div>
+		  <div class="form-group">
+		    <label for="exampleFormControlTextarea1">Message</label>
+		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="message"></textarea>
+		  </div>
+		  <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" onclick="startLoading()">Send Email</button>
+      </div>
+	</form>
+      
+        <!--  <form   class="mb-3 mt-5">
+		        <label for="subject">Subject:</label>
+				<input type="text" id="subject" name="subject" required /><br><br>
+				
+				<label for="message">Message:</label>
+				<textarea id="message" name="message" rows="5" required></textarea>
+				
+		   </form> -->
+      </div>
+      
     </div>
+  </div>
+</div>
+		
+        
+       
+    </div>
+    
+    
 	
 	<!-- END BODY CARD -->
-
+	
 
 	<form th:action="@{/logout}" id="logout_form" method="POST">
 	 	<input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+	 	
 	 </form>
+			<script>
+    				function startLoading() {
+       				 Notiflix.Loading.dots('Loading.....');
+
+        			// Simulate a long-running task by waiting for 3 seconds
+       				 setTimeout(function() {
+           			 // Task complete, remove the loading indicator
+         			Notiflix.Loading.remove();
+        			}, 300000);
+   				 }
+			</script>
 
 	
   <script defer src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <script defer src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
   <script defer src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
   <script defer th:src="@{/js/dataTable.js}"></script>
+  
+  <script src="/js/notiflix-aio-3.2.6.min.js"></script>
   
    	<script th:src="@{/js/modalHelpAdmin.js}"></script>
 	 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

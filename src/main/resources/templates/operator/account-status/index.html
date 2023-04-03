@@ -153,11 +153,11 @@
 
 				<div
 					style="display: flex; justify-content: start; flex-direction: column; align-items: center;">
-					<div style="width: 50%;">Name - Nyan Linn Soe</div>
-					<div style="width: 50%;">Staff ID - 100001</div>
-					<div style="width: 50%;">Division - DIV 1</div>
-					<div style="width: 50%;">Department - Department 17</div>
-					<div style="width: 50%;">Team - Bombs</div>
+					<div style="width: 50%;" th:text="'Name - '+${staff.name}"></div>
+					<div style="width: 50%;" th:text="'Staff ID - '+${staff.id}"></div>
+					<div style="width: 50%;" th:text="'Division - '+${staff.division}"></div>
+					<div style="width: 50%;" th:text="'Department - '+${staff.department}"></div>
+					<div style="width: 50%;" th:text="'Team - '+${staff.team}"></div>
 					<button class="btn btn-primary text-light text-start buttons"
 						data-bs-toggle="collapse" data-bs-target="#collapse1"
 						style="width: 50%;">Description</button>
@@ -168,6 +168,10 @@
 							<div
 								style="display: flex; justify-content: center; flex-direction: column;">
 
+								<!-- <span th:if="${descriptionLists.size()==0}" class="text-danger">
+								 	You don't have no avoid meat.
+								 </span> -->
+									
 								<ul class="">
 								    <li th:each="description : ${descriptionLists}" th:text="${description}"></li>
 								 </ul>

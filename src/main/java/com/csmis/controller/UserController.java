@@ -82,26 +82,31 @@ public class UserController {
 
 	@GetMapping("/account")
 	public String account(Model theModel,Authentication auth) {
-		StaffDetails staff = staffDetailsService.getStaffDetailByID(auth.getName());
-
-		StaffDetails staffDetail=staffDetailsService.getStaffDetailByID(auth.getName());
-		String description = staffDetail.getDescription();
-		//System.out.println("Desceiptopn ==>"+description);
-		List<String> descriptionLists = Arrays.asList(description.split(","));
-		theModel.addAttribute("descriptionLists",descriptionLists);
-
-
-		//System.out.println("mail noti is :" + staff.getEmail_status());
-		theModel.addAttribute(staff.getEmail_status());
-		ObjectMapper objectMapper = new ObjectMapper();
-		String json = null;
-		try {
-			json = objectMapper.writeValueAsString(staff.getEmail_status());
-
-		}catch(JsonProcessingException e){
-
-		}
-		theModel.addAttribute("json",json);
+		/*
+		 * StaffDetails staff = staffDetailsService.getStaffDetailByID(auth.getName());
+		 * 
+		 * StaffDetails
+		 * staffDetail=staffDetailsService.getStaffDetailByID(auth.getName()); String
+		 * description = staffDetail.getDescription();
+		 * //System.out.println("Desceiptopn ==>"+description); List<String>
+		 * descriptionLists = Arrays.asList(description.split(","));
+		 * System.out.println("Value: " + descriptionLists.get(0).length());
+		 * if(descriptionLists.get(0).length()==0) {
+					descriptionLists = new ArrayList<>();
+				}
+		 * theModel.addAttribute("descriptionLists",descriptionLists);
+		 * 
+		 * 
+		 * //System.out.println("mail noti is :" + staff.getEmail_status());
+		 * theModel.addAttribute(staff.getEmail_status()); ObjectMapper objectMapper =
+		 * new ObjectMapper(); String json = null; try { json =
+		 * objectMapper.writeValueAsString(staff.getEmail_status());
+		 * 
+		 * }catch(JsonProcessingException e){
+		 * 
+		 * } theModel.addAttribute("json",json);
+		 */
+		theModel.addAttribute("staff", staffService.findByID(auth.getName()));
 		return "/operator/account-status/index";
 	}
 
