@@ -22,6 +22,8 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 
 	@Autowired
 	HolidayService holidayService;
+	@Autowired
+	DateService dateService;
 
 	@Autowired
 	public Operator_Register_Service(ConsumerListRepository consumerListRepository) {
@@ -252,7 +254,7 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 
 	// set and return monthly confirmation with the weekly selected list
 	public String getWeeklConfirmation(List<String> checkedList, List<String> uncheckedList, String id) {
-		String[] holidays = { "05", "26" };
+
 		boolean checker;
 
 
@@ -267,6 +269,10 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 		// for checking if all day in next week is in next month
 		LocalDate today = LocalDate.now();
 		Integer monthValue = today.getMonthValue() + 1;
+		
+		// for holiday
+		List<String> holidays = holidayService.getThisMonthHoliday(today);
+		
 
 		// get next monday date in today
 		while (today.getDayOfWeek() != DayOfWeek.MONDAY) {
@@ -281,19 +287,22 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 			count = 1;
 		}
 
-		List<String> days = get_Monthly_Dates(count);
+		List<String> days = dateService.getMonthlyDates(today);
 
 		if (confirmation == "") {
 			for (String s : days)
 				confirmation += "x";
 		}
-
+		String temp="";
 		for (int i = 0; i < days.size(); i++) {
 			checker = true;
 			if (checkedList != null) {
 				for (String s : checkedList) {
 					if (days.get(i).equals(s)) {
-						confirmation = confirmation.substring(0, i) + "x" + confirmation.substring(i+1);
+						try {
+							temp=confirmation.substring(i+1);
+						}catch (Exception e) {	}
+						confirmation = confirmation.substring(0, i) + "x" + temp;
 						checker = false;
 						break;
 					}
@@ -303,7 +312,10 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 				if (uncheckedList != null) {
 					for (String s : uncheckedList) {
 						if (days.get(i).equals(s)) {
-							confirmation = confirmation.substring(0, i) + "1" + confirmation.substring(i+1);
+							try {
+								temp=confirmation.substring(i+1);
+							}catch (Exception e) {	}
+							confirmation = confirmation.substring(0, i) + "1" + temp;
 							break;
 						}
 					}

@@ -18,26 +18,19 @@ public class DateService {
 	@Autowired
 	ConsumerListRepository consumerListRepository;
 
-		public List<String> getWeeklyDate() {
-			ZoneId zone = ZoneId.systemDefault();
-			LocalDate today = LocalDate.now(zone);
+		public List<String> getWeeklyDate(LocalDate date) {
 
 			List<String> days = new ArrayList<>();
 			Integer temp;
 
-			// input first week of month
-			while (today.getDayOfWeek() != DayOfWeek.SUNDAY) {
-				today = today.plusDays(1);
-			}
-
-			while (today.getDayOfWeek() != DayOfWeek.FRIDAY) {
-				today = today.plusDays(1);
-				temp = today.getDayOfMonth();
+			while (date.getDayOfWeek() != DayOfWeek.SATURDAY) {
+				temp = date.getDayOfMonth();
 				days.add(temp.toString());
 				for (int i = 0; i < days.size(); i++) {
 					if (days.get(i).length() < 2)
 						days.set(i, "0" + days.get(i));
 				}
+				date = date.plusDays(1);
 			}
 			return days;
 		}

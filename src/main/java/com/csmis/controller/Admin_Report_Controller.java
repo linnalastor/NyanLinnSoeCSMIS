@@ -13,13 +13,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.csmis.entity.ConsumerList;
+import com.csmis.entity.HeadCount;
 import com.csmis.entity.Lunch_Report;
 import com.csmis.entity.Staff;
 import com.csmis.service.AdminLunch_ReportService;
 import com.csmis.service.AdminReportService;
+import com.csmis.service.DateService;
 import com.csmis.service.HolidayService;
 import com.csmis.service.Operator_Register_Service;
+import com.csmis.service.Operator_Report_Service;
+import com.csmis.service.Prefix_ID_Service;
 import com.csmis.service.StaffService;
+import com.csmis.service_interface.HeadCountServiceInterface;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -29,29 +35,31 @@ public class Admin_Report_Controller {
 	
 	@Autowired
 	AdminReportService adminReportService;
-	
 	@Autowired
-	Operator_Register_Service operatorRegisterService;
-	
+	Operator_Register_Service operatorRegisterService;	
+	@Autowired
+	Operator_Report_Service operatorReportService;
 	@Autowired
 	AdminLunch_ReportService adminLunch_ReportService;
-
 	@Autowired
 	StaffService staffService;
-	
-	
 	@Autowired
 	HolidayService holidayService;
+	@Autowired
+	Prefix_ID_Service prefix_ID_Service;
+	@Autowired
+	DateService dateService;
+	
+	@Autowired
+	HeadCountServiceInterface headCountService;
 	
 	
 	/* Report List Today */
 	@GetMapping("/report/today")
 	public String reportToday(@RequestParam(name = "search", required = false) String search,Model theModel) {
 		// get today date
-				LocalDate today = LocalDate.now().minusDays(1);
+				LocalDate yesterday = LocalDate.now().minusDays(1);
 				
-				System.out.println("search >> "+ search);
-
 				// Staff Lists
 				List<Staff> staffList = new ArrayList<>();
 				List<Staff> searchStaffList = new ArrayList<>();
@@ -59,14 +67,13 @@ public class Admin_Report_Controller {
 				List<String> staffConfirmation = new ArrayList<>();
 				int count = 0;
 
-				String month_year = operatorRegisterService.get_Month_Year_Weekly(count);
+				String month_year = prefix_ID_Service.getPrefix_ID(yesterday);
 				String year = month_year.substring(3);
 
 				// consumer report lists
 				List<Lunch_Report> lunchReprotList = adminLunch_ReportService.getAllLunch_Reports();
-				System.out.println("lunch report lsit >> "+ lunchReprotList);
 
-				Integer temp = today.getDayOfMonth();
+				Integer temp = yesterday.getDayOfMonth();
 
 				String day = temp.toString();
 				if (day.length() < 2)
@@ -84,11 +91,9 @@ public class Admin_Report_Controller {
 					}
 				}
 				
-				
 				boolean checker = true;
 				if (search == null || search == "")
 					checker = false;
-				System.out.println("serach "+ search);
 
 //					search staff as you like
 				if (checker) {
@@ -107,11 +112,19 @@ public class Admin_Report_Controller {
 					}
 					staffList = searchStaffList;
 				}
-				System.out.println("staff List >> "+ staffList);
+				String date = ""+yesterday;
+				HeadCount headcount= null;
+				try {
+					headcount = headCountService.find_by_id(date);
+				} catch (Exception e) {	}
+				if(headcount == null) {
+					headcount = new HeadCount();
+				}
 				
-
+				theModel.addAttribute("headcount",headcount);
+				theModel.addAttribute(headcount);
 				theModel.addAttribute("lunchReportList", lunchReprotList);
-				theModel.addAttribute("day", today);// add date to the model
+				theModel.addAttribute("day", yesterday);// add date to the model
 				theModel.addAttribute("staffList", staffList);// Add Staff Lists to the model
 				theModel.addAttribute("month", Month.of(Integer.parseInt(month_year.substring(0, 2))) + " / " + year);
 				theModel.addAttribute("confirmation_id", staffConfirmation);
@@ -150,24 +163,23 @@ public class Admin_Report_Controller {
 	/* Report List Monthly */
 	@GetMapping("/report/by_month")
 	public String reportListMonth(@RequestParam(name = "search", required = false) String search,Model theModel) {
-		LocalDate date = LocalDate.now();
-		date = date.plusMonths(1);
+		LocalDate date = LocalDate.now().withDayOfMonth(1).minusMonths(1);
 		ObjectMapper objectMapper = new ObjectMapper();
-		String json = null;
 		String jsonHoliday = null;
+		String jasonNotRegisterWeeklyDateLists = null;
+		String jasonNotPickedWeeklyDate = null;
+		String jasonPickedWeeklyDateLists = null;
 
 		// for holiday
 		List<String> holidays = holidayService.getThisMonthHoliday(date);
 
 		// for mordel addAttribute
-		String month_year = operatorRegisterService.get_Month_Year_Monthly(1);
-		String year = month_year.substring(3);
+		String prefix_id = prefix_ID_Service.getPrefix_ID(date);
+		String year = prefix_id.substring(3,7);
+		int month = Integer.parseInt(prefix_id.substring(0,2));
 
 		// set staff already selected dates into selection
-		List<String> list = operatorRegisterService.get_Monthly_Dates(1);
-		List<String> notRegisterDateList;
-
-//			List<String> holidayList = op.get_Monthly_Dates(1);
+		List<String> dates = dateService.getMonthlyDates(date);
 
 //			search staff as you like
 		List<Staff> staffList = staffService.findAll();
@@ -195,13 +207,6 @@ public class Admin_Report_Controller {
 			staffList = searchStaffList;
 		}
 
-		// date bind with staff id
-//		ArrayList<List<String>> notJsonRegisterDateList = new ArrayList<>();
-//		for (Staff s : staffService.findAll()) {
-//			notRegisterDateList = adminRegisterService.getAdminMonthlyNotRegisteredDate(month_year + "|" + s.getId());
-//			notJsonRegisterDateList.add(notRegisterDateList);
-//		}
-
 		// holiday date bind with staff id
 		ArrayList<List<String>> holidaysList = new ArrayList<>();
 		for (Staff s : staffService.findAll()) {
@@ -209,29 +214,38 @@ public class Admin_Report_Controller {
 			for (String holiday : holidays) {
 				String holidayId = holiday + s.getId();
 				staffHolidays.add(holidayId);
-
 			}
 			holidaysList.add(staffHolidays);
-
 		}
+		
+		
+		// for adding model attributes to html for show data
+//		==========================================================================================================				
+		List<List<String>> notRegisterWeeklyDateLists = adminReportService.getNotRegisteredDateLists(prefix_id,date,dates);
+		List<List<String>> notPickedWeeklyDate = adminReportService.getNotPickedDateLists(prefix_id,date,dates);
+		List<List<String>> pickedWeeklyDateLists = adminReportService.getPickedDateLists(prefix_id,date,dates);
 
+		System.out.println(date);
+		System.out.println("notRegisterWeeklyDateLists==> "+notRegisterWeeklyDateLists);
+		System.out.println("notPickedWeeklyDate==> "+notPickedWeeklyDate);
+		System.out.println("pickedWeeklyDateLists==> "+pickedWeeklyDateLists);
+		
 		try {
-			// add selected dates into json file
-//			json = objectMapper.writeValueAsString(notJsonRegisterDateList);
-			// add holidays into json file
+			jasonNotRegisterWeeklyDateLists = objectMapper.writeValueAsString(notRegisterWeeklyDateLists);
+			jasonNotPickedWeeklyDate = objectMapper.writeValueAsString(notPickedWeeklyDate);
+			jasonPickedWeeklyDateLists = objectMapper.writeValueAsString(pickedWeeklyDateLists);
 			jsonHoliday = objectMapper.writeValueAsString(holidaysList);
-
 		} catch (JsonProcessingException e) {
 		}
 
-		theModel.addAttribute("arrayJson", json);
 		theModel.addAttribute("jsonHoliday", jsonHoliday);
-
-		theModel.addAttribute("list", list);
+		theModel.addAttribute("jasonNotRegisterWeeklyDateLists", jasonNotRegisterWeeklyDateLists);
+		theModel.addAttribute("jasonNotPickedWeeklyDate", jasonNotPickedWeeklyDate);
+		theModel.addAttribute("jasonPickedWeeklyDateLists", jasonPickedWeeklyDateLists);
+		theModel.addAttribute("list", dates);
 		theModel.addAttribute("staffList", staffList);
-//			search=null;
-		theModel.addAttribute("month", Month.of(Integer.parseInt(month_year.substring(0, 2))) + " / " + year);
-
+		theModel.addAttribute("month", Month.of(month) + " / " + year);
+		theModel.addAttribute("listweeklydate", adminReportService.get_Monthly_Dates(1));
 		
 		return "admin/report-list/month-report-list/report";
 	}
@@ -250,55 +264,42 @@ public class Admin_Report_Controller {
 	@GetMapping("/report/by_week")
 	public String reportListWeek(@RequestParam(name = "search", required = false) String search, Model theModel) {
 		// used for  holidayService.getThisMonthHoliday()
-				LocalDate date = LocalDate.now();
 
 				ObjectMapper objectMapper = new ObjectMapper();
-				String json = null;
 				String jsonHoliday = null;
+				String jasonNotRegisterWeeklyDateLists = null;
+				String jasonNotPickedWeeklyDate = null;
+				String jasonPickedWeeklyDateLists = null;
 
 				//for checking if all day in next week is in next month
 				LocalDate today = LocalDate.now();
-				Integer monthValue = today.getMonthValue() + 1;
+				
+				if(today.getDayOfWeek() == DayOfWeek.MONDAY) 
+					today = today.minusDays(1);
 
 				//get next monday date in today
 				while (today.getDayOfWeek() != DayOfWeek.MONDAY) {
-					today = today.plusDays(1);
+					today = today.minusDays(1);
 				}
-
+				
 				// for service method usages
 				int count = 0;
 
-				// check if all day in next week is in next month
-				if (today.getMonthValue() == monthValue) {
-					count = 1;
-					date = date.plusMonths(1);
-				}
 
-				// set holiday
 				// for holiday
-				List<String> holidays = holidayService.getThisMonthHoliday(date);
+				List<String> holidays = holidayService.getThisMonthHoliday(today);
 
 				// get string of month and year of this week
-				String month_year = operatorRegisterService.get_Month_Year_Weekly(count);
-
-				// get this week days
-				List<String> dates = operatorRegisterService.getWeeklyDate();
-
-				// for model
-				Integer month = Integer.parseInt(month_year.substring(0, 2));
-				String year = month_year.substring(3);
-				String day_to_day = "( " + "From " + dates.get(0) + " To " + dates.get(dates.size() - 1) + " )";
-
+				String month_year = prefix_ID_Service.getPrefix_ID(today);
+				
 				List<Staff> staffList = staffService.findAll();
-
-				List<String> notRegisterDateListWeek;
+				
 				List<Staff> searchStaffList = new ArrayList<>();
 
 				boolean checker = true;
 
 				if (search == null || search == "")
 					checker = false;
-//						search staff as you like
 
 				if (checker) {
 					search = search.toLowerCase();
@@ -317,14 +318,6 @@ public class Admin_Report_Controller {
 					staffList = searchStaffList;
 				}
 
-				// date bind with staff id
-//				ArrayList<List<String>> notWeeklyRegisterDateList = new ArrayList<>();
-//				for (Staff s : staffService.findAll()) {
-//					notRegisterDateListWeek = adminRegisterService.getAdminWeeklyConfirmDate(month_year + "|" + s.getId(),
-//							count);
-//					notWeeklyRegisterDateList.add(notRegisterDateListWeek);
-//				}
-
 				// holiday date bind with staff id
 				ArrayList<List<String>> holidaysList = new ArrayList<>();
 				for (Staff s : staffService.findAll()) {
@@ -337,22 +330,41 @@ public class Admin_Report_Controller {
 					holidaysList.add(staffHolidays);
 
 				}
+				
+				// for adding model attributes to html for show data
+//				==========================================================================================================				
+				List<String> dates = dateService.getWeeklyDate(today);
+				List<List<String>> notRegisterWeeklyDateLists = adminReportService.getNotRegisteredDateLists(month_year,today,dates);
+				List<List<String>> notPickedWeeklyDate = adminReportService.getNotPickedDateLists(month_year,today,dates);
+				List<List<String>> pickedWeeklyDateLists = adminReportService.getPickedDateLists(month_year,today,dates);
 
+				System.out.println("notRegisterWeeklyDateLists==> "+notRegisterWeeklyDateLists);
+				System.out.println("notPickedWeeklyDate==> "+notPickedWeeklyDate);
+				System.out.println("pickedWeeklyDateLists==> "+pickedWeeklyDateLists);
+				
 				try {
-					// add selected dates into json file
-//					json = objectMapper.writeValueAsString(notWeeklyRegisterDateList);
-					// add holidays into json file
+					jasonNotRegisterWeeklyDateLists = objectMapper.writeValueAsString(notRegisterWeeklyDateLists);
+					jasonNotPickedWeeklyDate = objectMapper.writeValueAsString(notPickedWeeklyDate);
+					jasonPickedWeeklyDateLists = objectMapper.writeValueAsString(pickedWeeklyDateLists);
 					jsonHoliday = objectMapper.writeValueAsString(holidaysList);
-
 				} catch (JsonProcessingException e) {
 				}
+
+				
+				// for model
+				Integer month = Integer.parseInt(month_year.substring(0, 2));
+				String year = month_year.substring(3);
+				String day_to_day = "( " + "From " + dates.get(0) + " To " + dates.get(dates.size() - 1) + " )";
 
 				theModel.addAttribute("month", Month.of(month) + " / " + year);// get this month and year
 				theModel.addAttribute("month", Month.of(month));// get this month
 				theModel.addAttribute("day_to_day", day_to_day);// get from day to day between this week
 				theModel.addAttribute("listweeklydate", dates);// get dates between this week
-				theModel.addAttribute("arrayJson", json);
+				theModel.addAttribute("jasonNotRegisterWeeklyDateLists", jasonNotRegisterWeeklyDateLists);
+				theModel.addAttribute("jasonNotPickedWeeklyDate", jasonNotPickedWeeklyDate);
+				theModel.addAttribute("jasonPickedWeeklyDateLists", jasonPickedWeeklyDateLists);
 				theModel.addAttribute("jsonHoliday", jsonHoliday);
+				theModel.addAttribute("listweeklydate",adminReportService.getWeeklyDate());
 				theModel.addAttribute("staffList", staffList);
 		
 		return "admin/report-list/week-report-list/weekreport";

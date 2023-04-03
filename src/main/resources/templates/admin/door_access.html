@@ -140,21 +140,20 @@
 			<button type="submit">Import</button>
 		</form>
 	</div>
+	<!--display error if any-->
+	<div class="alert alert-danger" role="alert" th:if="${!status}">
+		<strong>Error:</strong> <span th:text="${message}"></span>
+	</div>
 
 	<div class="container py-5">
 		<div class="row">
 			<div class="col-10 mx-auto">
-
-				<!--display error if any-->
-				<div class="alert alert-danger" role="alert" th:if="${!status}">
-					<strong>Error:</strong> <span th:text="${message}"></span>
-				</div>
 				<table id="dataTable" align="center"
-					class=" w-75table table-striped" th:if="${status}">
+					class=" w-75table table-striped">
 					<thead>
 						<tr class="fw-bolder">
 							<th>No.</th>
-							
+
 							<th>Date</th>
 							<th>Actual</th>
 							<th>Registered</th>
@@ -173,7 +172,7 @@
 							<td th:text="${headCount.registered_head_count}"></td>
 							<td th:text="${headCount.not_registered_head_count}"></td>
 							<td th:text="${headCount.not_picked_head_count}"></td>
-							<td/>
+							<td />
 						</tr>
 					</tbody>
 				</table>

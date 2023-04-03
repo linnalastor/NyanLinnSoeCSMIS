@@ -86,7 +86,7 @@ public class ExcelService {
     }
 
     private static File convert(MultipartFile file) throws IOException {
-        File convFile = new File(file.getOriginalFilename());
+        File convFile = new File("excel_tempFiel.xlsx");
         FileOutputStream fos = new FileOutputStream(convFile);
         fos.write(file.getBytes());
         fos.close();
