@@ -93,7 +93,21 @@ public class Import_Holiday_Controller {
 		hdto.setDescription(holiday.getDescription());
 
 		theModel.addAttribute("holiday", hdto);
-
+		theModel.addAttribute("hol", true);
 		return "/admin/Holiday_Update_List";
 	}
+	
+
+	@GetMapping("/HolidayFormAdd")
+	public String showFormForAdd(Model theModel) {
+		HolidayDTO hdto= new HolidayDTO();
+		theModel.addAttribute("holiday", hdto);
+		return "/admin/Holiday_Update_List";
+	}
+	
+	
+	
+	
+	
+	
  	  	}

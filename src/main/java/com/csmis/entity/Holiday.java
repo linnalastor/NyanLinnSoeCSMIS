@@ -30,7 +30,7 @@ public class Holiday {
 
 	public void HolidayDTO(String sdate, String description)throws ParseException {
 
-		String[] dateFormats = {"dd-MM-yy","d-MM-yy","dd-m-yy","d-m-yy","yyyy-MM-dd"};
+		String[] dateFormats = {"dd-MM-yy","d-MM-yy","dd-m-yy","d-m-yy","yyyy-MM-dd","yyyy-MM-d","yyyy-M-DD","yyyy-M-d"};
 		for(String foramat: dateFormats) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern(foramat);
             try {

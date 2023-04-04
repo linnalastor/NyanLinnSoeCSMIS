@@ -68,4 +68,10 @@ public class AuthoritiesService implements AuthoritiesServiceInterface{
 		 authoritiesRepository.save(authorities);
 	}
 
+
+	public List<Authorities> findAll() {
+		return authoritiesRepository.findAll();
+		
+	}
+
 }

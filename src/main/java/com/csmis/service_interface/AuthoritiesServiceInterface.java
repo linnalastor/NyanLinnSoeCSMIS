@@ -14,4 +14,6 @@ public interface AuthoritiesServiceInterface {
 	public Authorities findById(String id);
 
 	public void saveAuthorities(Authorities authorities) ;
+	
+	public List<Authorities> findAll();
 }

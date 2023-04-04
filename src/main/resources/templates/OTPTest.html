@@ -216,7 +216,11 @@ body {
 								class="form-control mt-5 mb-5" 	type="password" id="confirmpassword" name="confirmPassword"
 									placeholder="Confirm your new password"  th:attr="readonly=${pass}">
 
-								<button type="submit"  class="btn btn-sm btn-primary ">Change Password</button>
+								   <button type="button" onclick="window.location.href='/admin/fancy-login'"
+                                class="btn btn-danger btn-sm col-4 ">Cancel</button>
+                                
+								<button type="submit"  class="btn btn-sm btn-primary  float-end"  th:disabled="${chPass}">Change Password</button>
+							 
 							</form>
 
 

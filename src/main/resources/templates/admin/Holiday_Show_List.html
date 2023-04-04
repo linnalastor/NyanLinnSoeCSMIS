@@ -188,6 +188,10 @@
 				<div class="alert alert-danger" role="alert" th:if="${!status}">
 					<strong>Error:</strong> <span th:text="${message}"></span>
 				</div>
+				
+				
+				<a th:href="@{/admin/HolidayFormAdd}"
+					class="btn btn-success btn-sm"> Add New holiday </a>
 				<table id="dataTable" align="center"
 					class=" w-75table table-striped" th:if="${status}">
 					<thead>

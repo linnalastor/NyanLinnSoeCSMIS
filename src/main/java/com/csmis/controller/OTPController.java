@@ -45,7 +45,9 @@ public class OTPController {
 		model.addAttribute("status", true);
 		model.addAttribute("pass", true);
 		model.addAttribute("OTPCode","");
+		model.addAttribute("otpStatus", true);
 
+		model.addAttribute("chPass", true);
 //		  model.addAttribute("otp", staff);
 		return "/OTPTest";
 
@@ -74,6 +76,7 @@ public class OTPController {
 			model.addAttribute("sta", true);
 			model.addAttribute("pass", true);
 
+			model.addAttribute("chPass", true);
 			model.addAttribute("otp", otp);
 			System.out.println(otp);
 			return "/OTPTest";
