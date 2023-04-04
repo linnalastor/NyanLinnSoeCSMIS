@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,7 +56,7 @@ public class Admin_Report_Controller {
 
 	/* Report List Today */
 	@GetMapping("/report/today")
-	public String reportToday(@RequestParam(name = "search", required = false) String search,Model theModel) {
+	public String reportToday(@RequestParam(name = "search", required = false) String search,Model theModel, Authentication auth) {
 		// get today date
 				LocalDate yesterday = LocalDate.now().minusDays(1);
 
@@ -120,6 +121,9 @@ public class Admin_Report_Controller {
 					headcount = new HeadCount();
 				}
 
+				Staff loginStaff = staffService.findByID(auth.getName());
+				
+				theModel.addAttribute("userName",loginStaff.getName());
 				theModel.addAttribute("headcount",headcount);
 				theModel.addAttribute(headcount);
 				theModel.addAttribute("lunchReportList", lunchReprotList);
@@ -161,7 +165,7 @@ public class Admin_Report_Controller {
 	//------------------------------------------------------------------
 	/* Report List Monthly */
 	@GetMapping("/report/by_month")
-	public String reportListMonth(@RequestParam(name = "search", required = false) String search,Model theModel) {
+	public String reportListMonth(@RequestParam(name = "search", required = false) String search,Model theModel, Authentication auth) {
 		LocalDate date = LocalDate.now().withDayOfMonth(1).minusMonths(1);
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonHoliday = null;
@@ -237,6 +241,9 @@ public class Admin_Report_Controller {
 		} catch (JsonProcessingException e) {
 		}
 
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("jsonHoliday", jsonHoliday);
 		theModel.addAttribute("jasonNotRegisterWeeklyDateLists", jasonNotRegisterWeeklyDateLists);
 		theModel.addAttribute("jasonNotPickedWeeklyDate", jasonNotPickedWeeklyDate);
@@ -261,7 +268,7 @@ public class Admin_Report_Controller {
 	//------------------------------------------------------------------
 	/* Report List Weekly */
 	@GetMapping("/report/by_week")
-	public String reportListWeek(@RequestParam(name = "search", required = false) String search, Model theModel) {
+	public String reportListWeek(@RequestParam(name = "search", required = false) String search, Model theModel, Authentication auth) {
 		// used for  holidayService.getThisMonthHoliday()
 
 				ObjectMapper objectMapper = new ObjectMapper();
@@ -355,6 +362,9 @@ public class Admin_Report_Controller {
 				String year = month_year.substring(3);
 				String day_to_day = "( " + "From " + dates.get(0) + " To " + dates.get(dates.size() - 1) + " )";
 
+				Staff loginStaff = staffService.findByID(auth.getName());
+				
+				theModel.addAttribute("userName",loginStaff.getName());
 				theModel.addAttribute("month", Month.of(month) + " / " + year);// get this month and year
 				theModel.addAttribute("month", Month.of(month));// get this month
 				theModel.addAttribute("day_to_day", day_to_day);// get from day to day between this week

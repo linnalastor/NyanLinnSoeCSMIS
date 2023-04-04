@@ -5,15 +5,18 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.csmis.entity.Avoidmeat;
+import com.csmis.entity.Staff;
 import com.csmis.entity.StaffDetails;
 import com.csmis.service_interface.AvoidmeatServiceInterface;
 import com.csmis.service_interface.StaffDetailsServiceInterface;
+import com.csmis.service_interface.StaffServiceInterface;
 
 @Controller
 @RequestMapping("/admin")
@@ -23,9 +26,11 @@ public class AvoidMeatController {
 	StaffDetailsServiceInterface staffDetailsService;
 	@Autowired
 	AvoidmeatServiceInterface avoidmeatService;
+	@Autowired
+	StaffServiceInterface staffService;
 
 	@GetMapping("/avoidMeat")
-	public String avoidMeatList(Model model) {
+	public String avoidMeatList(Model model, Authentication auth) {
 		List<Avoidmeat> avoidMeatlist =avoidmeatService.findAll();
 		List<StaffDetails> staffDetailList = staffDetailsService.getStaffDetails();
 		List<String> staffID = new ArrayList<>();
@@ -60,6 +65,9 @@ public class AvoidMeatController {
 			descriptionCount.add(""+count);
 			descriptionCount_list.add(descriptionCount);
 		}
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("desList",descriptionCount_list);
 		model.addAttribute("staffDesList", staffDescription_list);
 

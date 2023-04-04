@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ import com.csmis.entity.Cost;
 import com.csmis.entity.DailyInvoice;
 import com.csmis.entity.HeadCount;
 import com.csmis.entity.Lunch_Report;
+import com.csmis.entity.Staff;
 import com.csmis.service.DoorAccessService;
 import com.csmis.service.ExcelService;
 import com.csmis.service_interface.CostServiceInterface;
@@ -50,9 +52,10 @@ public class DoorAccessController {
 	OperatorReportServiceInterface operatorReportService;
 
 	@GetMapping("/door_access")
-	public String door_access(Model model,@ModelAttribute(name = "message") String message,@ModelAttribute(name = "status") String status) {
+	public String door_access(Model model,@ModelAttribute(name = "message") String message,@ModelAttribute(name = "status") String status, Authentication auth) {
 		List<HeadCount> headCount = headCountService.findAllDesc();
-		System.out.println(headCount);
+		Staff loginStaff = staffService.findByID(auth.getName());
+		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("headCountList",headCount);
 		model.addAttribute("message",message);
 		if(status == "true")

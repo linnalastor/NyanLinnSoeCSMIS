@@ -6,7 +6,9 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,7 +45,7 @@ public class Admin_Register_Controller {
 
 	// start consumer list today
 	@GetMapping("/consumer_list/today")
-	public String consumerToday(@RequestParam(name = "search", required = false) String search, Model theModel) {
+	public String consumerToday(@RequestParam(name = "search", required = false) String search, Model theModel,Authentication auth) {
 
 		// get today date
 		LocalDate today = LocalDate.now();
@@ -96,7 +98,10 @@ public class Admin_Register_Controller {
 			}
 			staffList = searchStaffList;
 		}
-
+		
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("consumerList", consumerLists);// Add the consumer lists to the model
 		theModel.addAttribute("day", today);// add date to the model
 		theModel.addAttribute("staffList", staffList);// Add Staff Lists to the model
@@ -112,7 +117,7 @@ public class Admin_Register_Controller {
 
 	// preparing for Lunch Plan By week page
 	@GetMapping("/consumer_list/by_week")
-	public String ConsumerListWeekly(@RequestParam(name = "search", required = false) String search, Model theModel) {
+	public String ConsumerListWeekly(@RequestParam(name = "search", required = false) String search, Model theModel,Authentication auth) {
 
 		// used for  holidayService.getThisMonthHoliday()
 		LocalDate date = LocalDate.now();
@@ -212,6 +217,9 @@ public class Admin_Register_Controller {
 		} catch (JsonProcessingException e) {
 		}
 
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("month", Month.of(month) + " / " + year);// get this month and year
 		theModel.addAttribute("month", Month.of(month));// get this month
 		theModel.addAttribute("day_to_day", day_to_day);// get from day to day between this week
@@ -296,7 +304,7 @@ public class Admin_Register_Controller {
 
 	// Start Consumer List Monthly
 	@GetMapping("/consumer_list/by_month")
-	public String ConsumerListMonthly(@RequestParam(name = "search", required = false) String search, Model theModel) {
+	public String ConsumerListMonthly(@RequestParam(name = "search", required = false) String search, Model theModel, Authentication auth) {
 		LocalDate date = LocalDate.now();
 		date = date.plusMonths(1);
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -371,6 +379,9 @@ public class Admin_Register_Controller {
 		} catch (JsonProcessingException e) {
 		}
 
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("arrayJson", json);
 		theModel.addAttribute("jsonHoliday", jsonHoliday);
 
