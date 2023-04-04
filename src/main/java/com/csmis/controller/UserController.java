@@ -88,15 +88,27 @@ public class UserController {
 		List<String> descriptionLists = null;
 		try {
 			descriptionLists = Arrays.asList(description.split(","));
+			//System.out.println("Value: " + descriptionLists.get(0).length());
+			if(descriptionLists.get(0).length()==0) {
+				descriptionLists = new ArrayList<>();
+			}
 		} catch (Exception e1) {
 		}
-		if (descriptionLists== null) {
-			descriptionLists = new ArrayList<>();
+		
+		if (descriptionLists == null || descriptionLists.isEmpty() || descriptionLists.get(0).trim().equals("")) {
+		    descriptionLists = new ArrayList<>();
 		}
+
+		/*
+		 * if (descriptionLists== null) { descriptionLists = new ArrayList<>(); }
+		 * if(descriptionLists.get(0).trim().equals("")) { descriptionLists = new
+		 * ArrayList<>(); }
+		 */
+		//System.out.println(descriptionLists);
 		theModel.addAttribute("descriptionLists", descriptionLists);
 
 		// System.out.println("mail noti is :" + staff.getEmail_status());
-		theModel.addAttribute(staff.getEmail_status());
+		theModel.addAttribute("emailStatus",staff.getEmail_status());
 		ObjectMapper objectMapper = new ObjectMapper();
 		String json = null;
 		try {
