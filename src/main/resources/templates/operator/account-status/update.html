@@ -170,6 +170,10 @@
                         <h1 class="card-title"> User Update  Form </h1>
                     </div>
                     <div class="card-body">
+                    
+                        <div th:if="${error}" class="alert alert-danger">
+						  <p th:text="${error}"></p>
+						</div><br>
                     <form  th:action="@{/operator/oldPassword}" method="post" class="mb-3">
                     	<div class="form-group">
 							    <label for="oldPassword">Old Password</label>
@@ -189,10 +193,7 @@
 							  </div>
 							  <button type="button" th:onclick="window.location.href='/operator/account'" class="btn btn-danger btn-block col-3 me-3">Cancel</button>
 							  <button type="submit" class="btn btn-primary updatePasswordBtn" disabled>Update Password</button>
-						</form><br>
-                        <div th:if="${error}" class="alert alert-danger">
-						  <p th:text="${error}"></p>
-						</div>
+						</form>
                     </div>
                 </div>
             </div>

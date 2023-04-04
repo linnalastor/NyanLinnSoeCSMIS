@@ -13,6 +13,7 @@ public interface StaffRepository extends JpaRepository<Staff, String>{
 	@Query(value="Select * from Staff where email=?1",nativeQuery=true)
 	public Staff findByEmail(String email);
 
+	
 
 
 }
