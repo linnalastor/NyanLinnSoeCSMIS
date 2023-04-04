@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -60,7 +61,7 @@ public class Import_Controller {
 
 	// Mapping For Import Menu Pdf
 	@PostMapping("/import_menu")
-	public String import_menu(@RequestParam("pdfFile") MultipartFile pdfFile, Model model)
+	public String import_menu(@RequestParam("pdfFile") MultipartFile pdfFile, Model model, Authentication auth)
 			throws IOException, DocumentException {
 
 		// get the name of the imported file
@@ -73,16 +74,17 @@ public class Import_Controller {
 		// convert pdf from resource/pdfs to byte string
 		String thisweek_encodedPdf = pdfService.getPdfAsByteString(thisweek_pdfFileName);
 		String nextweek_encodedPdf = pdfService.getPdfAsByteString(nextweek_pdfFileName);
-
+		Staff loginStaff = thestaffService.findByID(auth.getName());
+		
+		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("pdf", thisweek_encodedPdf);
 		model.addAttribute("npdf", nextweek_encodedPdf);
 		return "admin/admin_menu";
 	}
 
 	// Mapping for Import Staff.csv
-	// Mapping for Import Staff.csv
 	@PostMapping("/import_staff")
-	public String StaffList(@RequestParam("staff_file") MultipartFile file, Model model) {
+	public String StaffList(@RequestParam("staff_file") MultipartFile file, Model model, Authentication auth) {
 		boolean status = false;
 		String message = "";
 		// validate file
@@ -189,7 +191,10 @@ public class Import_Controller {
 			}
 		}
 		staffs = thestaffService.findAll();
+		Staff loginStaff = thestaffService.findByID(auth.getName());
+		
 		// add staffs attributes into model for show data
+		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("staff", staffs);
 		model.addAttribute("status", status);
 		model.addAttribute("message", message);
@@ -197,7 +202,7 @@ public class Import_Controller {
 	}
 
 	@PostMapping("/saveStaff")
-	public String saveStaff(@ModelAttribute("staff") Staff thestaff, Model theModel) {
+	public String saveStaff(@ModelAttribute("staff") Staff thestaff, Model theModel, Authentication auth) {
 
 		thestaffService.save(thestaff);
 
@@ -225,13 +230,5 @@ public class Import_Controller {
 		}
 		return "redirect:/admin/staff_list";
 	}
-
-//	private void startLoading() {
-//	    Notiflix.Loading.dots('Loading.....');
-//	}
-//
-//	private void stopLoading() {
-//	    Notiflix.Loading.remove();
-//	}
 
 }

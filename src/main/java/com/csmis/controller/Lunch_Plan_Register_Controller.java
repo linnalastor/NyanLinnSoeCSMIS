@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.csmis.entity.ConsumerList;
+import com.csmis.entity.Staff;
 import com.csmis.service.DateService;
 import com.csmis.service.HolidayService;
 import com.csmis.service.Operator_Register_Service;
@@ -79,6 +80,9 @@ public class Lunch_Plan_Register_Controller {
 			jsonHoliday = objectMapper.writeValueAsString(holidays);
 		} catch (JsonProcessingException e) {
 		}
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		theModel.addAttribute("userName",loginStaff.getName());
 
 		theModel.addAttribute("arrayJson", jsonUncheckedDates);
 		theModel.addAttribute("jsonHoliday", jsonHoliday);
@@ -153,6 +157,9 @@ public class Lunch_Plan_Register_Controller {
 
 		} catch (JsonProcessingException e) {
 		}
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		theModel.addAttribute("userName",loginStaff.getName());
 
 		theModel.addAttribute("month", Month.of(month) + " / " + year);
 		theModel.addAttribute("day_to_day", day_to_day);

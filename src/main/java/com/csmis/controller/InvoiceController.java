@@ -25,7 +25,9 @@ import com.csmis.entity.InvoiceReceiveBy;
 import com.csmis.entity.PaymentVoucher;
 import com.csmis.entity.Paymentmethod;
 import com.csmis.entity.Restaurant;
+import com.csmis.entity.Staff;
 import com.csmis.entity.StaffDetails;
+import com.csmis.service.StaffService;
 import com.csmis.service_interface.InvoiceApprovedByServiceInterface;
 import com.csmis.service_interface.InvoiceCashierServiceInterface;
 import com.csmis.service_interface.InvoiceReceiveByServiceInterface;
@@ -38,6 +40,10 @@ import com.csmis.service_interface.StaffDetailsServiceInterface;
 @Controller
 @RequestMapping("/admin")
 public class InvoiceController {
+	@Autowired
+	private StaffService staffService;
+	
+	
 	private InvoiceServiceInterface dailyInvoiceService;
 	private InvoiceCashierServiceInterface cashierSerivice;
 	private InvoiceReceiveByServiceInterface receivedService;
@@ -52,7 +58,8 @@ public class InvoiceController {
 			InvoiceCashierServiceInterface theCashierSerivice, InvoiceReceiveByServiceInterface theReceivedService,
 			InvoiceApprovedByServiceInterface theApprovedByServie, RestaurantServiceInterface theResturantService,
 			PaidVoucherServiceInterface thePaidVoucherServiceInterface,
-			StaffDetailsServiceInterface theStaffDetailsServiceInterface,PaymentmethodServiceInterface thePaymentmethodServiceInterface) {
+			StaffDetailsServiceInterface theStaffDetailsServiceInterface,PaymentmethodServiceInterface thePaymentmethodServiceInterface,
+			Authentication auth) {
 
 		dailyInvoiceService = theInvoiceService;
 		cashierSerivice = theCashierSerivice;
@@ -113,6 +120,9 @@ public class InvoiceController {
 //		boolean isFirstTime = true;
 		int Ctotal = 0;
 		int Stotal = 0;
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("CTotal", Ctotal);
 		model.addAttribute("Stotal", Stotal);
 		model.addAttribute("cashier", cashier);
@@ -135,7 +145,8 @@ public class InvoiceController {
 	public String showData(Model model,
 			@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
 			@RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
-			@RequestParam("paymentDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate paymentDate) {
+			@RequestParam("paymentDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate paymentDate,
+			Authentication auth) {
 
 		List<DailyInvoice> data = dailyInvoiceService.findByDateBetween(startDate, endDate);
 		List<InvoiceCashier> cashier = cashierSerivice.findAll();
@@ -218,14 +229,21 @@ public class InvoiceController {
 		String voucherNo = "CSMIS-" + pYear + pMonth + pDay + ": " + sYear + sMonth + sDay + " ~" + eYear + eMonth
 				+ eDay;
 		model.addAttribute("voucherNo", voucherNo);
+
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		model.addAttribute("userName",loginStaff.getName());
 		return "admin/invoice/invoice";
 	}
 
 	@GetMapping("/monthlyInvoice")
-	public String MonthlyInvoice(Model model) {
+	public String MonthlyInvoice(Model model, Authentication auth) {
 		List<PaymentVoucher> monthlyInvoice = paidVoucherServiceInterface.findAll();
 		model.addAttribute("monthlyInvoice", monthlyInvoice);
 
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		model.addAttribute("userName",loginStaff.getName());
 		return "admin/invoice/paidinvoice";
 
 	}
@@ -240,7 +258,7 @@ public class InvoiceController {
 	}
 
 	@GetMapping("/detailInvoice")
-	public String DetailInvoice(Model model) {
+	public String DetailInvoice(Model model, Authentication auth) {
 		List<DailyInvoice> theInvoices = dailyInvoiceService.findAll();
 		List<DailyInvoiceDTO> dto = new ArrayList<>();
 
@@ -268,12 +286,15 @@ public class InvoiceController {
 		model.addAttribute("invoices", dto);
 
 		model.addAttribute("status", false);
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		model.addAttribute("userName",loginStaff.getName());
 
 		return "admin/invoice/detailInvoice";
 	}
 
 	@GetMapping("/search")
-	public String Search(Model model, @RequestParam("voucherNo") String voucherNo) {
+	public String Search(Model model, @RequestParam("voucherNo") String voucherNo, Authentication auth) {
 		String startDateString = voucherNo.substring(voucherNo.indexOf(":") + 2, voucherNo.indexOf("~")).trim();
 		String endDateString = voucherNo.substring(voucherNo.indexOf("~") + 1).trim();
 
@@ -308,6 +329,9 @@ public class InvoiceController {
 			Stotal += temp.getSamount();
 			dto.add(temp);
 		}
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("invoices", dto);
 		model.addAttribute("CTotal", Ctotal);
 		model.addAttribute("Stotal", Stotal);
@@ -319,7 +343,8 @@ public class InvoiceController {
 	@PostMapping("/SEsearch")
 	public String betweenTwoDate(Model model,
 			@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-			@RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+			@RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+			Authentication auth) {
 		List<DailyInvoice> data = dailyInvoiceService.findByDateBetween(startDate, endDate);
 		List<DailyInvoiceDTO> dto = new ArrayList<>();
 		int Ctotal = 0;
@@ -347,6 +372,9 @@ public class InvoiceController {
 			Stotal += temp.getSamount();
 			dto.add(temp);
 		}
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("invoices", dto);
 		model.addAttribute("CTotal", Ctotal);
 		model.addAttribute("Stotal", Stotal);

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.csmis.entity.ConsumerList;
 import com.csmis.entity.Lunch_Report;
+import com.csmis.entity.Staff;
 import com.csmis.service.HolidayService;
 import com.csmis.service.Operator_Register_Service;
 import com.csmis.service.Operator_Report_Service;
@@ -105,6 +106,9 @@ public class Lunch_Report_Controller {
 		} else
 			status = "notpicked";
 
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("day", yesterday);
 		// picked/not picked/not registered/holiday status
 		theModel.addAttribute("status", status);
@@ -158,6 +162,9 @@ public class Lunch_Report_Controller {
 			}
 			notRegisteredDates = operatorReportService.getPickedUpWithoutRegisteredDays(reportStatus, 0);
 		}
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		theModel.addAttribute("userName",loginStaff.getName());
 
 		holidayString = objectMapper.writeValueAsString(holidays);
 		notRegisteredDatesString = objectMapper.writeValueAsString(notRegisteredDates);
@@ -225,6 +232,9 @@ public class Lunch_Report_Controller {
 		pickedDatesString = objectMapper.writeValueAsString(pickedDates);
 		notPickedDatesString = objectMapper.writeValueAsString(notPickedDates);
 
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("holidays", holidayString);
 		theModel.addAttribute("notregistereddays", notRegisteredDatesString);
 		theModel.addAttribute("pickeddays", pickedDatesString);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,12 +28,15 @@ public class EmailListAdminController {
 	}
 
 	@GetMapping("/email")
-	public String emailList(Model model) {
+	public String emailList(Model model, Authentication auth) {
 		List<StaffDetails> staffDetail1 = staffDetailsServiceInterface.findByEmailStatus();
 		List<Staff> staffs= new ArrayList<>();
 		for(StaffDetails s:staffDetail1) {
 			staffs.add( staffService.findByID(s.getId()) );
 		}
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("staffs",staffs);
 		return "/admin/email/email";
 	}

@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -34,7 +35,7 @@ public class EmailController {
 
 	@PostMapping("/emailSending")
 	public String sendEmail(@RequestParam("message")String message,
-							@RequestParam("subject")String subject) {
+							@RequestParam("subject")String subject, Authentication auth, Model theModel) {
 		List<StaffDetails> staffDetails = staffDetailsServiceInterface.findByEmailStatus();
 		List<String> emailAddresses = new ArrayList<>();
 		
@@ -47,8 +48,10 @@ public class EmailController {
 		
 		String[] addresses = emailAddresses.toArray(new String[emailAddresses.size()]);
 		
-		
 		emailSender.sendEmail(subject,message,addresses);
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		theModel.addAttribute("userName",loginStaff.getName());
 		return "/admin/email/email";
 	}
 }

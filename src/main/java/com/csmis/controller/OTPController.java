@@ -5,6 +5,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,10 +38,10 @@ public class OTPController {
 	}
 
 	@GetMapping("/showPage")
-	public String showMyLoginPage(Model model) {
-//		List<Staff> staff=staffService.findAll();
-//		staffService.saveStaffs(staff);
-//		staff=staffService.findAll();
+	public String showMyLoginPage(Model model, Authentication auth) {
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("email", "");
 		model.addAttribute("status", true);
 		model.addAttribute("pass", true);
@@ -48,13 +49,12 @@ public class OTPController {
 		model.addAttribute("otpStatus", true);
 
 		model.addAttribute("chPass", true);
-//		  model.addAttribute("otp", staff);
 		return "/OTPTest";
 
 	}
 
 	@PostMapping("/send-otp")
-	public String sendOTP(@RequestParam("email") String email, Model model)
+	public String sendOTP(@RequestParam("email") String email, Model model, Authentication auth)
 			throws InvalidKeyException, NoSuchAlgorithmException {
 		// Staff staff=new Staff();
 		Staff staff = null;
@@ -65,10 +65,10 @@ public class OTPController {
 
 		}
 		System.out.println(staff);
-		// Find staff by email
-
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		model.addAttribute("userName",loginStaff.getName());
 		if (staff != null) { // Check if staff with the given email exists
-
 			String otp = oTPSenderService.generateOTP();
 			this.matchOtp = otp;
 			oTPSenderService.sendOTP(email, otp);
@@ -78,7 +78,6 @@ public class OTPController {
 
 			model.addAttribute("chPass", true);
 			model.addAttribute("otp", otp);
-			System.out.println(otp);
 			return "/OTPTest";
 
 		} else {
@@ -91,10 +90,13 @@ public class OTPController {
 
 //
 	@PostMapping("/password")
-	public String OTPCheckt(@RequestParam("otp") String otp, @RequestParam("otpemail") String email, Model model) {
+	public String OTPCheckt(@RequestParam("otp") String otp, @RequestParam("otpemail") String email, Model model, Authentication auth) {
 
 		Staff staff = staffService.findByEmail(email);
 		model.addAttribute("id", staff.getId());
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		model.addAttribute("userName",loginStaff.getName());
 //
 		// Check if the OTP is correct
 		if (otp.equals(matchOtp)) {
@@ -123,7 +125,7 @@ public class OTPController {
 //	}
 	@PostMapping("/change-password")
 	public String Changpass(@RequestParam("id") String id, @RequestParam("confirmPassword") String confirmPassword,
-			Model model, @RequestParam("otpemail") String email) {
+			Model model, @RequestParam("otpemail") String email, Authentication auth) {
 
 		model.addAttribute("email", email);
 		StaffDetails staffDetails = staffDetailsService.getByID(id);
@@ -138,6 +140,9 @@ public class OTPController {
 
 		staffDetails.setPassword(encoder.encode(confirmPassword));
 
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		model.addAttribute("userName",loginStaff.getName());
 		staffDetailsService.save(staffDetails);
 		return "/fancy-login";
 

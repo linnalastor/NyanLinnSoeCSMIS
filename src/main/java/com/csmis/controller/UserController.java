@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.csmis.entity.Staff;
 import com.csmis.entity.StaffDetails;
 import com.csmis.service.Operator_Register_Service;
 import com.csmis.service.PdfService;
@@ -39,33 +40,25 @@ public class UserController {
 	@Autowired
 	StaffDetailsService staffDetailsService;
 
-	@GetMapping("/emailing")
-	public String emailing(@RequestParam("myHiddenParam") String s, Model theModel) {
-		return "operator/user_login";
-	}
-
-	@GetMapping("/home")
-	public String Login(Model theModel) {
-
-		return "operator/user_login";
-	}
-
 	@GetMapping("/dashboard")
-	public String Dashboard(Model theModel) {
-
+	public String Dashboard(Model theModel, Authentication auth) {
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		theModel.addAttribute("userName",loginStaff.getName());
 		return "operator/User_Dashboard";
 	}
 
 	@GetMapping("/menu")
-	public String UserMenu(Model theModel) throws IOException {
+	public String UserMenu(Model theModel, Authentication auth) throws IOException {
 		String pdf = "ThisWeek.pdf";
 		String encodedPdf = pdfService.getPdfAsByteString(pdf);
 		theModel.addAttribute("pdf", encodedPdf);
 
 		String next_pdf = "NextWeek.pdf";
 		String next_encodedPdf = pdfService.getPdfAsByteString(next_pdf);
+		Staff loginStaff = staffService.findByID(auth.getName());
+		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("npdf", next_encodedPdf);
-
 		theModel.addAttribute(theModel);
 		return "operator/User_Menu";
 	}
@@ -73,8 +66,10 @@ public class UserController {
 	// End Consumer ListWeekly
 
 	@GetMapping("/lunch_plan/today")
-	public String ConsumerListToday(Model theModel) {
-
+	public String ConsumerListToday(Model theModel, Authentication auth) {
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		theModel.addAttribute("userName",loginStaff.getName());
 		return "operator/register/ConsumerListToday";
 	}
 
@@ -117,6 +112,9 @@ public class UserController {
 		} catch (JsonProcessingException e) {
 
 		}
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("json", json);
 
 		theModel.addAttribute("staff", staffService.findByID(auth.getName()));
@@ -124,13 +122,18 @@ public class UserController {
 	}
 
 	@PostMapping("/account_status")
-	public String accountStatus(Model model) {
-
+	public String accountStatus(Model model, Authentication auth) {
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		model.addAttribute("userName",loginStaff.getName());
 		return "/operator/account-status/index";
 	}
 
 	@GetMapping("/update")
-	public String updateAccount(Model model) {
+	public String updateAccount(Model model, Authentication auth) {
+		Staff loginStaff = staffService.findByID(auth.getName());
+		
+		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("status", true);
 		return "/operator/account-status/update";
 	}

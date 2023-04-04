@@ -27,26 +27,14 @@ public class EmailStatusController {
 	@ResponseBody
 	public void handleToggleSwitch(@RequestParam("isChecked") boolean isChecked,Authentication auth) {
 		String staffId = auth.getName();
-//		System.out.println("staff id is >>>>>>"+staffId);
-//		System.out.println("Toggle switch is " + (isChecked ? "on" : "off"));
-		// JDBC or an ORM to save the value of the toggle switch to the database
-		// Example using JDBC:
 		try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/csmis", "CSMIS", "CSMIS")) {
 			String sql = "UPDATE staff_detail SET email_status = ? WHERE id=?";
-
 			PreparedStatement statement = conn.prepareStatement(sql);
 			 statement.setBoolean(1, isChecked);
 			 statement.setString(2, staffId);
-
 			 int rowsUpdated = statement.executeUpdate();
-			 //System.out.println(rowsUpdated + " rows updated successfully.");
-
-
 
 		} catch (SQLException e) {
-
-			System.out.println("error");
-			e.printStackTrace();
 		}
 	}
 }
