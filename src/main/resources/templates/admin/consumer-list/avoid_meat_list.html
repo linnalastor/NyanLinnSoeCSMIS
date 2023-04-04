@@ -15,6 +15,7 @@
 
 <!-- internal css -->
 <link rel="stylesheet" th:href="@{/css/dashboard.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/css1.css}" />
 
 <!-- font awesome -->
 <link rel="stylesheet" href="https://kit.fontawesome.com/e0faeaf50f.css"
@@ -47,9 +48,9 @@
 									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
 										class="fa-solid fa-utensils fa-lg ps-1 me-3"></i>Menu</a></li>
 								<li class="navbar-item"><a
-									th:href="@{/admin/consumer_list/by_week}"
+									th:href="@{/admin/consumer_list/today}"
 									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-										class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Register
+										class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Registered
 										List</a></li>
 								<li class="navbar-item"><a th:href="@{/admin/report/today}"
 									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
@@ -129,157 +130,54 @@
 		</nav>
 		<!-- END NAVBAR -->
 	</header>
-
-
-
-	<!-- START BODY CARD -->
-	<section class="container-fluid d-flex justify-content-start flax-warp  pt-5 mt-5 mx-5 col-12 allcards">
-
-		<div class="card text-center col-3 me-5 cards mx-5"
-			onclick="window.location.href='/admin/door_access'">
-			<div class="card-header text-uppercase cardheads">Door Access
-				File</div>
-			<div class="card-body">
-				<p class="card-text cardbodys">
-
-					<a href="/admin/door_access" class="align-items-center"><i
-						class="fa-solid fa-id-card-clip fa-xl"></i></a>
-				</p>
-			</div>
-			<div class="card-footer text-muted d-flex justify-content-end">
-				<a href="" class="me-2"><i
-					class="fa-solid fa-arrow-trend-up fa-lg mx-2"></i></a> <a href=""><i
-					class="fa-solid fa-note-sticky fa-lg ms-2"></i></a>
-			</div>
-		</div>
-
-		<div class="card text-center col-3 me-5  cards mx-5"
-			th:onclick="window.location.href='/admin/invoice'">
-			<div class="card-header text-uppercase cardheads">Invoice</div>
-			<div class="card-body">
-				<p class="card-text cardbodys">
-
-					<a href="#" class="align-items-center"><i
-						class="fa-solid fa-sack-dollar fa-xl "></i></a>
-				</p>
-			</div>
-			<div class="card-footer text-muted d-flex justify-content-end">
-				<a href="" class="me-2"><i
-					class="fa-solid fa-arrow-trend-up fa-lg mx-2"></i></a> <a href=""><i
-					class="fa-solid fa-note-sticky fa-lg ms-2"></i></a>
-
-			</div>
-		</div>
-
-		<div class="card text-center col-3 me-5 my-3 cards mx-5"
-			th:onclick="window.location.href='/admin/menu'">
-			<div class="card-header text-uppercase cardheads">Menu</div>
-			<div class="card-body">
-				<p class="card-text cardbodys">
-
-					<a href="#" class="align-items-center"><i
-						class="fa-solid fa-utensils fa-xl"></i></a>
-				</p>
-			</div>
-			<div class="card-footer text-muted d-flex justify-content-end">
-				<a href="" class="me-2"><i
-					class="fa-solid fa-arrow-trend-up fa-lg mx-2"></i></a> <a href=""><i
-					class="fa-solid fa-note-sticky fa-lg ms-2"></i></a>
-			</div>
-		</div>
-
-		<div class="card text-center col-3 me-5 my-3 cards mx-5"
-			th:onclick="window.location.href='/admin/consumer_list/today'">
-			<div class="card-header text-uppercase cardheads">Today Lunch Registerd List</div>
-			<div class="card-body">
-				<p class="card-text cardbodys">
-
-					<a href="#" class="align-items-center"><i
-						class="fa-solid fa-users-viewfinder fa-xl"></i></a>
-				</p>
-			</div>
-			<div class="card-footer text-muted d-flex justify-content-end">
-				<a href="" class="me-2"><i
-					class="fa-solid fa-arrow-trend-up fa-lg mx-2"></i></a> <a href=""><i
-					class="fa-solid fa-note-sticky fa-lg ms-2"></i></a>
-
-			</div>
-		</div>
-
-		<div class="card text-center col-3 me-5 my-3 cards mx-5"
-			th:onclick="window.location.href='/admin/consumer_list/by_week'">
-			<div class="card-header text-uppercase cardheads">Register List</div>
-			<div class="card-body">
-				<p class="card-text cardbodys">
-
-					<a href="#" class="align-items-center"><i
-						class="fa-solid fa-users-viewfinder fa-xl"></i></a>
-				</p>
-			</div>
-			<div class="card-footer text-muted d-flex justify-content-end">
-				<a href="" class="me-2"><i
-					class="fa-solid fa-arrow-trend-up fa-lg mx-2"></i></a> <a href=""><i
-					class="fa-solid fa-note-sticky fa-lg ms-2"></i></a>
-
-			</div>
-		</div>
-
-		<div class="card text-center col-3 me-5 my-3 cards mx-5"
-			th:onclick="window.location.href='/admin/report/today'">
-			<div class="card-header text-uppercase cardheads">Report List</div>
-			<div class="card-body">
-				<p class="card-text cardbodys">
-
-					<a href="#" class="align-items-center"><i
-						class="fa-solid fa-money-check fa-xl"></i></a>
-				</p>
-			</div>
-			<div class="card-footer text-muted d-flex justify-content-end">
-				<a href="" class="me-2"><i
-					class="fa-solid fa-arrow-trend-up fa-lg mx-2"></i></a> <a href=""><i
-					class="fa-solid fa-note-sticky fa-lg ms-2"></i></a>
-
-			</div>
-		</div>
-
-		<div class="card text-center col-3 me-5 my-3 cards mx-5"
-			th:onclick="window.location.href='/operator/dashboard'">
-			<div class="card-header text-uppercase cardheads">Operator Level Dashboard</div>
-			<div class="card-body">
-				<p class="card-text cardbodys">
-
-					<a href="#" class="align-items-center"><i class="fa-solid fa-user"></i></a>
-				</p>
-			</div>
-			<div class="card-footer text-muted d-flex justify-content-end">
-				<a href="" class="me-2"><i
-					class="fa-solid fa-arrow-trend-up fa-lg mx-2"></i></a> <a href=""><i
-					class="fa-solid fa-note-sticky fa-lg ms-2"></i></a>
-
-			</div>
-		</div>
-
-		<div class="card text-center col-3 me-5 my-3 cards mx-5"
-			th:onclick="window.location.href='/admin/staff_list'">
-			<div class="card-header text-uppercase cardheads">Staff Management</div>
-			<div class="card-body">
-				<p class="card-text cardbodys">
-
-					<a href="#" class="align-items-center"><i
-						class="fa-solid fa-users-line fa-xl "></i></a>
-				</p>
-			</div>
-			<div class="card-footer text-muted d-flex justify-content-end">
-				<a href="" class="me-2"><i
-					class="fa-solid fa-arrow-trend-up fa-lg mx-2"></i></a> <a href=""><i
-					class="fa-solid fa-note-sticky fa-lg ms-2"></i></a>
-
-			</div>
-		</div>
 		
+	<div class="row text-center mt-4 pt-5 mb-3">
+		<div class="col">
+			<h3 class="titles text-dark">Avoid Meat List</h3>
+		</div>
+	</div>
+	<div class="div2">
+		<div>
+			<div class="div4"
+				th:onclick="window.location.href='/admin/consumer_list/today'">Today</div>
+			<div class="div3"
+				th:onclick="window.location.href='/admin/avoidMeat'">Avoid
+				Meat List</div>
+		</div>
+	</div>
+	<div>
+		<table>
+			<thead>
+				<tr class="fw-bolder">
+					<th>Sr No.</th>
+					<th>Avoid Meat</th>
+					<th>Count</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="list, i : ${desList}">
+					<td th:text="${i.count}"></td>
+					<td th:each="des : ${list}" th:text="${des}"></td>
+				</tr>
+			</tbody>
+		</table>
 
-	</section>
-	<!-- END BODY CARD -->
+		<table>
+			<thead>
+				<tr class="fw-bolder">
+					<th>Sr No.</th>
+					<th>Staff ID</th>
+					<th>Avoid Meat</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="list, i : ${staffDesList}">
+					<td th:text="${i.count}"></td>
+					<td th:each="des : ${list}" th:text="${des}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 	<form th:action="@{/logout}" id="logout_form" method="POST">
 		<input type="hidden" name="_csrf" th:value="${_csrf.token}" />

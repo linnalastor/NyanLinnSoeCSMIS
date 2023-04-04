@@ -84,9 +84,9 @@ public class Import_Controller {
 	@PostMapping("/import_staff")
 	public String StaffList(@RequestParam("staff_file") MultipartFile file, Model model) {
 		boolean status = false;
-		String message="";
+		String message = "";
 		// validate file
-		List<Staff> staff = null;
+		List<Staff> staffs = null;
 		if (file.isEmpty()) {
 			message = "Please select the Staff CSV file to import.";
 		} else {
@@ -107,20 +107,40 @@ public class Import_Controller {
 				CsvToBean<Staff> csvToBean = new CsvToBeanBuilder<Staff>(reader).withType(Staff.class)
 						.withIgnoreLeadingWhiteSpace(true).build();
 
+				List<Staff> originStaffList = thestaffService.findAll();
+				List<Staff> updatedStaffList = new ArrayList<>();
 				// convert `CsvToBean` object to list of users
-				staff = csvToBean.parse();
+				staffs = csvToBean.parse();
+
+				for (Staff staff : originStaffList) {
+					String id1 = staff.getId();
+					boolean checker = false;
+					for (Staff s : staffs) {
+						String id2 = s.getId();
+						if (id1.equals(id2)) {
+							checker = true;
+							staff.setStatus("Active");
+							staffs.remove(s);
+							break;
+						}else staff.setStatus("Inactive");
+					}
+				}
+				for(Staff staff: staffs) {
+					staff.setStatus("Active");
+					originStaffList.add(staff);
+				}
 
 				// save users in DB?
-				thestaffService.saveStaffs(staff);
+				thestaffService.saveStaffs(originStaffList);
 
-				staff = thestaffService.findAll();
+				staffs = thestaffService.findAll();
 
 				List<StaffDetailsDTO> staffDetailsDTOList = new ArrayList<>();
 
 				// staff details
 				List<StaffDetails> staffDetailsList = staffDetailsService.getStaffDetails();
 
-				for (Staff s : staff) {
+				for (Staff s : staffs) {
 					StaffDetailsDTO staffDetailsDTO = new StaffDetailsDTO();
 					boolean checker = false;
 					for (StaffDetails staffDetail : staffDetailsList) {
@@ -132,7 +152,7 @@ public class Import_Controller {
 					if (!checker) {
 						staffDetailsDTO.setId(s.getId());
 						staffDetailsDTO.setPassword(s.getId());
-						staffDetailsDTO.setDescription(" ");
+						staffDetailsDTO.setDescription("");
 						staffDetailsDTO.setEnabled("1");
 						staffDetailsDTO.setEmail_status("0");
 						staffDetailsDTOList.add(staffDetailsDTO);
@@ -145,7 +165,7 @@ public class Import_Controller {
 				List<Authorities> AuthoritiesList = authoritiesService.getAuthorities();
 
 				// author
-				for (Staff st2 : staff) {
+				for (Staff st2 : staffs) {
 					Authorities authorities = new Authorities();
 					boolean checker2 = false;
 					for (Authorities Authorities2 : AuthoritiesList) {
@@ -168,11 +188,11 @@ public class Import_Controller {
 				message = "An error occurred while processing the CSV file.";
 			}
 		}
-		staff = thestaffService.findAll();
+		staffs = thestaffService.findAll();
 		// add staffs attributes into model for show data
-		model.addAttribute("staff", staff);
+		model.addAttribute("staff", staffs);
 		model.addAttribute("status", status);
-		model.addAttribute("message",message);
+		model.addAttribute("message", message);
 		return "admin/employee-list/stafflist";
 	}
 
@@ -193,7 +213,7 @@ public class Import_Controller {
 			staffDetails = new StaffDetails();
 			staffDetails.setId(thestaff.getId());
 			staffDetails.setPassword(staffDetailsService.encodedPassword(thestaff.getId()));
-			staffDetails.setDescription(" ");
+			staffDetails.setDescription("");
 			staffDetails.setEmail_status("0");
 			staffDetails.setEnabled("1");
 			staffDetailsService.save(staffDetails);

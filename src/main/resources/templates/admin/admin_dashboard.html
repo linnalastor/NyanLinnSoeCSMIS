@@ -47,9 +47,9 @@
 									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
 										class="fa-solid fa-utensils fa-lg ps-1 me-3"></i>Menu</a></li>
 								<li class="navbar-item"><a
-									th:href="@{/admin/consumer_list/today}"
+									th:href="@{/admin/consumer_list/by_week}"
 									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-										class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Registered
+										class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Register
 										List</a></li>
 								<li class="navbar-item"><a th:href="@{/admin/report/today}"
 									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
@@ -133,9 +133,9 @@
 
 
 	<!-- START BODY CARD -->
-	<section class="container-fluid d-flex justify-content-center flex-row pt-5 mt-5 col-lg-12 allcards">
+	<section class="container-fluid d-flex justify-content-start flax-warp  pt-5 mt-5 mx-5 col-12 allcards">
 
-		<div class="card text-center col-3 me-5  cards"
+		<div class="card text-center col-3 me-5 cards mx-5"
 			onclick="window.location.href='/admin/door_access'">
 			<div class="card-header text-uppercase cardheads">Door Access
 				File</div>
@@ -150,11 +150,10 @@
 				<a href="" class="me-2"><i
 					class="fa-solid fa-arrow-trend-up fa-lg mx-2"></i></a> <a href=""><i
 					class="fa-solid fa-note-sticky fa-lg ms-2"></i></a>
-
 			</div>
 		</div>
 
-		<div class="card text-center col-3 me-5  cards"
+		<div class="card text-center col-3 me-5  cards mx-5"
 			th:onclick="window.location.href='/admin/invoice'">
 			<div class="card-header text-uppercase cardheads">Invoice</div>
 			<div class="card-body">
@@ -172,7 +171,7 @@
 			</div>
 		</div>
 
-		<div class="card text-center col-3 me-5 my-3 cards"
+		<div class="card text-center col-3 me-5 my-3 cards mx-5"
 			th:onclick="window.location.href='/admin/menu'">
 			<div class="card-header text-uppercase cardheads">Menu</div>
 			<div class="card-body">
@@ -189,8 +188,26 @@
 			</div>
 		</div>
 
-		<div class="card text-center col-3 me-5 my-3 cards"
+		<div class="card text-center col-3 me-5 my-3 cards mx-5"
 			th:onclick="window.location.href='/admin/consumer_list/today'">
+			<div class="card-header text-uppercase cardheads">Today Lunch Registerd List</div>
+			<div class="card-body">
+				<p class="card-text cardbodys">
+
+					<a href="#" class="align-items-center"><i
+						class="fa-solid fa-users-viewfinder fa-xl"></i></a>
+				</p>
+			</div>
+			<div class="card-footer text-muted d-flex justify-content-end">
+				<a href="" class="me-2"><i
+					class="fa-solid fa-arrow-trend-up fa-lg mx-2"></i></a> <a href=""><i
+					class="fa-solid fa-note-sticky fa-lg ms-2"></i></a>
+
+			</div>
+		</div>
+
+		<div class="card text-center col-3 me-5 my-3 cards mx-5"
+			th:onclick="window.location.href='/admin/consumer_list/by_week'">
 			<div class="card-header text-uppercase cardheads">Register List</div>
 			<div class="card-body">
 				<p class="card-text cardbodys">
@@ -207,7 +224,7 @@
 			</div>
 		</div>
 
-		<div class="card text-center col-3 me-5 my-3 cards"
+		<div class="card text-center col-3 me-5 my-3 cards mx-5"
 			th:onclick="window.location.href='/admin/report/today'">
 			<div class="card-header text-uppercase cardheads">Report List</div>
 			<div class="card-body">
@@ -225,9 +242,26 @@
 			</div>
 		</div>
 
-		<div class="card text-center col-3 me-5 my-3 cards"
+		<div class="card text-center col-3 me-5 my-3 cards mx-5"
 			th:onclick="window.location.href='/operator/dashboard'">
 			<div class="card-header text-uppercase cardheads">Operator Level Dashboard</div>
+			<div class="card-body">
+				<p class="card-text cardbodys">
+
+					<a href="#" class="align-items-center"><i class="fa-solid fa-user"></i></a>
+				</p>
+			</div>
+			<div class="card-footer text-muted d-flex justify-content-end">
+				<a href="" class="me-2"><i
+					class="fa-solid fa-arrow-trend-up fa-lg mx-2"></i></a> <a href=""><i
+					class="fa-solid fa-note-sticky fa-lg ms-2"></i></a>
+
+			</div>
+		</div>
+
+		<div class="card text-center col-3 me-5 my-3 cards mx-5"
+			th:onclick="window.location.href='/admin/staff_list'">
+			<div class="card-header text-uppercase cardheads">Staff Management</div>
 			<div class="card-body">
 				<p class="card-text cardbodys">
 
