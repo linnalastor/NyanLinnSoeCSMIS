@@ -32,31 +32,8 @@
 <link rel="stylesheet" type="text/css" href="/notiflix.min.css">
 <script src="/js/notiflix-aio-3.2.6.min.js"></script>
 
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
+
 <script>
-
-	/* $(function() {
-		$('.datetimepicker').datetimepicker({
-			format : 'YYYY-MM-DD',
-			useCurrent : true,
-			showTodayButton : true,
-			showClear : true,
-			icons : {
-				time : 'fa fa-clock-o',
-				date : 'fa fa-calendar',
-				up : 'fa fa-chevron-up',
-				down : 'fa fa-chevron-down',
-				previous : 'fa fa-chevron-left',
-				next : 'fa fa-chevron-right',
-				today : 'fa fa-calendar-check-o',
-				clear : 'fa fa-trash',
-				close : 'fa fa-times',
-				
-			}
-		});
-
-	}); */
 	$(function() {
 		var paymentDate = $('#paymentdate').val();
 		var currentDate = new Date();
@@ -70,16 +47,6 @@
 		$('#paymentdate').val(moment(paymentDate).format('YYYY-MM-DD'));
 
 	});
-	/*  $(function() {
-	        var currentDate = moment($('#paymentdate').val(), 'YYYY-MM-DD').toDate();
-	        $('#paymentdate').datetimepicker({
-	            format: 'YYYY-MM-DD',
-	            defaultDate: currentDate,
-	            minDate: currentDate,
-	            disabled: true // add this line to disable the date time picker
-	        });
-	    }); */
-
 	function GetPrint() {
 		window.print();
 
@@ -367,8 +334,8 @@
 									<span class="input-group-text" id="basic-addon1">Payment
 										Method</span> <select name="paymentMethod"
 										class="outline-none p-1 dropdowns select-dropdown">
-										<option th:each="tempResturant : ${resturant}"
-											th:text="${tempResturant.name}"></option>
+										<option th:each="tempPaymentMethod : ${paymentMethod}"
+											th:text="${tempPaymentMethod .name}"></option>
 									</select>
 								</div>
 
@@ -501,37 +468,7 @@
 		<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
 	</form>
 	<script src="./app.js"></script>
-	<!-- <script>
-		$(document).ready(
-				function() {
-					var startDate = $("#startDate").val();
-					var endDate = $("#endDate").val();
-					var currentdate = new Date();
 
-					console.log(endDate);
-					if (startDate != null && endDate != null && startDate != ""
-							&& endDate != "") {
-
-						$('#fromDate').datetimepicker({
-
-						});
-						$('#fromDate').val(
-								moment(startDate).format('YYYY-MM-DD'));
-						$('#toDate').val(moment(endDate).format('YYYY-MM-DD'));
-					}
-
-				});
-	</script> -->
-	<!-- <script>
-	$(document).ready(function(){
-		var currentDate = new Date();
-		var minDate = new Date(currentDate);
-		minDate.setDate(current.getDate()-1);
-		$('#paymentdate').datepicker({
-			startDate:minDate
-		});
-	}
-	</script> -->
 
 
 

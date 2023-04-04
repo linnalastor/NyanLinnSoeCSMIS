@@ -32,7 +32,7 @@ public class AvoidMeatController {
 		List<String> descriptions = new ArrayList<>();
 		List<List<String>> descriptionCount_list = new ArrayList<>();
 		List<List<String>> staffDescription_list = new ArrayList<>();
-		
+
 		for(StaffDetails staffDetail : staffDetailList) {
 			String description = staffDetail.getDescription();
 			System.out.println("description ==>"+description +"<==");
@@ -62,7 +62,7 @@ public class AvoidMeatController {
 		}
 		model.addAttribute("desList",descriptionCount_list);
 		model.addAttribute("staffDesList", staffDescription_list);
-		
+
 		return "admin/consumer-list/avoid_meat_list";
 	}
 

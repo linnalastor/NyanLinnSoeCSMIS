@@ -11,7 +11,7 @@ import com.csmis.email.EmailSender;
 public class EmailController {
 	@Autowired
 	 private EmailSender emailSender;
-	
+
 	@PostMapping("/emailSending")
 	public String sendEmail(@RequestParam("message")String message,
 							@RequestParam("subject")String subject) {

@@ -70,6 +70,8 @@ public class DoorAccessController {
 		LocalDate today = LocalDate.now();
 		HeadCount headCount = headCountService.find_by_id(dateString);
 
+		
+
 		//if the selected date hasn't reached yet, go back to dooraccess upload file page with error message
 		if(date.getYear()>today.getYear() && date.getMonthValue()>today.getMonthValue() && date.getDayOfMonth()>today.getDayOfMonth() ) {
 			redirectAttributes.addFlashAttribute("message", "Selected date hasn't reached yet!");

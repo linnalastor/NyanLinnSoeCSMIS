@@ -423,13 +423,13 @@ public class AdminReportService {
 		}
 
 		List<Lunch_Report> reports = new ArrayList<>();
-		
+
 			try {
 				reports = operatorReportService.findAll_Monthly(id);
 			} catch (Exception e) {
-				
+
 			}
-		
+
 
 		for (Lunch_Report report : reports) {
 			List<String> notRegisteredDates = new ArrayList<>();
@@ -439,12 +439,12 @@ public class AdminReportService {
 				try {
 					if(report_status.charAt(i)=='n') notRegisteredDates.add(dates.get(i) + staff_id);
 				} catch (Exception e) {
-					
+
 				}
 			}
 			notRegisteredDateList.add(notRegisteredDates);
 		}
 		return notRegisteredDateList;
 	}
-	
+
 }

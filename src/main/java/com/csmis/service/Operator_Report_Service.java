@@ -175,7 +175,7 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 					if (report.charAt(i) == '1')
 						days.add(monthly_dates.get(i));
 				} catch (Exception e) {
-					
+
 				}
 		}
 		return days;
@@ -216,7 +216,7 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 					if (report.charAt(i) == 'n')
 						days.add(monthly_dates.get(i));
 				} catch (Exception e) {
-					
+
 				}
 		}
 		return days;

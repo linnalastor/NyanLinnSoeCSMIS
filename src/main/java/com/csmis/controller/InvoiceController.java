@@ -23,6 +23,7 @@ import com.csmis.entity.InvoiceApprovedBy;
 import com.csmis.entity.InvoiceCashier;
 import com.csmis.entity.InvoiceReceiveBy;
 import com.csmis.entity.PaymentVoucher;
+import com.csmis.entity.Paymentmethod;
 import com.csmis.entity.Restaurant;
 import com.csmis.entity.StaffDetails;
 import com.csmis.service_interface.InvoiceApprovedByServiceInterface;
@@ -30,6 +31,7 @@ import com.csmis.service_interface.InvoiceCashierServiceInterface;
 import com.csmis.service_interface.InvoiceReceiveByServiceInterface;
 import com.csmis.service_interface.InvoiceServiceInterface;
 import com.csmis.service_interface.PaidVoucherServiceInterface;
+import com.csmis.service_interface.PaymentmethodServiceInterface;
 import com.csmis.service_interface.RestaurantServiceInterface;
 import com.csmis.service_interface.StaffDetailsServiceInterface;
 
@@ -43,12 +45,14 @@ public class InvoiceController {
 	private RestaurantServiceInterface resturantService;
 	private PaidVoucherServiceInterface paidVoucherServiceInterface;
 	private StaffDetailsServiceInterface staffDetailsServiceInterface;
+	private PaymentmethodServiceInterface paymentmethodServiceInterface;
 
 	@Autowired
 	public InvoiceController(InvoiceServiceInterface theInvoiceService,
 			InvoiceCashierServiceInterface theCashierSerivice, InvoiceReceiveByServiceInterface theReceivedService,
 			InvoiceApprovedByServiceInterface theApprovedByServie, RestaurantServiceInterface theResturantService,
-			PaidVoucherServiceInterface thePaidVoucherServiceInterface,StaffDetailsServiceInterface theStaffDetailsServiceInterface) {
+			PaidVoucherServiceInterface thePaidVoucherServiceInterface,
+			StaffDetailsServiceInterface theStaffDetailsServiceInterface,PaymentmethodServiceInterface thePaymentmethodServiceInterface) {
 
 		dailyInvoiceService = theInvoiceService;
 		cashierSerivice = theCashierSerivice;
@@ -57,11 +61,12 @@ public class InvoiceController {
 		resturantService = theResturantService;
 		paidVoucherServiceInterface = thePaidVoucherServiceInterface;
 		staffDetailsServiceInterface = theStaffDetailsServiceInterface;
+		paymentmethodServiceInterface = thePaymentmethodServiceInterface;
 
 	}
 
 	@GetMapping("/invoice")
-	public String DailyInvoice(Model model,Authentication auth) {
+	public String DailyInvoice(Model model, Authentication auth) {
 
 		LocalDate date = LocalDate.now();
 		LocalDate firstDate = LocalDate.now();
@@ -72,8 +77,9 @@ public class InvoiceController {
 		List<InvoiceReceiveBy> received = receivedService.findAll();
 		List<InvoiceApprovedBy> approve = approvedByServie.findAll();
 		List<Restaurant> resturant = resturantService.findAll();
+		List<Paymentmethod> paymentMethod = paymentmethodServiceInterface.findAll();
 		StaffDetails staffDetail = staffDetailsServiceInterface.getStaffDetailByID(auth.getName());
-		//System.out.println(staffDetail);
+		// System.out.println(staffDetail);
 		String staffPassword = staffDetail.getPassword();
 		LocalDate lastDate = LocalDate.now();
 
@@ -81,29 +87,28 @@ public class InvoiceController {
 		try {
 			tempLatestDate = paidVoucherServiceInterface.getLastDate();
 			String latestDate = tempLatestDate.substring(tempLatestDate.length() - 8);
-			System.out.println("hey latestDate++++++++"+latestDate);
+			System.out.println("hey latestDate++++++++" + latestDate);
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
 			startDate = LocalDate.parse(latestDate, formatter).plusDays(3);
 			endDate = startDate.plusDays(4);
 		} catch (Exception e) {
 		}
-		if( tempLatestDate == null) {
-			firstDate=dailyInvoiceService.getFirstDate();
+		if (tempLatestDate == null) {
+			firstDate = dailyInvoiceService.getFirstDate();
 
-		if(firstDate.getDayOfWeek().getValue()<DayOfWeek.FRIDAY.getValue()) {
-			while(firstDate.getDayOfWeek()!=DayOfWeek.MONDAY) {
-				firstDate = firstDate.minusDays(1);
+			if (firstDate.getDayOfWeek().getValue() < DayOfWeek.FRIDAY.getValue()) {
+				while (firstDate.getDayOfWeek() != DayOfWeek.MONDAY) {
+					firstDate = firstDate.minusDays(1);
+				}
+			} else {
+				while (firstDate.getDayOfWeek() != DayOfWeek.MONDAY) {
+					firstDate = firstDate.plusDays(1);
+				}
 			}
-		}else{
-			while(firstDate.getDayOfWeek()!=DayOfWeek.MONDAY) {
-				firstDate = firstDate.plusDays(1);
-			}
+			startDate = firstDate;
+			endDate = startDate.plusDays(4);
 		}
-		startDate=firstDate;
-		endDate=startDate.plusDays(4);
-		}
-
 
 //		boolean isFirstTime = true;
 		int Ctotal = 0;
@@ -117,12 +122,11 @@ public class InvoiceController {
 		model.addAttribute("staffPassword", staffPassword);
 		model.addAttribute("status", false);
 
-
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
 		model.addAttribute("paymentDate", date);
 		model.addAttribute("lastDate", lastDate);
-//		model.addAttribute("firstTime",isFirstTime);
+		model.addAttribute("paymentMethod",paymentMethod);
 
 		return "admin/invoice/invoice";
 	}
@@ -191,7 +195,6 @@ public class InvoiceController {
 		model.addAttribute("endDate", endDate);
 		model.addAttribute("paymentDate", paymentDate);
 
-
 		System.out.println("Hello mother fucker+++++startDate------------" + startDate);
 		model.addAttribute("cashier", cashier);
 		model.addAttribute("received", received);
@@ -202,17 +205,18 @@ public class InvoiceController {
 		String SstartDate = startDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		String SendDate = endDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		String pYear = SpaymentDate.substring(0, 4);
-	    String pMonth = SpaymentDate.substring(5, 7);
+		String pMonth = SpaymentDate.substring(5, 7);
 		String pDay = SpaymentDate.substring(8);
 //		String voucherNo = "CSMIS-" + year + month + day + ": " + year + month + SstartDate.substring(8) + " ~" + year
 //				+ month + SendDate.substring(8);
 		String sYear = SstartDate.substring(0, 4);
-		 String sMonth = SstartDate.substring(5, 7);
-			String sDay = SstartDate.substring(8);
-		String eYear= SendDate.substring(0, 4);
-		 String eMonth = SendDate.substring(5, 7);
-			String eDay = SendDate.substring(8);
-		String voucherNo="CSMIS-"+pYear+pMonth+pDay+": "+sYear+sMonth+sDay+" ~"+eYear+eMonth+eDay;
+		String sMonth = SstartDate.substring(5, 7);
+		String sDay = SstartDate.substring(8);
+		String eYear = SendDate.substring(0, 4);
+		String eMonth = SendDate.substring(5, 7);
+		String eDay = SendDate.substring(8);
+		String voucherNo = "CSMIS-" + pYear + pMonth + pDay + ": " + sYear + sMonth + sDay + " ~" + eYear + eMonth
+				+ eDay;
 		model.addAttribute("voucherNo", voucherNo);
 		return "admin/invoice/invoice";
 	}
@@ -231,7 +235,6 @@ public class InvoiceController {
 
 		paidVoucherServiceInterface.save(thePaymentVoucher);
 
-
 		return "redirect:/admin/invoice";
 
 	}
@@ -240,7 +243,6 @@ public class InvoiceController {
 	public String DetailInvoice(Model model) {
 		List<DailyInvoice> theInvoices = dailyInvoiceService.findAll();
 		List<DailyInvoiceDTO> dto = new ArrayList<>();
-
 
 		for (DailyInvoice dailyInvoice : theInvoices) {
 			DailyInvoiceDTO temp = new DailyInvoiceDTO();
@@ -312,6 +314,44 @@ public class InvoiceController {
 		model.addAttribute("status", true);
 		return "admin/invoice/detailInvoice";
 
+	}
+
+	@PostMapping("/SEsearch")
+	public String betweenTwoDate(Model model,
+			@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+			@RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+		List<DailyInvoice> data = dailyInvoiceService.findByDateBetween(startDate, endDate);
+		List<DailyInvoiceDTO> dto = new ArrayList<>();
+		int Ctotal = 0;
+		int Stotal = 0;
+
+		for (DailyInvoice dailyInvoice : data) {
+			DailyInvoiceDTO temp = new DailyInvoiceDTO();
+			temp.setActualHeadCount(dailyInvoice.getActualHeadCount());
+			temp.setRegisterHeadCount(dailyInvoice.getRegisterHeadCount());
+			temp.setDate(dailyInvoice.getDate());
+			temp.setCompanyCost(dailyInvoice.getCompanyCost());
+			temp.setStaffCost(dailyInvoice.getStaffCost());
+			temp.setDifference(dailyInvoice.getRegisterHeadCount() - dailyInvoice.getActualHeadCount());
+			if (dailyInvoice.getActualHeadCount() > dailyInvoice.getRegisterHeadCount()) {
+				temp.setCamount(dailyInvoice.getActualHeadCount() * dailyInvoice.getCompanyCost());
+			} else {
+				temp.setCamount(dailyInvoice.getRegisterHeadCount() * dailyInvoice.getCompanyCost());
+			}
+			if (dailyInvoice.getActualHeadCount() > dailyInvoice.getRegisterHeadCount()) {
+				temp.setSamount(dailyInvoice.getActualHeadCount() * dailyInvoice.getStaffCost());
+			} else {
+				temp.setSamount(dailyInvoice.getRegisterHeadCount() * dailyInvoice.getStaffCost());
+			}
+			Ctotal += temp.getCamount();
+			Stotal += temp.getSamount();
+			dto.add(temp);
+		}
+		model.addAttribute("invoices", dto);
+		model.addAttribute("CTotal", Ctotal);
+		model.addAttribute("Stotal", Stotal);
+		model.addAttribute("status", true);
+		return "admin/invoice/detailInvoice";
 	}
 
 }

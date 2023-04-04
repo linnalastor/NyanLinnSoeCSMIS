@@ -21,7 +21,7 @@ public class PaymentmethodService implements PaymentmethodServiceInterface  {
 
 	@Override
 	public List<Paymentmethod> findAll() {
-		// TODO Auto-generated method stub
+
 		return paymentmethodRepository.findAll();
 	}
 

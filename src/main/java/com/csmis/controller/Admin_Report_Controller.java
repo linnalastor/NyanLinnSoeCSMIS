@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.csmis.entity.ConsumerList;
 import com.csmis.entity.HeadCount;
 import com.csmis.entity.Lunch_Report;
 import com.csmis.entity.Staff;
@@ -32,11 +31,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 @RequestMapping("/admin")
 public class Admin_Report_Controller {
-	
+
 	@Autowired
 	AdminReportService adminReportService;
 	@Autowired
-	Operator_Register_Service operatorRegisterService;	
+	Operator_Register_Service operatorRegisterService;
 	@Autowired
 	Operator_Report_Service operatorReportService;
 	@Autowired
@@ -49,17 +48,17 @@ public class Admin_Report_Controller {
 	Prefix_ID_Service prefix_ID_Service;
 	@Autowired
 	DateService dateService;
-	
+
 	@Autowired
 	HeadCountServiceInterface headCountService;
-	
-	
+
+
 	/* Report List Today */
 	@GetMapping("/report/today")
 	public String reportToday(@RequestParam(name = "search", required = false) String search,Model theModel) {
 		// get today date
 				LocalDate yesterday = LocalDate.now().minusDays(1);
-				
+
 				// Staff Lists
 				List<Staff> staffList = new ArrayList<>();
 				List<Staff> searchStaffList = new ArrayList<>();
@@ -80,7 +79,7 @@ public class Admin_Report_Controller {
 					day = "0" + day;
 
 				staff_id_list = adminReportService.getStaffIdList(lunchReprotList, month_year);
-				
+
 
 				// bind staff
 				if(staff_id_list != null) {
@@ -90,7 +89,7 @@ public class Admin_Report_Controller {
 						count++;
 					}
 				}
-				
+
 				boolean checker = true;
 				if (search == null || search == "")
 					checker = false;
@@ -120,7 +119,7 @@ public class Admin_Report_Controller {
 				if(headcount == null) {
 					headcount = new HeadCount();
 				}
-				
+
 				theModel.addAttribute("headcount",headcount);
 				theModel.addAttribute(headcount);
 				theModel.addAttribute("lunchReportList", lunchReprotList);
@@ -143,7 +142,7 @@ public class Admin_Report_Controller {
 		return "admin/report-list/today-report-list/todaynoconsumer";
 	}
 	//------------------------------------------------------------------
-	
+
 	/* Report List by day */
 	@GetMapping("/report/by_days")
 	public String reportList() {
@@ -217,10 +216,10 @@ public class Admin_Report_Controller {
 			}
 			holidaysList.add(staffHolidays);
 		}
-		
-		
+
+
 		// for adding model attributes to html for show data
-//		==========================================================================================================				
+//		==========================================================================================================
 		List<List<String>> notRegisterWeeklyDateLists = adminReportService.getNotRegisteredDateLists(prefix_id,date,dates);
 		List<List<String>> notPickedWeeklyDate = adminReportService.getNotPickedDateLists(prefix_id,date,dates);
 		List<List<String>> pickedWeeklyDateLists = adminReportService.getPickedDateLists(prefix_id,date,dates);
@@ -229,7 +228,7 @@ public class Admin_Report_Controller {
 		System.out.println("notRegisterWeeklyDateLists==> "+notRegisterWeeklyDateLists);
 		System.out.println("notPickedWeeklyDate==> "+notPickedWeeklyDate);
 		System.out.println("pickedWeeklyDateLists==> "+pickedWeeklyDateLists);
-		
+
 		try {
 			jasonNotRegisterWeeklyDateLists = objectMapper.writeValueAsString(notRegisterWeeklyDateLists);
 			jasonNotPickedWeeklyDate = objectMapper.writeValueAsString(notPickedWeeklyDate);
@@ -246,7 +245,7 @@ public class Admin_Report_Controller {
 		theModel.addAttribute("staffList", staffList);
 		theModel.addAttribute("month", Month.of(month) + " / " + year);
 		theModel.addAttribute("listweeklydate", adminReportService.get_Monthly_Dates(1));
-		
+
 		return "admin/report-list/month-report-list/report";
 	}
 
@@ -273,15 +272,15 @@ public class Admin_Report_Controller {
 
 				//for checking if all day in next week is in next month
 				LocalDate today = LocalDate.now();
-				
-				if(today.getDayOfWeek() == DayOfWeek.MONDAY) 
+
+				if(today.getDayOfWeek() == DayOfWeek.MONDAY)
 					today = today.minusDays(1);
 
 				//get next monday date in today
 				while (today.getDayOfWeek() != DayOfWeek.MONDAY) {
 					today = today.minusDays(1);
 				}
-				
+
 				// for service method usages
 				int count = 0;
 
@@ -291,9 +290,9 @@ public class Admin_Report_Controller {
 
 				// get string of month and year of this week
 				String month_year = prefix_ID_Service.getPrefix_ID(today);
-				
+
 				List<Staff> staffList = staffService.findAll();
-				
+
 				List<Staff> searchStaffList = new ArrayList<>();
 
 				boolean checker = true;
@@ -330,9 +329,9 @@ public class Admin_Report_Controller {
 					holidaysList.add(staffHolidays);
 
 				}
-				
+
 				// for adding model attributes to html for show data
-//				==========================================================================================================				
+//				==========================================================================================================
 				List<String> dates = dateService.getWeeklyDate(today);
 				List<List<String>> notRegisterWeeklyDateLists = adminReportService.getNotRegisteredDateLists(month_year,today,dates);
 				List<List<String>> notPickedWeeklyDate = adminReportService.getNotPickedDateLists(month_year,today,dates);
@@ -341,7 +340,7 @@ public class Admin_Report_Controller {
 				System.out.println("notRegisterWeeklyDateLists==> "+notRegisterWeeklyDateLists);
 				System.out.println("notPickedWeeklyDate==> "+notPickedWeeklyDate);
 				System.out.println("pickedWeeklyDateLists==> "+pickedWeeklyDateLists);
-				
+
 				try {
 					jasonNotRegisterWeeklyDateLists = objectMapper.writeValueAsString(notRegisterWeeklyDateLists);
 					jasonNotPickedWeeklyDate = objectMapper.writeValueAsString(notPickedWeeklyDate);
@@ -350,7 +349,7 @@ public class Admin_Report_Controller {
 				} catch (JsonProcessingException e) {
 				}
 
-				
+
 				// for model
 				Integer month = Integer.parseInt(month_year.substring(0, 2));
 				String year = month_year.substring(3);
@@ -366,7 +365,7 @@ public class Admin_Report_Controller {
 				theModel.addAttribute("jsonHoliday", jsonHoliday);
 				theModel.addAttribute("listweeklydate",adminReportService.getWeeklyDate());
 				theModel.addAttribute("staffList", staffList);
-		
+
 		return "admin/report-list/week-report-list/weekreport";
 	}
 
@@ -380,5 +379,5 @@ public class Admin_Report_Controller {
 		return "admin/report-list/week-report-list/weeknoconsumer";
 	}
 
-	
+
 }

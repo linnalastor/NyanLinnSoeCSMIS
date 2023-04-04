@@ -2,7 +2,6 @@ package com.csmis.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ public class DoorAccessService {
 	@Autowired
 	Operator_Report_Service operator_report_service;
 	@Autowired
-	Operator_Register_Service operator_register_service;	
+	Operator_Register_Service operator_register_service;
 	@Autowired
 	DateService dateService;
 

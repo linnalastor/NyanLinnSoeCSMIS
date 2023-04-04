@@ -19,7 +19,7 @@ public class Paymentmethod
 
 	public Paymentmethod() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Paymentmethod(String name) {

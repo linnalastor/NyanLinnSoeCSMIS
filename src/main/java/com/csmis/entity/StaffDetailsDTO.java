@@ -4,13 +4,6 @@ package com.csmis.entity;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import com.opencsv.bean.CsvBindByName;
-
 public class StaffDetailsDTO {
 
 	private String id;
@@ -26,7 +19,7 @@ public class StaffDetailsDTO {
 	private Timestamp timestamp;
 
     private String enabled;
-	
+
 	private String email_status;
 
 	public StaffDetailsDTO() {

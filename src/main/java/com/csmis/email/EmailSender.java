@@ -11,7 +11,7 @@ public class EmailSender implements CommandLineRunner{
 
 	@Autowired
     private JavaMailSender javaMailSender;
-	
+
 	public void sendEmail(String subject,String message) {
 	 	System.out.println("Sending....");
         SimpleMailMessage msg = new SimpleMailMessage();
@@ -24,11 +24,11 @@ public class EmailSender implements CommandLineRunner{
         System.out.println("Successfully!");
 
     }
-	
+
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

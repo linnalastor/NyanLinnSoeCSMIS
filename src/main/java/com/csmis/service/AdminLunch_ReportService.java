@@ -11,11 +11,11 @@ import com.csmis.service_interface.AdminReportServiceInterface;
 
 @Service
 public class AdminLunch_ReportService implements AdminReportServiceInterface{
-	
+
 	LunchReportRepository lunchReportRepository;
-	
+
 	StaffRepository staffRepository;
-	
+
 	public AdminLunch_ReportService(LunchReportRepository lunchReportRepository) {
 		this.lunchReportRepository = lunchReportRepository;
 	}

@@ -269,10 +269,10 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 		// for checking if all day in next week is in next month
 		LocalDate today = LocalDate.now();
 		Integer monthValue = today.getMonthValue() + 1;
-		
+
 		// for holiday
 		List<String> holidays = holidayService.getThisMonthHoliday(today);
-		
+
 
 		// get next monday date in today
 		while (today.getDayOfWeek() != DayOfWeek.MONDAY) {
