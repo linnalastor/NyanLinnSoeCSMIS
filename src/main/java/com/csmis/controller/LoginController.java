@@ -26,10 +26,6 @@ public class LoginController {
 	public String dashboard(Authentication auth, Model theModel) {
 		String role=null;
 
-		Staff loginStaff = staffService.findByID(auth.getName());
-
-		theModel.addAttribute("userName",loginStaff.getName());
-
 		if(auth!=null) role=auth.getAuthorities().toArray()[0].toString();
 
 		if(role==null) return "fancy-login";
