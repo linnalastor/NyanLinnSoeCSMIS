@@ -122,7 +122,7 @@ public class Admin_Report_Controller {
 				}
 
 				Staff loginStaff = staffService.findByID(auth.getName());
-				
+
 				theModel.addAttribute("userName",loginStaff.getName());
 				theModel.addAttribute("headcount",headcount);
 				theModel.addAttribute(headcount);
@@ -242,7 +242,7 @@ public class Admin_Report_Controller {
 		}
 
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("jsonHoliday", jsonHoliday);
 		theModel.addAttribute("jasonNotRegisterWeeklyDateLists", jasonNotRegisterWeeklyDateLists);
@@ -251,8 +251,6 @@ public class Admin_Report_Controller {
 		theModel.addAttribute("list", dates);
 		theModel.addAttribute("staffList", staffList);
 		theModel.addAttribute("month", Month.of(month) + " / " + year);
-		theModel.addAttribute("listweeklydate", adminReportService.get_Monthly_Dates(1));
-
 		return "admin/report-list/month-report-list/report";
 	}
 
@@ -278,7 +276,7 @@ public class Admin_Report_Controller {
 				String jasonPickedWeeklyDateLists = null;
 
 				//for checking if all day in next week is in next month
-				LocalDate today = LocalDate.now();
+				LocalDate today = LocalDate.now().minusDays(7);
 
 				if(today.getDayOfWeek() == DayOfWeek.MONDAY)
 					today = today.minusDays(1);
@@ -363,7 +361,7 @@ public class Admin_Report_Controller {
 				String day_to_day = "( " + "From " + dates.get(0) + " To " + dates.get(dates.size() - 1) + " )";
 
 				Staff loginStaff = staffService.findByID(auth.getName());
-				
+
 				theModel.addAttribute("userName",loginStaff.getName());
 				theModel.addAttribute("month", Month.of(month) + " / " + year);// get this month and year
 				theModel.addAttribute("month", Month.of(month));// get this month

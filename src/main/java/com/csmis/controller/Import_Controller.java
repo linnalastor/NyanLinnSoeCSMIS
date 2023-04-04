@@ -75,7 +75,7 @@ public class Import_Controller {
 		String thisweek_encodedPdf = pdfService.getPdfAsByteString(thisweek_pdfFileName);
 		String nextweek_encodedPdf = pdfService.getPdfAsByteString(nextweek_pdfFileName);
 		Staff loginStaff = thestaffService.findByID(auth.getName());
-		
+
 		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("pdf", thisweek_encodedPdf);
 		model.addAttribute("npdf", nextweek_encodedPdf);
@@ -192,7 +192,7 @@ public class Import_Controller {
 		}
 		staffs = thestaffService.findAll();
 		Staff loginStaff = thestaffService.findByID(auth.getName());
-		
+
 		// add staffs attributes into model for show data
 		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("staff", staffs);

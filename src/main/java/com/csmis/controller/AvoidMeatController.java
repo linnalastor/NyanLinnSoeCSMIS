@@ -66,7 +66,7 @@ public class AvoidMeatController {
 			descriptionCount_list.add(descriptionCount);
 		}
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("desList",descriptionCount_list);
 		model.addAttribute("staffDesList", staffDescription_list);

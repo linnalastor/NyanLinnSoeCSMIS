@@ -145,18 +145,19 @@
 		<div
 			style="width: 35%; background-color: lightblue; display: flex; flex-direction: column; align-items: center; border-radius: 25px; padding-bottom: 1%;">
 			<div
-				style="font-size: large; font-weight: 500; background: grey; width: 100%; display: flex; align-items: center; justify-content: center; border-top-right-radius: 25px; border-top-left-radius: 25px;">
+				style="font-size: large; font-weight: 500; background: green;color:#fff; width: 100%; display: flex; align-items: center; justify-content: center; border-top-right-radius: 25px; border-top-left-radius: 25px;padding:1%">
 				Yesterday Lunch Status</div>
-			<div class="text-center">
+			<div class="mt-2">
 				<div th:text="'Name - '+${staff.name}"></div>
 				<div th:text="'Staff ID - '+${staff.id}"></div>
 				<div th:text="'Division - '+${staff.division}"></div>
 				<div th:text="'Department - '+${staff.department}"></div>
 				<div th:text="'Team - '+${staff.team}"></div>
-				<div th:id="${status}"></div>
+				
 				
 
 			</div>
+			<div class="rounded text-light px-4 py-2 m-2" th:id="${status}"></div>
 
 
 		</div>
@@ -168,12 +169,18 @@
 		var picked = document.getElementById("picked");
 		var notpicked = document.getElementById("notpicked");
 		var notregistered = document.getElementById("notregistered");
+		var normal = document.getElementById("normal");
 		
 		console.log(notregistered);
-
+		
+		if(normal !=null){
+			normal.style.backgroundColor = "green";
+			normal.innerHTML = "Your Lunch Yesterday Status is default.";
+		}
+		
 		if (picked != null) {
 			picked.style.backgroundColor = "green";
-			picked.innerHTML = "Your Lunch Yesterday Status is Completed.";
+			picked.innerHTML = "Your Lunch Yesterday Status is completed.";
 		}
 		if (notpicked != null) {
 			notpicked.style.backgroundColor = "red";

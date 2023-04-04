@@ -60,7 +60,7 @@ public class DoorAccessController {
 		model.addAttribute("message",message);
 		if(status == "true")
 			model.addAttribute("status",false);
-		else 
+		else
 			model.addAttribute("status",true);
 		return "admin/door_access";
 	}
@@ -73,7 +73,7 @@ public class DoorAccessController {
 		LocalDate today = LocalDate.now();
 		HeadCount headCount = headCountService.find_by_id(dateString);
 
-		
+
 
 		//if the selected date hasn't reached yet, go back to dooraccess upload file page with error message
 		if(date.getYear()>today.getYear() && date.getMonthValue()>today.getMonthValue() && date.getDayOfMonth()>today.getDayOfMonth() ) {

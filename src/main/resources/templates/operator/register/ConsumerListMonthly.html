@@ -139,52 +139,51 @@
 
 		<div class="div2 mb-2">
 			<div>
-				<div class="div3"
-					th:onclick="window.location.href='by_month'">
-					Monthly</div>
-				<div class="div4"
-					th:onclick="window.location.href='by_week'">
-					Weekly</div>
+				<div class="div3" th:onclick="window.location.href='by_month'">
+					Next Month</div>
+				<div class="div4" th:onclick="window.location.href='by_week'">
+					Next Week</div>
 			</div>
 		</div>
 
-		<div style="font-size: x-large; font-weight: 600;" class="mb-2" th:text="${month}"></div>
-		
+		<div style="font-size: x-large; font-weight: 600;" class="mb-2"
+			th:text="${month}"></div>
+
 		<div
 			style="width: 100%; display: flex; justify-content: center; align-items: center"
 			class="mb-5">
 			<div
-				style="width: 40%; background-color: lightblue; display: flex; flex-direction: column; align-items: center; border-radius: 25px; padding-bottom: 1%;">
+				style="width: 35%; background-color: lightblue; display: flex; flex-direction: column; align-items: center; border-radius: 25px; padding-bottom: 1%;">
 				<div
-					style="font-size: large; font-weight: 500; background: #14A44D; width: 100%; display: flex; align-items: center; justify-content: center; border-top-right-radius: 25px; border-top-left-radius: 25px; padding-top: 1%;">Account
-					Status</div>
-				<div style="display: flex; justify-content: center; flex-direction: column; text-align: center;">
-					<div th:text="${staff.name}"></div>
-					<div th:text="${staff.id}"></div>
-					<div th:text="${staff.division}"></div>
-					<div th:text="${staff.department}"></div>
-					<div th:text="${staff.team}" style="border-bottom: 1px solid black;"></div>
+					style="font-size: large; font-weight: 500; background: #14A44D;color:#fff; width: 100%; display: flex; align-items: center; justify-content: center; border-top-right-radius: 25px; border-top-left-radius: 25px; padding: 1%;">Next Month Lunch PLan
+					</div>
+				<div
+					style="display: flex; justify-content: center; flex-direction: column; text-align: center;margin-top:1%;">
+					<div th:text="'Name - '+${staff.name}"></div>
+					<div th:text="'Staff ID - '+${staff.id}"></div>
+					<div th:text="'Division - '+${staff.division}"></div>
+					<div th:text="'Department - '+${staff.department}"></div>
+					<div th:text="'Team - '+${staff.team}" style="border-bottom: 1px solid black;"></div>
+					
 
-					<div style="display: flex; justify-content: center;">
-						<ul class="d-flex jsutify-content-center flex-wrap mt-3"
-							style="width: 70%">
-							<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">M-</label></li>
-							<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">T-</label></li>
-							<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">W-</label></li>
-							<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">T-</label></li>
-							<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">F-</label></li>
-							<li class="px-3 mb-3" th:each="list : ${list}">
-								<label
-									class="px-2 mb-1" style="background-color: green;"
-									th:id="${list} + '-show'" th:text="${list}">
-								</label>
-							</li>
+					<div style="background-color: lightblue; border-radius: 15px">
+						<ul style="color: #000"
+							class="row d-flex justify-content-start text-center m-0 py-2">
+							<li class="col-2 me-2"><label class="text-uppercase">Mon</label></li>
+							<li class="col-2 me-2"><label class="text-uppercase">Tue</label></li>
+							<li class="col-2 me-2"><label class="text-uppercase">Wed</label></li>
+							<li class="col-2 me-2"><label class="text-uppercase">Thu</label></li>
+							<li class="col-2"><label class="text-uppercase">Fri</label></li>
+							<li class="row col-2 px-3 mx-1 my-2 text-center"
+								th:each="list : ${list}"><label class="px-2 mb-1"
+								style="background-color: green; border: 1px solid gold; color: #fff;"
+								th:id="${list} + '-show'" th:text="${list}"> </label></li>
 						</ul>
 					</div>
 
 				</div>
 
-				<div style="display: flex; justify-content: center; margin-top: 5%;">
+				<div style="display: flex; justify-content: center;">
 					<div class="div4" data-bs-toggle="modal"
 						data-bs-target="#staticBackdrop">Update</div>
 				</div>
@@ -209,30 +208,35 @@
 						<div
 							style="width: 100%; background-color: lightblue; display: flex; flex-direction: column; align-items: center; border-radius: 25px; padding-bottom: 1%;">
 							<div
-								style="font-size: large; font-weight: 500; background: #14A44D; width: 100%; display: flex; align-items: center; justify-content: center; border-top-right-radius: 25px; border-top-left-radius: 25px; padding-top: 1%;">Account
-								Status</div>
+								style="font-size: large; font-weight: 500; background: #14A44D;color:#fff; width: 100%; display: flex; align-items: center; justify-content: center; border-top-right-radius: 25px; border-top-left-radius: 25px; padding: 1%;">Next Month Lunch PLan
+								</div>
 							<div class="mb-3">
-								<div th:text="'Name - '+${staff.name}" style="display: flex; justify-content: center;"></div>
-								<div th:text="'Staff ID - '+${staff.id}" style="display: flex; justify-content: center;"></div>
-								<div th:text="'Division - '+${staff.division}" style="display: flex; justify-content: center;"></div>
-								<div th:text="'Department - '+${staff.department}" style="display: flex; justify-content: center;"></div>
-								<div th:text="'Team - '+${staff.team}" style="display: flex; justify-content: center; border-bottom: 1px solid black;"></div>
+								<div th:text="'Name - '+${staff.name}"
+									style="display: flex; justify-content: center;"></div>
+								<div th:text="'Staff ID - '+${staff.id}"
+									style="display: flex; justify-content: center;"></div>
+								<div th:text="'Division - '+${staff.division}"
+									style="display: flex; justify-content: center;"></div>
+								<div th:text="'Department - '+${staff.department}"
+									style="display: flex; justify-content: center;"></div>
+								<div th:text="'Team - '+${staff.team}"
+									style="display: flex; justify-content: center; border-bottom: 1px solid black;"></div>
 
 								<div
 									style="margin-top: 5%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-									
-									<ul class="d-flex jsutify-content:center flex-wrap" style="width: 80%">
-										<li class="px-2 mb-3"><label class="px-2 mb-1 dayLabel">M-</label></li>
-										<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">T-</label></li>
-										<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">W-</label></li>
-										<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">T-</label></li>
-										<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">F-</label></li>
-										<li class="px-3 mb-3" th:each="list : ${list}">
-										<input
-											type="checkbox" th:class="${list} + 'checkbox' "
-											th:id="${list}" name="list" th:value="${list}" /> 
-											<label th:for="${list}" th:class="${list}" th:text="${list}"></label>
-										</li>
+
+									<ul style="color: #000"
+										class="row d-flex justify-content-start text-center m-0 py-2">
+										<li class="col-2 me-2"><label class="text-uppercase">Mon</label></li>
+										<li class="col-2 me-2"><label class="text-uppercase">Tue</label></li>
+										<li class="col-2 me-2"><label class="text-uppercase">Wed</label></li>
+										<li class="col-2 me-2"><label class="text-uppercase">Thu</label></li>
+										<li class="col-2"><label class="text-uppercase">Fri</label></li>
+										<li class="row col-2 px-3 mx-1 my-2 text-center"
+											th:each="list : ${list}"><input type="checkbox"
+											th:class="${list} + 'checkbox' " th:id="${list}" name="list"
+											th:value="${list}" /> <label th:for="${list}"
+											th:class="${list}" th:text="${list}"></label></li>
 									</ul>
 								</div>
 
@@ -304,7 +308,7 @@
 
 		for (var i = 0; i < holidayarr.length; i++) {
 			var myholiday = document.getElementById(holidayarr[i] + "-show");
-			if(myholiday!=null){
+			if (myholiday != null) {
 				myholiday.style.backgroundColor = "yellow";
 				myholiday.style.color = "black";
 				myholiday.style.border = "1px solid white";

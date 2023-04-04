@@ -108,9 +108,9 @@ public class Import_Cost_Controller {
 		costService.save(thecost);
 
 		List<Cost> cost = costService.findAll();
-		
+
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("cost", cost);
 		theModel.addAttribute("status", true);
@@ -124,7 +124,7 @@ public class Import_Cost_Controller {
 		// create model attribute to bind form data
 		Cost cost = new Cost();
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("cost", cost);
 

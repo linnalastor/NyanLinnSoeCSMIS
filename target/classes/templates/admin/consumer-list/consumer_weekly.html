@@ -288,25 +288,26 @@
 		<!-- END NAVBAR -->
 
 	</header>
+	
 	<div class="container-fluid div1 mt-5 pt-5">
 		<!-- -->
 		<div class="row text-center mt-2 mb-3">
 			<div class="col">
-				<h3 class="titles text-dark">Weekly Consumer List</h3>
+				<h3 class="titles text-dark">Registration</h3>
 			</div>
 		</div>
 
 		<div class="div2">
 			<div>
 				<div class="div3"
-					th:onclick="window.location.href='/admin/consumer_list/by_week'">Weekly</div>
+					th:onclick="window.location.href='/admin/consumer_list/by_week'">For Next Week</div>
 				<div class="div4"
-					th:onclick="window.location.href='/admin/consumer_list/by_month'">Monthly</div>
+					th:onclick="window.location.href='/admin/consumer_list/by_month'">For Next Month</div>
 			</div>
 		</div>
 		<!-- div2 close -->
 
-		<div class="col-lg-12 col-md-6 mb-2 d-flex justify-content-between">
+		<div class="col-lg-10 col-md-6 mb-2 d-flex justify-content-between">
 			<span class="fs-5 showdates"><span th:text="${month}"></span>
 				/ <span th:text="${day_to_day}"></span></span>
 			<form action="/admin/consumer_list/by_week"  style="display: flex; flex-direction: row;">
@@ -317,7 +318,7 @@
 		</div>
 
 		<!-- Start consumer_weekly -->
-		<div class="col-lg-12 col-md-6 lists">
+		<div class="col-lg-10 col-md-6 lists">
 			<div th:each="staff : ${staffList}">
 
 				<div class="card">
@@ -341,19 +342,19 @@
 						<div class="card-body listboxs">
 							<div
 								style="display: flex; flex-direction: row; justify-content: center;">
-								<div
-									class="col-lg-6 col-md-12 d-flex justify-content-center my-2">
-									<ul
-										class="row col-lg-8 col-md-12 d-flex justify-content-center bg-info m-0 p-0">
-										<li class="col-2 me-2"><label class="text-uppercase">Mon</label></li>
-										<li class="col-2 me-2"><label class="text-uppercase">Tue</label></li>
-										<li class="col-2 me-2"><label class="text-uppercase">Wed</label></li>
-										<li class="col-2 me-2"><label class="text-uppercase">Thu</label></li>
-										<li class="col-2"><label class="text-uppercase">Fri</label></li>
+								<div style="background-color: lightblue; border-radius: 15px"
+									class="col-lg-5 col-md-12 d-flex justify-content-center my-2">
+									<ul style="color: #000"
+												class="row d-flex justify-content-start text-center m-0 py-2">
+												<li class="col-2 me-2"><label class="text-uppercase">Mon</label></li>
+												<li class="col-2 me-2"><label class="text-uppercase">Tue</label></li>
+												<li class="col-2 me-2"><label class="text-uppercase">Wed</label></li>
+												<li class="col-2 me-2"><label class="text-uppercase">Thu</label></li>
+												<li class="col-2"><label class="text-uppercase">Fri</label></li>
 										<li class="row col-2 px-3 mx-1 my-2"
 											th:each="listweeklydate : ${listweeklydate}"><label
 											class="px-2 mb-1"
-											style="background-color: green; border: 1px solid #000;"
+											style="background-color: green; border: 1px solid gold; color: #fff"
 											th:id="${listweeklydate}  + ${staff.id} + '-showweekday'"
 											th:text="${listweeklydate}"></label></li>
 									</ul>
@@ -403,8 +404,8 @@
 										<div
 											style="margin-top: 5%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
 
-											<ul
-												class="row col-lg-11 d-flex justify-content-center m-0 p-0">
+											<ul style="color: #000"
+												class="row d-flex justify-content-start text-center m-0 py-2">
 												<li class="col-2 me-2"><label class="text-uppercase">Mon</label></li>
 												<li class="col-2 me-2"><label class="text-uppercase">Tue</label></li>
 												<li class="col-2 me-2"><label class="text-uppercase">Wed</label></li>

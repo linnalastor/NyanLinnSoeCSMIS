@@ -293,16 +293,18 @@
 		<!-- -->
 		<div class="row text-center mt-2 mb-3">
 			<div class="col">
-				<h3 class="titles text-dark">Consumer List</h3>
+				<h3 class="titles text-dark">Registration</h3>
 			</div>
 		</div>
 
 		<div class="div2">
 			<div>
 				<div class="div4"
-					th:onclick="window.location.href='/admin/consumer_list/by_week'">Weekly</div>
+					th:onclick="window.location.href='/admin/consumer_list/by_week'">For
+					Next Week</div>
 				<div class="div3"
-					th:onclick="window.location.href='/admin/consumer_list/by_month'">Monthly</div>
+					th:onclick="window.location.href='/admin/consumer_list/by_month'">For
+					Next Month</div>
 			</div>
 		</div>
 		<!-- div2 close -->
@@ -310,13 +312,15 @@
 		<div class="col-lg-10 col-md-12 mb-2 d-flex justify-content-between">
 			<span class="fs-5 showdates"><span th:text="${month}"></span>
 			</span>
-			
-				<form action="/admin/consumer_list/by_month"  style="display: flex; flex-direction: row;">
-					<input type="text" name="search" class="form-control text-muted me-2 searchnames"
-						placeholder="Search .....">
-					<button type="submit" class="div4 ms-2">Search</button>
-				</form>
-			
+
+			<form action="/admin/consumer_list/by_month"
+				style="display: flex; flex-direction: row;">
+				<input type="text" name="search"
+					class="form-control text-muted me-2 searchnames"
+					placeholder="Search .....">
+				<button type="submit" class="div4 ms-2">Search</button>
+			</form>
+
 		</div>
 
 		<!-- Start consumer_monthly card -->
@@ -345,24 +349,25 @@
 						<div class="card-body listboxs">
 							<div
 								style="display: flex; flex-direction: row; justify-content: center;">
-								<div class="col-lg-4">
-									<ul
-										class="d-flex jsutify-content-center flex-wrap bg-info mx-4">
-										<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">M-</label></li>
-										<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">T-</label></li>
-										<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">W-</label></li>
-										<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">T-</label></li>
-										<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">F-</label></li>
-										<li class="px-3 mb-3" th:each="list : ${list}"><label
-											class="px-2 mb-1 "
-											style="background-color: green; border: 1px solid #000;"
+								<div class="col-lg-5"
+									style="background-color: lightblue; border-radius: 15px">
+									<ul style="color: #000"
+										class="row d-flex justify-content-start text-center m-0 py-2">
+										<li class="col-2 me-2"><label class="text-uppercase">Mon</label></li>
+										<li class="col-2 me-2"><label class="text-uppercase">Tue</label></li>
+										<li class="col-2 me-2"><label class="text-uppercase">Wed</label></li>
+										<li class="col-2 me-2"><label class="text-uppercase">Thu</label></li>
+										<li class="col-2"><label class="text-uppercase">Fri</label></li>
+										<li class="row col-2 px-3 mx-1 my-2 text-center"
+											th:each="list : ${list}"><label class="px-2 mb-1 "
+											style="background-color: green; border: 1px solid gold; color: #fff;"
 											th:id="${list}  + ${staff.id} + '-show'" th:text="${list}"
 											th:attr="data-bs-target='#' + ${list}"></label></li>
 									</ul>
 								</div>
 							</div>
 							<div style="display: flex; justify-content: center;">
-								<div class="div4" data-bs-toggle="modal"
+								<div class="div4 mt-3" data-bs-toggle="modal"
 									th:data-bs-target="'#showpopupreg'  + ${staff.id}">Update</div>
 							</div>
 						</div>
@@ -406,20 +411,22 @@
 										<div
 											style="margin-top: 5%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
 
-											<ul class="d-flex jsutify-content:center flex-wrap"
-												style="width: 85%">
-												<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">M-</label></li>
-												<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">T-</label></li>
-												<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">W-</label></li>
-												<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">T-</label></li>
-												<li class="px-3 mb-3"><label class="px-2 mb-1 dayLabel">F-</label></li>
-												<li class="px-3 mb-3" th:each="list : ${list}">
-													<input type="checkbox" th:class="${list} + ${staff.id} + 'checkbox' "
-														th:id="${list} + ${staff.id}" name="list" th:value="${list}" /> 
-													<label th:for="${list} + ${staff.id}" th:class="${list} + ${staff.id} + 'checkbox' "
-														th:text="${list}">
-													</label>
-												</li>
+											<ul style="color: #000"
+												class="row d-flex justify-content-start text-center m-0 py-2">
+												<li class="col-2 me-2"><label class="text-uppercase">Mon</label></li>
+												<li class="col-2 me-2"><label class="text-uppercase">Tue</label></li>
+												<li class="col-2 me-2"><label class="text-uppercase">Wed</label></li>
+												<li class="col-2 me-2"><label class="text-uppercase">Thu</label></li>
+												<li class="col-2"><label class="text-uppercase">Fri</label></li>
+												<li class="row col-2 px-3 mx-1 my-2 text-center" th:each="list : ${list}"><input
+													type="checkbox"
+													th:class="${list} + ${staff.id} + 'checkbox' "
+													th:id="${list} + ${staff.id}" name="list"
+													th:value="${list}" /> 
+													<label
+													th:for="${list} + ${staff.id}"
+													th:class="${list} + ${staff.id} + 'checkbox' "
+													th:text="${list}"> </label></li>
 											</ul>
 										</div>
 
@@ -469,7 +476,7 @@
 
 					myvar.style.backgroundColor = "red";
 					myvar.style.color = "white";
-					myvar.style.border = "1px solid white";
+					myvar.style.border = "1px solid gold";
 				}
 			}
 		}
@@ -498,7 +505,7 @@
 				if (myholiday != null) {
 					myholiday.style.backgroundColor = "yellow";
 					myholiday.style.color = "black";
-					myholiday.style.border = "1px solid white";
+					myholiday.style.border = "1px solid gold";
 				}
 
 			}
@@ -517,7 +524,7 @@
 					myholidayPopUp.style.border = "1px solid white";
 					myholidayLabelPopUp.style.backgroundColor = "yellow";
 					myholidayLabelPopUp.style.color = "black";
-					myholidayLabelPopUp.style.border = "1px solid white";
+					myholidayLabelPopUp.style.border = "1px solid gold";
 				}
 			}
 		}

@@ -35,7 +35,7 @@ public class EmailListAdminController {
 			staffs.add( staffService.findByID(s.getId()) );
 		}
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("staffs",staffs);
 		return "/admin/email/email";

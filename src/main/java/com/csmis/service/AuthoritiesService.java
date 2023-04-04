@@ -69,9 +69,10 @@ public class AuthoritiesService implements AuthoritiesServiceInterface{
 	}
 
 
+	@Override
 	public List<Authorities> findAll() {
 		return authoritiesRepository.findAll();
-		
+
 	}
 
 }

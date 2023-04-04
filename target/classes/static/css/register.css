@@ -1,5 +1,6 @@
 body{
-    background-color: #f4f4f4;
+   	height:100vh;
+    background-color: #ebf5fb !important;
 }
 .div1{
     position: absolute;
@@ -9,7 +10,7 @@ body{
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: #f4f4f4;
+    background-color: #ebf5fb;
 }
 .div2{
     display: flex;
@@ -35,7 +36,8 @@ body{
     cursor: pointer;
 }
 .div4{
-    background: rgb(255, 255, 255);
+    background: #2874a6;
+    color:white;
     padding-right: 20px;
     padding-left:20px ;
     padding-top: 5px;

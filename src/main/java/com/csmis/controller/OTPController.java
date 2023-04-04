@@ -40,7 +40,7 @@ public class OTPController {
 	@GetMapping("/showPage")
 	public String showMyLoginPage(Model model, Authentication auth) {
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("email", "");
 		model.addAttribute("status", true);
@@ -66,7 +66,7 @@ public class OTPController {
 		}
 		System.out.println(staff);
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		model.addAttribute("userName",loginStaff.getName());
 		if (staff != null) { // Check if staff with the given email exists
 			String otp = oTPSenderService.generateOTP();
@@ -95,7 +95,7 @@ public class OTPController {
 		Staff staff = staffService.findByEmail(email);
 		model.addAttribute("id", staff.getId());
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		model.addAttribute("userName",loginStaff.getName());
 //
 		// Check if the OTP is correct
@@ -141,7 +141,7 @@ public class OTPController {
 		staffDetails.setPassword(encoder.encode(confirmPassword));
 
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		model.addAttribute("userName",loginStaff.getName());
 		staffDetailsService.save(staffDetails);
 		return "/fancy-login";

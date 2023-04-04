@@ -12,7 +12,7 @@ public class EmailSender implements CommandLineRunner{
 	@Autowired
     private JavaMailSender javaMailSender;
 
-	
+
 	public void sendEmail(String subject,String message,String[] to) {
 	 	System.out.println("Sending....");
         SimpleMailMessage msg = new SimpleMailMessage();

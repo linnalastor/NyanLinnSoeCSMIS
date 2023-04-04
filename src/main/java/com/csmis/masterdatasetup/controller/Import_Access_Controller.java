@@ -1,7 +1,5 @@
 package com.csmis.masterdatasetup.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +15,9 @@ import com.csmis.service.AccessService;
 @RequestMapping("/admin")
 public class Import_Access_Controller {
 
-	
+
 	AccessService accessService;
-	
+
 	@Autowired
 	public Import_Access_Controller(AccessService accessService) {
 		this.accessService = accessService;
@@ -42,10 +40,10 @@ public class Import_Access_Controller {
 
 		return "redirect:/admin/master_data_setup";
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 }

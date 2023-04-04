@@ -42,8 +42,8 @@ import com.csmis.service_interface.StaffDetailsServiceInterface;
 public class InvoiceController {
 	@Autowired
 	private StaffService staffService;
-	
-	
+
+
 	private InvoiceServiceInterface dailyInvoiceService;
 	private InvoiceCashierServiceInterface cashierSerivice;
 	private InvoiceReceiveByServiceInterface receivedService;
@@ -58,8 +58,7 @@ public class InvoiceController {
 			InvoiceCashierServiceInterface theCashierSerivice, InvoiceReceiveByServiceInterface theReceivedService,
 			InvoiceApprovedByServiceInterface theApprovedByServie, RestaurantServiceInterface theResturantService,
 			PaidVoucherServiceInterface thePaidVoucherServiceInterface,
-			StaffDetailsServiceInterface theStaffDetailsServiceInterface,PaymentmethodServiceInterface thePaymentmethodServiceInterface,
-			Authentication auth) {
+			StaffDetailsServiceInterface theStaffDetailsServiceInterface,PaymentmethodServiceInterface thePaymentmethodServiceInterface) {
 
 		dailyInvoiceService = theInvoiceService;
 		cashierSerivice = theCashierSerivice;
@@ -94,7 +93,6 @@ public class InvoiceController {
 		try {
 			tempLatestDate = paidVoucherServiceInterface.getLastDate();
 			String latestDate = tempLatestDate.substring(tempLatestDate.length() - 8);
-			System.out.println("hey latestDate++++++++" + latestDate);
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
 			startDate = LocalDate.parse(latestDate, formatter).plusDays(3);
@@ -121,7 +119,7 @@ public class InvoiceController {
 		int Ctotal = 0;
 		int Stotal = 0;
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("CTotal", Ctotal);
 		model.addAttribute("Stotal", Stotal);
@@ -199,9 +197,7 @@ public class InvoiceController {
 		model.addAttribute("numOfPax", numOfPax);
 		model.addAttribute("amount", amount);
 		model.addAttribute("price", price);
-
 		model.addAttribute("status", true);
-
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
 		model.addAttribute("paymentDate", paymentDate);
@@ -231,7 +227,7 @@ public class InvoiceController {
 		model.addAttribute("voucherNo", voucherNo);
 
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		model.addAttribute("userName",loginStaff.getName());
 		return "admin/invoice/invoice";
 	}
@@ -242,7 +238,7 @@ public class InvoiceController {
 		model.addAttribute("monthlyInvoice", monthlyInvoice);
 
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		model.addAttribute("userName",loginStaff.getName());
 		return "admin/invoice/paidinvoice";
 
@@ -287,7 +283,7 @@ public class InvoiceController {
 
 		model.addAttribute("status", false);
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		model.addAttribute("userName",loginStaff.getName());
 
 		return "admin/invoice/detailInvoice";
@@ -330,7 +326,7 @@ public class InvoiceController {
 			dto.add(temp);
 		}
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("invoices", dto);
 		model.addAttribute("CTotal", Ctotal);
@@ -373,7 +369,7 @@ public class InvoiceController {
 			dto.add(temp);
 		}
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("invoices", dto);
 		model.addAttribute("CTotal", Ctotal);

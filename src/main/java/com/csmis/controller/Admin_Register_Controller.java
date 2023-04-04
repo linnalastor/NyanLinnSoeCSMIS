@@ -6,7 +6,6 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -98,9 +97,9 @@ public class Admin_Register_Controller {
 			}
 			staffList = searchStaffList;
 		}
-		
+
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("consumerList", consumerLists);// Add the consumer lists to the model
 		theModel.addAttribute("day", today);// add date to the model
@@ -218,7 +217,7 @@ public class Admin_Register_Controller {
 		}
 
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("month", Month.of(month) + " / " + year);// get this month and year
 		theModel.addAttribute("month", Month.of(month));// get this month
@@ -380,7 +379,7 @@ public class Admin_Register_Controller {
 		}
 
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("arrayJson", json);
 		theModel.addAttribute("jsonHoliday", jsonHoliday);

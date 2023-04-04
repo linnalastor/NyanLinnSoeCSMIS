@@ -81,7 +81,7 @@ public class Lunch_Plan_Register_Controller {
 		} catch (JsonProcessingException e) {
 		}
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		theModel.addAttribute("userName",loginStaff.getName());
 
 		theModel.addAttribute("arrayJson", jsonUncheckedDates);
@@ -158,7 +158,7 @@ public class Lunch_Plan_Register_Controller {
 		} catch (JsonProcessingException e) {
 		}
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		theModel.addAttribute("userName",loginStaff.getName());
 
 		theModel.addAttribute("month", Month.of(month) + " / " + year);

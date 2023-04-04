@@ -23,13 +23,13 @@ import com.csmis.service_interface.StaffDetailsServiceInterface;
 public class EmailController {
 	private StaffDetailsServiceInterface staffDetailsServiceInterface;
 	private StaffService staffService;
-	
+
 	@Autowired
 	public EmailController(StaffDetailsServiceInterface theStaffDetailsServiceInterface,StaffService staffService) {
 		staffDetailsServiceInterface = theStaffDetailsServiceInterface;
 		this.staffService=staffService;
 	}
-	
+
 	@Autowired
 	 private EmailSender emailSender;
 
@@ -38,19 +38,19 @@ public class EmailController {
 							@RequestParam("subject")String subject, Authentication auth, Model theModel) {
 		List<StaffDetails> staffDetails = staffDetailsServiceInterface.findByEmailStatus();
 		List<String> emailAddresses = new ArrayList<>();
-		
+
 		for(StaffDetails s : staffDetails) {
 	        Staff staff = staffService.findByID(s.getId());
 	        if(staff != null) {
 	            emailAddresses.add(staff.getEmail());
 	        }
 	    }
-		
+
 		String[] addresses = emailAddresses.toArray(new String[emailAddresses.size()]);
-		
+
 		emailSender.sendEmail(subject,message,addresses);
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		theModel.addAttribute("userName",loginStaff.getName());
 		return "/admin/email/email";
 	}

@@ -10,7 +10,7 @@ import com.csmis.service_interface.AccessServiceInterface;
 public class AccessService implements AccessServiceInterface {
 	@Autowired
 	private AccessRepository accessRepository;
-	
+
 	@Override
 	public void saveAccess(Access access) {
 

@@ -38,10 +38,6 @@ body{
     left: 0;
 }
 
-.reports{
-    width: 100%;
-}
-
 .titles{
     /* background-color: green; */
     text-transform: uppercase;
@@ -110,14 +106,6 @@ body{
     color: var(--txtcolor);
     background: rgb(1, 80, 120);
     
-}
-
-#search{
-    width: 100%;
-}
-
-.inputdates{
-    width: 50%;
 }
 
 .lists ,.tablebodys{

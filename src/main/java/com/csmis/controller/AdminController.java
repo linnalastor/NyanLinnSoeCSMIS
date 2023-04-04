@@ -35,7 +35,7 @@ public class AdminController {
 	@GetMapping("/master_data_setup")
     public String index(Authentication auth, Model theModel) {
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		theModel.addAttribute("userName",loginStaff.getName());
         return "admin/admin_datasetup";
     }
@@ -46,7 +46,7 @@ public class AdminController {
 	@GetMapping("/dashboard")
 	public String dashboard(Authentication auth, Model theModel) {
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		theModel.addAttribute("userName",loginStaff.getName());
 		return "admin/admin_dashboard";
 	}
@@ -61,7 +61,7 @@ public class AdminController {
         String next_pdf="NextWeek.pdf";
 		String next_encodedPdf =pdfService.getPdfAsByteString(next_pdf);
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		model.addAttribute("userName",loginStaff.getName());
         model.addAttribute("npdf", next_encodedPdf);
 		model.addAttribute(model);
@@ -74,7 +74,7 @@ public class AdminController {
 		List<Staff> staff =staffService.findAll();
 
 		Staff loginStaff = staffService.findByID(auth.getName());
-				
+
 		model.addAttribute("userName",loginStaff.getName());
         model.addAttribute("staff", staff);
         model.addAttribute("status", true);
@@ -102,7 +102,7 @@ public class AdminController {
 		// create model attribute to bind form data
 		Staff staff = new Staff();
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("staff", staff);
 

@@ -107,7 +107,7 @@ public class Lunch_Report_Controller {
 			status = "notpicked";
 
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("day", yesterday);
 		// picked/not picked/not registered/holiday status
@@ -163,7 +163,7 @@ public class Lunch_Report_Controller {
 			notRegisteredDates = operatorReportService.getPickedUpWithoutRegisteredDays(reportStatus, 0);
 		}
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		theModel.addAttribute("userName",loginStaff.getName());
 
 		holidayString = objectMapper.writeValueAsString(holidays);
@@ -233,7 +233,7 @@ public class Lunch_Report_Controller {
 		notPickedDatesString = objectMapper.writeValueAsString(notPickedDates);
 
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("holidays", holidayString);
 		theModel.addAttribute("notregistereddays", notRegisteredDatesString);

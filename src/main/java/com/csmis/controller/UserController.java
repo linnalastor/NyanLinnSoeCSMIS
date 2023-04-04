@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.csmis.entity.Staff;
 import com.csmis.entity.StaffDetails;
@@ -43,7 +42,7 @@ public class UserController {
 	@GetMapping("/dashboard")
 	public String Dashboard(Model theModel, Authentication auth) {
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		theModel.addAttribute("userName",loginStaff.getName());
 		return "operator/User_Dashboard";
 	}
@@ -68,7 +67,7 @@ public class UserController {
 	@GetMapping("/lunch_plan/today")
 	public String ConsumerListToday(Model theModel, Authentication auth) {
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		theModel.addAttribute("userName",loginStaff.getName());
 		return "operator/register/ConsumerListToday";
 	}
@@ -89,7 +88,7 @@ public class UserController {
 			}
 		} catch (Exception e1) {
 		}
-		
+
 		if (descriptionLists == null || descriptionLists.isEmpty() || descriptionLists.get(0).trim().equals("")) {
 		    descriptionLists = new ArrayList<>();
 		}
@@ -113,7 +112,7 @@ public class UserController {
 
 		}
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("json", json);
 
@@ -124,7 +123,7 @@ public class UserController {
 	@PostMapping("/account_status")
 	public String accountStatus(Model model, Authentication auth) {
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		model.addAttribute("userName",loginStaff.getName());
 		return "/operator/account-status/index";
 	}
@@ -132,7 +131,7 @@ public class UserController {
 	@GetMapping("/update")
 	public String updateAccount(Model model, Authentication auth) {
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("status", true);
 		return "/operator/account-status/update";

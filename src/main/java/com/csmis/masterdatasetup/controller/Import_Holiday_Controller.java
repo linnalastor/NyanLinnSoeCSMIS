@@ -96,7 +96,7 @@ public class Import_Holiday_Controller {
 		theModel.addAttribute("hol", true);
 		return "/admin/Holiday_Update_List";
 	}
-	
+
 
 	@GetMapping("/HolidayFormAdd")
 	public String showFormForAdd(Model theModel) {
@@ -104,10 +104,10 @@ public class Import_Holiday_Controller {
 		theModel.addAttribute("holiday", hdto);
 		return "/admin/Holiday_Update_List";
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
  	  	}

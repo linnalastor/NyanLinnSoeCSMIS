@@ -287,8 +287,7 @@
 	</header>
 
 	<!-- start byday report section -->
-	<section class="pt-4 pb-2 reports">
-		<div class="container mt-3 pt-4">
+	<section class="container mt-4">
 			<div class="container-fluid">
 				<!-- start title -->
 				<div class="row text-center mt-2 mb-3">
@@ -382,19 +381,19 @@
 										<div class="card-body listboxs">
 											<div
 												style="display: flex;  flex-direction: row; justify-content: center;">
-												<div class="col-lg-5" style = "background-color: lightblue;">
+												<div class="col-lg-5" style = "background-color: lightblue;border-radius: 15px;">
 													<ul
-														class="row d-flex justify-content-center text-center m-0 py-2 px-3">
+														class="row d-flex justify-content-start text-center m-0 py-2">
 														<li class="col-2 me-2"><label class="text-uppercase">Mon</label></li>
 														<li class="col-2 me-2"><label class="text-uppercase">Tue</label></li>
 														<li class="col-2 me-2"><label class="text-uppercase">Wed</label></li>
 														<li class="col-2 me-2"><label class="text-uppercase">Thu</label></li>
 														<li class="col-2"><label class="text-uppercase">Fri</label></li>
 														<li class="row col-2 px-3 mx-1 my-2 text-center"
-															th:each="listweeklydate : ${listweeklydate}"><label
-															class="px-2 mb-1" style="background-color: grey;border:1px solid #000"
-															th:id="${listweeklydate} + ${staff.id} + '-showweekday'"
-															th:text="${listweeklydate}"></label></li>
+															th:each="date : ${list}"><label
+															class="px-2 mb-1" style="background-color: grey;border: 1px solid gold;color:#fff;"
+															th:id="${date} + ${staff.id} + '-showweekday'"
+															th:text="${date}"></label></li>
 													</ul>
 												</div>
 											</div>
@@ -411,9 +410,6 @@
 			</div>
 			<!-- End staff report -->
 
-			<!-- start pagination -->
-
-		</div>
 
 	</section>
 
@@ -427,8 +423,7 @@
 
 				if (myvar != null) {
 					myvar.style.backgroundColor = "red";
-					myvar.style.color = "white";
-					myvar.style.border = "1px solid white";
+					myvar.style.border = "1px solid gold";
 					console.log(notPickedArr[i]);
 				}
 			}
@@ -444,8 +439,7 @@
 
 				if (myvar != null) {
 					myvar.style.backgroundColor = "green";
-					myvar.style.color = "white";
-					myvar.style.border = "1px solid white";
+					myvar.style.border = "1px solid gold";
 
 					console.log(pickedArr[i]);
 				}
@@ -461,9 +455,8 @@
 						+ "-showweekday");
 				console.log(">>>>>" + myvar);
 				if (myvar != null) {
-					myvar.style.backgroundColor = "yellow";
-					myvar.style.color = "black";
-					myvar.style.border = "1px solid white";
+					myvar.style.backgroundColor = "#133716";
+					myvar.style.border = "1px solid gold";
 
 					console.log(notRegisterArr[i]);
 				}
@@ -481,9 +474,9 @@
 						+ "-showweekday");
 
 				if (myvar != null) {
-					myvar.style.backgroundColor = "white";
-					myvar.style.color = "black";
-					myvar.style.border = "1px solid black";
+					myvar.style.backgroundColor = "yellow";
+					myvar.style.color = "#000"
+					myvar.style.border = "1px solid gold";
 				}
 			}
 

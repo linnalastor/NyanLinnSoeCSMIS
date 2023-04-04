@@ -20,8 +20,8 @@ ul {
     padding-right: 5px;
     padding-left: 5px;
     cursor: pointer;
-    border: 1px solid black;
-    color: black;
+    border: 1px solid gold;
+    color: white;
     background-color: green;
   }
   
@@ -34,7 +34,7 @@ ul {
  } */
   
   input[type="checkbox"]:checked + label {
-    border: 1px solid white;
+    border: 1px solid gold;
     color: white;
     background-color: red;
   }

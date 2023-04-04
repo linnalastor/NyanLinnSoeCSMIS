@@ -106,7 +106,7 @@ public class Import_Avoidmeat_Controller {
 
 		List<Avoidmeat> avoidmeat = avoidmeatService.findAll();
 		Staff loginStaff = staffService.findByID(auth.getName());
-		
+
 		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("avoidmeat", avoidmeat);
 		theModel.addAttribute("status", true);

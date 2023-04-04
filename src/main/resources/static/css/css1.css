@@ -1,5 +1,6 @@
 body{
-    background-color: #ebf5fb;
+	height:100vh;
+    background-color: #ebf5fb !important;
 }
 
 .buttons{
