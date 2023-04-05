@@ -109,7 +109,6 @@ public class Import_InvoiceReceiveBy_Controller {
 	@GetMapping("/invoiceReceiveByRemove")
 	public String removeInvoiceReceiveBy(@ModelAttribute("invoiceReceiveBy") String name) {
 		InvoiceReceiveBy invoiceReceiveBy = invoiceReceiveByService.findByName(name);
-		System.out.println(invoiceReceiveBy.getName());
 		invoiceReceiveByService.delete(invoiceReceiveBy);
 		return "redirect:/admin/show_invoiceReceiveBy";
 	}

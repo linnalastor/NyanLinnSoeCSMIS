@@ -46,7 +46,7 @@
 							<div class="pb-3 mt-4 text-center borderbottoms">
 								<a href="" class="btn btn-outline-light rounded-circle mb-1"><i
 									class="fa-solid fa-user fs-3"></i></a> <a href="#"
-									class="text-white nav-link">Ms.July</a>
+									class="text-white nav-link" th:text="${userName}"></a>
 							</div>
 							<ul class="navbar-nav flex-column mt-4">
 								<li class="navbar-item"><a th:href="@{/operator/dashboard}"
@@ -183,7 +183,7 @@
 
 				</div>
 
-				<div style="display: flex; justify-content: center;">
+				<div th:if="${access}" style="display: flex; justify-content: center;">
 					<div class="div4" data-bs-toggle="modal"
 						data-bs-target="#staticBackdrop">Update</div>
 				</div>

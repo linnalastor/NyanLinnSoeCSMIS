@@ -40,7 +40,6 @@ public class Import_Restaurant_Controller {
 	@GetMapping("/restaurantRemove")
 	public String removeRestaurant(@ModelAttribute("restaurant") String name) {
 		Restaurant restaurant = restaurantService.findByName(name);
-		System.out.println(restaurant.getName());
 		restaurantService.delete(restaurant);
 		return "redirect:/admin/show_restaurant";
 	}
@@ -63,7 +62,6 @@ public class Import_Restaurant_Controller {
 
 	                // convert `CsvToBean` object to list of users
 	                List<Restaurant> restaurant = csvToBean.parse();
-	                System.out.println(restaurant);
 
 
 	                // save users in DB?

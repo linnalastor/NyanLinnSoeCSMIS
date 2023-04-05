@@ -350,7 +350,6 @@ public class AdminReportService {
 				}
 			}
 		}
-		System.out.println("indexes ===>" + indexs);
 
 		List<Lunch_Report> reports = new ArrayList<>();
 		try {
@@ -394,7 +393,6 @@ public class AdminReportService {
 					if (c == '1')
 						notPickedDates.add(dates.get(i) + staff_id);
 				}
-				System.out.println("here ==>"+staff_id );
 			}
 			notPickedDateList.add(notPickedDates);
 		}

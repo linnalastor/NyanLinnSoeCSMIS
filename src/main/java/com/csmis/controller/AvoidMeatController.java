@@ -40,7 +40,6 @@ public class AvoidMeatController {
 
 		for(StaffDetails staffDetail : staffDetailList) {
 			String description = staffDetail.getDescription();
-			System.out.println("description ==>"+description +"<==");
 			String id =staffDetail.getId();
 			if(!description.equals(null)&& !description.equals("")) {
 				descriptions.add(description);

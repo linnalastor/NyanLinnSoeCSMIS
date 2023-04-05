@@ -35,7 +35,6 @@ public class Import_Paymentmethod_Controller {
 	public String showFormForm(Model model) {
 
 		List<Paymentmethod> paymentmethod = paymentmethodService.findAll();
-		System.out.println(paymentmethod);
 		model.addAttribute("paymentmethod", paymentmethod);
 		model.addAttribute("status", true);
 		return "/admin/Paymentmethod_Show_List";
@@ -100,7 +99,6 @@ public class Import_Paymentmethod_Controller {
 	public String removePaymentmethod(@ModelAttribute("paymentmethod") String name) {
 
 		Paymentmethod paymentmethod = paymentmethodService.findByName(name);
-		System.out.println(paymentmethod.getName());
 		paymentmethodService.delete(paymentmethod);
 		return "redirect:/admin/show_Paymentmethod";
 	}

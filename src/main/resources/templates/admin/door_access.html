@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Dashboard</title>
+<title>Door Access Import</title>
 <!-- fav icon -->
 <link th:href="@{/images/datlogo.png}" rel="icon" type="image/png"
 	sizes="18*18" />
@@ -25,6 +25,10 @@
 <script defer
 	src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
 <script defer th:src="@{/js/dataTable.js}"></script>
+
+<!-- Loading  -->
+<link rel="stylesheet" type="text/css" href="/notiflix.min.css">
+<script src="/js/notiflix-aio-3.2.6.min.js"></script>
 
 <!-- bootstrap css1 js1 -->
 <link rel="stylesheet"
@@ -49,38 +53,45 @@
 
 						<!-- Start Left Sidebar -->
 						<div id="nav"
-							class="col-xl-2 col-lg-3 col-md-4 fixed-top collapse sidebars">
+							class="col-xl-2 col-lg-3 col-md-4 fixed-top collapse sidebars"  style="margin-bottom:0px;">
 
 							<div class="pb-3 mt-4 text-center borderbottoms">
 								<a href="" class="btn btn-outline-light rounded-circle mb-1"><i
 									class="fa-solid fa-user fs-3"></i></a> <a href="#"
-									class="text-white nav-link">Phoe</a>
+									class="text-white nav-link" th:text="${userName}"></a>
 							</div>
 							<ul class="navbar-nav flex-column mt-4">
 								<li class="navbar-item"><a th:href="@{/admin/dashboard}"
 									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
 										class="fas fa-home fa-lg me-3"></i>Dashboard</a></li>
-								<li class="navbar-item"><a th:href="@{/admin/menu}"
-									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-										class="fa-solid fa-utensils fa-lg ps-1 me-3"></i>Menu</a></li>
-								<li class="navbar-item"><a
-									th:href="@{/admin/consumer_list/today}"
-									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-										class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Registered
-										List</a></li>
-								<li class="navbar-item"><a th:href="@{/admin/report/today}"
-									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-										class="fa-solid fa-money-check fa-lg me-3"></i>Report List</a></li>
-								<li class="navbar-item"><a th:href="@{/admin/staff_list}"
-									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-										class="fa-solid fa-users-line fa-lg me-3"></i>Staff List</a></li>
-								<li class="navbar-item"><a th:href="@{/admin/invoice}"
-									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-										class="fa-solid fa-sack-dollar fa-lg me-3"></i>Invoice</a></li>
 								<li class="navbar-item"><a href="/admin/door_access"
 									class="nav-link text-white px-2 py-2 mb-2 currents"><i
 										class="fa-solid fa-id-card-clip fa-lg me-3"></i>Door Access
 										File</a></li>
+								<li class="navbar-item"><a th:href="@{/admin/invoice}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-sack-dollar fa-lg me-3"></i>Invoice</a></li>
+								<li class="navbar-item"><a th:href="@{/admin/report/today}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-money-check fa-lg me-3"></i>Report List</a></li>
+								<li class="navbar-item"><a
+									th:href="@{/admin/consumer_list/today}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Today
+										Registered List</a></li>
+								<li class="navbar-item"><a
+									th:href="@{/admin/consumer_list/by_week}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Registeration</a></li>
+								<li class="navbar-item"><a th:href="@{/admin/menu}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-utensils fa-lg ps-1 me-3"></i>Menu</a></li>
+								<li class="navbar-item"><a th:href="@{/admin/menu}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-user fa-lg ps-1 me-3"></i>Operator Dashboard</a></li>
+								<li class="navbar-item"><a th:href="@{/admin/staff_list}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-users-line fa-lg me-3"></i>Staff Management</a></li>
 								<li class="navbar-item"><a
 									th:href="@{/admin/master_data_setup}"
 									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
@@ -147,26 +158,46 @@
 		<!-- END NAVBAR -->
 	</header>
 
-	<div class="mt-5">
+	<div class="d-flex justify-content-end">
+		<a href="/admin/master_data_setup" class=" pt-5"><i class="fa-solid fa-house-chimney mt-3 mx-3 fs-2"></i></a>
+	</div>
+	
+	<!-- start title -->
+	<div class="container">
+		<div class="row text-center mb-4">
+			<div class="col">
+				<h3 class="titles text-dark">Door Access Import</h3>
+			</div>
+		</div>
+	</div>
+	<!-- end title -->
+	<div class="d-flex w-100 px-5 justify-content-center mb-3">
 		<form th:action="@{/admin/door_access/validation}" method="post"
-			enctype="multipart/form-data">
-			<input class="mt-5" type="file" name="file"
-				id="invoiceReceiveBy_file" accept=".xlsx" required> <label
-				for="dateInput">Select a date:</label> <input type="date"
-				name="date" id="dateInput" required />
-			<button type="submit">Import</button>
+			enctype="multipart/form-data" class="d-flex">
+			<div><input class="form-control" type="file" name="file" id="invoiceReceiveBy_file" accept=".xlsx" required></div> 
+			<div>
+				<label for="dateInput"
+					 style="text-align:center;height:100%;line-height:2.2em;"
+				>Select a date:
+				</label> 
+			</div>
+			
+			<div><input class="form-control" type="date" name="date" id="dateInput" required /></div>
+			<div><button class="btn btn-info btn-block" onclick="startLoading()" type="submit">Import</button></div>
+			
 		</form>
+		<script> function startLoading() { Notiflix.Loading.dots('Loading.....'); } </script>
 	</div>
 	<!--display error if any-->
 	<div class="alert alert-danger" role="alert" th:if="${!status}">
 		<strong>Error:</strong> <span th:text="${message}"></span>
 	</div>
 
-	<div class="container py-5">
+	<div class="container py-3">
 		<div class="row">
 			<div class="col-10 mx-auto">
 				<table id="dataTable" align="center"
-					class=" w-75table table-striped">
+					class=" w-75table table-striped text-center">
 					<thead>
 						<tr class="fw-bolder">
 							<th>No.</th>

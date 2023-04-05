@@ -85,7 +85,6 @@ public class InvoiceController {
 		List<Restaurant> resturant = resturantService.findAll();
 		List<Paymentmethod> paymentMethod = paymentmethodServiceInterface.findAll();
 		StaffDetails staffDetail = staffDetailsServiceInterface.getStaffDetailByID(auth.getName());
-		// System.out.println(staffDetail);
 		String staffPassword = staffDetail.getPassword();
 		LocalDate lastDate = LocalDate.now();
 
@@ -202,7 +201,6 @@ public class InvoiceController {
 		model.addAttribute("endDate", endDate);
 		model.addAttribute("paymentDate", paymentDate);
 
-		System.out.println("Hello mother fucker+++++startDate------------" + startDate);
 		model.addAttribute("cashier", cashier);
 		model.addAttribute("received", received);
 		model.addAttribute("approve", approve);

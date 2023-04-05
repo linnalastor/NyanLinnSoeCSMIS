@@ -41,33 +41,42 @@
 							<div class="pb-3 mt-4 text-center borderbottoms">
 								<a href="" class="btn btn-outline-light rounded-circle mb-1"><i
 									class="fa-solid fa-user fs-3"></i></a> <a href="#"
-									class="text-white nav-link">DAT Admin</a>
+									class="text-white nav-link" th:text="${userName}"></a>
 							</div>
 							<ul class="navbar-nav flex-column mt-4">
 								<li class="navbar-item"><a th:href="@{/admin/dashboard}"
 									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
 										class="fas fa-home fa-lg me-3"></i>Dashboard</a></li>
-								<li class="navbar-item"><a th:href="@{/admin/menu}"
-									class="nav-link text-white px-2 py-2 mb-2 currents"><i
-										class="fa-solid fa-utensils fa-lg ps-1 me-3"></i>Menu</a></li>
-								<li class="navbar-item"><a th:href="@{/admin/registered_list/today}"
-									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-										class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Registered
-										List</a></li>
-								<li class="navbar-item"><a th:href="@{/admin/report/today}"
-									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-										class="fa-solid fa-money-check fa-lg me-3"></i>Report List</a></li>
-								<li class="navbar-item"><a th:href="@{/admin/staff_list}"
-									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-										class="fa-solid fa-users-line fa-lg me-3"></i>Staff List</a></li>
-								<li class="navbar-item"><a th:href="@{/admin/invoice}"
-									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-										class="fa-solid fa-sack-dollar fa-lg me-3"></i>Invoice</a></li>
-								<li class="navbar-item"><a href="#"
+								<li class="navbar-item"><a href="/admin/door_access"
 									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
 										class="fa-solid fa-id-card-clip fa-lg me-3"></i>Door Access
 										File</a></li>
-								<li class="navbar-item"><a href="#"
+								<li class="navbar-item"><a th:href="@{/admin/invoice}"
+									class="nav-link text-white px-2 py-2 mb-2 siderbarlinks"><i
+										class="fa-solid fa-sack-dollar fa-lg me-3"></i>Invoice</a></li>
+								<li class="navbar-item"><a th:href="@{/admin/report/today}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-money-check fa-lg me-3"></i>Report List</a></li>
+								<li class="navbar-item"><a
+									th:href="@{/admin/consumer_list/today}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Today
+										Registered List</a></li>
+								<li class="navbar-item"><a
+									th:href="@{/admin/consumer_list/by_week}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Registeration</a></li>
+								<li class="navbar-item"><a th:href="@{/admin/menu}"
+									class="nav-link text-white px-2 py-2 mb-2 currents"><i
+										class="fa-solid fa-utensils fa-lg ps-1 me-3"></i>Menu</a></li>
+								<li class="navbar-item"><a th:href="@{/admin/menu}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-user fa-lg ps-1 me-3"></i>Operator Dashboard</a></li>
+								<li class="navbar-item"><a th:href="@{/admin/staff_list}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-users-line fa-lg me-3"></i>Staff Management</a></li>
+								<li class="navbar-item"><a
+									th:href="@{/admin/master_data_setup}"
 									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
 										class="fa-brands fa-mdb fa-lg me-3"></i>Master Data Setup</a></li>
 								<li class="navbar-item"><a th:href="@{/admin/email}"
@@ -77,8 +86,10 @@
 									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
 										class="fas fa-wrench fa-lg me-3"></i>About As</a></li>
 								<li class="navbar-item"><a href="#"
-									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-										class="fas fa-sign-out-alt fa-lg me-3"></i>Logout</a></li>
+									onclick="event.preventDefault(); document.getElementById('logout_form').submit();"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"> <i
+										class="fas fa-sign-out-alt fa-lg me-3"></i>Logout
+								</a></li>
 							</ul>
 						</div>
 
@@ -130,95 +141,39 @@
 		<!-- END NAVBAR -->
 	</header>
 
+	<!-- start title -->
 	<div class="container mt-5 pt-5">
-		<!-- start title -->
 		<div class="row text-center mb-1">
 			<div class="col">
-				<h3 class="titles text-dark">Menu List</h3>
+				<h3 class="titles text-dark">Menu</h3>
 			</div>
 		</div>
 	</div>
 	<!-- end title -->
 	
+	<div class="d-flex justify-content-end pe-5 ps-5">
+		<form th:action="@{/admin/import_menu}" method="POST"
+            enctype="multipart/form-data" class="d-flex w-25 me-5">
+            <input class="form-control" type="file" name="pdfFile" required/>
+            <button class="btn btn-info btn-block w-50" type="submit">Import Menu</button>
+    	</form>
+	</div>
 	
-	<div class="text-center p-5">
+	
+	<div class="text-center">
 		<div class="d-flex justify-content-around mt-3">
-        <form>
-            <br><br>
          <label class="fs-3">Current week</label>
-        </form>
-
-         <form th:action="@{/admin/import_menu}" method="POST"
-            enctype="multipart/form-data">
-            <input type="file" name="pdfFile" required/>
-            <button type="submit">Import Menu</button>
-            <br><br>
          <label class="fs-3">Next week</label>
-        </form>
-        
     </div>
 
     <div class="d-flex mt-1">
    
-        <embed th:attr="src='data:application/pdf;base64,' + ${pdf}" type="application/pdf" width="50%" height="600" class="p-5" />
+        <embed th:attr="src='data:application/pdf;base64,' + ${pdf}" type="application/pdf" width="50%" height="800" class="p-5" />
          
-         <embed th:attr="src='data:application/pdf;base64,' + ${npdf}" type="application/pdf" width="50%" height="600" class="p-5"/> 
+         <embed th:attr="src='data:application/pdf;base64,' + ${npdf}" type="application/pdf" width="50%" height="800" class="p-5"/> 
     </div>
 	</div>
 
-<!-- <div class="container text-center">
-	<div class="row justify-content-evenly bg-info">
-		<div class="col-4">
-			<label for="formFile" class="form-label">Menu File</label>
-				<form th:action="@{/import_menu}" method="post"
-					enctype="multipart/form-data">
-					<div class="d-flex justify-content-end">
-						<input class="form-control" type="file" name="pdfFile"
-							id="formFile" />
-						<button class="btn btn-success ms-2" style="width: 200px"
-							type="submit">Import</button>
-					</div>
-				</form>
-				<div class="col-4">
-				<label for="formFile" class="form-label">Menu File</label>
-				<form th:action="@{/import_menu}" method="post"
-					enctype="multipart/form-data">
-					<div class="d-flex justify-content-end">
-						<input class="form-control" type="file" name="pdfFile"
-							id="formFile" />
-						<button class="btn btn-success ms-2" style="width: 200px"
-							type="submit">Import</button>
-					</div>
-				</form>
-				</div>
-		</div>
-		
-			
-				
-				
-				<div>
-					<label for="formGroupExampleInput"
-						class="form-label text-success fw-bold fs-5">This
-						Week</label>
-					<embed th:attr="src='data:application/pdf;base64,' + ${pdf}"
-						type="application/pdf" width="600px" height="600px"/>
-				</div>
-				
-				<div>
-					<label for="formGroupExampleInput"
-						class="form-label  text-success fw-bold fs-5">This
-						Week</label>
-					<embed th:attr="src='data:application/pdf;base64,' + ${pdf}"
-						type="application/pdf" width="600px" height="600px"/>
-				</div>
-		
-	</div>
-</div>
- -->
-
-
-	<!-- END BODY CARD -->
-	
 	
 	<script src="https://kit.fontawesome.com/e0faeaf50f.js" crossorigin="anonymous"></script>
 	

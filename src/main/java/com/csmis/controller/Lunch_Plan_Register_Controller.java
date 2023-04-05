@@ -20,6 +20,7 @@ import com.csmis.service.DateService;
 import com.csmis.service.HolidayService;
 import com.csmis.service.Operator_Register_Service;
 import com.csmis.service.Prefix_ID_Service;
+import com.csmis.service_interface.AccessServiceInterface;
 import com.csmis.service_interface.StaffServiceInterface;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,14 +44,20 @@ public class Lunch_Plan_Register_Controller {
 	@Autowired
 	HolidayService holidayService;
 
+	@Autowired
+	AccessServiceInterface accessService;
+
 
 	// Start Consumer List Monthly
 	@GetMapping("/lunch_plan/by_month")
 	public String ConsumerListMonthly(Model theModel, Authentication auth) {
-
+		
 		// set date to next month's 1st date
 		LocalDate date= LocalDate.now();
 		date = date.withDayOfMonth(1).plusMonths(1);
+		
+		boolean access = accessService.checkMonthlyAccess();
+		theModel.addAttribute("access",access);
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonUncheckedDates = null;
@@ -83,7 +90,6 @@ public class Lunch_Plan_Register_Controller {
 		Staff loginStaff = staffService.findByID(auth.getName());
 
 		theModel.addAttribute("userName",loginStaff.getName());
-
 		theModel.addAttribute("arrayJson", jsonUncheckedDates);
 		theModel.addAttribute("jsonHoliday", jsonHoliday);
 		theModel.addAttribute("list", dateService.getMonthlyDates(date));
@@ -119,6 +125,9 @@ public class Lunch_Plan_Register_Controller {
 
 		String jsonUncheckedDates = null;
 		String jsonHoliday = null;
+		
+		boolean access = accessService.checkWeeklyAccess();
+		theModel.addAttribute("access",access);
 
 		// add days to today till monday
 		while(today.getDayOfWeek() != DayOfWeek.MONDAY) {
@@ -160,7 +169,6 @@ public class Lunch_Plan_Register_Controller {
 		Staff loginStaff = staffService.findByID(auth.getName());
 
 		theModel.addAttribute("userName",loginStaff.getName());
-
 		theModel.addAttribute("month", Month.of(month) + " / " + year);
 		theModel.addAttribute("day_to_day", day_to_day);
 		theModel.addAttribute("listweeklydate", dates);

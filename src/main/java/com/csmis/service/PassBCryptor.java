@@ -10,7 +10,6 @@ public class PassBCryptor {
 		String rawPass = "123";
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String encodedPass = encoder.encode(rawPass);
-		System.out.println(encodedPass);
 	}
 
 }

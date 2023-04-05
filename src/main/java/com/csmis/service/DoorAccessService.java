@@ -139,7 +139,6 @@ public class DoorAccessService {
 		else {
 			report = report.substring(0, index) + 'n' + temp;
 		}
-		System.out.println("Updated ==> Lunch Report ==>"+report);
 		// set report status string into lunch report of staff
 		lunch_report.setReport_status(report);
 

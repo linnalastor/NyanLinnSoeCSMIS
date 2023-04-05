@@ -71,16 +71,13 @@ public class DoorAccessController {
 
 		LocalDate date = LocalDate.parse(dateString);
 		LocalDate today = LocalDate.now();
-		HeadCount headCount = headCountService.find_by_id(dateString);
-
-
 
 		//if the selected date hasn't reached yet, go back to dooraccess upload file page with error message
 		if(date.getYear()>today.getYear() && date.getMonthValue()>today.getMonthValue() && date.getDayOfMonth()>today.getDayOfMonth() ) {
 			redirectAttributes.addFlashAttribute("message", "Selected date hasn't reached yet!");
 			redirectAttributes.addFlashAttribute("status", "true");
 			return "redirect:/admin/door_access";
-		}else if (headCount == null) {
+		}else{
 
 			// create file for incoming xlsx file
 			File tempFile = null;
@@ -94,12 +91,6 @@ public class DoorAccessController {
 			redirectAttributes.addFlashAttribute("file", tempFile);
 
 			return "redirect:/admin/door_access/import?date=" + dateString;
-		}
-		//if the selected date is already uploaded, go back to dooraccess upload file page with error message
-		else {
-			redirectAttributes.addFlashAttribute("message", "Selected date hasn already imported!");
-			redirectAttributes.addFlashAttribute("status", "true");
-			return "redirect:/admin/door_access";
 		}
 	}
 

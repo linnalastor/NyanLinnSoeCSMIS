@@ -35,7 +35,7 @@ public class Import_Access_Controller {
 	}
 	@PostMapping("/saveAccess")
 	public String saveCost(@ModelAttribute("access") Access theaccess,Model theModel) {
-		System.out.println(theaccess.getEnd());
+		theaccess.setId(1);
         accessService.saveAccess(theaccess);
 
 		return "redirect:/admin/master_data_setup";

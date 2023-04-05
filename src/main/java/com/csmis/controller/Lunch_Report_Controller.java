@@ -104,7 +104,7 @@ public class Lunch_Report_Controller {
 			}
 
 		} else
-			status = "notpicked";
+			status = "normal";
 
 		Staff loginStaff = staffService.findByID(auth.getName());
 

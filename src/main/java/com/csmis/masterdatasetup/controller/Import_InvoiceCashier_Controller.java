@@ -109,7 +109,6 @@ public class Import_InvoiceCashier_Controller {
 	@GetMapping("/invoiceCashierRemove")
 	public String removeInvoiceCashier(@ModelAttribute("invoiceCashier") String name) {
 		InvoiceCashier invoiceCashier = invoiceCashierService.findByName(name);
-		System.out.println(invoiceCashier.getName());
 		invoiceCashierService.delete(invoiceCashier);
 		return "redirect:/admin/show_invoiceCashier";
 	}

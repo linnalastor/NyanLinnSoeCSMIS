@@ -84,10 +84,8 @@ public class Import_Holiday_Controller {
 	public String showFormForUpdate(@RequestParam("holiday_date") String thedate,
 									Model theModel) {
 	    LocalDate date = LocalDate.parse(thedate);
-	    System.out.println("Parsed Date"+date);
 
 		Holiday holiday = holidayService.findByDate(date);
-		System.out.println("here");
 		HolidayDTO hdto= new HolidayDTO();
 		hdto.setDate(holiday.getDate().toString());
 		hdto.setDescription(holiday.getDescription());

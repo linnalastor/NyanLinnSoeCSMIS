@@ -6,4 +6,6 @@ public interface AccessServiceInterface {
 
 
 	public void saveAccess(Access access) ;
+	public boolean checkWeeklyAccess();
+	public boolean checkMonthlyAccess();
 }

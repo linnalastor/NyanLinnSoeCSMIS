@@ -33,15 +33,11 @@ public class UpdatePasswordController {
 
 	@PostMapping("/oldPassword")
 	public String oldPassword(@RequestParam("oldPassword") String oldPassword, Model model, Authentication auth) {
-		// System.out.println("input old password is >>>> " + oldPassword);
 
 		StaffDetails staffDetail = staffDetailsServiceInterface.getStaffDetailByID(auth.getName());
-		// System.out.println(staffDetail);
 		String staffPassword = staffDetail.getPassword();
-		// System.out.println("orginal password is >>>>> " + staffPassword);
 
 		boolean passwordsMatch = passwordEncoder.matches(oldPassword, staffPassword);
-		// System.out.println(passwordsMatch);
 
 		if (passwordsMatch) {
 			model.addAttribute("success", true);
@@ -60,18 +56,10 @@ public class UpdatePasswordController {
 	@PostMapping("/update-password")
 	public String updatePassword(@RequestParam("newPassword") String newPassword,
 			@RequestParam("confirmPassword") String confirmPassword, Model model, Authentication auth) {
-		// System.out.println(newPassword);
-		// System.out.println(confirmPassword);
 		StaffDetails staffDetail = staffDetailsServiceInterface.getStaffDetailByID(auth.getName());
-		/*
-		 * if(newPassword.equals(confirmPassword)) { model.addAttribute("success",
-		 * true); }else { model.addAttribute("error",
-		 * "New Password and Confirm Password is not match!"); }
-		 */
 
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String staffNewPassword = encoder.encode(newPassword);
-		// System.out.println(staffNewPassword);
 
 		staffDetail.setPassword(staffNewPassword);
 		staffDetailsServiceInterface.save(staffDetail);

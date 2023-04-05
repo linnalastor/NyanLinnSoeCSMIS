@@ -37,7 +37,6 @@ public class Import_Admin_Controller {
 	public String saveAdmin(@ModelAttribute("authorities") Authorities theAuthorities, Model theModel) {
 		Authorities authorities=null;
 		try {
-			System.out.println("here");
 			authorities = authoritiesService.findById(theAuthorities.getId());
 		} catch (Exception e) {
 		}

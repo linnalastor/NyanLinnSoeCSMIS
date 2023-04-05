@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.csmis.entity.Avoidmeat;
 import com.csmis.entity.Staff;
 import com.csmis.entity.StaffDetails;
 import com.csmis.service.Operator_Register_Service;
 import com.csmis.service.PdfService;
 import com.csmis.service.StaffDetailsService;
 import com.csmis.service.StaffService;
+import com.csmis.service_interface.AvoidmeatServiceInterface;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -27,7 +29,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class UserController {
 
 	@Autowired
-
 	Operator_Register_Service op;
 
 	@Autowired
@@ -38,6 +39,9 @@ public class UserController {
 
 	@Autowired
 	StaffDetailsService staffDetailsService;
+	
+	@Autowired
+	AvoidmeatServiceInterface avoidMeatService;
 
 	@GetMapping("/dashboard")
 	public String Dashboard(Model theModel, Authentication auth) {
@@ -82,26 +86,16 @@ public class UserController {
 		List<String> descriptionLists = null;
 		try {
 			descriptionLists = Arrays.asList(description.split(","));
-			//System.out.println("Value: " + descriptionLists.get(0).length());
-			if(descriptionLists.get(0).length()==0) {
-				descriptionLists = new ArrayList<>();
-			}
 		} catch (Exception e1) {
+			descriptionLists = new ArrayList<>();
 		}
 
 		if (descriptionLists == null || descriptionLists.isEmpty() || descriptionLists.get(0).trim().equals("")) {
 		    descriptionLists = new ArrayList<>();
 		}
 
-		/*
-		 * if (descriptionLists== null) { descriptionLists = new ArrayList<>(); }
-		 * if(descriptionLists.get(0).trim().equals("")) { descriptionLists = new
-		 * ArrayList<>(); }
-		 */
-		//System.out.println(descriptionLists);
 		theModel.addAttribute("descriptionLists", descriptionLists);
 
-		// System.out.println("mail noti is :" + staff.getEmail_status());
 		theModel.addAttribute("emailStatus",staff.getEmail_status());
 		ObjectMapper objectMapper = new ObjectMapper();
 		String json = null;
@@ -111,11 +105,18 @@ public class UserController {
 		} catch (JsonProcessingException e) {
 
 		}
+		
+		List<Avoidmeat> avoidMeatObjList = avoidMeatService.findAll();
+		List<String> avoidMeatList = new ArrayList<>();
+		for(Avoidmeat avoidmeat : avoidMeatObjList) {
+			avoidMeatList.add(avoidmeat.getName());
+		}
+		
 		Staff loginStaff = staffService.findByID(auth.getName());
 
 		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("json", json);
-
+		theModel.addAttribute("avoidMeatList",avoidMeatList);
 		theModel.addAttribute("staff", staffService.findByID(auth.getName()));
 		return "/operator/account-status/index";
 	}

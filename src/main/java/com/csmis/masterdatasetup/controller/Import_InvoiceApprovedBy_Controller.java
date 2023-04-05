@@ -121,7 +121,6 @@ public class Import_InvoiceApprovedBy_Controller {
 	@GetMapping("/invoiceApprovedByRemove")
 	public String removeInvoiceApprovedBy(@ModelAttribute("invoiceApprovedBy") String name) {
 		InvoiceApprovedBy invoiceApprovedBy = invoiceApprovedByService.findByName(name);
-		System.out.println(invoiceApprovedBy.getName());
 		invoiceApprovedByService.delete(invoiceApprovedBy);
 		return "redirect:/admin/show_invoiceApprovedBy";
 	}

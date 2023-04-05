@@ -14,7 +14,6 @@ public class EmailSender implements CommandLineRunner{
 
 
 	public void sendEmail(String subject,String message,String[] to) {
-	 	System.out.println("Sending....");
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(to);
 
@@ -22,8 +21,6 @@ public class EmailSender implements CommandLineRunner{
         msg.setText(message);
 
         javaMailSender.send(msg);
-        System.out.println("Successfully!");
-
     }
 
 	@Override

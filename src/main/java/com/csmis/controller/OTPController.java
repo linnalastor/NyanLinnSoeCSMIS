@@ -56,15 +56,12 @@ public class OTPController {
 	@PostMapping("/send-otp")
 	public String sendOTP(@RequestParam("email") String email, Model model, Authentication auth)
 			throws InvalidKeyException, NoSuchAlgorithmException {
-		// Staff staff=new Staff();
 		Staff staff = null;
-		System.out.println(email);
 		try {
 			staff = staffService.findByEmail(email);
 		} catch (Exception e) {
 
 		}
-		System.out.println(staff);
 		Staff loginStaff = staffService.findByID(auth.getName());
 
 		model.addAttribute("userName",loginStaff.getName());
@@ -131,9 +128,6 @@ public class OTPController {
 		StaffDetails staffDetails = staffDetailsService.getByID(id);
 
 		staffDetails.setPassword(confirmPassword);
-
-		System.out.println(id);
-		System.out.println(confirmPassword);
 
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
