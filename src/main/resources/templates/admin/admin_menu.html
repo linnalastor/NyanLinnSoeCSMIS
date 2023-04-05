@@ -69,7 +69,7 @@
 								<li class="navbar-item"><a th:href="@{/admin/menu}"
 									class="nav-link text-white px-2 py-2 mb-2 currents"><i
 										class="fa-solid fa-utensils fa-lg ps-1 me-3"></i>Menu</a></li>
-								<li class="navbar-item"><a th:href="@{/admin/menu}"
+								<li class="navbar-item"><a th:href="@{/operator/dashboard}"
 									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
 										class="fa-solid fa-user fa-lg ps-1 me-3"></i>Operator Dashboard</a></li>
 								<li class="navbar-item"><a th:href="@{/admin/staff_list}"
@@ -141,8 +141,12 @@
 		<!-- END NAVBAR -->
 	</header>
 
+	<!-- Home button -->
+	<div class="d-flex justify-content-end">
+		<a href="/admin/dashboard" class=" pt-5"><i class="fa-solid fa-house-chimney mt-3 mx-3 fs-2"></i></a>
+	</div>
 	<!-- start title -->
-	<div class="container mt-5 pt-5">
+	<div class="container">
 		<div class="row text-center mb-1">
 			<div class="col">
 				<h3 class="titles text-dark">Menu</h3>

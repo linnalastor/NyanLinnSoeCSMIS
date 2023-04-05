@@ -152,40 +152,49 @@
 				Meat List</div>
 		</div>
 	</div>
-	<div>
-		<table>
-			<thead>
-				<tr class="fw-bolder">
-					<th>Sr No.</th>
-					<th>Avoid Meat</th>
-					<th>Count</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="list, i : ${desList}">
-					<td th:text="${i.count}"></td>
-					<td th:each="des : ${list}" th:text="${des}"></td>
-				</tr>
-			</tbody>
-		</table>
-
-		<table>
-			<thead>
-				<tr class="fw-bolder">
-					<th>Sr No.</th>
-					<th>Staff ID</th>
-					<th>Avoid Meat</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="list, i : ${staffDesList}">
-					<td th:text="${i.count}"></td>
-					<td th:each="des : ${list}" th:text="${des}"></td>
-				</tr>
-			</tbody>
-		</table>
+	<div class="d-flex justify-content-center align-items-center my-3">
+		<div class="col-10 d-flex justify-content-center align-items-center flex-column">
+		
+			<table class=" table table-striped mb-5">
+	  			<thead style="color:#fff;background-color: rgb(1, 80, 120);">
+					<tr class="fw-bolder">
+						<th>Sr No.</th>
+						<th>Avoid Meat</th>
+						<th>Count</th>
+					</tr>
+				</thead>
+				<tbody >
+					<tr th:each="list, i : ${desList}">
+						<td th:text="${i.count}"></td>
+						<td th:each="des : ${list}" th:text="${des}"></td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div class="text-center text-dark fs-4 mb-3 border-info border-bottom">
+				Staff's Avoid Meat List
+			</div>
+			
+			
+			<table class=" table table-striped">
+				<thead style="color:#fff;background-color: rgb(1, 80, 120);">
+					<tr class="fw-bolder">
+						<th>Sr No.</th>
+						<th>Staff ID</th>
+						<th>Avoid Meat</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="list, i : ${staffDesList}">
+						<td th:text="${i.count}"></td>
+						<td th:each="des : ${list}" th:text="${des}"></td>
+					</tr>
+				</tbody>
+			</table>
 	</div>
-
+	
+	</div>
+	
 	<form th:action="@{/logout}" id="logout_form" method="POST">
 		<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
 	</form>

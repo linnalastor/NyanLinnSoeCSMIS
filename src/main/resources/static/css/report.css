@@ -1,6 +1,6 @@
 :root{
     --bgcolor: #00b4d8;
-    --btncolor: #03045e;
+    --bcolor: #03045e;
     --txtcolor: #fff;
 }
 
@@ -26,51 +26,6 @@ body{
     background-color: #ebf5fb;
 
     overflow-x: hidden;
-}
-
-.sidebars{
-    height: 100vh;
-
-    background-color: var(--btncolor);
-
-    position: absolute;
-    top: 10vh;
-    left: 0;
-}
-
-.titles{
-    /* background-color: green; */
-    text-transform: uppercase;
-    color: var(--txtcolor);
-    display: inline-block;
-    padding: 5px 20px;
-
-    position: relative;
-}
-
-.titles::before,
-.titles::after{
-    content: "";
-    width: 20px;
-    height: 20px;
-
-    position: absolute;
-}
-
-.titles::before{
-    border-left: 3px solid var(--btncolor);
-    border-bottom: 3px solid var(--btncolor);
-
-    left: 0;
-    bottom: 0;
-}
-
-.titles::after{
-    border-right: 3px solid var(--btncolor);
-    border-top: 3px solid var(--btncolor);
-
-    right: 0;
-    top: 0;
 }
 
 /* start report lists  */
@@ -109,8 +64,8 @@ body{
 }
 
 .lists ,.tablebodys{
-    height: 300px;
-    /* background-color: var(--btncolor); */
+    height: 400px;
+    
     
     overflow-y: scroll;
     overflow-x: hidden;
@@ -136,7 +91,7 @@ body{
 
 .showdates,
 .showtotals{
-    color: var(--btncolor);
+    color: var(--bcolor);
 }
 
 .showdates{

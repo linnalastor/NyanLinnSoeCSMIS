@@ -68,8 +68,10 @@ body{
 }
 
 .buttons{
-    background-color: var(--btncolor);
+    background-color: var(--btncolor) !important;
 }
+
+
 
 .sidebars{
     height: 100vh;
@@ -77,10 +79,21 @@ body{
     background-color: var(--btncolor);
     /* border-right: 2px solid black; */
     box-shadow: 3px 0 5px rgb(16, 176, 230);
+    position:fixed;
+    top:8vh;
+    left:0;
+    bottom:0;
+    overflow-y: scroll;
+    padding-top:20px;
+  	padding-bottom: 100px;
+ }
+.sidebars::-webkit-scrollbar {
+  display: none;
+}
 
-    position: absolute;
-    top: 10vh;
-    left: 0;
+.sidebars {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 .currents{

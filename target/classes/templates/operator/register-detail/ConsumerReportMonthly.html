@@ -143,13 +143,25 @@
 					Month</div>
 			</div>
 		</div>
+		
+		<!-- Start List color box -->
+			<div class="col-10 d-flex justify-content-center my-3">
+				<div class="col-10  d-flex justify-content-center text-light text-center rounded-3" style="height:2.5rem;background-color:#9D9D9D;">
+					<div class="col-2  border-end d-flex justify-content-center align-items-center"><span class="me-2">Normal</span><span class="px-3 " style="background-color:grey;border:1px solid gold">00</span></div>
+					<div class="col-2 mx-3 border-end  d-flex justify-content-center align-items-center"><span class="me-2">Holiday</span><span class="px-3 " style="background-color:yellow;color:#000;border:1px solid gold">00</span></div>
+					<div class="col-2 mx-3 border-end  d-flex justify-content-center align-items-center"><span class="me-2">Picked</span><span class=" px-3 " style="background-color:green;border:1px solid gold">00</span></div>
+					<div class="col-2 mx-3 border-end  d-flex justify-content-center align-items-center"><span class="me-2">Not Picked</span><span class="px-3 " style="background-color:red;border:1px solid gold">00</span></div>
+					<div class="col-2  d-flex justify-content-center align-items-center"><span class="me-2">Not Register</span><span class="px-3 " style="background-color:#133716;border:1px solid gold">00</span></div>
+				</div>
+			</div>
+			<!-- End List Color Box -->
 
 		<div style="font-size: x-large; font-weight: 600; margin-top: 1%;"
 			th:text="${Month_Year}"></div>
 		<div class="mb-5"
 			style="width: 35%; background-color: lightblue; display: flex; flex-direction: column; align-items: center; border-radius: 25px; padding-bottom: 1%;">
 			<div class="p-2"
-				style="font-size: large; font-weight: 500; background: #14A44D; color: #fff; width: 100%; display: flex; align-items: center; justify-content: center; border-top-right-radius: 25px; border-top-left-radius: 25px; padding-top: 1%;">Last Month Lunch Status</div>
+				style="font-size: large; font-weight: 500; background: green; color: #fff; width: 100%; display: flex; align-items: center; justify-content: center; border-top-right-radius: 25px; border-top-left-radius: 25px; padding-top: 1%;">Last Month Lunch Status</div>
 			<div class="mt-2">
 				<div th:text="'Name - '+${staff.name}"></div>
 				<div th:text="'Staff ID - '+${staff.id}"></div>
@@ -185,8 +197,7 @@
 
 			if (myvar != null) {
 				myvar.style.backgroundColor = "red";
-				myvar.style.color = "white";
-				myvar.style.border = "1px solid white";
+				myvar.style.border = "1px solid gold";
 				console.log(notPickedArr[i]);
 			}
 		}
@@ -198,8 +209,7 @@
 
 			if (myvar != null) {
 				myvar.style.backgroundColor = "green";
-				myvar.style.color = "white";
-				myvar.style.border = "1px solid white";
+				myvar.style.border = "1px solid gold";
 				
 				console.log(pickedArr[i]);
 			}
@@ -211,9 +221,8 @@
 			var myvar = document.getElementById(notRegisterArr[i] + "-showweekday");
 			console.log(myvar);
 			if (myvar != null) {
-				myvar.style.backgroundColor = "yellow";
-				myvar.style.color = "white";
-				myvar.style.border = "1px solid white";
+				myvar.style.backgroundColor = "#133716";
+				myvar.style.border = "1px solid gold";
 				
 				console.log(notRegisterArr[i]);
 			}
@@ -228,9 +237,9 @@
 			var myvar = document.getElementById(holidayArr[i] + "-showweekday");
 			
 			if (myvar != null) {
-				myvar.style.backgroundColor = "white";
-				myvar.style.color = "black";
-				myvar.style.border = "1px solid black";
+				myvar.style.backgroundColor = "yellow";
+				myvar.style.color = "#000"
+				myvar.style.border = "1px solid gold";
 			}
 		}
 	</script>

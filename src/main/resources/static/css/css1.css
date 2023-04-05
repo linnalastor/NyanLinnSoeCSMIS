@@ -3,10 +3,6 @@ body{
     background-color: #ebf5fb !important;
 }
 
-.buttons{
-    background-color: #03045e !important;
-}
-
 .div1{
     position: absolute;
     top: 0px;
@@ -22,7 +18,7 @@ body{
     display: flex;
     align-items: center;
     justify-content:center;
-    margin-bottom: 2%;
+    
 }
 .div2 div{
     display: flex;

@@ -145,26 +145,51 @@
 					Next Week</div>
 			</div>
 		</div>
+		
+		<!-- Start List color box -->
+		<div class="col-8 d-flex justify-content-center my-3">
+			<div
+				class="col-9  d-flex justify-content-center text-light text-center rounded-3"
+				style="height: 2.5rem; background-color: #9D9D9D;">
+				<div
+					class="col-3 me-3 border-end  d-flex justify-content-center align-items-center">
+					<span class="me-2">Holiday</span><span class="px-3 "
+						style="background-color: yellow; color: #000; border: 1px solid gold">00</span>
+				</div>
+				<div
+					class="col-3 me-3 border-end  d-flex justify-content-center align-items-center">
+					<span class="me-2">Will Pick</span><span class=" px-3 "
+						style="background-color: green; border: 1px solid gold">00</span>
+				</div>
+				<div
+					class="col-3   d-flex justify-content-center align-items-center">
+					<span class="me-2">Will Not Pick</span><span class="px-3 "
+						style="background-color: red; border: 1px solid gold">00</span>
+				</div>
+			</div>
+		</div>
+		<!-- End List Color Box -->
 
 		<div style="font-size: x-large; font-weight: 600;" class="mb-2"
 			th:text="${month}"></div>
 
 		<div
 			style="width: 100%; display: flex; justify-content: center; align-items: center"
-			class="mb-5">
+			class="mb-3">
 			<div
 				style="width: 35%; background-color: lightblue; display: flex; flex-direction: column; align-items: center; border-radius: 25px; padding-bottom: 1%;">
 				<div
-					style="font-size: large; font-weight: 500; background: #14A44D;color:#fff; width: 100%; display: flex; align-items: center; justify-content: center; border-top-right-radius: 25px; border-top-left-radius: 25px; padding: 1%;">Next Month Lunch PLan
-					</div>
+					style="font-size: large; font-weight: 500; background: #14A44D; color: #fff; width: 100%; display: flex; align-items: center; justify-content: center; border-top-right-radius: 25px; border-top-left-radius: 25px; padding: 1%;">Next
+					Month Lunch PLan</div>
 				<div
-					style="display: flex; justify-content: center; flex-direction: column; text-align: center;margin-top:1%;">
+					style="display: flex; justify-content: center; flex-direction: column; text-align: center; margin-top: 1%;">
 					<div th:text="'Name - '+${staff.name}"></div>
 					<div th:text="'Staff ID - '+${staff.id}"></div>
 					<div th:text="'Division - '+${staff.division}"></div>
 					<div th:text="'Department - '+${staff.department}"></div>
-					<div th:text="'Team - '+${staff.team}" style="border-bottom: 1px solid black;"></div>
-					
+					<div th:text="'Team - '+${staff.team}"
+						style="border-bottom: 1px solid black;"></div>
+
 
 					<div style="background-color: lightblue; border-radius: 15px">
 						<ul style="color: #000"
@@ -183,76 +208,83 @@
 
 				</div>
 
-				<div th:if="${access}" style="display: flex; justify-content: center;">
+				<div th:if="${access}"
+					style="display: flex; justify-content: center;">
 					<div class="div4" data-bs-toggle="modal"
 						data-bs-target="#staticBackdrop">Update</div>
 				</div>
 			</div>
 		</div>
 
+
+		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+
+				<form th:action="@{register_by_month}" class="modal-content">
+
+					<div class="modal-body">
+						<div style="width: 100%; display: flex; justify-content: center;"
+							class="mb-5">
+							<div
+								style="width: 100%; background-color: lightblue; display: flex; flex-direction: column; align-items: center; border-radius: 25px; padding-bottom: 1%;">
+								<div
+									style="font-size: large; font-weight: 500; background: #14A44D; color: #fff; width: 100%; display: flex; align-items: center; justify-content: center; border-top-right-radius: 25px; border-top-left-radius: 25px; padding: 1%;">Next
+									Month Lunch PLan</div>
+								<div class="mb-3">
+									<div th:text="'Name - '+${staff.name}"
+										style="display: flex; justify-content: center;"></div>
+									<div th:text="'Staff ID - '+${staff.id}"
+										style="display: flex; justify-content: center;"></div>
+									<div th:text="'Division - '+${staff.division}"
+										style="display: flex; justify-content: center;"></div>
+									<div th:text="'Department - '+${staff.department}"
+										style="display: flex; justify-content: center;"></div>
+									<div th:text="'Team - '+${staff.team}"
+										style="display: flex; justify-content: center; border-bottom: 1px solid black;"></div>
+
+									<div
+										style="margin-top: 5%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+
+										<ul style="color: #000"
+											class="row d-flex justify-content-start text-center m-0 py-2">
+											<li class="col-2 me-2"><label class="text-uppercase">Mon</label></li>
+											<li class="col-2 me-2"><label class="text-uppercase">Tue</label></li>
+											<li class="col-2 me-2"><label class="text-uppercase">Wed</label></li>
+											<li class="col-2 me-2"><label class="text-uppercase">Thu</label></li>
+											<li class="col-2"><label class="text-uppercase">Fri</label></li>
+											<li class="row col-2 px-3 mx-1 my-2 text-center"
+												th:each="list : ${list}"><input type="checkbox"
+												th:class="${list} + 'checkbox' " th:id="${list}" name="list"
+												th:value="${list}" /> <label th:for="${list}"
+												th:class="${list}" th:text="${list}"></label></li>
+										</ul>
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Update</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+
+		
 	</div>
 
 	<!-- Modal -->
 
 
-	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-		data-bs-keyboard="false" tabindex="-1"
-		aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-
-			<form th:action="@{register_by_month}" class="modal-content">
-
-				<div class="modal-body">
-					<div style="width: 100%; display: flex; justify-content: center;"
-						class="mb-5">
-						<div
-							style="width: 100%; background-color: lightblue; display: flex; flex-direction: column; align-items: center; border-radius: 25px; padding-bottom: 1%;">
-							<div
-								style="font-size: large; font-weight: 500; background: #14A44D;color:#fff; width: 100%; display: flex; align-items: center; justify-content: center; border-top-right-radius: 25px; border-top-left-radius: 25px; padding: 1%;">Next Month Lunch PLan
-								</div>
-							<div class="mb-3">
-								<div th:text="'Name - '+${staff.name}"
-									style="display: flex; justify-content: center;"></div>
-								<div th:text="'Staff ID - '+${staff.id}"
-									style="display: flex; justify-content: center;"></div>
-								<div th:text="'Division - '+${staff.division}"
-									style="display: flex; justify-content: center;"></div>
-								<div th:text="'Department - '+${staff.department}"
-									style="display: flex; justify-content: center;"></div>
-								<div th:text="'Team - '+${staff.team}"
-									style="display: flex; justify-content: center; border-bottom: 1px solid black;"></div>
-
-								<div
-									style="margin-top: 5%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-
-									<ul style="color: #000"
-										class="row d-flex justify-content-start text-center m-0 py-2">
-										<li class="col-2 me-2"><label class="text-uppercase">Mon</label></li>
-										<li class="col-2 me-2"><label class="text-uppercase">Tue</label></li>
-										<li class="col-2 me-2"><label class="text-uppercase">Wed</label></li>
-										<li class="col-2 me-2"><label class="text-uppercase">Thu</label></li>
-										<li class="col-2"><label class="text-uppercase">Fri</label></li>
-										<li class="row col-2 px-3 mx-1 my-2 text-center"
-											th:each="list : ${list}"><input type="checkbox"
-											th:class="${list} + 'checkbox' " th:id="${list}" name="list"
-											th:value="${list}" /> <label th:for="${list}"
-											th:class="${list}" th:text="${list}"></label></li>
-									</ul>
-								</div>
 
 
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">Update</button>
-				</div>
-			</form>
-		</div>
-	</div>
 
 
 	<script th:inline="javascript">

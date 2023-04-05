@@ -20,13 +20,13 @@
     <style>
         /* Custom CSS styles */
         body {
-            background-color: #eee;
+            background-color: #ebf5fb;
         }
 
         .card {
             margin-top: 100px;
             border: none;
-            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 2px 25px rgb(16, 176, 230);
         }
 
         .card-header {
@@ -153,17 +153,10 @@
       <!-- END NAVBAR -->
   </header>
 
-    <div class="container">
-        <!-- start title -->
-        <div class="row text-center mt-2 mb-3">
-            <div class="col">
-                <h3 class="titles text-dark">Register</h3>
-            </div>
-        </div>
-        <!-- end title -->
+    <div class="container mt-4">
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
+            <div class="col-md-12 col-lg-6  d-flex  justify-content-center">
+                <div class="card col-lg-10">
                     <div class="card-header">
                         <h1 class="card-title"> User Update  Form </h1>
                     </div>
@@ -189,8 +182,10 @@
 							    <label for="confirmPassword">Confirm New Password</label>
 							    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required th:attr="readonly=${status}">
 							  </div>
-							  <button type="button" th:onclick="window.location.href='/operator/account'" class="btn btn-danger btn-block col-3 me-3">Cancel</button>
+							  <div class="d-flex justify-content-between">
+							  		<button type="button" th:onclick="window.location.href='/operator/account'" class="btn btn-danger btn-block col-3 me-3">Cancel</button>
 							  <button type="submit" class="btn btn-primary updatePasswordBtn" disabled>Update Password</button>
+							  </div>
 						</form>
                     </div>
                 </div>

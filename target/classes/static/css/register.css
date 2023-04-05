@@ -12,6 +12,11 @@ body{
     flex-direction: column;
     background-color: #ebf5fb;
 }
+
+li{
+	list-style-type:none;
+}
+
 .div2{
     display: flex;
     align-items: center;

@@ -1,16 +1,5 @@
-ul {
-    margin: 0;
-    clear: both;
-  }
-  
-  li{
-    list-style-type: none;
-    list-style-position: outside;
-    text-align:center;
-  }
-  
-  input[type="checkbox"]:not(:checked), 
-  input[type="checkbox"]:checked {
+input[type="checkbox"]:not(:checked), 
+input[type="checkbox"]:checked {
     position: absolute;
     left: -9999%;
   }
@@ -24,14 +13,7 @@ ul {
     color: white;
     background-color: green;
   }
-  
-/*   disable-checkbox{
-  background-color: #c0c0c0 !important;
-  }
-  
-  #00 + label{
-	background-color: #c0c0c0 !important;
- } */
+
   
   input[type="checkbox"]:checked + label {
     border: 1px solid gold;

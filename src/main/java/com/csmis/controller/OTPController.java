@@ -39,9 +39,7 @@ public class OTPController {
 
 	@GetMapping("/showPage")
 	public String showMyLoginPage(Model model, Authentication auth) {
-		Staff loginStaff = staffService.findByID(auth.getName());
 
-		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("email", "");
 		model.addAttribute("status", true);
 		model.addAttribute("pass", true);

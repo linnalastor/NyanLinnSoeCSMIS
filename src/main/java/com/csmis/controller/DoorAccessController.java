@@ -73,12 +73,21 @@ public class DoorAccessController {
 		LocalDate today = LocalDate.now();
 
 		//if the selected date hasn't reached yet, go back to dooraccess upload file page with error message
-		if(date.getYear()>today.getYear() && date.getMonthValue()>today.getMonthValue() && date.getDayOfMonth()>today.getDayOfMonth() ) {
+		if(date.getYear()>=today.getYear() && date.getMonthValue()>=today.getMonthValue() && date.getDayOfMonth()>today.getDayOfMonth() ) {
 			redirectAttributes.addFlashAttribute("message", "Selected date hasn't reached yet!");
 			redirectAttributes.addFlashAttribute("status", "true");
 			return "redirect:/admin/door_access";
 		}else{
-
+			HeadCount  check =null;
+			try {
+				check = headCountService.find_by_id(""+date);
+				System.out.println(check);
+			} catch (Exception e) {
+			}
+			if(check!=null) {
+				redirectAttributes.addFlashAttribute("message", "Database was overwrite by imported date!!");
+				redirectAttributes.addFlashAttribute("status", "true");
+			}
 			// create file for incoming xlsx file
 			File tempFile = null;
 			try {
@@ -95,7 +104,7 @@ public class DoorAccessController {
 	}
 
 	@GetMapping("/door_access/import")
-	public String upload(Model model, @RequestParam("date") String dateString, RedirectAttributes redirectAttributes)
+	public String upload(Model model, @RequestParam("date") String dateString, RedirectAttributes redirectAttributes,@ModelAttribute(name = "message") String message,@ModelAttribute(name = "status") String status)
 			throws IOException, ParseException {
 		String[] dateArray = dateString.split(",");
 		dateString = dateArray[0];
@@ -103,7 +112,7 @@ public class DoorAccessController {
 		File tempFile = (File) model.getAttribute("file");
 
 		LocalDate date = LocalDate.parse(dateString);
-
+		
 		List<String> door_access_list = new ArrayList<>();
 		List<String> staff_list = new ArrayList<>();
 		List<Lunch_Report> lunch_report = new ArrayList<>();
@@ -165,6 +174,9 @@ public class DoorAccessController {
 		dailyInvoice.setCompanyCost(cost_list.get(0).getCost());
 		// save today invoice
 		invoiceService.save(dailyInvoice);
+		
+		redirectAttributes.addFlashAttribute("message", message);
+		redirectAttributes.addFlashAttribute("status", status);
 
 		return "redirect:/admin/door_access";
 	}
