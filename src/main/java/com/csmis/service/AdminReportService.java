@@ -341,6 +341,7 @@ public class AdminReportService {
 
 		// get this week days
 		List<String> dates = dateService.getMonthlyDates(date);
+		dates.remove("00");
 		List<Integer> indexs = new ArrayList<>();
 
 		for (int i = 0; i < dates.size(); i++) {

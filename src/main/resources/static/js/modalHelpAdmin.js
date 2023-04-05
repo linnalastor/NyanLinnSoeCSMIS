@@ -21,7 +21,7 @@ function openModal() {
                             </a>
                             <div class="collapse" id="faq-17">
                               <div class="card card-body border-0 p-0">
-                            	 <p><strong>In Door Access File</strong>  contains <b>Choose File Button</b>,<b>Date input field</b> and <b>Import Button</b>.Choose File button is to choose file that is .csv or .xlsx.Date inpute field is to choose the date but date must not be imported dates and upcoming dates.Import Button is to import chose file and selected date.</p>
+                            	 <p><strong>In Door Access File</strong>  contains <b>Choose File Button</b>,<b>Date input field</b> and <b>Import Button</b>.<br> - Choose File button is to choose file that is .csv or .xlsx.<br> - Date inpute field is to choose the date but date must not be imported dates and upcoming dates.<br> - Import Button is to import chose file and selected date.</p>
 							</div>
                       	
                               </div>
@@ -41,41 +41,35 @@ function openModal() {
                               <div class="card card-body border-0 p-0">
                                 <p><strong>In Invoice</strong> contains <b>Create Voucher</b>,<b>Paid Voucher Lists </b>and <b>Details Invoice</b>.</p>
                                 
-                                <div class="accordion" id="accordionExample">
+                                <div class="accordion accordion-flush" id="accordionFlushExample">
   <div class="accordion-item">
-    <h2 class="accordion-header" id="headingOne">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        <strong>Create Voucher</strong>
+    <h2 class="accordion-header" id="flush-headingOne">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+        Create Voucher
       </button>
     </h2>
-    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        <b>In Create Voucher</b> contains create button date input field for payment date, dropdown list for catering service name , dropdown list for payment methods ,dropdown lists for cashier ,dropdown lists for receiver and dropdown lists for approver.Create Button can create voucher for last unpaid week.Payment Date input field for created date which cannnot be past date.Catering service name dropdown list input field is to choose the catering service name.Payment Method dropdown list input field is to choose the payment methods.Cashier dropdown list input field is to choose the cashier name.Receiver dropdown list input field is to choose the receiver name.Approver  dropdown list input field is to choose the approver name.
-      </div>
+    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body"><b>In Create Voucher</b> contains create button date input field for payment date, dropdown list for catering service name , dropdown list for payment methods ,dropdown lists for cashier ,dropdown lists for receiver and dropdown lists for approver.<br> - Create Button can create voucher for last unpaid week.<br> - Payment Date input field for created date which cannnot be past date.<br> - Catering service name dropdown list input field is to choose the catering service name.<br> - Payment Method dropdown list input field is to choose the payment methods.<br> - Cashier dropdown list input field is to choose the cashier name.<br> - Receiver dropdown list input field is to choose the receiver name.<br> - Approver  dropdown list input field is to choose the approver name.</div>
     </div>
   </div>
   <div class="accordion-item">
-    <h2 class="accordion-header" id="headingTwo">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        <strong>Paid Voucher Lists</strong>
+    <h2 class="accordion-header" id="flush-headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+        Paid Voucher Lists
       </button>
     </h2>
-    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        <strong>In Paid Voucher Lists</strong> contains search input field.It can search everything u desire.
-      </div>
+    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body"><strong>In Paid Voucher Lists</strong> contains search input field.It can search everything u desire.</div>
     </div>
   </div>
   <div class="accordion-item">
-    <h2 class="accordion-header" id="headingThree">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-        <strong>Details Invoice</strong>
+    <h2 class="accordion-header" id="flush-headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+        Details Invoice
       </button>
     </h2>
-    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        <strong>In Details Invoice</strong> contains two search button.First search button is to search detail invoice by voucher number.Second search button is to search details invoice between two dates. 
-      </div>
+    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body"><strong>In Details Invoice</strong> contains two search button.<br> - First search button is to search detail invoice by voucher number.<br> - Second search button is to search details invoice between two dates.</div>
     </div>
   </div>
 </div>
@@ -95,7 +89,7 @@ function openModal() {
                             </a>
                             <div class="collapse" id="faq-19">
                               <div class="card card-body border-0 p-0">
-                                <p><strong>In Menu</strong> contains <b>Choose File Button</b> and <b>Import Menu Button</b>.Choose File button is to choose the file that must be <b>.pdf</b>.Import Menu Button is to import the chose file.</p>
+                                <p><strong>In Menu</strong> contains <b>Choose File Button</b> and <b>Import Menu Button</b>.<br> - Choose File button is to choose the file that must be <b>.pdf</b>.<br> - Import Menu Button is to import the chose file.</p>
                               </div>
                             </div>
                       
@@ -111,7 +105,7 @@ function openModal() {
                             </a>
                             <div class="collapse" id="faq-20">
                               <div class="card card-body border-0 p-0">
-                                <p><strong>In Today Lunch Registered List</strong> contains <b>Search Button</b> and <b>Avoid Meat Lists</b>.Search Button can be serach today register list.Avoid Meat Lists shows avoid meat lists.</p>
+                                <p><strong>In Today Lunch Registered List</strong> contains <b>Search Button</b> and <b>Avoid Meat Lists</b>.<br> - Search Button can be serach today register list.<br> - Avoid Meat Lists shows avoid meat lists.</p>
                                 </div>
                             </div>
                       
@@ -137,7 +131,7 @@ function openModal() {
       </button>
     </h2>
     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body"><b>In Weekly</b> contains Search Button and Update Button.Search Button can search everything u desire.Update Button is appear when u clicked humbuger button.When u click Update Button,modal pop up is appear and can update green(eat) or red(not eat) per week.</div>
+      <div class="accordion-body"><b>In Weekly</b> contains Search Button and Update Button.<br> - Search Button can search everything u desire.<br> - Update Button is appear when u clicked humbuger button.When u click Update Button,modal pop up is appear and can update green(eat) or red(not eat) per week.</div>
     </div>
   </div>
   <div class="accordion-item">
@@ -147,7 +141,7 @@ function openModal() {
       </button>
     </h2>
     <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body"><b>In Monthly</b> contains Search Button and Update Button.Search Button can search everything u desire.Update Button is appear when u clicked humbuger button.When u click Update Button,modal pop up is appear and can update green(eat) or red(not eat) per month.</div>
+      <div class="accordion-body"><b>In Monthly</b> contains Search Button and Update Button.<br> - Search Button can search everything u desire.<br> - Update Button is appear when u clicked humbuger button.When u click Update Button,modal pop up is appear and can update green(eat) or red(not eat) per month.</div>
     </div>
   </div>
   </div>
@@ -177,7 +171,7 @@ function openModal() {
       </button>
     </h2>
     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body"><b>In Yesterday</b> contains Search Button and Update Button.Search Button can search everything u desire.Update Button is appear when u clicked humbuger button.When u click Update Button,modal pop up is appear and can update green(eat) or red(not eat) per week.</div>
+      <div class="accordion-body"><b>In Yesterday</b> contains Search Button and Update Button.<br> - Search Button can search everything u desire.<br> - Update Button is appear when u clicked humbuger button.When u click Update Button,modal pop up is appear and can update green(eat) or red(not eat) per week.</div>
     </div>
   </div>
   <div class="accordion-item">
@@ -187,7 +181,7 @@ function openModal() {
       </button>
     </h2>
     <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body"><b>In Last Week</b> contains Search Button and Update Button.Search Button can search everything u desire.Update Button is appear when u clicked humbuger button.When u click Update Button,modal pop up is appear and can update green(eat) or red(not eat) per month.</div>
+      <div class="accordion-body"><b>In Last Week</b> contains Search Button and Update Button.<br> - Search Button can search everything u desire.<br> - Update Button is appear when u clicked humbuger button.When u click Update Button,modal pop up is appear and can update green(eat) or red(not eat) per month.</div>
     </div>
   </div>
    <div class="accordion-item">
@@ -197,7 +191,7 @@ function openModal() {
       </button>
     </h2>
     <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body"><b>In Yesterday</b> contains Search Button and Update Button.Search Button can search everything u desire.Update Button is appear when u clicked humbuger button.When u click Update Button,modal pop up is appear and can update green(eat) or red(not eat) per week.</div>
+      <div class="accordion-body"><b>In Yesterday</b> contains Search Button and Update Button.<br> - Search Button can search everything u desire.<br> - Update Button is appear when u clicked humbuger button.When u click Update Button,modal pop up is appear and can update green(eat) or red(not eat) per week.</div>
     </div>
   </div>
  </div>

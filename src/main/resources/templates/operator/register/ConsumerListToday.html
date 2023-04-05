@@ -39,7 +39,7 @@
 							<div class="pb-3 mt-4 text-center borderbottoms">
 								<a href="" class="btn btn-outline-light rounded-circle mb-1"><i
 									class="fa-solid fa-user fs-3"></i></a> <a href="#"
-									class="text-white nav-link">Ms.July</a>
+									class="text-white nav-link" th:text="${userName}"></a>
 							</div>
 							<ul class="navbar-nav flex-column mt-4">
 								<li class="navbar-item"><a th:href="@{/operator/dashboard}"
@@ -51,6 +51,10 @@
 								<li class="navbar-item"><a
 									th:href="@{/operator/lunch_plan/by_month}"
 									class="nav-link text-white px-2 py-2 mb-2 currents"><i
+										class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Today Lunch Plan</a></li>
+								<li class="navbar-item"><a
+									th:href="@{/operator/lunch_plan/by_month}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
 										class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Lunch Plan</a></li>
 								<li class="navbar-item"><a
 									th:href="@{/operator/report/yesterday}"
@@ -58,15 +62,16 @@
 										class="fa-solid fa-money-check fa-lg me-3"></i>Report</a></li>
 								<li class="navbar-item"><a th:href="@{/operator/account}"
 									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-										class="fa-solid fa-clipboard-user fa-lg me-3"></i>Account
+										class="fa-solid fa-clipboard-user fa-lg me-3"></i></i>Account
 										Status</a></li>
-
 								<li class="navbar-item"><a href="#"
 									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
 										class="fas fa-wrench fa-lg me-3"></i>About As</a></li>
 								<li class="navbar-item"><a href="#"
-									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-										class="fas fa-sign-out-alt fa-lg me-3"></i>Logout</a></li>
+									onclick="event.preventDefault(); document.getElementById('logout_form').submit();"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"> <i
+										class="fas fa-sign-out-alt fa-lg me-3"></i>Logout
+								</a></li>
 							</ul>
 						</div>
 
@@ -117,41 +122,38 @@
 		</nav>
 		<!-- END NAVBAR -->
 	</header>
-	<div class="div1 mt-5 pt-5">
+	<!-- Home button -->
+	<div class="d-flex justify-content-end">
+		<a href="/operator/dashboard" class=" pt-5"><i class="fa-solid fa-house-chimney mt-3 mx-3 fs-2"></i></a>
+	</div>
+	
+	<div class="div1 pt-5 mt-5">
+	<!-- Home button -->
+	<div class="d-flex  align-self-end me-2">
+		<a href="/operator/dashboard"><i class="fa-solid fa-house-chimney mt-3 mx-5 fs-2"></i></a>
+	</div>
 		<!-- -->
 		<!-- start title -->
-		<div class="row text-center mt-2 mb-3">
+		<div class="row text-center pt-5">
 			<div class="col">
 				<h3 class="titles text-dark">Register</h3>
 			</div>
 		</div>
-		<!-- end title -->
-		<div class="div2 mb-3">
-			<div>
-				<div class="div4"
-					th:onclick="window.location.href='by_month'">
-					Monthly</div>
-				<div class="div4"
-					th:onclick="window.location.href='by_week'">
-					Weekly</div>
-				<div class="div3"
-					th:onclick="window.location.href='today'">Today</div>
-			</div>
-		</div>
-		<!-- div2 close -->
 
-		<div style="font-size: x-large;">Date - 01/3/2023</div>
+		<div style="font-size: x-large;" class="mb-2"><h4>Today</h4></div>
 		<div
 			style="width: 30%; background-color: lightblue; display: flex; flex-direction: column; align-items: center; border-radius: 25px; padding-bottom: 1%;">
-			<div
+			<div class="py-2 mb-2"
 				style="font-size: large; font-weight: 500; background: #14A44D; width: 100%; display: flex; align-items: center; justify-content: center; border-top-right-radius: 25px; border-top-left-radius: 25px; padding-top: 1%;">Account
 				Status</div>
-			<div>
-				<div>Name - Nyan Linn Soe</div>
-				<div>Staff ID - 100001</div>
-				<div>Division - DIV 1</div>
-				<div>Department - Department 17</div>
-				<div>Team - Bombs</div>
+			<div
+					style="display: flex; justify-content: center; flex-direction: column; text-align: center; margin-top: 1%;">
+					<div th:text="'Name - '+${staff.name}"></div>
+					<div th:text="'Staff ID - '+${staff.id}"></div>
+					<div th:text="'Division - '+${staff.division}"></div>
+					<div th:text="'Department - '+${staff.department}"></div>
+					<div th:text="'Team - '+${staff.team}"></div>
+					<div th:text="${status}" class="py-2 px-4 mt-2" style="background-color:#14A44D;"></div>
 			</div>
 		</div>
 

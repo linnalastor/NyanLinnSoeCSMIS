@@ -33,7 +33,7 @@ public class Lunch_Plan_Register_Controller {
 	StaffServiceInterface staffService;
 
 	@Autowired
-	Operator_Register_Service op;
+	Operator_Register_Service operatorRegisterService;
 
 	@Autowired
 	Prefix_ID_Service prefix_ID_Service;
@@ -106,12 +106,12 @@ public class Lunch_Plan_Register_Controller {
 		ConsumerList consumerList = new ConsumerList();
 
 		// get confirmation of user updated dates
-		String confirmation = op.getMonthlyConfirmation(list);
+		String confirmation = operatorRegisterService.getMonthlyConfirmation(list);
 
 		// set consumer and save
 		consumerList.setConfirmation(confirmation);
-		consumerList.setConsumer_information_id(op.get_Month_Year_Monthly(1) + "|" + auth.getName());
-		op.saveConsumerMonthlyRegistration(consumerList);
+		consumerList.setConsumer_information_id(operatorRegisterService.get_Month_Year_Monthly(1) + "|" + auth.getName());
+		operatorRegisterService.saveConsumerMonthlyRegistration(consumerList);
 
 		return "redirect:/operator/lunch_plan/by_month";
 	}
@@ -147,7 +147,7 @@ public class Lunch_Plan_Register_Controller {
 		} catch (Exception e1) { }
 
 		// get this week days
-		List<String> dates = op.getWeeklyDate();
+		List<String> dates = operatorRegisterService.getWeeklyDate();
 
 		// for model
 		Integer month = Integer.parseInt(month_year.substring(0, 2));
@@ -229,25 +229,44 @@ public class Lunch_Plan_Register_Controller {
 				i++;
 			}
 
-			consumerList.setConfirmation(op.getWeeklConfirmation(this_month,uncheckedList,thisMonth_id));
+			consumerList.setConfirmation(operatorRegisterService.getWeeklConfirmation(this_month,uncheckedList,thisMonth_id));
 			consumerList.setConsumer_information_id(thisMonth_id);
-			op.saveConsumerMonthlyRegistration(consumerList);
+			operatorRegisterService.saveConsumerMonthlyRegistration(consumerList);
 
-			consumerList.setConfirmation(op.getWeeklConfirmation(next_month,uncheckedList,nextMonth_id));
+			consumerList.setConfirmation(operatorRegisterService.getWeeklConfirmation(next_month,uncheckedList,nextMonth_id));
 			consumerList.setConsumer_information_id(thisMonth_id);
-			op.saveConsumerMonthlyRegistration(consumerList);
+			operatorRegisterService.saveConsumerMonthlyRegistration(consumerList);
 		}else if(checker){
-			consumerList.setConfirmation(op.getWeeklConfirmation(check_list,uncheckedList,nextMonth_id));
+			consumerList.setConfirmation(operatorRegisterService.getWeeklConfirmation(check_list,uncheckedList,nextMonth_id));
 			consumerList.setConsumer_information_id(nextMonth_id);
-			op.saveConsumerMonthlyRegistration(consumerList);
+			operatorRegisterService.saveConsumerMonthlyRegistration(consumerList);
 		}
 			else {
-			consumerList.setConfirmation(op.getWeeklConfirmation(check_list,uncheckedList,thisMonth_id));
+			consumerList.setConfirmation(operatorRegisterService.getWeeklConfirmation(check_list,uncheckedList,thisMonth_id));
 			consumerList.setConsumer_information_id(thisMonth_id);
-			op.saveConsumerMonthlyRegistration(consumerList);
+			operatorRegisterService.saveConsumerMonthlyRegistration(consumerList);
 			}
 
 		return "redirect:/operator/lunch_plan/by_week";
+	}
+
+	@GetMapping("/lunch_plan/today")
+	public String ConsumerListToday(Model theModel, Authentication auth) {
+		LocalDate date = LocalDate.now();
+		String month_year = prefix_ID_Service.getPrefix_ID(date);
+		String id = month_year+"|"+auth.getName();
+		ConsumerList consumer = null;
+		String status = "";
+		try {
+			consumer = operatorRegisterService.getLunchRegistration_by_ID(id);
+			operatorRegisterService.getTodayStatus(consumer.getConfirmation());
+		} catch (Exception e) {	}
+		if(status =="") status = "Your Lunch Register status is not active";
+		Staff staff = staffService.findByID(auth.getName());
+		theModel.addAttribute("status",status);
+		theModel.addAttribute("userName",staff.getName());
+		theModel.addAttribute("staff", staff);
+		return "operator/register/ConsumerListToday";
 	}
 
 }

@@ -41,13 +41,15 @@ public class AvoidMeatController {
 		for(StaffDetails staffDetail : staffDetailList) {
 			String description = staffDetail.getDescription();
 			String id =staffDetail.getId();
-			if(!description.equals(null)&& !description.equals("")) {
-				descriptions.add(description);
-				staffID.add(id);
-				List<String> list = new ArrayList<>();
-				list.add(id);
-				list.add(description);
-				staffDescription_list.add(list);
+			if(description!=null) {
+				if(!description.equals("")) {
+					descriptions.add(description);
+					staffID.add(id);
+					List<String> list = new ArrayList<>();
+					list.add(id);
+					list.add(description);
+					staffDescription_list.add(list);
+				}
 			}
 		}
 		for(Avoidmeat avoidMeat : avoidMeatlist) {

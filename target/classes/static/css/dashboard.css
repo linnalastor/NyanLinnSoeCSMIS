@@ -148,3 +148,7 @@ body{
 
     line-height: 130px;
 }
+
+.modelHover:hover{
+	cursor: pointer;
+}

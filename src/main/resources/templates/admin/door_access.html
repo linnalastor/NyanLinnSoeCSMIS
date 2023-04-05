@@ -9,6 +9,9 @@
 <link th:href="@{/images/datlogo.png}" rel="icon" type="image/png"
 	sizes="18*18" />
 
+<!-- Modle help -->
+<link rel="stylesheet" th:href="@{/css/modalHelp.css}">
+<script th:src="@{/js/modalHelpAdmin.js}"></script>
 
 
 <!-- bootstrap css1 js1 -->
@@ -52,8 +55,8 @@
 					<div class="row">
 
 						<!-- Start Left Sidebar -->
-						<div id="nav"
-							class="col-xl-2 col-lg-3 col-md-4 collapse sidebars"  style="margin-bottom:0px;">
+						<div id="nav" class="col-xl-2 col-lg-3 col-md-4 collapse sidebars"
+							style="margin-bottom: 0px;">
 
 							<div class="pb-3 mt-4 text-center borderbottoms">
 								<a href="" class="btn btn-outline-light rounded-circle mb-1"><i
@@ -88,7 +91,8 @@
 										class="fa-solid fa-utensils fa-lg ps-1 me-3"></i>Menu</a></li>
 								<li class="navbar-item"><a th:href="@{/operator/dashboard}"
 									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
-										class="fa-solid fa-user fa-lg ps-1 me-3"></i>Operator Dashboard</a></li>
+										class="fa-solid fa-user fa-lg ps-1 me-3"></i>Operator
+										Dashboard</a></li>
 								<li class="navbar-item"><a th:href="@{/admin/staff_list}"
 									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
 										class="fa-solid fa-users-line fa-lg me-3"></i>Staff Management</a></li>
@@ -138,8 +142,8 @@
 									</div>
 
 									<div class=" d-flex align-items-center">
-										<a href="" class="nav-link fs-4"><i
-											class="fa-solid fa-circle-question fa-lg me-1 qicons"></i><span
+										<a class="nav-link fs-4 modelHover" onclick="openModal()"><i
+											class="fa-solid fa-circle-question fa-lg me-3 qicons"></i><span
 											class="me-2">Help</span></a>
 									</div>
 								</div>
@@ -159,9 +163,10 @@
 	</header>
 
 	<div class="d-flex justify-content-end">
-		<a href="/admin/dashboard" class=" pt-5"><i class="fa-solid fa-house-chimney mt-3 mx-3 fs-2"></i></a>
+		<a href="/admin/dashboard" class=" pt-5"><i
+			class="fa-solid fa-house-chimney mt-3 mx-3 fs-2"></i></a>
 	</div>
-	
+
 	<!-- start title -->
 	<div class="container">
 		<div class="row text-center mb-4">
@@ -174,19 +179,56 @@
 	<div class="d-flex w-100 px-5 justify-content-center mb-3">
 		<form th:action="@{/admin/door_access/validation}" method="post"
 			enctype="multipart/form-data" class="d-flex">
-			<div><input class="form-control" type="file" name="file" id="invoiceReceiveBy_file" accept=".xlsx" required></div> 
+			<div>
+				<input class="form-control" type="file" name="file"
+					id="invoiceReceiveBy_file" accept=".xlsx" required>
+			</div>
 			<div>
 				<label for="dateInput"
-					 style="text-align:center;height:100%;line-height:2.2em;"
-				>Select a date:
-				</label> 
+					style="text-align: center; height: 100%; line-height: 2.2em;">Select
+					a date: </label>
 			</div>
-			
-			<div><input class="form-control" type="date" name="date" id="dateInput" required /></div>
-			<div><button class="btn btn-info btn-block" onclick="startLoading()" type="submit">Import</button></div>
-			
+
+			<div>
+				<input class="form-control" type="date" name="date" id="dateInput"
+					required />
+			</div>
+			<div>
+				<button class="btn btn-info btn-block ms-2 px-4"
+					onclick="startLoading()" type="submit">Import</button>
+			</div>
+			<script>
+				// get the date input element
+				var dateInput = document.getElementById("dateInput");
+
+				// add an event listener for when the date is changed
+				dateInput.addEventListener("change",
+					function() {
+						// get the selected date
+						var selectedDate = new Date(this.value);
+
+						// check if the selected date is a weekend day (Saturday or Sunday)
+						if (selectedDate.getDay() == 6 || selectedDate.getDay() == 0) {
+							this.value = "";
+							}
+					});
+			</script>
+
+
 		</form>
-		<script> function startLoading() { Notiflix.Loading.dots('Loading.....'); } </script>
+		<script>
+			function startLoading() {
+				var dateInput = document.getElementById("dateInput").value;
+				var file = document.getElementById("invoiceReceiveBy_file").value;
+				if(file!=""){
+					if(dateInput!=""){
+						console.log("this is dateInput=>"+dateInput+"<=blah");
+						console.log("this is file=>"+file+"<=file");
+						Notiflix.Loading.dots('Loading.....');
+					}
+				}
+			}
+		</script>
 	</div>
 	<!--display error if any-->
 	<div class="alert alert-danger" role="alert" th:if="${!status}">

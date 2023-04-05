@@ -53,6 +53,10 @@
 										class="fa-solid fa-utensils fa-lg me-3"></i>Menu</a></li>
 								<li class="navbar-item"><a
 									th:href="@{/operator/lunch_plan/by_month}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Today Lunch Plan</a></li>
+								<li class="navbar-item"><a
+									th:href="@{/operator/lunch_plan/by_month}"
 									class="nav-link text-white px-2 py-2 mb-2 currents"><i
 										class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Lunch Plan</a></li>
 								<li class="navbar-item"><a
@@ -121,12 +125,17 @@
 		<!-- END NAVBAR -->
 	</header>
 
+
 	<div class="div1 mt-5 pt-5">
+	<!-- Home button -->
+	<div class="d-flex  align-self-end me-2">
+		<a href="/operator/dashboard"><i class="fa-solid fa-house-chimney mt-3 mx-5 fs-2"></i></a>
+	</div>
 
 		<!-- start title -->
-		<div class="row text-center mt-2 mb-3">
+		<div class="row text-center mb-3">
 			<div class="col">
-				<h3 class="titles text-dark">View Page</h3>
+				<h3 class="titles text-dark">Report</h3>
 			</div>
 		</div>
 		<!-- end title -->

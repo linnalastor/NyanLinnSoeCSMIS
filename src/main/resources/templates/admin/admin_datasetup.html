@@ -19,6 +19,10 @@
 <!-- font awesome -->
 <link rel="stylesheet" href="https://kit.fontawesome.com/e0faeaf50f.css"
 	crossorigin="anonymous">
+	
+<!-- Modle Help -->	
+<link rel="stylesheet" th:href="@{/css/modalHelp.css}">
+<script th:src="@{/js/modalHelpAdmin.js}"></script>
 
 </head>
 <body>
@@ -117,8 +121,8 @@
 									</div>
 
 									<div class=" d-flex align-items-center">
-										<a href="" class="nav-link fs-4"><i
-											class="fa-solid fa-circle-question fa-lg me-1 qicons"></i><span
+										<a class="nav-link fs-4 modelHover" onclick="openModal()"><i
+											class="fa-solid fa-circle-question fa-lg me-3 qicons"></i><span
 											class="me-2">Help</span></a>
 									</div>
 								</div>

@@ -69,7 +69,6 @@ public class HolidayService implements HolidayServiceInterface {
 			if (thisdate.getMonthValue() == date.getMonthValue())
 				days.add("" + thisdate.getDayOfMonth());
 		}
-
 		return days;
 	}
 

@@ -396,5 +396,27 @@ public class Operator_Register_Service implements OperatorRegisterServiceInterfa
 		String s = month + "/" + today.getYear();
 		return s;
 	}
+	
+	public String getTodayStatus(String confirmation) {
+		LocalDate today = LocalDate.now();
+		String day = ""+today.getDayOfMonth();
+		String status = "";
+		int index = -1;
+		if(day.length()<2) day = "0"+day;
+		List<String> dateList = dateService.getMonthlyDates(today);
+		for(int i=0;i<dateList.size(); i++) {
+			if(dateList.get(i).equals(day)) {
+				index = i;
+				break;
+			}
+		}
+		if(index!=-1) {
+			char c = confirmation.charAt(index);
+			if(c=='x') status = "Your Lunch Register status is not active";
+			else if(c=='1') status = "Your Lunch Register status is active.";
+			else if(c=='h') status = "Today is holiday";
+		}
+		return status;
+	}
 
 }

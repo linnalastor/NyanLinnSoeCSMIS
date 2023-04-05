@@ -68,14 +68,6 @@ public class UserController {
 
 	// End Consumer ListWeekly
 
-	@GetMapping("/lunch_plan/today")
-	public String ConsumerListToday(Model theModel, Authentication auth) {
-		Staff loginStaff = staffService.findByID(auth.getName());
-
-		theModel.addAttribute("userName",loginStaff.getName());
-		return "operator/register/ConsumerListToday";
-	}
-
 	@GetMapping("/account")
 	public String account(Model theModel, Authentication auth) {
 

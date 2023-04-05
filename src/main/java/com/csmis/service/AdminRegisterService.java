@@ -17,6 +17,8 @@ import com.csmis.entity.ConsumerList;
 public class AdminRegisterService {
 
 	boolean isweekend;
+	@Autowired
+	DateService dateService;
 
 	ConsumerListRepository consumerListRepository;
 
@@ -32,21 +34,9 @@ public class AdminRegisterService {
 			LocalDate today = LocalDate.now();
 			int index = 0;
 
-			List<String> days = get_Monthly_Dates(0);
+			List<String> days = dateService.getMonthlyDates(today);
 
 			List<String> staff_id_list = new ArrayList<>();
-
-
-			// remove '00' from monthly_date
-			String target = "00";
-			Iterator<String> iter = days.iterator();
-			while (iter.hasNext()) {
-				String str = iter.next();
-				if (str.equals(target)) {
-					iter.remove();
-				}
-			}
-
 
 			String subString;
 			String staff_id;
@@ -67,10 +57,6 @@ public class AdminRegisterService {
 					}
 				}
 			}
-
-
-
-
 			return staff_id_list;
 
 		}

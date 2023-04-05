@@ -51,6 +51,10 @@
 								<li class="navbar-item"><a
 									th:href="@{/operator/lunch_plan/by_month}"
 									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
+										class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Today Lunch Plan</a></li>
+								<li class="navbar-item"><a
+									th:href="@{/operator/lunch_plan/by_month}"
+									class="nav-link text-white px-2 py-2 mb-2 sidebarlinks"><i
 										class="fa-solid fa-users-viewfinder fa-lg me-3"></i>Lunch Plan</a></li>
 								<li class="navbar-item"><a
 									th:href="@{/operator/report/yesterday}"
@@ -119,10 +123,13 @@
 		<!-- END NAVBAR -->
 	</header>
 
-
+	<!-- Home button -->
+	<div class="d-flex justify-content-end">
+		<a href="/welcome" class=" pt-5"><i class="fa-solid fa-house-chimney mt-3 mx-3 fs-2"></i></a>
+	</div>
 	<!-- START BODY CARD -->
 	<section
-		class="container-fluid d-flex justify-content-start flax-warp  pt-5 mt-5 mx-5 col-12 allcards">
+		class="container-fluid d-flex justify-content-start flax-warp mx-5 col-12 allcards">
 
 		<div class="card text-center col-3 me-5 my-3 cards mx-5"
 			th:onclick="window.location.href='/operator/menu'">
@@ -134,11 +141,20 @@
 						class="fa-solid fa-utensils fa-xl"></i></a>
 				</p>
 			</div>
-			<div class="card-footer text-muted d-flex justify-content-end">
-				<!-- <a href="" class="me-2"><i
-					class="fa-solid fa-arrow-trend-up fa-lg mx-2"></i></a> <a href=""><i
-					class="fa-solid fa-note-sticky fa-lg ms-2"></i></a> -->
+		</div>
 
+		<div class="card text-center col-3 me-5 my-3 cards"
+			th:onclick="window.location.href='/operator/lunch_plan/today'">
+			<div class="card-header text-uppercase cardheads">Today Lunch Plan</div>
+			<div class="card-body">
+				<p class="card-text cardbodys">
+
+					<a href="#" class="align-items-center"><i
+						class="fa-solid fa-users-viewfinder fa-xl"></i></a>
+				</p>
+			</div>
+			<div class="card-footer text-muted d-flex justify-content-end">
+				
 			</div>
 		</div>
 
@@ -157,7 +173,7 @@
 			</div>
 		</div>
 
-		<div class="card text-center col-3 me-5 my-3 cards"
+		<div class="card text-center col-3 me-5 my-3 cards mx-5"
 			th:onclick="window.location.href='/operator/report/yesterday'">
 			<div class="card-header text-uppercase cardheads">Report</div>
 			<div class="card-body">
@@ -172,7 +188,7 @@
 			</div>
 		</div>
 
-		<div class="card text-center col-3 me-5 my-3 cards mx-5"
+		<div class="card text-center col-3 me-5 my-3 cards"
 			th:onclick="window.location.href='/operator/account'">
 			<div class="card-header text-uppercase cardheads">Account
 				Status</div>

@@ -18,8 +18,10 @@ import com.csmis.entity.ConsumerList;
 import com.csmis.entity.Staff;
 import com.csmis.service.AdminConsumerListService;
 import com.csmis.service.AdminRegisterService;
+import com.csmis.service.DateService;
 import com.csmis.service.HolidayService;
 import com.csmis.service.Operator_Register_Service;
+import com.csmis.service.Prefix_ID_Service;
 import com.csmis.service.StaffService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -41,13 +43,17 @@ public class Admin_Register_Controller {
 	AdminRegisterService adminRegisterService;
 	@Autowired
 	HolidayService holidayService;
+	@Autowired
+	DateService dateService;
+	@Autowired
+	Prefix_ID_Service prefix_id_service;
 
 	// start consumer list today
 	@GetMapping("/consumer_list/today")
 	public String consumerToday(@RequestParam(name = "search", required = false) String search, Model theModel,Authentication auth) {
 
 		// get today date
-		LocalDate today = LocalDate.now();
+		LocalDate today = LocalDate.now().plusDays(1);
 
 		// Staff Lists
 		List<Staff> staffList = new ArrayList<>();
@@ -56,7 +62,7 @@ public class Admin_Register_Controller {
 		List<String> staffConfirmation = new ArrayList<>();
 		int count = 0;
 
-		String month_year = op.get_Month_Year_Weekly(count);
+		String month_year = prefix_id_service.getPrefix_ID(today);
 		String year = month_year.substring(3);
 
 		// consumer lists
@@ -312,16 +318,18 @@ public class Admin_Register_Controller {
 
 		// for holiday
 		List<String> holidays = holidayService.getThisMonthHoliday(date);
+		for(int i=0;i<holidays.size();i++) {
+			if(holidays.get(i).length()<2) holidays.set(i, "0"+holidays.get(i));
+		}
 
 		// for mordel addAttribute
-		String month_year = op.get_Month_Year_Monthly(1);
+		String month_year = prefix_id_service.getPrefix_ID(date);
 		String year = month_year.substring(3);
 
 		// set staff already selected dates into selection
-		List<String> list = op.get_Monthly_Dates(1);
+		List<String> list = dateService.getMonthlyDates(date);
 		List<String> notRegisterDateList;
 
-//			List<String> holidayList = op.get_Monthly_Dates(1);
 
 //			search staff as you like
 		List<Staff> staffList = staffService.findAll();
@@ -383,10 +391,8 @@ public class Admin_Register_Controller {
 		theModel.addAttribute("userName",loginStaff.getName());
 		theModel.addAttribute("arrayJson", json);
 		theModel.addAttribute("jsonHoliday", jsonHoliday);
-
 		theModel.addAttribute("list", list);
 		theModel.addAttribute("staffList", staffList);
-//			search=null;
 		theModel.addAttribute("month", Month.of(Integer.parseInt(month_year.substring(0, 2))) + " / " + year);
 
 		return "admin/consumer-list/consumer_monthly";
@@ -395,7 +401,7 @@ public class Admin_Register_Controller {
 	@GetMapping("/consumer_list/monthly_register")
 	public String monthly_register_staffId(@RequestParam(value = "list", required = false) List<String> list,
 			@RequestParam("staffId") String id, Model theModel) {
-
+		LocalDate date = LocalDate.now().plusMonths(1);
 		ConsumerList consumerList = new ConsumerList();
 
 		// get confirmation of user updated dates
@@ -403,7 +409,7 @@ public class Admin_Register_Controller {
 
 		// set consumer and save
 		consumerList.setConfirmation(confirmation);
-		consumerList.setConsumer_information_id(op.get_Month_Year_Monthly(1) + "|" + id);
+		consumerList.setConsumer_information_id(prefix_id_service.getPrefix_ID(date) + "|" + id);
 		op.saveConsumerMonthlyRegistration(consumerList);
 
 		return "redirect:by_month";

@@ -33,6 +33,7 @@
 <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
 <link rel="stylesheet" th:href="@{/css/faq.css}" />
 <link rel="stylesheet" th:href="@{/css/register.css}" />
+<link rel="stylesheet" th:href="@{/css/modalHelp.css}">
 
 
 
@@ -140,8 +141,8 @@
 											Service</span>
 									</div>
 
-									<div class=" d-flex align-items-center">
-										<a href="" class="nav-link fs-4"><i
+									<div class="modelHover d-flex align-items-center" onclick="openModal()">
+										<a class="nav-link fs-4"><i
 											class="fa-solid fa-circle-question fa-lg me-1 qicons"></i> <span
 											class="me-2">Help</span> </a>
 									</div>
@@ -242,6 +243,13 @@
 		</div>
 	</div>
 
+	<form th:action="@{/logout}" id="logout_form" method="POST">
+		<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+	</form>
+	
+	
+	<script th:src="@{/js/modalHelpAdmin.js}"></script>
+	
 	<script src="https://kit.fontawesome.com/e0faeaf50f.js"
 		crossorigin="anonymous"></script>
 

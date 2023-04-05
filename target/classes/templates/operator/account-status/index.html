@@ -105,8 +105,7 @@
 											Service</span>
 									</div>
 
-									<div class=" d-flex align-items-center">
-									</div>
+									<div class=" d-flex align-items-center"></div>
 
 								</div>
 
@@ -125,14 +124,19 @@
 	</header>
 
 	<div
-		class="d-flex justify-content-between align-items-center flex-column pt-5 mt-5">
-
-		<div class="form-check form-switch align-self-end me-5">
-
-			<label class="form-check-label pt-1" for="flexSwitchCheckDefault"><i
-				class="fa-solid fa-bell fs-4 me-2"></i>Notifications</label> <input
-				class="form-check-input fs-4 ms-2 float-end" type="checkbox"
-				role="switch" th:checked="${noti}" id="toggle-switch">
+		class="d-flex justify-content-between align-items-center flex-column mt-3">
+		<div class="d-flex align-self-end">
+			<div class="form-check form-switch align-self-end me-5">
+				<label class="form-check-label pt-1" for="flexSwitchCheckDefault"><i
+					class="fa-solid fa-bell fs-4 me-2"></i>Notifications</label> <input
+					class="form-check-input fs-4 ms-2 float-end" type="checkbox"
+					role="switch" th:checked="${noti}" id="toggle-switch">
+			</div>
+				<!-- Home button -->
+				<div class="d-flex">
+					<a href="/operator/dashboard" class=" pt-5"><i
+						class="fa-solid fa-house-chimney mx-3 fs-2"></i></a>
+				</div>
 		</div>
 
 		<!-- start title -->
@@ -146,8 +150,8 @@
 		<div class="card mt-2" style="width: 30%;">
 			<div class="card-header">
 
-				<div
-					style="font-size: large; font-weight: 500; background: #14A44D; width: 100%; display: flex; align-items: center; justify-content: center; padding-top: 1%;">Account
+				<div class="py-2 mb-2"
+					style="font-size: large; font-weight: 500; background: #14A44D; width: 100%; display: flex; align-items: center; justify-content: center;">Account
 					Status</div>
 
 				<div
@@ -158,7 +162,7 @@
 					<div style="width: 50%;"
 						th:text="'Department - '+${staff.department}"></div>
 					<div style="width: 50%;" th:text="'Team - '+${staff.team}"></div>
-					<button class="btn btn-primary text-light text-start buttons"
+					<button class="mt-2 btn btn-primary text-light text-start buttons"
 						data-bs-toggle="collapse" data-bs-target="#collapse1"
 						style="width: 50%;">Avoid Meat List</button>
 
@@ -212,7 +216,8 @@
 						<label for="datalist">Meats :</label> <input type="text"
 							list="options" id="datalist">
 						<datalist id="options">
-							<option th:each="avoidMeat:${avoidMeatList}" th:value="${avoidMeat}">
+							<option th:each="avoidMeat:${avoidMeatList}"
+								th:value="${avoidMeat}">
 						</datalist>
 						<button type="button" onclick="displayData()">
 							<i class="fa-solid fa-check"></i>

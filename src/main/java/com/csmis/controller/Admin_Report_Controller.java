@@ -200,7 +200,7 @@ public class Admin_Report_Controller {
 			}
 			date=date.plusDays(1);
 		}
-
+		date = date.minusMonths(1);
 		// for holiday
 		List<String> holidays = holidayService.getThisMonthHoliday(date);
 
@@ -211,6 +211,9 @@ public class Admin_Report_Controller {
 
 		// set staff already selected dates into selection
 		List<String> dates = dateService.getMonthlyDates(date);
+		for(String d : dates) {
+			if(d.equals("00")) holidays.remove(d); 
+		}
 
 //			search staff as you like
 		List<Staff> staffList = staffService.findAll();
@@ -255,8 +258,7 @@ public class Admin_Report_Controller {
 		List<List<String>> notRegisterWeeklyDateLists = adminReportService.getNotRegisteredDateLists(prefix_id,date,dates);
 		List<List<String>> notPickedWeeklyDate = adminReportService.getNotPickedDateLists(prefix_id,date,dates);
 		List<List<String>> pickedWeeklyDateLists = adminReportService.getPickedDateLists(prefix_id,date,dates);
-
-
+		
 		try {
 			jasonNotRegisterWeeklyDateLists = objectMapper.writeValueAsString(notRegisterWeeklyDateLists);
 			jasonNotPickedWeeklyDate = objectMapper.writeValueAsString(notPickedWeeklyDate);

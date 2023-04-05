@@ -81,7 +81,6 @@ public class DoorAccessController {
 			HeadCount  check =null;
 			try {
 				check = headCountService.find_by_id(""+date);
-				System.out.println(check);
 			} catch (Exception e) {
 			}
 			if(check!=null) {
@@ -108,7 +107,6 @@ public class DoorAccessController {
 			throws IOException, ParseException {
 		String[] dateArray = dateString.split(",");
 		dateString = dateArray[0];
-
 		File tempFile = (File) model.getAttribute("file");
 
 		LocalDate date = LocalDate.parse(dateString);
@@ -136,6 +134,8 @@ public class DoorAccessController {
 				String staff_id = staffService.findID_By_DoorAccessID(s);
 				if (staff_id != null) {
 					staff_list.add(staff_id);
+
+					System.out.println("here id id==>"+staff_id);
 					count++;
 				}
 			}
@@ -148,7 +148,7 @@ public class DoorAccessController {
 
 		// save lunch_report into database
 		operatorReportService.saveAll(lunch_report);
-
+		
 		// this list contain head counts
 		// index 0 is for registered head counts
 		// index 1 is for not registered head counts

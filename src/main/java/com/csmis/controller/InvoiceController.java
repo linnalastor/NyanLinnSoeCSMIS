@@ -227,6 +227,8 @@ public class InvoiceController {
 		Staff loginStaff = staffService.findByID(auth.getName());
 
 		model.addAttribute("userName",loginStaff.getName());
+		List<Paymentmethod> paymentMethod = paymentmethodServiceInterface.findAll();
+		model.addAttribute("paymentMethod",paymentMethod);
 		return "admin/invoice/invoice";
 	}
 
