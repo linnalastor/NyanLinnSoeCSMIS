@@ -66,6 +66,6 @@ public class UpdatePasswordController {
 		Staff loginStaff = staffService.findByID(auth.getName());
 
 		model.addAttribute("userName", loginStaff.getName());
-		return "/operator/account-status/index";
+		return "redirect:/operator/account";
 	}
 }

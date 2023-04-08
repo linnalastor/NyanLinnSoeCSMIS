@@ -25,6 +25,8 @@ public class HolidayService implements HolidayServiceInterface {
 	private HolidayRepository holidayRepository;
 	@Autowired
 	private ConsumerListRepository consumerListRepository;
+	@Autowired
+	DateService dateService;
 
 	@Override
 	public void saveHoliday(Holiday holiday) {
@@ -95,110 +97,70 @@ public class HolidayService implements HolidayServiceInterface {
 	public void getUpdatedConsumerList(List<Holiday> holidays) {
 
 		List<LocalDate> dates = new ArrayList<>();
-		List<Integer> days;
-		int index=0;
-
-
-		List<ConsumerList> lunchRegisterList=null;
-		try {
-			lunchRegisterList = consumerListRepository.findAll();
-		} catch (Exception e) {	}
+		List<String> days;
+		int index = 0;
 
 		for (Holiday h : holidays) {
 			dates.add(h.getDate());
 		}
+		System.out.println("Holidays==>" + dates);
 
-		for (LocalDate date : dates) {
-			for (ConsumerList lunchList : lunchRegisterList) {
-
-				String temp="";
-				String confirmation = lunchList.getConfirmation();
-				for(int i=0;i<confirmation.length();i++) {
-					if(confirmation.charAt(i)=='h')
-						try {
-							temp = confirmation.substring(i+1);
-						} catch (Exception e) { }
-						confirmation = confirmation.substring(0,i)+"x"+temp;
-						lunchList.setConfirmation(confirmation);
-
+		List<ConsumerList> lunchRegisterList = new ArrayList<>();
+		try {
+			lunchRegisterList.addAll(consumerListRepository.findAll());
+		} catch (Exception e1) {
+		}
+		for (ConsumerList lunchList : lunchRegisterList) {
+			String confirmation = lunchList.getConfirmation();
+			System.out.println("confirmation ==> " + confirmation);
+			
+			for (int i = 0; i < confirmation.length(); i++) {
+			String temp = "";
+			if (confirmation.charAt(i) == 'h') {
+				try {
+					temp = confirmation.substring(i + 1);
+				} catch (Exception e) {
 				}
+				confirmation = confirmation.substring(0, i) + "x" + temp;
+				lunchList.setConfirmation(confirmation);
+				System.out.println("x substituded confirmation==>" + confirmation);
+			}
+		}
+			for (LocalDate date : dates) {
+				System.out.println("++++++++++++ dates ++++++++++++++++" + date);
+				
+				String temp = "";
 				if (Integer.parseInt(lunchList.getConsumer_information_id().substring(3, 7)) == date.getYear()) {
 					if (Integer.parseInt(lunchList.getConsumer_information_id().substring(0, 2)) == date
 							.getMonthValue()) {
+						days = dateService.getMonthlyDates(date);
+						for(String day : days) 
+							if(day.equals("00")) days.remove("00");
+						String tempMonth = ""+date.getDayOfMonth();
+						if(tempMonth.length()<2) tempMonth="0"+tempMonth;
 
-						days = getMonthlyDays(date);
-
-						boolean flag=false;
-						for(int i=0; i<days.size();i++) {
-							if(date.getDayOfMonth()==days.get(i)) {
-								index=i;
-								flag=true;
+						boolean flag = false;
+						for (int i = 0; i < days.size(); i++) {
+							if (days.get(i).equals(tempMonth)) {
+								index = i;
+								flag = true;
 								break;
 							}
 						}
-						if(flag) {
+						if (flag) {
 							try {
-								temp = confirmation.substring(index+1);
-							} catch (Exception e) { }
-							confirmation = confirmation.substring(0,index)+"h"+temp;
+								temp = confirmation.substring(index + 1);
+							} catch (Exception e) {
+							}
+							confirmation = confirmation.substring(0, index) + "h" + temp;
 							lunchList.setConfirmation(confirmation);
 						}
+						System.out.println("holiday updated confirmation==> " + confirmation);
+						consumerListRepository.save(lunchList);
 					}
 				}
-				consumerListRepository.save(lunchList);
 			}
 		}
-	}
-
-	public List<Integer> getMonthlyDays(LocalDate day) {
-		boolean isweekend = false;
-
-		day = day.withDayOfMonth(1);
-		LocalDate thisMonth = day;
-		List<Integer> days = new ArrayList<>();
-
-		// input first week of the month
-		if (day.getDayOfWeek() == DayOfWeek.SATURDAY || day.getDayOfWeek() == DayOfWeek.SUNDAY)
-			isweekend = true;
-
-		if (!isweekend) {
-			if (day.getDayOfWeek() == DayOfWeek.MONDAY) {
-				days.add(day.getDayOfMonth());
-				day = day.plusDays(1);
-			}else days.add(0);
-
-			if (day.getDayOfWeek() == DayOfWeek.TUESDAY) {
-				days.add(day.getDayOfMonth());
-				day = day.plusDays(1);
-			}else days.add(0);
-
-			if (day.getDayOfWeek() == DayOfWeek.WEDNESDAY) {
-				days.add(day.getDayOfMonth());
-				day = day.plusDays(1);
-			}else days.add(0);
-
-			if (day.getDayOfWeek() == DayOfWeek.THURSDAY) {
-				days.add(day.getDayOfMonth());
-				day = day.plusDays(1);
-			}else days.add(0);
-
-			if (day.getDayOfWeek() == DayOfWeek.FRIDAY) {
-				days.add(day.getDayOfMonth());
-				day = day.plusDays(1);
-			}else days.add(0);
-		}
-		// input other week days of the month
-		while (day.getMonthValue() == thisMonth.getMonthValue()) {
-			isweekend = false;
-			if (day.getDayOfWeek() == DayOfWeek.SATURDAY || day.getDayOfWeek() == DayOfWeek.SUNDAY)
-				isweekend = true;
-			if (!isweekend) {
-				days.add( day.getDayOfMonth());
-			}
-			day = day.plusDays(1);
-		}
-		return days;
-
 	}
 
 }

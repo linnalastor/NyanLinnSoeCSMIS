@@ -108,7 +108,7 @@ public class Lunch_Report_Controller {
 
 		Staff loginStaff = staffService.findByID(auth.getName());
 
-		theModel.addAttribute("userName",loginStaff.getName());
+		theModel.addAttribute("userName", loginStaff.getName());
 		theModel.addAttribute("day", yesterday);
 		// picked/not picked/not registered/holiday status
 		theModel.addAttribute("status", status);
@@ -164,7 +164,7 @@ public class Lunch_Report_Controller {
 		}
 		Staff loginStaff = staffService.findByID(auth.getName());
 
-		theModel.addAttribute("userName",loginStaff.getName());
+		theModel.addAttribute("userName", loginStaff.getName());
 
 		holidayString = objectMapper.writeValueAsString(holidays);
 		notRegisteredDatesString = objectMapper.writeValueAsString(notRegisteredDates);
@@ -187,7 +187,7 @@ public class Lunch_Report_Controller {
 	@GetMapping("/report/last_month")
 	public String ConsumerReportMonthly(Model theModel, Authentication auth) throws JsonProcessingException {
 
-		List<String> holidays = holidayService.getThisMonthHoliday(LocalDate.now());
+		List<String> holidays = holidayService.getThisMonthHoliday(LocalDate.now().minusMonths(1));
 		List<String> notPickedDates = new ArrayList<>();
 		List<String> notRegisteredDates = new ArrayList<>();
 		List<String> pickedDates = new ArrayList<>();
@@ -219,12 +219,14 @@ public class Lunch_Report_Controller {
 		} catch (Exception e) {
 		}
 
-		if (reportStatus != null) {
-			if (lunchConfirmation != null) {
+		if (lunchConfirmation != null) {
+			if (reportStatus != null) {
+				notRegisteredDates = operatorReportService.getPickedUpWithoutRegisteredDays(reportStatus, 0);
 				pickedDates = operatorReportService.getPickedDays(reportStatus, 0);
 				notPickedDates = operatorReportService.getNotPickedDays(reportStatus, lunchConfirmation, 0);
+			}else {
+				notPickedDates = operatorReportService.getNotPickedDays(lunchConfirmation, 0);
 			}
-			notRegisteredDates = operatorReportService.getPickedUpWithoutRegisteredDays(reportStatus, 0);
 		}
 
 		holidayString = objectMapper.writeValueAsString(holidays);
@@ -234,7 +236,7 @@ public class Lunch_Report_Controller {
 
 		Staff loginStaff = staffService.findByID(auth.getName());
 
-		theModel.addAttribute("userName",loginStaff.getName());
+		theModel.addAttribute("userName", loginStaff.getName());
 		theModel.addAttribute("holidays", holidayString);
 		theModel.addAttribute("notregistereddays", notRegisteredDatesString);
 		theModel.addAttribute("pickeddays", pickedDatesString);

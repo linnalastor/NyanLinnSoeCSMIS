@@ -178,11 +178,12 @@
 			<div class="d-flex justify-content-between text-center my-2">
 				<span class="fs-5 showdates"><span th:text="${month}"></span>
 					/ <span th:text="${day_to_day}"></span></span>
-				<p class="d-flex">
-					<input type="text" class="form-control text-muted me-2 searchnames"
-						placeholder="Search by name .... " /> <a href=""
-						class="btn searchbtns">Search</a>
-				</p>
+				<form action="/admin/report/by_week" class="d-flex">
+					<input type="text" name="search"
+						class="form-control text-muted me-2 searchnames"
+						placeholder="Search by ... " />
+					<button type="submit" class="btn searchbtns ms-2">Search</button>
+				</form>
 			</div>
 			<!-- End about discription -->
 
@@ -290,7 +291,6 @@
 				if (myvar != null) {
 					myvar.style.backgroundColor = "red";
 					myvar.style.border = "1px solid gold";
-					console.log(notPickedArr[i]);
 				}
 			}
 
@@ -306,25 +306,19 @@
 				if (myvar != null) {
 					myvar.style.backgroundColor = "green";
 					myvar.style.border = "1px solid gold";
-
-					console.log(pickedArr[i]);
 				}
 			}
 
 		}
 		var notRegisterArray = /*[[${jasonNotRegisterWeeklyDateLists}]]*/'';
-		console.log("..." + notRegisterArray);
 		var notRegisterArr = JSON.parse(notRegisterArray);
 		for (var i = 0; i < notRegisterArr.length; i++) {
 			for (var j = 0; j < notRegisterArr[i].length; j++) {
 				var myvar = document.getElementById(notRegisterArr[i][j]
 						+ "-showweekday");
-				console.log(">>>>>" + myvar);
 				if (myvar != null) {
 					myvar.style.backgroundColor = "#133716";
 					myvar.style.border = "1px solid gold";
-
-					console.log(notRegisterArr[i]);
 				}
 			}
 

@@ -131,11 +131,12 @@ public class DoorAccessController {
 		// get staff id list by door access IDs
 		for (String s : door_access_list) {
 			if (s != "") {
-				String staff_id = staffService.findID_By_DoorAccessID(s);
+				String staff_id=null;
+				try {
+					staff_id = staffService.findID_By_DoorAccessID(s);
+				} catch (Exception e) {	}
 				if (staff_id != null) {
 					staff_list.add(staff_id);
-
-					System.out.println("here id id==>"+staff_id);
 					count++;
 				}
 			}

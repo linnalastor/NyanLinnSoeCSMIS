@@ -1,0 +1,258 @@
+﻿Sr.,Division,Staff ID,Name,DoorLogNo.,Dept,Team ,Email
+1,DIV002,26-00070,Amy Htun,40042,Offshore Development Dept-1,DOT,amyhtun@diracetechnology.com
+2,DIV003,25-00114,Arjun,30075,Local Business Dept,GGI RPA Development,arjun@diracetechnology.com
+3,DIV003,25-00195,Aung Chan Myae,30113,Common Infrastructure Dept,First Line ,aungchanmyae@diracetechnology.com
+4,DIV002,25-00220,Aung Htet Myet Kyaw,30295,Offshore Development Dept-1,FPD(Financial),aunghtetmyetkyaw@diracetechnology.com
+5,DIV002,25-00184,Aung Kaung Myat,30258,Offshore Development Dept-1,MARK,aungkaungmyat@diracetechnology.com
+6,DIV003,25-00055,Aung Khant,40022,Common Infrastructure Dept,Local Project -1,aungkhant@diracetechnology.com
+7,DIV002,25-00119,Aung Ko Lin,40045,Offshore Development Dept-1,FPD(Securities),aungkolin@diracetechnology.com
+8,DIV002,25-00130,Aung Kyaw Myat,30189,Offshore Development Dept-1,"TDB, D-Base",aungkyawmyat@diracetechnology.com
+9,DIV003,25-00015,Aung Kyaw Zaw,40033,SSD Dept,Securities System (Front) ,aungkyawzaw@diracetechnology.com
+10,DIV002,25-00008,Aung Myo Oo,30106,Offshore Development Dept-1,Off-Dept1,aungmyooo@diracetechnology.com
+11,DIV002,25-00219,Aung Myo Thu,30181,Offshore Development Dept-2,SONAR-FR,aungmyothu@diracetechnology.com
+12,DIV003,25-00155,Aung Myo Tint,30196,PMO + Service Desk +SD-QC,Service Desk,aungmyotint@diracetechnology.com
+14,DIV002,25-00117,Aung San Oo,30105,Common Infrastructure Dept,DIC,aungsanoo@diracetechnology.com
+15,DIV002,25-00190,Aung Thein Kyaw,30200,Offshore Development Dept-2,FAIMS-IT,aungtheinkyaw@diracetechnology.com
+16,DIV003,26-00139,Aye Aye Moe,30131,Common Infrastructure Dept,First Line,ayeayemoe@diracetechnology.com
+17,DIV002,26-00161,Aye Aye Mon,30083,Offshore Development Dept-1,MARK,ayeayemon@diracetechnology.com
+18,DIV001,26-00035,Aye Aye Swe,30033,HR/Admin Dept,Admin,NILL
+19,DIV001,26-00017,Aye Aye Thwe,30129,PMO + Service Desk +SD-QC,SDQC,ayeayethwe@diracetechnology.com
+20,DIV002,26-00274,Aye Chan Htun Naing,30290,Offshore Development Dept-1,FPD(Financial),ayechanhtunnaing@diracetechnology.com
+21,DIV002,26-00076,Aye Chan Thar Soe,30119,Offshore Development Dept-1,"CstNavi, BT18, MSC",ayechantharsoe@diracetechnology.com
+22,DIV002,26-00183,Aye Moet Moet Oo,30182,Offshore Development Dept-1,MARK,ayemoetmoetoo@diracetechnology.com
+23,DIV002,26-00135,Aye Myat Mon,30115,Offshore Development Dept-2,WEB4,ayemyatmon@diracetechnology.com
+24,DIV002,26-00150,Aye Nyeaint Inzali,30269,Offshore Development Dept-1,MARK,ayenyeaintinzali@diracetechnology.com
+25,DIV002,26-00222,Aye Sandar Htun,30171,Offshore Development Dept-1,MARK,ayesandarhtun@diracetechnology.com
+26,DIV002,26-00245,Aye Yadanar Myo,30122,Offshore Development Dept-2,SONAR-FR,ayeyadanarmyo@diracetechnology.com
+27,DIV003,25-00196,Bo Bo Latt,30177,Common Infrastructure Dept,Local Project -2,bobolatt@diracetechnology.com
+28,DIV002,25-00126,Bone Myint Zaw,30132,Common Infrastructure Dept,DIC,bonemyintzaw@diracetechnology.com
+29,DIV002,26-00221,Cherry Aung,30167,Offshore Development Dept-1,MARK,cherryaung@diracetechnology.com
+30,DIV002,25-00181,Chit Swe Oo,30250,Offshore Development Dept-2,KOSMO-Net21,chitsweoo@diracetechnology.com
+31,DIV002,26-00254,Cho Cho Zin,30276,Offshore Development Dept-1,SNR-MF,chochozin@diracetechnology.com
+32,DIV002,26-00236,Ei Ei Mon,30237,Offshore Development Dept-1,MARK,eieimon@diracetechnology.com
+33,DIV001,26-00098,Ei Ei Phyo,30077,Finance Dept,Finance,eieiphyo@diracetechnology.com
+34,DIV002,26-00159,Ei Kay Zin,30163,Offshore Development Dept-1,MARK,eikayzin@diracetechnology.com
+35,DIV002,26-00205,Ei Mon Mon Kyaw,40001,Offshore Development Dept-1,MARK,eimonmonkyaw@diracetechnology.com
+36,DIV002,26-00203,Ei Phyu,30217,Offshore Development Dept-2,MODOS,eiphyu@diracetechnology.com
+37,DIV003,26-00242,Ei Zar Lwin,30120,Common Infrastructure Dept,First Line,eizarlwin@diracetechnology.com
+38,DIV002,26-00096,Gayatri,30043,Offshore Development Dept-2,FAIMS-IT,gayatri@diracetechnology.com
+39,DIV003,25-00105,Han Htoo Hlaing,30046,Local Business Dept,MAJA JLPT Exam Application ,hanhtoohlaing@diracetechnology.com
+40,DIV002,26-00244,Hanny Su San,30130,Offshore Development Dept-2,Off-Dept1,hannysusan@diracetechnology.com
+41,DIV002,26-00114,Hay Mar Hnin,30089,Offshore Development Dept-1,DOT,haymarhnin@diracetechnology.com
+42,DIV002,25-00235,Hein Htet Kyaw,40036,Offshore Development Dept-1,MARK,heinhtetkyaw@diracetechnology.com
+43,DIV002,25-00171,Hein Htet Zaw,30225,Offshore Development Dept-2,KOSMO-Net21,heinhtetzaw@diracetechnology.com
+44,DIV002,25-00204,Hein Htet Zaw-2,30246,Offshore Development Dept-1,DOT,heinhtetzaw2@diracetechnology.com
+45,DIV002,25-00175,Hein Min Phyo,30231,Offshore Development Dept-1,DOT,heinminphyo@diracetechnology.com
+46,DIV001,25-00014,Hein Thant Oo,30054,PMO + Service Desk +SD-QC,PMO,heinthantoo@diracetechnology.com
+47,DIV001,25-10006,Hiroyasu Ishikawa,40028,Expatriate (Japanese),Expatriate (Japanese),hiroyasu.ishikawa@diracetechnology.com
+48,DIV002,26-00227,Hlaing Nang Nwe ,30212,Offshore Development Dept-1,FPD(Securities),hlaingnangnwe @diracetechnology.com
+49,DIV003,25-00051,Hlaing Win Tun,30003,Local Business Dept,JICA BPO,hlaingwintun@diracetechnology.com
+50,DIV002,25-00182,Hlwann Moe Aung,30252,Offshore Development Dept-2,KOSMO-Net21,hlwannmoeaung@diracetechnology.com
+51,DIV002,26-00207,Hmue Hmue Thwe,30044,Offshore Development Dept-2,KOSMO-Net21,hmuehmuethwe@diracetechnology.com
+52,DIV002,26-00174,Hnin Htut Naing,30012,Offshore Development Dept-1,"TDB, D-Base",hninhtutnaing@diracetechnology.com
+53,DIV002,26-00241,Hnin Nu Wai,30240,Offshore Development Dept-1,Off-Dept1,hninnuwai@diracetechnology.com
+54,DIV002,26-00239,Hnin Phyu,30265,Offshore Development Dept-2,FASE,hninphyu@diracetechnology.com
+55,DIV002,26-00198,Hnin Pwint Phyo,30218,Offshore Development Dept-1,SNR-MF,hninpwintphyo@diracetechnology.com
+56,DIV002,26-00252,Hnin Pwint Phyu,30274,Offshore Development Dept-1,"TDB, D-Base",hninpwintphyu@diracetechnology.com
+57,DIV002,26-00120,Hnin Sandar,30104,Offshore Development Dept-1,MARK,hninsandar@diracetechnology.com
+58,DIV002,26-00177,Hnin Su Hlaing,30096,Offshore Development Dept-1,MARK,hninsuhlaing@diracetechnology.com
+59,DIV002,26-00253,Hnin Thandar Htet,30275,Offshore Development Dept-2,KOSMO-Net21,hninthandarhtet@diracetechnology.com
+60,DIV002,26-00240,Hnin Wutt Yee,30185,Offshore Development Dept-2,WEB4,hninwuttyee@diracetechnology.com
+61,DIV001,26-00073,Hsu Min Htet,30058,PMO + Service Desk +SD-QC,SDQC,hsuminhtet@diracetechnology.com
+62,DIV002,26-00220,Hsu Myat Htet,30112,Offshore Development Dept-1,MARK,hsumyathtet@diracetechnology.com
+63,DIV002,26-00275,Hsu Myat Thu,30099,Offshore Development Dept-1,SNR-MF,hsumyatthu@diracetechnology.com
+64,DIV002,26-00180,Hsu Nandar Htet,40017,Offshore Development Dept-1,FPD(Securities),hsunandarhtet@diracetechnology.com
+65,DIV002,26-00192,Hsu Pyae Moe,30195,Offshore Development Dept-1,SNR-MF,hsupyaemoe@diracetechnology.com
+66,DIV002,26-00250,Htar Ei Phoo,30266,Offshore Development Dept-1,SNR-MF,htareiphoo@diracetechnology.com
+67,DIV003,26-00085,Htar Htar Nwe,30079,SSD Dept,Securities System (Back),htarhtarnwe@diracetechnology.com
+68,DIV002,25-00185,Htein Aung Win,30253,Offshore Development Dept-1,SNR-MF,hteinaungwin@diracetechnology.com
+69,DIV002,26-00260,Htet Htet Oo,30271,Offshore Development Dept-2,KOSMO-Net21,htethtetoo@diracetechnology.com
+70,DIV002,26-00247,Htet Htet Win,30037,Offshore Development Dept-1,DELTA Maintenance,htethtetwin@diracetechnology.com
+71,DIV003,26-00157,Htet Htet Zin,30155,Local Business Dept,Aeon Product Development,htethtetzin@diracetechnology.com
+72,DIV002,25-00010,Htet Ko Ko,40008,Common Infrastructure Dept,DIC,htetkoko@diracetechnology.com
+73,DIV002,25-00179,Htet Lin,30183,Offshore Development Dept-1,"TDB, D-Base",htetlin@diracetechnology.com
+74,DIV002,25-00210,Htet Wai Aung,30281,Offshore Development Dept-2,MODOS,htetwaiaung@diracetechnology.com
+75,DIV002,25-00044,Htet Wai Yum,30036,Offshore Development Dept-2,MODOS,htetwaiyum@diracetechnology.com
+76,DIV003,25-00065,Htin Aung Hein,30078,Common Infrastructure Dept,Local Project -2,htinaunghein@diracetechnology.com
+77,DIV003,26-00013,Htoo Lae Kyaw,30055,Local Business Dept,CBM Workflow,htoolaekyaw@diracetechnology.com
+78,DIV002,25-00194,Htoo Wai Myat,30118,Offshore Development Dept-1,DELTA Maintenance,htoowaimyat@diracetechnology.com
+79,DIV001,26-00001,Kalyar Soe,40029,Finance Dept,Finance,kalyarsoe@diracetechnology.com
+80,DIV003,25-00107,Kaung Htet Aung,30060,Common Infrastructure Dept,Network,kaunghtetaung@diracetechnology.com
+81,DIV002,25-00221,Kaung Htet Kyaw,30210,Offshore Development Dept-1,SNR-MF,kaunghtetkyaw@diracetechnology.com
+82,DIV002,25-00128,Kaung Min Htet,30135,Offshore Development Dept-2,WEB4,kaungminhtet@diracetechnology.com
+83,DIV002,25-00227,Kaung Myat Kyaw,30291,Offshore Development Dept-1,FPD(Financial),kaungmyatkyaw@diracetechnology.com
+84,DIV003,25-00157,Kaung Myat San,30042,Local Business Dept,Aeon Product Development,kaungmyatsan@diracetechnology.com
+85,DIV002,25-00134,Kaung Wai Myat,30088,Offshore Development Dept-1,SNR-MF,kaungwaimyat@diracetechnology.com
+86,DIV002,26-00237,Kay Kay Min,30261,Offshore Development Dept-1,MARK,kaykaymin@diracetechnology.com
+87,DIV003,26-00028,Kay Khaing Zaw,30108,SSD Dept,Exchange System ,kaykhaingzaw@diracetechnology.com
+88,DIV001,26-00032,Kay Thi Khine,40002,HR/Admin Dept,Admin,kaythikhine@diracetechnology.com
+89,DIV001,25-10008,Kentaro Odoi,30128,Expatriate (Japanese),System Develop: Division,kentaro.odoi@diracetechnology.com
+91,DIV002,25-00226,Kham Nyein Chan Aung,30293,Offshore Development Dept-2,KOSMO-Net21,khamnyeinchanaung@diracetechnology.com
+92,DIV002,25-00186,Khant Kyi Thar,30173,Offshore Development Dept-1,MARK,khantkyithar@diracetechnology.com
+93,DIV003,26-00133,Khin Cho Cho Thet,30007,SSD Dept,Exchange System,khinchochothet@diracetechnology.com
+94,DIV002,26-00232,Khin Oo Khin,30255,Common Infrastructure Dept,DIC,khinookhin@diracetechnology.com
+95,DIV002,26-00277,Khin Sandar Htun,30297,Offshore Development Dept-1,MARK,khinsandarhtun@diracetechnology.com
+96,DIV002,26-00235,Khin Shwe Hlaing,30263,Offshore Development Dept-2,WEB4,khinshwehlaing@diracetechnology.com
+97,DIV002,26-00280,Khin Yati Sett,30145,Offshore Development Dept-1,MARK,khinyatisett@diracetechnology.com
+98,DIV001,26-00005,Khine Thiri Win,30051,PMO + Service Desk +SD-QC,PMO,khinethiriwin@diracetechnology.com
+99,DIV002,25-00202,Kyaw Bo Bo Lin,30203,Offshore Development Dept-1,"CstNavi, BT18, MSC",kyawbobolin@diracetechnology.com
+100,DIV003,25-00151,Kyaw Wai Yan,30086,Common Infrastructure Dept,Network,kyawwaiyan@diracetechnology.com
+101,DIV003,25-00004,Kyaw Zaw Hlaing,30224,Common Infrastructure Dept,Network ,kyawzawhlaing@diracetechnology.com
+102,DIV002,26-00164,Kyi Kyi Sein,30178,Offshore Development Dept-1,DOT,kyikyisein@diracetechnology.com
+103,DIV002,26-00248,Kyi Pyar Lwin-2,30157,Offshore Development Dept-1,SNR-MF,kyipyarlwin2@diracetechnology.com
+104,DIV002,26-00034,Kyi Saw Win,30048,Offshore Development Dept-1,MARK,kyisawwin@diracetechnology.com
+105,DIV002,26-00190,Kyipyar Lwin,30201,Offshore Development Dept-1,SNR-MF,kyipyarlwin@diracetechnology.com
+106,DIV002,26-00219,Lain Mar Pan Eain,30236,Offshore Development Dept-2,HIME,lainmarpaneain@diracetechnology.com
+107,DIV003,25-00153,Lhu Minn Moung,30162,Common Infrastructure Dept,First Line,lhuminnmoung@diracetechnology.com
+108,DIV001,26-00060,Lin Lin Khaing,30017,HR/Admin Dept,HR,linlinkhaing@diracetechnology.com
+109,DIV002,26-00124,Lin Lin Tun,30041,Offshore Development Dept-1,MARK,linlintun@diracetechnology.com
+110,DIV002,26-00185,Lu Lu Aung,30187,Offshore Development Dept-1,"TDB, D-Base",luluaung@diracetechnology.com
+111,DIV002,25-00218,Lwin Moe Oo,30080,Offshore Development Dept-2,KOSMO-Net21,lwinmoeoo@diracetechnology.com
+112,DIV003,26-00144,Mai Jue Ni Moon,30032,SSD Dept,Securities System (Front),maijuenimoon@diracetechnology.com
+113,DIV001,26-00175,Marlar Win,30197,HR/Admin Dept,Admin,NILL
+114,DIV002,26-00147,May Han Thi Chue,30073,Offshore Development Dept-1,SNR-MF,mayhanthichue@diracetechnology.com
+115,DIV002,26-00153,May Htet Htet Aung,30158,Offshore Development Dept-1,"TDB, D-Base",mayhtethtetaung@diracetechnology.com
+116,DIV002,26-00154,May Lwin Khaing,30170,Offshore Development Dept-2,OSS,maylwinkhaing@diracetechnology.com
+117,DIV002,26-00163,May Myat Thu,30214,Offshore Development Dept-1,FPD(Securities),maymyatthu@diracetechnology.com
+118,DIV002,26-00142,May Phyo Nyein,30126,Offshore Development Dept-2,KOSMO-Net21,mayphyonyein@diracetechnology.com
+119,DIV002,26-00251,May Phyu Phyu Aung,30273,Offshore Development Dept-1,SNR-MF,mayphyuphyuaung@diracetechnology.com
+120,DIV002,26-00212,May Thazin Oo,30244,Offshore Development Dept-1,"TDB, D-Base",maythazinoo@diracetechnology.com
+121,DIV002,26-00255,May Thazin Oo-2,30277,Offshore Development Dept-2,KOSMO-Net21,maythazinoo2@diracetechnology.com
+122,DIV001,26-00051,May Thet Naing,30031,HR/Admin Dept,Admin,maythetnaing@diracetechnology.com
+124,DIV002,26-00223,May Thu Kywe,30026,Offshore Development Dept-2,HIME,maythukywe@diracetechnology.com
+125,DIV002,25-00149,Min Arkar Mon,30165,Offshore Development Dept-1,FPD(Securities),minarkarmon@diracetechnology.com
+126,DIV002,25-00132,Min Ko Ko,30141,Offshore Development Dept-1,FPD(Financial),minkoko@diracetechnology.com
+127,DIV003,25-00080,Min Phone Myat Thu,40044,Common Infrastructure Dept,System,minphonemyatthu@diracetechnology.com
+128,DIV002,25-00228,Min Thant Swe,30169,Offshore Development Dept-1,Mark,minthantswe@diracetechnology.com
+130,DIV002,25-00026,Moe Sat Aung,30059,Offshore Development Dept-1,"TDB, D-Base",moesataung@diracetechnology.com
+131,DIV001,26-00194,Moe Thuzar Min,20001,Finance Dept,Finance,moethuzarmin.dms@diracetechnology.com
+132,DIV002,25-00147,Myat Kaung Kyaw,30241,Offshore Development Dept-1,"TDB, D-Base",myatkaungkyaw@diracetechnology.com
+133,DIV002,25-00212,Myat Thu Aung,40032,Offshore Development Dept-1,FPD(Securities),myatthuaung@diracetechnology.com
+134,DIV002,25-00199,Myint Min Khant,30121,Offshore Development Dept-1,SNR-MF,myintminkhant@diracetechnology.com
+135,DIV002,26-00187,Myint Myat San,30209,Offshore Development Dept-1,MARK,myintmyatsan@diracetechnology.com
+136,DIV002,25-00123,Myo Htet Min,30143,Offshore Development Dept-2,KTS,myohtetmin@diracetechnology.com
+137,DIV002,25-00177,Myo Soe Aung,30232,Offshore Development Dept-1,MARK,myosoeaung@diracetechnology.com
+138,DIV002,26-00184,Nan Tha Zin,30184,Offshore Development Dept-1,MARK,nanthazin@diracetechnology.com
+139,DIV002,25-00191,Nanda Win Kyu,30139,Offshore Development Dept-2,WEB4,nandawinkyu@diracetechnology.com
+140,DIV003,26-00115,Naw Aye Myat Thuzar,30098,SSD Dept,Securities System (Back),nawayemyatthuzar@diracetechnology.com
+141,DIV002,26-00103,Naw Lel Bwe Paw Bwa,30084,Offshore Development Dept-2,FAIMS-IT,nawlelbwepawbwa@diracetechnology.com
+142,DIV002,26-00172,Nay Chyi Phoo Wai,20004,Offshore Development Dept-1,MARK,naychyiphoowai@diracetechnology.com
+143,DIV002,26-00268,Nu Hla Phyu,10010,Offshore Development Dept-1,FPD(Securities),nuhlaphyu@diracetechnology.com
+144,DIV003,26-00004,Nwai Thingyan,30062,Local Business Dept,GGI RPA Development ,nwaythingyan@diracetechnology.com
+145,DIV002,26-00089,Nway Wint Kyaw,30005,Offshore Development Dept-2,FASE,nwaywintkyaw@diracetechnology.com
+146,DIV001,26-00226,Nway Zar Chi Win,30068,Finance Dept,Finance,nwayzarchiwin@diracetechnology.com
+147,DIV001,26-00088,Nwe Ni Win,30030,HR/Admin Dept,HR,nweniwin@diracetechnology.com
+148,DIV002,26-00149,Nwe Oo Mon,40003,Offshore Development Dept-2,FASE,nweoomon@diracetechnology.com
+149,DIV002,26-00122,Nyein Aye Mon,30114,Offshore Development Dept-2,Kenpo Transfer System(KTS),nyeinayemon@diracetechnology.com
+150,DIV002,25-00197,Nyein Chan Kyaw,30268,Offshore Development Dept-1,"CstNavi, BT18, MSC",nyeinchankyaw@diracetechnology.com
+151,DIV002,26-00273,Nyein Ei San,30296,Offshore Development Dept-1,FPD(Financial),nyeineisan@diracetechnology.com
+152,DIV002,25-00094,Nyein Htet Kyaw,40050,Common Infrastructure Dept,DIC,nyeinhtetkyaw@diracetechnology.com
+153,DIV002,25-00209,Phone Khaing Hein,30280,Offshore Development Dept-2,MODOS,phonekhainghein@diracetechnology.com
+154,DIV002,26-00156,Phoo Pwint Wai,30172,Offshore Development Dept-1,MARK,phoopwintwai@diracetechnology.com
+155,DIV002,26-00257,Phyo Pwint Phyu,30117,Offshore Development Dept-2,OA Automation,phyopwintphyu@diracetechnology.com
+157,DIV003,25-00189,Phyo Thu,30230,Common Infrastructure Dept,First Line,phyothu@diracetechnology.com
+158,DIV003,26-00081,Poe Ei Phyu,40046,Common Infrastructure Dept,System,poeeiphyu@diracetechnology.com
+159,DIV002,26-00266,Poe Thiri Lwin,30284,Offshore Development Dept-1,FPD(Securities),poethirilwin@diracetechnology.com
+160,DIV002,26-00033,Pwint Mar Naing Win,30027,Offshore Development Dept-2,HIME,pwintmarnaingwin@diracetechnology.com
+161,DIV002,26-00030,Pwint Wai Hlaing,30001,PMO + Service Desk +SD-QC,Block Chain,pwintwaihlaing@diracetechnology.com
+162,DIV002,26-00279,Pyae Phyo Tint,30300,Offshore Development Dept-1,MARK,pyaephyotint@diracetechnology.com
+163,DIV002,25-00170,Pyae Sone,30220,Offshore Development Dept-1,MARK,pyaesone@diracetechnology.com
+164,DIV002,26-00213,Pyone Pwint Paing,30242,Offshore Development Dept-1,"TDB, D-Base",pyonepwintpaing@diracetechnology.com
+165,DIV002,25-00193,Sai Nyi Nyi Tun,30219,Offshore Development Dept-2,WEB4,sainyinyitun@diracetechnology.com
+166,DIV002,25-00229,Sai Si Thu,30090,Offshore Development Dept-1,SNR-MF,saisithu@diracetechnology.com
+167,DIV001,26-00092,San San Yu,30094,HR/Admin Dept,Admin,NILL
+168,DIV002,26-00136,San Thiri Tun,30123,Offshore Development Dept-1,MARK,santhiritun@diracetechnology.com
+169,DIV002,26-00158,Saung Thinzar Khaing,30166,Offshore Development Dept-1,MARK,saungthinzarkhaing@diracetechnology.com
+170,DIV002,25-00211,Saw Wai Lwin,30279,Offshore Development Dept-1,Mark,sawwailwin@diracetechnology.com
+171,DIV002,26-00188,Seinn Lei Lei Tun,30208,Offshore Development Dept-2,HIME,seinnleileitun@diracetechnology.com
+172,DIV002,25-00167,Sett Paing Htoo,30222,Offshore Development Dept-2,WEB4,settpainghtoo@diracetechnology.com
+173,DIV002,26-00270,Shin Thant Linn,30286,Offshore Development Dept-1,SNR-MF,shinthantlinn@diracetechnology.com
+174,DIV002,26-00129,Shwe Sin Ei Myat,30107,Offshore Development Dept-1,"TDB, D-Base",shwesineimyat@diracetechnology.com
+175,DIV002,25-00223,Si Thu Lwin,40034,Offshore Development Dept-1,SNR-MF,sithulwin@diracetechnology.com
+176,DIV002,25-00205,Sithu Win,30247,Offshore Development Dept-2,Kenpo Transfer System(KTS),sithuwin@diracetechnology.com
+177,DIV002,26-00206,Soe Nandar,30216,Offshore Development Dept-2,KOSMO-Net21,soenandar@diracetechnology.com
+178,DIV002,25-00234,Soe Thu Win,30301,Offshore Development Dept-1,MARK,soethuwin@diracetechnology.com
+179,DIV002,26-00281,Soe Yu New,30302,Offshore Development Dept-1,ST Wallet,soeyunwe@diracetechnology.com
+180,DIV003,26-00262,Su Nandar,30283,Local Business Dept,GGI RPA Development,sunandar@diracetechnology.com
+181,DIV002,26-00269,Su Nandar Htwe,30248,Offshore Development Dept-2,SONAR-FR,sunandarhtwe@diracetechnology.com
+182,DIV002,26-00189,Su Pyae Naing,30204,Offshore Development Dept-2,HIME,supyaenaing@diracetechnology.com
+183,DIV002,26-00162,Su Su Htay,30097,Offshore Development Dept-1,MARK,susuhtay@diracetechnology.com
+184,DIV002,26-00271,Su Su Mon,30136,Offshore Development Dept-2,SONAR-FR,susumon@diracetechnology.com
+185,DIV002,26-00181,Su Su Sandi,30153,Offshore Development Dept-2,OSS,sususandi@diracetechnology.com
+186,DIV002,26-00178,Su Yati Kyaw,30190,Offshore Development Dept-1,MARK,suyatikyaw@diracetechnology.com
+187,DIV003,26-00077,Swe Hsu Mon,30125,Local Business Dept,Aeon BPO,swehsumon@diracetechnology.com
+188,DIV001,05-00007,Takeshi Nagayama,30020,Expatriate (Japanese),Offshore Division,takeshi.nagayama@diracetechnology.com
+189,DIV002,25-00152,Tala Htaw,30018,Offshore Development Dept-2,MODOS,talahtaw@diracetechnology.com
+190,DIV001,25-00127,Tay Zar Tun,30259,Finance Dept,Finance,tayzartun@diracetechnology.com
+191,DIV002,26-00014,Thae Thae,30095,Offshore Development Dept-2,Off-Dept2,thaethae@diracetechnology.com
+192,DIV003,25-00092,Than Htun Aung,30072,PMO + Service Desk +SD-QC,Service Desk,thanhtunaung@diracetechnology.com
+193,DIV002,26-00228,Than Than Htay,30233,Offshore Development Dept-1,MARK,thanthanhtay@diracetechnology.com
+194,DIV002,25-00192,Thant Sin Oo,30156,Offshore Development Dept-2,WEB4,thantsinoo@diracetechnology.com
+195,DIV002,25-00188,Thant Zin Tun,30133,Offshore Development Dept-1,Block Chain,thantzintun@diracetechnology.com
+196,DIV003,25-00121,Thar Pyae,30056,Local Business Dept,JICA BPO,tharpyae@diracetechnology.com
+197,DIV002,26-00243,Thazin Lin,30015,Offshore Development Dept-1,DELTA Maintenance,thazinlin@diracetechnology.com
+198,DIV003,26-00130,Thazin Myint Maung,30002,Common Infrastructure Dept,Operation Management ,thazinmyintmaung@diracetechnology.com
+199,DIV002,26-00165,Thazin San,30179,Offshore Development Dept-2,Kenpo Transfer System(KTS),thazinsan@diracetechnology.com
+200,DIV002,25-00129,Theik Di Soe,30137,Offshore Development Dept-2,FAIMS-IT,theikdisoe@diracetechnology.com
+201,DIV003,25-00102,Thein Lin,40020,PMO + Service Desk +SD-QC,Service Desk,theinlin@diracetechnology.com
+202,DIV001,05-00004,Thein Oo,30029,BOD (ACE),BOD (ACE),BOD
+203,DIV003,26-00009,Thet Nwe Win,30067,SSD Dept,Stock Exchange/Security System Development Department,thetnwewin@diracetechnology.com
+204,DIV003,26-00121,Thet Thet Maung,30238,SSD Dept,Exchange System,thetthetmaung@diracetechnology.com
+205,DIV002,25-00160,Thet Wai Tun,30206,Offshore Development Dept-2,MODOS,thetwaitun@diracetechnology.com
+206,DIV002,26-00229,Thet Zin Aye,30254,Offshore Development Dept-2,Kenpo Transfer System(KTS),thetzinaye@diracetechnology.com
+207,DIV003,26-00095,Thida Lwin,30004,Common Infrastructure Dept,Operation Management,thidalwin@diracetechnology.com
+208,DIV002,25-00141,Thiha Htet Zaw,30147,Offshore Development Dept-2,OSS,thihahtetzaw@diracetechnology.com
+209,DIV002,25-00144,Thiha Oo,30151,Offshore Development Dept-2,OSS,thihaoo@diracetechnology.com
+210,DIV002,26-00263,Thin Zar Aung-2,30272,Offshore Development Dept-2,FAIMS-IT,thinzaraung2@diracetechnology.com
+211,DIV002,26-00119,Thinzar Aung,30010,SSD Dept,SSD-Front,thinzaraung@diracetechnology.com
+212,DIV003,26-00042,Thiri Mon,30064,SSD Dept,Securities System (Back),thirimon@diracetechnology.com
+213,DIV003,25-00120,Thura Aung,40014,SSD Dept,Common Application Infrastructure,thuraaung@diracetechnology.com
+214,DIV003,25-00035,Thura Lwin,40005,Common Infrastructure Dept,System ,thuralwin@diracetechnology.com
+215,DIV003,26-00131,Tin Hter Nwe,30014,SSD Dept,Exchange System,tinhternwe@diracetechnology.com
+216,DIV002,25-00093,Toe Toe,30260,Common Infrastructure Dept,DIC,toetoe@diracetechnology.com
+217,DIV002,25-00176,Tun Mya Oo,30234,Offshore Development Dept-1,DOT,tunmyaoo@diracetechnology.com
+218,DIV002,25-00163,Tun Tun Win,30207,Offshore Development Dept-1,MARK,tuntunwin@diracetechnology.com
+220,DIV002,25-00173,Wai Yan Htun,30239,Offshore Development Dept-1,DOT,waiyanhtun@diracetechnology.com
+222,DIV002,25-00213,Wai Yan Tun,30285,Offshore Development Dept-1,ST Wallet,waiyantun@diracetechnology.com
+223,DIV002,26-00074,Wai Zar Soe,30022,Offshore Development Dept-2,OSS,waizarsoe@diracetechnology.com
+224,DIV002,25-00136,Win Hpone Maw,40041,Offshore Development Dept-2,FASE,winhponemaw@diracetechnology.com
+225,DIV002,25-00236,Win Htut Oo,30289,Offshore Development Dept-1,"TDB, D-Base",winhtutoo@diracetechnology.com
+227,DIV002,25-00164,Win Naing Soe,30211,Offshore Development Dept-1,"CstNavi, BT18, MSC",winnaingsoe@diracetechnology.com
+228,DIV002,26-00002,Win Thiri Han,30016,Offshore Development Dept-2,MODOS,winthirihan@diracetechnology.com
+229,DIV002,26-00193,Wint Wah Phyo,30213,Offshore Development Dept-2,HIME,wintwahphyo@diracetechnology.com
+230,DIV001,26-00195,Wint Wah Wah Htun,30142,Finance Dept,Finance,wintwahwahhtun.dms@diracetechnology.com
+231,DIV002,26-00218,Wutt Hmone Phoo,30235,Offshore Development Dept-1,MARK,wutthmonephoo@diracetechnology.com
+232,DIV002,26-00265,Yadanar Kyaw,30278,Offshore Development Dept-1,FPD(Financial),yadanarkyaw@diracetechnology.com
+233,DIV002,26-00272,Yadanar Zin Zin Htet,30267,Offshore Development Dept-2,KOSMO-Net21,yadanarzinzinhtet@diracetechnology.com
+234,DIV002,26-00160,Yamin Thu,30161,Offshore Development Dept-1,MARK,yaminthu@diracetechnology.com
+235,DIV002,26-00179,Yaminn Nge,30191,Offshore Development Dept-1,"TDB, D-Base",yaminnnge@diracetechnology.com
+237,DIV003,25-00133,Ye Htet Ko,30140,Common Infrastructure Dept,First Line,yehtetko@diracetechnology.com
+238,DIV002,25-00116,Ye Thu Naing,30116,Offshore Development Dept-2,WEB4,yethunaing@diracetechnology.com
+239,DIV003,25-00074,Ye Wint Kyaw,30013,Common Infrastructure Dept,Local Project -2,yewintkyaw@diracetechnology.com
+240,DIV003,25-00036,Ye Yint Depar,40004,Common Infrastructure Dept,Common Infrastructure Department,yeyintdepar@diracetechnology.com
+241,DIV002,25-00159,Yee Mon Ye Thit,30202,Offshore Development Dept-1,MARK,yeemonyethit@diracetechnology.com
+242,DIV002,26-00208,Yimon Theint,30228,Offshore Development Dept-2,KOSMO-Net21,yimontheint@diracetechnology.com
+243,DIV002,26-00080,Yin Pa Pa,30040,Offshore Development Dept-1,MARK,yinpapa@diracetechnology.com
+244,DIV002,26-00214,Yu Thazin,30243,Offshore Development Dept-1,"TDB, D-Base",yuthazin@diracetechnology.com
+245,DIV003,26-00132,Yu Ya Myat Noe,40031,SSD Dept,Common Application Infrastructure,yuyamyatnoe@diracetechnology.com
+246,DIV002,25-00187,Zabu Kyaw,30264,Offshore Development Dept-1,"CstNavi, BT18, MSC",zabukyaw@diracetechnology.com
+247,DIV002,26-00264,Zar Zar Soe,30282,Offshore Development Dept-2,KOSMO NET21,zarzarsoe@diracetechnology.com
+248,DIV002,26-00267,Zarli Linn Htet,30087,Offshore Development Dept-1,ST Wallet,zarlilinnhtet@diracetechnology.com
+249,DIV002,25-00201,Zaw moe Oo,30256,Offshore Development Dept-2,FAIMS-IT,zawmoeoo@diracetechnology.com
+250,DIV001,05-00003,Zaw Moe Thant,30028,BOD (ACE),BOD (ACE),BOD
+251,DIV002,25-00200,Zaw Win Naing,30160,Offshore Development Dept-2,KOSMO-Net21,zawwinnaing@diracetechnology.com
+252,DIV002,25-00203,Zaw Ye Htet,30227,Offshore Development Dept-1,DOT,zawyehtet@diracetechnology.com
+253,DIV003,25-00098,Zaw Ye' Paing,30091,Common Infrastructure Dept,Local Project -1,zawyepaing@diracetechnology.com
+255,DIV002,25-00180,Zay bo hein,30251,Offshore Development Dept-2,OSS,zaybohein@diracetechnology.com
+256,DIV002,25-00207,Zay Yar Hein,30038,Offshore Development Dept-1,Block Chain,zayyarhein@diracetechnology.com
+257,DIV003,25-00099,Zay Yar Min,30092,PMO + Service Desk +SD-QC,Service Desk,zayyarmin@diracetechnology.com
+258,DIV002,25-00174,Zayar Lwin,30215,Offshore Development Dept-2,HIME,zayarlwin@diracetechnology.com
+259,DIV002,25-00222,Zayar Myo Oo,30175,Offshore Development Dept-2,MODOS,zayarmyooo@diracetechnology.com
+260,DIV002,25-00224,Zin Ko Htwe,30292,Offshore Development Dept-1,ST Wallet,zinkohtwe@diracetechnology.com
+261,DIV002,26-00234,Zin Mar Nyein,30262,Offshore Development Dept-1,"CstNavi, BT18, MSC",zinmarnyein@diracetechnology.com
+262,DIV001,26-00086,Zin Mar Oo,40049,PMO + Service Desk +SD-QC,SDQC,zinmaroo@diracetechnology.com
+263,DIV002,26-00261,Zin War Htet,30270,Offshore Development Dept-2,FAIMS-IT,zinwarhtet@diracetechnology.com
+264,DIV002,26-00246,Zun Lay Nwe,30257,Offshore Development Dept-2,SONAR-FR,zunlaynwe@diracetechnology.com
+265,DIV001,26-00083,Zun Thuzar Naing,40047,PMO + Service Desk +SD-QC,PMO,zunthuzarnaing@diracetechnology.com
+266,DIV002,25-00214,Zwe Sithu,30287,Offshore Development Dept-1,ST Wallet,zwesithu@diracetechnology.com
+267,DIV002,12-12121,NLS,30287,Offshore Development Dept-1,ST Wallet,zwesithu@diracetechnology.com

@@ -1,0 +1,21 @@
+This application run on localhost 3306 for mysql database and localhost 8080 for application server.
+You can edit this in src/main/resources/application.properties
+
+First run the 'Database setup for application enviroment' section in Database_Script.txt(line 5 to line 208)
+
+Now you can login the application with username - csmisadmin and password - wearebombs20233
+
+Then do all master data setup in application which locate in dashboard burger menu on top left conor.
+ - you can setup other admins by adding Staff Id in Master Data Setup/Admin Setup
+ - invoice receive by name should be the name of the restaurant.
+ - you you can setup operator access time limit for lunch registration by seting up start time and end time in Access setup
+ 	*example setup for Thursday 1 am to Friday 3 pm....
+ 		- for start time, you must select a date that is on thursday and set the time to 1am.
+ 		- for end time , you must select a date that is on friday and set the time to 3pm.
+
+
+I recommend running 'Registration for march and april' section in Database_Script.txt (line 222 to line 269)
+	
+Try import door access file which include  csmisadmin,05-00003,05-00004,05-00007,12-12121,25-00008 for reports head counts
+* If you want not picked count in report page, please include other staff that are not mention aboved in your import door access file *
+

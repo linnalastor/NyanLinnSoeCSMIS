@@ -292,7 +292,6 @@
 				if (myvar != null) {
 					myvar.style.backgroundColor = "red";
 					myvar.style.border = "1px solid gold";
-					console.log(notPickedArr[i]);
 				}
 			}
 
@@ -308,34 +307,28 @@
 				if (myvar != null) {
 					myvar.style.backgroundColor = "green";
 					myvar.style.border = "1px solid gold";
-
-					console.log(pickedArr[i]);
 				}
 			}
 
 		}
 		var notRegisterArray = /*[[${jasonNotRegisterWeeklyDateLists}]]*/'';
-		console.log("..." + notRegisterArray);
 		var notRegisterArr = JSON.parse(notRegisterArray);
 		for (var i = 0; i < notRegisterArr.length; i++) {
 			for (var j = 0; j < notRegisterArr[i].length; j++) {
 				var myvar = document.getElementById(notRegisterArr[i][j]
 						+ "-showweekday");
-				console.log(">>>>>" + myvar);
 				if (myvar != null) {
 					myvar.style.backgroundColor = "#133716";
 					myvar.style.border = "1px solid gold";
-
-					console.log(notRegisterArr[i]);
 				}
 			}
 
 		}
 
 		var holidayArray = /*[[${jsonHoliday}]]*/'';
-
 		var holidayArr = JSON.parse(holidayArray);
 
+		console.log(holidayArr);
 		for (var i = 0; i < holidayArr.length; i++) {
 			for (var j = 0; j < holidayArr[i].length; j++) {
 				var myvar = document.getElementById(holidayArr[i][j]

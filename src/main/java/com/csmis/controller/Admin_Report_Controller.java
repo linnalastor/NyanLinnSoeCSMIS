@@ -174,7 +174,7 @@ public class Admin_Report_Controller {
 	@GetMapping("/report/by_month")
 	public String reportListMonth(@RequestParam(name = "search", required = false) String search,Model theModel, Authentication auth) {
 		LocalDate date = LocalDate.now().withDayOfMonth(1).minusMonths(1);
-		LocalDate nextMonthDate = date.plusMonths(1);
+		LocalDate checkDate = date.plusMonths(1);
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonHoliday = null;
 		String jasonNotRegisterWeeklyDateLists = null;
@@ -186,7 +186,7 @@ public class Admin_Report_Controller {
 		totalHeadCount.setNot_picked_head_count(0);
 		totalHeadCount.setNot_registered_head_count(0);
 		totalHeadCount.setRegistered_head_count(0);
-		while(date.getMonth()!=nextMonthDate.getMonth()) {
+		while(date.getMonth()!=checkDate.getMonth()) {
 			HeadCount headcount= null;
 			try {
 				headcount = headCountService.find_by_id(""+date);
@@ -203,7 +203,11 @@ public class Admin_Report_Controller {
 		date = date.minusMonths(1);
 		// for holiday
 		List<String> holidays = holidayService.getThisMonthHoliday(date);
+		for(int i=0; i<holidays.size(); i++) {
+			if(holidays.get(i).length()<2) holidays.set(i, "0"+holidays.get(i));
+		}
 
+		
 		// for mordel addAttribute
 		String prefix_id = prefix_ID_Service.getPrefix_ID(date);
 		String year = prefix_id.substring(3,7);
@@ -211,9 +215,6 @@ public class Admin_Report_Controller {
 
 		// set staff already selected dates into selection
 		List<String> dates = dateService.getMonthlyDates(date);
-		for(String d : dates) {
-			if(d.equals("00")) holidays.remove(d); 
-		}
 
 //			search staff as you like
 		List<Staff> staffList = staffService.findAll();
@@ -243,6 +244,7 @@ public class Admin_Report_Controller {
 
 		// holiday date bind with staff id
 		ArrayList<List<String>> holidaysList = new ArrayList<>();
+		
 		for (Staff s : staffService.findAll()) {
 			List<String> staffHolidays = new ArrayList<>();
 			for (String holiday : holidays) {
@@ -255,14 +257,14 @@ public class Admin_Report_Controller {
 
 		// for adding model attributes to html for show data
 //		==========================================================================================================
-		List<List<String>> notRegisterWeeklyDateLists = adminReportService.getNotRegisteredDateLists(prefix_id,date,dates);
-		List<List<String>> notPickedWeeklyDate = adminReportService.getNotPickedDateLists(prefix_id,date,dates);
-		List<List<String>> pickedWeeklyDateLists = adminReportService.getPickedDateLists(prefix_id,date,dates);
+		List<List<String>> notRegisteredDateLists = adminReportService.getNotRegisteredDateLists(prefix_id,date,dates);
+		List<List<String>> notPickedDate = adminReportService.getNotPickedDateLists(prefix_id,date,dates);
+		List<List<String>> pickedDateLists = adminReportService.getPickedDateLists(prefix_id,date,dates);
 		
 		try {
-			jasonNotRegisterWeeklyDateLists = objectMapper.writeValueAsString(notRegisterWeeklyDateLists);
-			jasonNotPickedWeeklyDate = objectMapper.writeValueAsString(notPickedWeeklyDate);
-			jasonPickedWeeklyDateLists = objectMapper.writeValueAsString(pickedWeeklyDateLists);
+			jasonNotRegisterWeeklyDateLists = objectMapper.writeValueAsString(notRegisteredDateLists);
+			jasonNotPickedWeeklyDate = objectMapper.writeValueAsString(notPickedDate);
+			jasonPickedWeeklyDateLists = objectMapper.writeValueAsString(pickedDateLists);
 			jsonHoliday = objectMapper.writeValueAsString(holidaysList);
 		} catch (JsonProcessingException e) {
 		}
@@ -308,20 +310,21 @@ public class Admin_Report_Controller {
 				if(date.getDayOfWeek() == DayOfWeek.MONDAY)
 					date = date.minusDays(1);
 				
-
 				//get next monday date in today
 				while (date.getDayOfWeek() != DayOfWeek.MONDAY) {
 					date = date.minusDays(1);
 				}
+				List<String> dates = dateService.getWeeklyDate(date);
+				System.out.println(dates);
+				theModel.addAttribute("listweeklydate", dates);// get dates between this week
 
-				LocalDate nextMonthDate = date.plusDays(5);
 				HeadCount totalHeadCount = new HeadCount();
 				totalHeadCount = new HeadCount();
 				totalHeadCount.setActual_head_count(0);
 				totalHeadCount.setNot_picked_head_count(0);
 				totalHeadCount.setNot_registered_head_count(0);
 				totalHeadCount.setRegistered_head_count(0);
-				while(date.getMonth()!=nextMonthDate.getMonth()) {
+				while(date.getDayOfWeek()!=DayOfWeek.SATURDAY) {
 					HeadCount headcount= null;
 					try {
 						headcount = headCountService.find_by_id(""+date);
@@ -340,10 +343,6 @@ public class Admin_Report_Controller {
 					date = date.minusDays(1);
 				}
 				
-				// for service method usages
-				int count = 0;
-
-
 				// for holiday
 				List<String> holidays = holidayService.getThisMonthHoliday(date);
 
@@ -391,10 +390,11 @@ public class Admin_Report_Controller {
 
 				// for adding model attributes to html for show data
 //				==========================================================================================================
-				List<String> dates = dateService.getWeeklyDate(date);
+				
 				List<List<String>> notRegisterWeeklyDateLists = adminReportService.getNotRegisteredDateLists(month_year,date,dates);
 				List<List<String>> notPickedWeeklyDate = adminReportService.getNotPickedDateLists(month_year,date,dates);
 				List<List<String>> pickedWeeklyDateLists = adminReportService.getPickedDateLists(month_year,date,dates);
+				System.out.println(pickedWeeklyDateLists);
 
 				try {
 					jasonNotRegisterWeeklyDateLists = objectMapper.writeValueAsString(notRegisterWeeklyDateLists);
@@ -417,12 +417,10 @@ public class Admin_Report_Controller {
 				theModel.addAttribute("month", Month.of(month) + " / " + year);// get this month and year
 				theModel.addAttribute("month", Month.of(month));// get this month
 				theModel.addAttribute("day_to_day", day_to_day);// get from day to day between this week
-				theModel.addAttribute("listweeklydate", dates);// get dates between this week
 				theModel.addAttribute("jasonNotRegisterWeeklyDateLists", jasonNotRegisterWeeklyDateLists);
 				theModel.addAttribute("jasonNotPickedWeeklyDate", jasonNotPickedWeeklyDate);
 				theModel.addAttribute("jasonPickedWeeklyDateLists", jasonPickedWeeklyDateLists);
 				theModel.addAttribute("jsonHoliday", jsonHoliday);
-				theModel.addAttribute("listweeklydate",adminReportService.getWeeklyDate());
 				theModel.addAttribute("staffList", staffList);
 
 		return "admin/report-list/week-report-list/weekreport";

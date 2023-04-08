@@ -285,6 +285,8 @@ public class AdminReportService {
 
 		// get this week days
 		List<String> dates = dateService.getMonthlyDates(date);
+		dates = dateService.removeExtraStringInList(dates);
+		
 		List<Integer> indexs = new ArrayList<>();
 
 		for (int i = 0; i < dates.size(); i++) {
@@ -341,7 +343,12 @@ public class AdminReportService {
 
 		// get this week days
 		List<String> dates = dateService.getMonthlyDates(date);
-		dates.remove("00");
+		for(int i=0; i<dates.size(); i++){
+			if(dates.get(i).equals("00")) {
+				dates.remove(i);
+				i--;
+			}
+		}
 		List<Integer> indexs = new ArrayList<>();
 
 		for (int i = 0; i < dates.size(); i++) {
@@ -407,6 +414,13 @@ public class AdminReportService {
 
 		// get this week days
 		List<String> dates = dateService.getMonthlyDates(date);
+		for(int i=0; i<dates.size(); i++){
+			if(dates.get(i).equals("00")) {
+				dates.remove(i);
+				i--;
+			}
+		}
+		
 
 		List<Integer> indexs = new ArrayList<>();
 		String monthDate= null;

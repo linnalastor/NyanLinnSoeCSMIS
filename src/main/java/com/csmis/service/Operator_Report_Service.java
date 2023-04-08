@@ -22,6 +22,8 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 
 	@Autowired
 	OperatorRegisterServiceInterface operatorRegisterService;
+	@Autowired
+	DateService dateService;
 
 	LunchReportRepository lunchReportRepository;
 
@@ -167,7 +169,7 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 		// get dates of last month
 		List<String> monthly_dates = get_Monthly_Dates(count);
 		// remove '00' from monthly_dates
-		monthly_dates = removeExtraStringInList(monthly_dates);
+		monthly_dates = dateService.removeExtraStringInList(monthly_dates);
 
 		// get picked dates which is '1' in report
 		for (int i = 0; i < monthly_dates.size(); i++) {
@@ -180,16 +182,29 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 		}
 		return days;
 	}
+	
+	public List<String> getNotPickedDays(String confirmation,int count) {
+		List<String> days = new ArrayList<>();
+		List<String> monthly_dates = dateService.getMonthlyDates(LocalDate.now().withDayOfMonth(1).minusMonths(1));
+		// remove '00' from monthly_dates
+		monthly_dates = dateService.removeExtraStringInList(monthly_dates);
+		for(int i=0; i<monthly_dates.size(); i++) {
+			if(confirmation.charAt(i)=='1')
+				days.add(monthly_dates.get(i));
+		}
+		
+		return days;
+	}
+
 
 	//get not picked days by user report
 	public List<String> getNotPickedDays(String report, String confirmation,int count) {
 
 		List<String> days = new ArrayList<>();
 
-		// get dates of last month
-		List<String> monthly_dates = get_Monthly_Dates(count);
+		List<String> monthly_dates = dateService.getMonthlyDates(LocalDate.now().withDayOfMonth(1).minusMonths(1));
 		// remove '00' from monthly_dates
-		monthly_dates = removeExtraStringInList(monthly_dates);
+		monthly_dates = dateService.removeExtraStringInList(monthly_dates);
 
 		// get not picked dates which is 'x' in report
 		for (int i = 0; i < report.length(); i++) {
@@ -208,7 +223,7 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 		// get dates of last month
 		List<String> monthly_dates = get_Monthly_Dates(count);
 		// remove '00' from monthly_dates
-		monthly_dates = removeExtraStringInList(monthly_dates);
+		monthly_dates = dateService.removeExtraStringInList(monthly_dates);
 
 		// get not registered picked dates which is 'n' in report
 		for (int i = 0; i < monthly_dates.size(); i++) {
@@ -220,20 +235,6 @@ public class Operator_Report_Service implements OperatorReportServiceInterface {
 				}
 		}
 		return days;
-	}
-
-	//remove extra string '00' from month list
-	public List<String> removeExtraStringInList(List<String> monthly_dates) {
-		// remove '00' from monthly_date
-		String target = "00";
-		Iterator<String> iter = monthly_dates.iterator();
-		while (iter.hasNext()) {
-			String str = iter.next();
-			if (str.equals(target)) {
-				iter.remove();
-			}
-		}
-		return monthly_dates;
 	}
 
 	//get month and year string for last week

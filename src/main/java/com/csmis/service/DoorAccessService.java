@@ -19,6 +19,8 @@ public class DoorAccessService {
 	Operator_Register_Service operator_register_service;
 	@Autowired
 	DateService dateService;
+	@Autowired
+	Prefix_ID_Service prefixed_id_service;
 
 	int index = 0;
 
@@ -85,9 +87,14 @@ public class DoorAccessService {
 
 		boolean registered = false;
 
-
 		// get all dates of this month without SAT &SUN
 		List<String> days = dateService.getMonthlyDates(date);
+		for(int i=0; i<days.size(); i++){
+			if(days.get(i).equals("00")) {
+				days.remove(i);
+				i--;
+			}
+		}
 
 		// pre setting report String
 		// setting index of today in report string
@@ -122,21 +129,21 @@ public class DoorAccessService {
 			lunch_report = new Lunch_Report();
 			lunch_report.setReport_id(prefix_id + id);
 
-		//set report status
-		}else {
+			// set report status
+		} else {
 			report = lunch_report.getReport_status();
 		}
 
 		String temp = null;
 		try {
-			temp = report.substring(index+1);
-		}catch (Exception e) {	}
+			temp = report.substring(index + 1);
+		} catch (Exception e) {
+		}
 		// change to '1' if registered
 		// change to 'n' if not registered
 		if (registered) {
 			report = report.substring(0, index) + '1' + temp;
-		}
-		else {
+		} else {
 			report = report.substring(0, index) + 'n' + temp;
 		}
 		// set report status string into lunch report of staff
@@ -150,11 +157,25 @@ public class DoorAccessService {
 		List<Integer> countList = new ArrayList<>();
 
 		LocalDate date = LocalDate.parse(dateString);
+		String day = "" + date.getDayOfMonth();
+		if (day.length() < 2)
+			day = "0" + day;
+
+		List<String> dates = dateService.getMonthlyDates(date);
+		dates = dateService.removeExtraStringInList(dates);
+
+		for (int i = 0; i < dates.size(); i++) {
+			if (dates.get(i).equals(day)) {
+				index = i;
+				break;
+			}
+		}
+		System.out.println(index);
 
 		// get lenght value 2 string month
 		String month = getMonth(date);
 		// get prefix id for this month
-		String prefix_id = "" + month + "/" + date.getYear() + "|";
+		String prefix_id = prefixed_id_service.getPrefix_ID(date);
 
 		int count = 0;
 
@@ -169,38 +190,37 @@ public class DoorAccessService {
 		// add registered staff count to list
 		countList.add(count);
 
-
 		count = 0;
 		// get all lunch report of this month
 		List<Lunch_Report> lunchReportList = operator_report_service.findAll_Monthly(prefix_id);
 
 		// get registered and not registered lunch picked count
-		for (Lunch_Report l : lunchReportList) {
-			if (l.getReport_status().charAt(index) == 'n')
+		for (Lunch_Report lr : lunchReportList) {
+			if (lr.getReport_status().charAt(index) == 'n')
 				count++;
 		}
 		// add not registered lunch picked count to list
 		countList.add(count);
 
 		count = 0;
-		for(int i=0;i<lunchPlanList.size();i++) {
-			boolean picked= false;
-			for(int j=0;j<lunchReportList.size();j++) {
-				String reportid = lunchReportList.get(j).getReport_id();
-				String report = lunchReportList.get(j).getReport_status();
-				String registerid = lunchPlanList.get(i).getConsumer_information_id();
-				String register = lunchPlanList.get(i).getConfirmation();
-				if(reportid.equals(registerid)) {
-					if(register.charAt(index)=='1') {
-						if(report.charAt(index)!='1') count++;
-						else picked=true;
+		for (ConsumerList c : lunchPlanList) {
+			String registerid = c.getConsumer_information_id();
+			String register = c.getConfirmation();
+			if (register.charAt(index) == '1') {
+				boolean picked = false;
+				for (Lunch_Report lr : lunchReportList) {
+					String reportid = lr.getReport_id();
+					String report = lr.getReport_status();
+					if (reportid.equals(registerid)) {
+						if (report.charAt(index) == '1') {
+							System.out.println("report.charAt(index)  "+report.charAt(index));
+							picked=true;	
+						}
 					}
-					lunchReportList.remove(j);
-					j--;
 				}
+				System.out.println("here  "+count );
+				if(!picked) count++;
 			}
-			if(!picked) count++;
-
 		}
 		// add not picked lunch picked count to list
 		countList.add(count);

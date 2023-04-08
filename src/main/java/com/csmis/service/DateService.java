@@ -3,6 +3,7 @@ package com.csmis.service;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -150,6 +151,20 @@ public class DateService {
 			} catch (Exception exception) { }
 
 			return confirmation;
+		}
+
+		//remove extra string '00' from month list
+		public List<String> removeExtraStringInList(List<String> monthly_dates) {
+			// remove '00' from monthly_date
+			String target = "00";
+			Iterator<String> iter = monthly_dates.iterator();
+			while (iter.hasNext()) {
+				String str = iter.next();
+				if (str.equals(target)) {
+					iter.remove();
+				}
+			}
+			return monthly_dates;
 		}
 
 }

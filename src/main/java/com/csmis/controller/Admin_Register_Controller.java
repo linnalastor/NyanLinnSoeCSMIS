@@ -243,12 +243,13 @@ public class Admin_Register_Controller {
 		boolean contain2month=false;
 
 		LocalDate today = LocalDate.now();
-		Integer monthValue = today.getMonthValue() + 1;
+		Integer nextmonthValue = today.getMonthValue() + 1;
+		if(today.getDayOfWeek() == DayOfWeek.MONDAY) today=today.plusDays(1);
 		while (today.getDayOfWeek() != DayOfWeek.MONDAY) {
 			today = today.plusDays(1);
 		}
 
-		if (today.getMonthValue() == monthValue)
+		if (today.getMonthValue() == nextmonthValue)
 			checker = true;
 
 		List<String> this_month = new ArrayList<>();
@@ -256,7 +257,7 @@ public class Admin_Register_Controller {
 		ConsumerList consumerList = new ConsumerList();
 
 		// get this week days
-		List<String> uncheckedList = op.getWeeklyDate();
+		List<String> uncheckedList = dateService.getWeeklyDate(today);
 
 		String thisMonth_id =op.get_Month_Year_Weekly(0) + "|" + id;
 		String nextMonth_id =op.get_Month_Year_Weekly(1) + "|" + id;
