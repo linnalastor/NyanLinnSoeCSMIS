@@ -18,4 +18,13 @@ I recommend running 'Registration for march and april' section in Database_Scrip
 	
 Try import door access file which include  csmisadmin,05-00003,05-00004,05-00007,12-12121,25-00008 for reports head counts
 * If you want not picked count in report page, please include other staff that are not mention aboved in your import door access file *
+Example import files contain in src/main/resources/Import_files.
 
+You will need imported door access data to use Invoice page
+In Invoice page,
+	Start date and end date is displayed by default.
+	Payment date must be today's date and above.
+	Create button will create a voucher including invoices between start date and end date.
+	Created Invoice can be export as a pdf file.
+	
+The password for paying created invoice is 'admin123'.

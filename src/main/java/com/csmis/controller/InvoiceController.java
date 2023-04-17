@@ -280,7 +280,6 @@ public class InvoiceController {
 		}
 		// add to the spring model
 		model.addAttribute("invoices", dto);
-
 		model.addAttribute("status", false);
 		Staff loginStaff = staffService.findByID(auth.getName());
 
@@ -327,6 +326,7 @@ public class InvoiceController {
 		}
 		Staff loginStaff = staffService.findByID(auth.getName());
 
+		model.addAttribute("voucherNo",voucherNo);
 		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("invoices", dto);
 		model.addAttribute("CTotal", Ctotal);
@@ -370,6 +370,8 @@ public class InvoiceController {
 		}
 		Staff loginStaff = staffService.findByID(auth.getName());
 
+		model.addAttribute("startDate",startDate);
+		model.addAttribute("endDate",endDate);
 		model.addAttribute("userName",loginStaff.getName());
 		model.addAttribute("invoices", dto);
 		model.addAttribute("CTotal", Ctotal);

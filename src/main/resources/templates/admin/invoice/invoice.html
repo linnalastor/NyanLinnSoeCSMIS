@@ -331,7 +331,7 @@
 								<div class="input-group mb-2 mt-2">
 									<span class="input-group-text" id="basic-addon1">Catering
 										Service Name:</span> <select name="carteringServiceName"
-										class="outline-none p-1 dropdowns select-dropdown">
+										class="outline-none p-1 dropdowns select-dropdown" required>
 										<option th:each="tempResturant : ${resturant}"
 											th:text="${tempResturant.name}"></option>
 
@@ -343,7 +343,7 @@
 								<div class="input-group mb-3 ">
 									<span class="input-group-text" id="basic-addon1">Payment
 										Method</span> <select name="paymentMethod"
-										class="outline-none p-1 dropdowns select-dropdown">
+										class="outline-none p-1 dropdowns select-dropdown" required>
 										<option th:each="tempPaymentMethod : ${paymentMethod}"
 											th:text="${tempPaymentMethod .name}"></option>
 									</select>
@@ -433,7 +433,7 @@
 								<div class="col-4">
 									<label for="username" class="me-3">Cashier</label><select
 										name="cashier"
-										class="outline-none p-1 dropdowns select-dropdown">
+										class="outline-none p-1 dropdowns select-dropdown" required>
 										<option th:each="tempCashier : ${cashier}"
 											th:text="${tempCashier.name}"></option>
 
@@ -443,7 +443,7 @@
 								<div class="col-4">
 									<label for="username" class="me-3">Received By</label><select
 										name="receivedBy"
-										class="outline-none p-1 dropdowns select-dropdown">
+										class="outline-none p-1 dropdowns select-dropdown" required>
 										<option th:each="tempReveived : ${received}"
 											th:text="${tempReveived.name}"></option>
 
@@ -454,7 +454,8 @@
 								<div class="col-4">
 									<label for="username" class="me-3">Approved By</label><select
 										name="approvedBy"
-										class="outline-none p-1 dropdowns select-dropdown">
+										class="outline-none p-1 dropdowns select-dropdown" required
+										>
 										<option th:each="tempApprove : ${approve}"
 											th:text="${tempApprove.name}"></option>
 

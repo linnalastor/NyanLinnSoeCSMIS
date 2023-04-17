@@ -197,7 +197,7 @@
 						<form action="#" th:action="@{/admin/search}" method="GET"
 							class="form-inline">
 							<div class="input-group mb-3">
-								<input type="search" name="voucherNo" class="form-control"
+								<input type="search" name="voucherNo" th:value="${voucherNo}" class="form-control"
 									required>
 								<button type="submit" class="btn btn-success">Search</button>
 							</div>
@@ -208,10 +208,10 @@
 
 								<div class="input-group mb-3">
 									<span class="input-group-text" id="basic-addon1">Start
-										Date</span> <input type="date" class="form-control"
+										Date</span> <input type="date" th:value="${startDate}" class="form-control"
 										data-toggle="datetimepicker" name="startDate" id="startDate" />
 									<span class="input-group-text" id="basic-addon1">End
-										Date</span> <input type="date" class="form-control " name="endDate"
+										Date</span> <input type="date" th:value="${endDate}" class="form-control " name="endDate"
 										id="endDate" />
 									<button type="submit" onclick="startLoading()"
 										id="createInvoiceButton" class="btn btn-success">Search</button>
