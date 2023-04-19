@@ -3,6 +3,8 @@ You can edit this in src/main/resources/application.properties
 
 First run the 'Database setup for application enviroment' section in Database_Script.txt(line 5 to line 208)
 
+You need to add (or) set up connection in mysql wrokbench with username-'CSMIS' and password 'CSMIS'.
+
 Now you can login the application with username - csmisadmin and password - wearebombs20233
 
 Then do all master data setup in application which locate in dashboard burger menu on top left conor.
@@ -28,3 +30,5 @@ In Invoice page,
 	Created Invoice can be export as a pdf file.
 	
 The password for paying created invoice is 'admin123'.
+
+For sending email from admin, you can edit your edmin mail in application.properties line 18.
