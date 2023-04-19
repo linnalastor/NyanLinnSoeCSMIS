@@ -1,6 +1,7 @@
 Database setup for application enviroment 
 ================================================================================================
 
+CREATE USER 'CSMIS'@'localhost' IDENTIFIED BY 'CSMIS';
 
 Drop database if exists `csmis`;
 CREATE DATABASE  IF NOT EXISTS `csmis`;
