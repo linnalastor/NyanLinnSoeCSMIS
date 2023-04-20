@@ -1,11 +1,13 @@
 Database setup for application enviroment 
 ================================================================================================
 
-CREATE USER 'CSMIS'@'localhost' IDENTIFIED BY 'CSMIS';
 
 Drop database if exists `csmis`;
 CREATE DATABASE  IF NOT EXISTS `csmis`;
 USE `csmis`;
+
+CREATE USER 'CSMIS'@'localhost' IDENTIFIED BY 'CSMIS';
+GRANT ALL PRIVILEGES ON csmis.* TO 'CSMIS'@'localhost';
 
 Drop table if exists `staff`;
 CREATE TABLE `staff` (

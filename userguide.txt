@@ -1,7 +1,7 @@
 This application run on localhost 3306 for mysql database and localhost 8080 for application server.
 You can edit this in src/main/resources/application.properties
 
-First run the 'Database setup for application enviroment' section in Database_Script.txt(line 5 to line 208)
+First run the 'Database setup for application enviroment' section in Database_Script.txt(line 5 to line 211)
 
 You need to add (or) set up connection in mysql wrokbench with username-'CSMIS' and password 'CSMIS'.
 
